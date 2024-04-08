@@ -4,7 +4,10 @@ defmodule ColorNames.FooBar do
   defmacro __before_compile__(_env) do
     quote do
       @ansi_color_codes Path.join(__DIR__, "color_names/ansi_color_codes.json")
-                        |> ColorNames.FooBar.read_json_colors!()
+                        |> ColorNames.FooBar.read_json_file!()
+
+      @color_data Path.join(__DIR__, "color_names/color_data.json")
+                  |> ColorNames.FooBar.read_json_file!()
 
       # @colors
       # |> Enum.each(fn color ->
@@ -26,12 +29,9 @@ defmodule ColorNames.FooBar do
       # end)
 
       def ansi_color_codes, do: @ansi_color_codes
+      def color_data, do: @color_data
     end
   end
 
-  def read_json_colors!(filename) do
-    filename
-    |> File.read!()
-    |> Jason.decode!(keys: :atoms)
-  end
+  def read_json_file!(filename), do: filename |> File.read!() |> Jason.decode!(keys: :atoms)
 end
