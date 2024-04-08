@@ -1,6 +1,6 @@
 # ColorNames
 
-**TODO: Add description**
+** Brings additional named IO.ANSI color codes into Elixir.
 
 ## Installation
 
