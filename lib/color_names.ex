@@ -1,18 +1,5 @@
 defmodule ColorNames do
-  @moduledoc """
-  Documentation for `ColorNames`.
-  """
+  @moduledoc false
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> ColorNames.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
+  defdelegate reset(), to: IO.ANSI
 end
