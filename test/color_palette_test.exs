@@ -1,16 +1,16 @@
-defmodule ColorNamesTest do
+defmodule ColorPaletteTest do
   use ExUnit.Case
-  doctest ColorNames
+  doctest ColorPalette
 
   describe "functions which delegate to IO.ANSI" do
     test "reset() delegates to IO.ANSI" do
-      assert ColorNames.reset() == IO.ANSI.reset()
+      assert ColorPalette.reset() == IO.ANSI.reset()
     end
   end
 
   describe "ansi_color_codes/0" do
     test "returns the list of ansi color codes" do
-      color_codes = ColorNames.ansi_color_codes()
+      color_codes = ColorPalette.ansi_color_codes()
       assert length(color_codes) == 256
 
       first_code = color_codes |> List.first()
@@ -33,7 +33,7 @@ defmodule ColorNamesTest do
 
   describe "color_data/0" do
     test "returns the list of color data elements" do
-      color_data = ColorNames.color_data()
+      color_data = ColorPalette.color_data()
       assert length(color_data) == 256
 
       first_color_data = color_data |> List.first()
@@ -97,9 +97,9 @@ defmodule ColorNamesTest do
 
   describe "add_code_to_color_data" do
     test "adds the ANSI code to the color data" do
-      ansi_codes = ColorNames.ansi_color_codes()
-      color_data = ColorNames.color_data()
-      color_data = ColorNames.add_code_to_color_data(ansi_codes, color_data)
+      ansi_codes = ColorPalette.ansi_color_codes()
+      color_data = ColorPalette.color_data()
+      color_data = ColorPalette.add_code_to_color_data(ansi_codes, color_data)
 
       first = color_data |> List.first()
       assert first.ansi_code == 0

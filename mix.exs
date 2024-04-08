@@ -1,9 +1,9 @@
-defmodule ColorNames.MixProject do
+defmodule ColorPalette.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :color_names,
+      app: :color_palette,
       version: "0.1.0",
       elixir: "~> 1.16",
       start_permanent: Mix.env() == :prod,

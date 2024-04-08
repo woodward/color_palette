@@ -6,7 +6,7 @@ Mix.install([
 
 import IO.ANSI
 
-color_data_file = Path.join(__DIR__, "../lib/color_names/color_data.json")
+color_data_file = Path.join(__DIR__, "../lib/color_palette/color_data.json")
 color_data = color_data_file |> File.read!() |> Jason.decode!(keys: :atoms)
 
 # color_data = color_data |> Enum.take(3)

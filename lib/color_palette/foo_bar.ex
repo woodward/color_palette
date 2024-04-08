@@ -1,13 +1,13 @@
-defmodule ColorNames.FooBar do
+defmodule ColorPalette.FooBar do
   @moduledoc false
 
   defmacro __before_compile__(_env) do
     quote do
-      @ansi_color_codes Path.join(__DIR__, "color_names/ansi_color_codes.json")
-                        |> ColorNames.FooBar.read_json_file!()
+      @ansi_color_codes Path.join(__DIR__, "color_palette/ansi_color_codes.json")
+                        |> ColorPalette.FooBar.read_json_file!()
 
-      @color_data Path.join(__DIR__, "color_names/color_data.json")
-                  |> ColorNames.FooBar.read_json_file!()
+      @color_data Path.join(__DIR__, "color_palette/color_data.json")
+                  |> ColorPalette.FooBar.read_json_file!()
 
       # @colors
       # |> Enum.each(fn color ->
