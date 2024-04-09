@@ -7,7 +7,7 @@ Mix.install([
 
 import IO.ANSI
 
-IO.puts(light_yellow() <> "Downloading color data..." <> reset())
+IO.puts(light_yellow() <> "Downloading color data from thecolorapi.com..." <> reset())
 
 # Sample URL:
 # https://www.thecolorapi.com/id?hex=00ffff&format=json
