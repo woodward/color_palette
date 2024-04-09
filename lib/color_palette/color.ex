@@ -20,4 +20,10 @@ defmodule ColorPalette.Color do
       end
     end
   end
+
+  defmacro delegate_to_io_ansi(name) do
+    quote bind_quoted: [name: name] do
+      defdelegate unquote(name)(), to: IO.ANSI
+    end
+  end
 end

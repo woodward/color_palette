@@ -112,4 +112,50 @@ defmodule ColorPaletteTest do
       assert ColorPalette.mercury_background() == "\e[48;5;254m"
     end
   end
+
+  describe "standard IO.ANSI colors" do
+    test "verify that the functions exist in ColorPalette for the standard IO.ANSI functions and that their outputs match" do
+      assert ColorPalette.black() == IO.ANSI.black()
+      assert ColorPalette.red() == IO.ANSI.red()
+      assert ColorPalette.green() == IO.ANSI.green()
+      assert ColorPalette.yellow() == IO.ANSI.yellow()
+      assert ColorPalette.blue() == IO.ANSI.blue()
+      assert ColorPalette.magenta() == IO.ANSI.magenta()
+      assert ColorPalette.cyan() == IO.ANSI.cyan()
+      assert ColorPalette.white() == IO.ANSI.white()
+
+      assert ColorPalette.light_black() == IO.ANSI.light_black()
+      assert ColorPalette.light_red() == IO.ANSI.light_red()
+      assert ColorPalette.light_green() == IO.ANSI.light_green()
+      assert ColorPalette.light_yellow() == IO.ANSI.light_yellow()
+      assert ColorPalette.light_blue() == IO.ANSI.light_blue()
+      assert ColorPalette.light_magenta() == IO.ANSI.light_magenta()
+      assert ColorPalette.light_cyan() == IO.ANSI.light_cyan()
+      assert ColorPalette.light_white() == IO.ANSI.light_white()
+
+      assert ColorPalette.black_background() == IO.ANSI.black_background()
+      assert ColorPalette.red_background() == IO.ANSI.red_background()
+      assert ColorPalette.green_background() == IO.ANSI.green_background()
+      assert ColorPalette.yellow_background() == IO.ANSI.yellow_background()
+      assert ColorPalette.blue_background() == IO.ANSI.blue_background()
+      assert ColorPalette.magenta_background() == IO.ANSI.magenta_background()
+      assert ColorPalette.cyan_background() == IO.ANSI.cyan_background()
+      assert ColorPalette.white_background() == IO.ANSI.white_background()
+
+      assert ColorPalette.light_black_background() == IO.ANSI.light_black_background()
+      assert ColorPalette.light_red_background() == IO.ANSI.light_red_background()
+      assert ColorPalette.light_green_background() == IO.ANSI.light_green_background()
+      assert ColorPalette.light_yellow_background() == IO.ANSI.light_yellow_background()
+      assert ColorPalette.light_blue_background() == IO.ANSI.light_blue_background()
+      assert ColorPalette.light_magenta_background() == IO.ANSI.light_magenta_background()
+      assert ColorPalette.light_cyan_background() == IO.ANSI.light_cyan_background()
+      assert ColorPalette.light_white_background() == IO.ANSI.light_white_background()
+    end
+  end
+
+  describe "standard_colors" do
+    test "returns the list of standard colors" do
+      assert ColorPalette.io_ansi_colors() == [:black, :red, :green, :yellow, :blue, :magenta, :cyan, :white]
+    end
+  end
 end
