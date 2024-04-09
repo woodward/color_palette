@@ -18,6 +18,7 @@ defmodule ColorPalette.FooBar do
                                |> ColorPalette.FooBar.read_json_file!()
 
       @colors ColorPalette.ColorNames.collate(@ansi_color_codes, @color_data)
+              |> Map.merge(ColorPalette.ColorNames.convert_color_name_dot_com_data(@ansi_color_codes, @color_name_dot_com_data))
 
       @io_ansi_colors [:black, :red, :green, :yellow, :blue, :magenta, :cyan, :white]
 
@@ -34,15 +35,6 @@ defmodule ColorPalette.FooBar do
         def_color(color_name, [color.ansi_color_code.code])
         background_name = "#{color_name}_background" |> String.to_atom()
         def_background_color(background_name, [color.ansi_color_code.code])
-      end)
-
-      @color_name_dot_com_data
-      |> Enum.each(fn color ->
-        code = color.code
-        color_name = color.name |> ColorPalette.ColorNames.color_name_to_atom() |> List.first()
-        def_color(color_name, [code])
-        background_name = "#{color_name}_background" |> String.to_atom()
-        def_background_color(background_name, [code])
       end)
 
       def ansi_color_codes, do: @ansi_color_codes

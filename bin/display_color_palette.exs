@@ -20,7 +20,7 @@ defmodule Display do
 
       IO.puts(
         apply(ColorPalette, name, []) <>
-          "This is color :#{String.pad_trailing(Atom.to_string(name), 21)}  Hex value: ##{hex}" <> reset()
+          "This is color :#{String.pad_trailing(Atom.to_string(name), 26)}  Hex value: ##{hex}" <> reset()
       )
     end)
   end
