@@ -1,6 +1,7 @@
 defmodule ColorPaletteTest do
   use ExUnit.Case
-  doctest ColorPalette
+
+  alias ColorPalette.ANSIColorCode
 
   describe "functions which delegate to IO.ANSI" do
     test "reset() delegates to IO.ANSI" do
@@ -15,7 +16,7 @@ defmodule ColorPaletteTest do
 
       first_code = color_codes |> List.first()
 
-      assert first_code == %{
+      assert first_code == %ANSIColorCode{
                code: 0,
                hex: "000000",
                rgb: [0, 0, 0]
@@ -23,7 +24,7 @@ defmodule ColorPaletteTest do
 
       last_code = color_codes |> List.last()
 
-      assert last_code == %{
+      assert last_code == %ANSIColorCode{
                code: 255,
                hex: "eeeeee",
                rgb: [238, 238, 238]

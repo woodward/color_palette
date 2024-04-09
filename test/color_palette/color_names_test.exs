@@ -3,6 +3,7 @@ defmodule ColorPalette.ColorNamesTest do
   use ExUnit.Case
 
   alias ColorPalette.ColorNames
+  # alias ColorPalette.ANSIColorCode
 
   describe "annotate" do
     test "adds color names and doc_text_color to ansi color codes" do
@@ -17,6 +18,11 @@ defmodule ColorPalette.ColorNamesTest do
       assert black_color.ansi_code == 16
       assert black_color.hex.value == "#000000"
       assert black_color.doc_text_color == :white
+
+      # assert black.name == :black
+      # assert black.ansi_color_code == %ANSIColorCode{code: 16, hex: "000000", rgb: [0, 0, 0]}
+      # assert black.doc_text_color == :white
+      # assert length(black.color_data) == 3
     end
 
     test "sorts colors based on their distance" do

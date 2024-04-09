@@ -2,11 +2,14 @@ defmodule ColorPalette.FooBar do
   @moduledoc false
 
   import ColorPalette.Color
+  # alias ColorPalette.Color
+  alias ColorPalette.ANSIColorCode
 
   defmacro __before_compile__(_env) do
     quote do
       @ansi_color_codes Path.join(__DIR__, "color_palette/ansi_color_codes.json")
                         |> ColorPalette.FooBar.read_json_file!()
+                        |> Enum.map(&(%ANSIColorCode{} |> Map.merge(&1)))
 
       @color_data Path.join(__DIR__, "color_palette/color_data.json")
                   |> ColorPalette.FooBar.read_json_file!()

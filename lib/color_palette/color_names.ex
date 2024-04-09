@@ -1,6 +1,8 @@
 defmodule ColorPalette.ColorNames do
   @moduledoc false
 
+  # alias ColorPalette.Color
+
   def collate(ansi_color_codes, color_data) do
     ansi_color_codes
     |> add_code_to_color_data(color_data)
