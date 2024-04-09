@@ -3,1536 +3,1792 @@
     "code": 0,
     "extra": null,
     "name": "Black",
-    "hex": "000000"
+    "hex": "000000",
+    "doc_text_color": "white"
   },
   {
     "code": 1,
     "extra": "HTML/CSS",
     "name": "Maroon",
-    "hex": "800000"
+    "hex": "800000",
+    "doc_text_color": "white"
   },
   {
     "code": 2,
     "extra": "English",
     "name": "Ao",
-    "hex": "008000"
+    "hex": "008000",
+    "doc_text_color": "white"
   },
   {
     "code": 3,
     "extra": null,
     "name": "Olive",
-    "hex": "808000"
+    "hex": "808000",
+    "doc_text_color": "white"
   },
   {
     "code": 4,
     "extra": null,
     "name": "Navy Blue",
-    "hex": "000080"
+    "hex": "000080",
+    "doc_text_color": "white"
   },
   {
     "code": 5,
     "extra": null,
     "name": "Patriarch",
-    "hex": "800080"
+    "hex": "800080",
+    "doc_text_color": "white"
   },
   {
     "code": 6,
     "extra": null,
     "name": "Teal",
-    "hex": "008080"
+    "hex": "008080",
+    "doc_text_color": "white"
   },
   {
     "code": 7,
     "extra": null,
     "name": "Argent",
-    "hex": "c0c0c0"
+    "hex": "c0c0c0",
+    "doc_text_color": "black"
   },
   {
     "code": 8,
     "extra": "HTML/CSS Gray",
     "name": "Gray",
-    "hex": "808080"
+    "hex": "808080",
+    "doc_text_color": "white"
   },
   {
     "code": 9,
     "extra": null,
     "name": "Red",
-    "hex": "ff0000"
+    "hex": "ff0000",
+    "doc_text_color": "white"
   },
   {
     "code": 10,
     "extra": null,
     "name": "Electric Green",
-    "hex": "00ff00"
+    "hex": "00ff00",
+    "doc_text_color": "black"
   },
   {
     "code": 11,
     "extra": null,
     "name": "Yellow",
-    "hex": "ffff00"
+    "hex": "ffff00",
+    "doc_text_color": "black"
   },
   {
     "code": 12,
     "extra": null,
     "name": "Blue",
-    "hex": "0000ff"
+    "hex": "0000ff",
+    "doc_text_color": "white"
   },
   {
     "code": 13,
     "extra": null,
     "name": "Fuchsia",
-    "hex": "ff00ff"
+    "hex": "ff00ff",
+    "doc_text_color": "white"
   },
   {
     "code": 14,
     "extra": null,
     "name": "Aqua",
-    "hex": "00ffff"
+    "hex": "00ffff",
+    "doc_text_color": "black"
   },
   {
     "code": 15,
     "extra": null,
     "name": "White",
-    "hex": "ffffff"
+    "hex": "ffffff",
+    "doc_text_color": "black"
   },
   {
     "code": 16,
     "extra": null,
     "name": "Black",
-    "hex": "000000"
+    "hex": "000000",
+    "doc_text_color": "white"
   },
   {
     "code": 17,
     "extra": null,
     "name": "Navy Blue",
-    "hex": "00005f"
+    "hex": "00005f",
+    "doc_text_color": "white"
   },
   {
     "code": 18,
     "extra": null,
     "name": "Dark Blue",
-    "hex": "000087"
+    "hex": "000087",
+    "doc_text_color": "white"
   },
   {
     "code": 19,
     "extra": null,
     "name": "Duke Blue",
-    "hex": "0000af"
+    "hex": "0000af",
+    "doc_text_color": "white"
   },
   {
     "code": 20,
     "extra": null,
     "name": "Medium Blue",
-    "hex": "0000d7"
+    "hex": "0000d7",
+    "doc_text_color": "white"
   },
   {
     "code": 21,
     "extra": null,
     "name": "Blue",
-    "hex": "0000ff"
+    "hex": "0000ff",
+    "doc_text_color": "white"
   },
   {
     "code": 22,
     "extra": "X11",
     "name": "Dark Green",
-    "hex": "005f00"
+    "hex": "005f00",
+    "doc_text_color": "white"
   },
   {
     "code": 23,
     "extra": null,
     "name": "Bangladesh Green",
-    "hex": "005f5f"
+    "hex": "005f5f",
+    "doc_text_color": "white"
   },
   {
     "code": 24,
     "extra": null,
     "name": "Sea Blue",
-    "hex": "005f87"
+    "hex": "005f87",
+    "doc_text_color": "white"
   },
   {
     "code": 25,
     "extra": null,
     "name": "Medium Persian Blue",
-    "hex": "005faf"
+    "hex": "005faf",
+    "doc_text_color": "white"
   },
   {
     "code": 26,
     "extra": null,
     "name": "True Blue",
-    "hex": "005fd7"
+    "hex": "005fd7",
+    "doc_text_color": "white"
   },
   {
     "code": 27,
     "extra": null,
     "name": "Brandeis Blue",
-    "hex": "005fff"
+    "hex": "005fff",
+    "doc_text_color": "white"
   },
   {
     "code": 28,
     "extra": "English",
     "name": "Ao",
-    "hex": "008700"
+    "hex": "008700",
+    "doc_text_color": "white"
   },
   {
     "code": 29,
     "extra": null,
     "name": "Spanish Viridian",
-    "hex": "00875f"
+    "hex": "00875f",
+    "doc_text_color": "white"
   },
   {
     "code": 30,
     "extra": null,
     "name": "Dark Cyan",
-    "hex": "008787"
+    "hex": "008787",
+    "doc_text_color": "white"
   },
   {
     "code": 31,
     "extra": "Munsell",
     "name": "Blue",
-    "hex": "0087af"
+    "hex": "0087af",
+    "doc_text_color": "white"
   },
   {
     "code": 32,
     "extra": null,
     "name": "Blue Cola",
-    "hex": "0087d7"
+    "hex": "0087d7",
+    "doc_text_color": "white"
   },
   {
     "code": 33,
     "extra": null,
     "name": "Azure",
-    "hex": "0087ff"
+    "hex": "0087ff",
+    "doc_text_color": "white"
   },
   {
     "code": 34,
     "extra": null,
     "name": "Islamic Green",
-    "hex": "00af00"
+    "hex": "00af00",
+    "doc_text_color": "white"
   },
   {
     "code": 35,
     "extra": null,
     "name": "GO Green",
-    "hex": "00af5f"
+    "hex": "00af5f",
+    "doc_text_color": "white"
   },
   {
     "code": 36,
     "extra": null,
     "name": "Persian Green",
-    "hex": "00af87"
+    "hex": "00af87",
+    "doc_text_color": "white"
   },
   {
     "code": 37,
     "extra": null,
     "name": "Tiffany Blue",
-    "hex": "00afaf"
+    "hex": "00afaf",
+    "doc_text_color": "white"
   },
   {
     "code": 38,
     "extra": "Process",
     "name": "Cyan",
-    "hex": "00afd7"
+    "hex": "00afd7",
+    "doc_text_color": "white"
   },
   {
     "code": 39,
     "extra": null,
     "name": "Blue Bolt",
-    "hex": "00afff"
+    "hex": "00afff",
+    "doc_text_color": "white"
   },
   {
     "code": 40,
     "extra": null,
     "name": "Electric Green",
-    "hex": "00d700"
+    "hex": "00d700",
+    "doc_text_color": "white"
   },
   {
     "code": 41,
     "extra": null,
     "name": "Malachite",
-    "hex": "00d75f"
+    "hex": "00d75f",
+    "doc_text_color": "black"
   },
   {
     "code": 42,
     "extra": null,
     "name": "Caribbean Green",
-    "hex": "00d787"
+    "hex": "00d787",
+    "doc_text_color": "black"
   },
   {
     "code": 43,
     "extra": null,
     "name": "Caribbean Green",
-    "hex": "00d7af"
+    "hex": "00d7af",
+    "doc_text_color": "black"
   },
   {
     "code": 44,
     "extra": null,
     "name": "Dark Turquoise",
-    "hex": "00d7d7"
+    "hex": "00d7d7",
+    "doc_text_color": "black"
   },
   {
     "code": 45,
     "extra": null,
     "name": "Vivid Sky Blue",
-    "hex": "00d7ff"
+    "hex": "00d7ff",
+    "doc_text_color": "black"
   },
   {
     "code": 46,
     "extra": null,
     "name": "Electric Green",
-    "hex": "00ff00"
+    "hex": "00ff00",
+    "doc_text_color": "black"
   },
   {
     "code": 47,
     "extra": null,
     "name": "Guppie Green",
-    "hex": "00ff5f"
+    "hex": "00ff5f",
+    "doc_text_color": "black"
   },
   {
     "code": 48,
     "extra": null,
     "name": "Guppie Green",
-    "hex": "00ff87"
+    "hex": "00ff87",
+    "doc_text_color": "black"
   },
   {
     "code": 49,
     "extra": null,
     "name": "Medium Spring Green",
-    "hex": "00ffaf"
+    "hex": "00ffaf",
+    "doc_text_color": "black"
   },
   {
     "code": 50,
     "extra": "Crayola",
     "name": "Sea Green",
-    "hex": "00ffd7"
+    "hex": "00ffd7",
+    "doc_text_color": "black"
   },
   {
     "code": 51,
     "extra": null,
     "name": "Aqua",
-    "hex": "00ffff"
+    "hex": "00ffff",
+    "doc_text_color": "black"
   },
   {
     "code": 52,
     "extra": null,
     "name": "Blood Red",
-    "hex": "5f0000"
+    "hex": "5f0000",
+    "doc_text_color": "white"
   },
   {
     "code": 53,
     "extra": null,
     "name": "Imperial Purple",
-    "hex": "5f005f"
+    "hex": "5f005f",
+    "doc_text_color": "white"
   },
   {
     "code": 54,
     "extra": null,
     "name": "Metallic Violet",
-    "hex": "5f0087"
+    "hex": "5f0087",
+    "doc_text_color": "white"
   },
   {
     "code": 55,
     "extra": null,
     "name": "Chinese Purple",
-    "hex": "5f00af"
+    "hex": "5f00af",
+    "doc_text_color": "white"
   },
   {
     "code": 56,
     "extra": null,
     "name": "French Violet",
-    "hex": "5f00d7"
+    "hex": "5f00d7",
+    "doc_text_color": "white"
   },
   {
     "code": 57,
     "extra": null,
     "name": "Electric Indigo",
-    "hex": "5f00ff"
+    "hex": "5f00ff",
+    "doc_text_color": "white"
   },
   {
     "code": 58,
     "extra": null,
     "name": "Bronze Yellow",
-    "hex": "5f5f00"
+    "hex": "5f5f00",
+    "doc_text_color": "white"
   },
   {
     "code": 59,
     "extra": null,
     "name": "Granite Gray",
-    "hex": "5f5f5f"
+    "hex": "5f5f5f",
+    "doc_text_color": "white"
   },
   {
     "code": 60,
     "extra": null,
     "name": "UCLA Blue",
-    "hex": "5f5f87"
+    "hex": "5f5f87",
+    "doc_text_color": "white"
   },
   {
     "code": 61,
     "extra": null,
     "name": "Liberty",
-    "hex": "5f5faf"
+    "hex": "5f5faf",
+    "doc_text_color": "white"
   },
   {
     "code": 62,
     "extra": null,
     "name": "Slate Blue",
-    "hex": "5f5fd7"
+    "hex": "5f5fd7",
+    "doc_text_color": "white"
   },
   {
     "code": 63,
     "extra": null,
     "name": "Very Light Blue",
-    "hex": "5f5fff"
+    "hex": "5f5fff",
+    "doc_text_color": "white"
   },
   {
     "code": 64,
     "extra": null,
     "name": "Avocado",
-    "hex": "5f8700"
+    "hex": "5f8700",
+    "doc_text_color": "white"
   },
   {
     "code": 65,
     "extra": null,
     "name": "Russian Green",
-    "hex": "5f875f"
+    "hex": "5f875f",
+    "doc_text_color": "white"
   },
   {
     "code": 66,
     "extra": null,
     "name": "Steel Teal",
-    "hex": "5f8787"
+    "hex": "5f8787",
+    "doc_text_color": "white"
   },
   {
     "code": 67,
     "extra": null,
     "name": "Rackley",
-    "hex": "5f87af"
+    "hex": "5f87af",
+    "doc_text_color": "white"
   },
   {
     "code": 68,
     "extra": null,
     "name": "United Nations Blue",
-    "hex": "5f87d7"
+    "hex": "5f87d7",
+    "doc_text_color": "white"
   },
   {
     "code": 69,
     "extra": null,
     "name": "Blueberry",
-    "hex": "5f87ff"
+    "hex": "5f87ff",
+    "doc_text_color": "white"
   },
   {
     "code": 70,
     "extra": null,
     "name": "Kelly Green",
-    "hex": "5faf00"
+    "hex": "5faf00",
+    "doc_text_color": "white"
   },
   {
     "code": 71,
     "extra": "Crayola",
     "name": "Forest Green",
-    "hex": "5faf5f"
+    "hex": "5faf5f",
+    "doc_text_color": "white"
   },
   {
     "code": 72,
     "extra": null,
     "name": "Polished Pine",
-    "hex": "5faf87"
+    "hex": "5faf87",
+    "doc_text_color": "white"
   },
   {
     "code": 73,
     "extra": null,
     "name": "Crystal Blue",
-    "hex": "5fafaf"
+    "hex": "5fafaf",
+    "doc_text_color": "white"
   },
   {
     "code": 74,
     "extra": null,
     "name": "Carolina Blue",
-    "hex": "5fafd7"
+    "hex": "5fafd7",
+    "doc_text_color": "black"
   },
   {
     "code": 75,
     "extra": null,
     "name": "Blue Jeans",
-    "hex": "5fafff"
+    "hex": "5fafff",
+    "doc_text_color": "black"
   },
   {
     "code": 76,
     "extra": null,
     "name": "Harlequin Green",
-    "hex": "5fd700"
+    "hex": "5fd700",
+    "doc_text_color": "black"
   },
   {
     "code": 77,
     "extra": null,
     "name": "Mantis",
-    "hex": "5fd75f"
+    "hex": "5fd75f",
+    "doc_text_color": "black"
   },
   {
     "code": 78,
     "extra": null,
     "name": "Very Light Malachite Green",
-    "hex": "5fd787"
+    "hex": "5fd787",
+    "doc_text_color": "black"
   },
   {
     "code": 79,
     "extra": null,
     "name": "Medium Aquamarine",
-    "hex": "5fd7af"
+    "hex": "5fd7af",
+    "doc_text_color": "black"
   },
   {
     "code": 80,
     "extra": null,
     "name": "Medium Turquoise",
-    "hex": "5fd7d7"
+    "hex": "5fd7d7",
+    "doc_text_color": "black"
   },
   {
     "code": 81,
     "extra": null,
     "name": "Maya Blue",
-    "hex": "5fd7ff"
+    "hex": "5fd7ff",
+    "doc_text_color": "black"
   },
   {
     "code": 82,
     "extra": null,
     "name": "Bright Green",
-    "hex": "5fff00"
+    "hex": "5fff00",
+    "doc_text_color": "black"
   },
   {
     "code": 83,
     "extra": null,
     "name": "Screamin' Green",
-    "hex": "5fff5f"
+    "hex": "5fff5f",
+    "doc_text_color": "black"
   },
   {
     "code": 84,
     "extra": null,
     "name": "Very Light Malachite Green",
-    "hex": "5fff87"
+    "hex": "5fff87",
+    "doc_text_color": "black"
   },
   {
     "code": 85,
     "extra": null,
     "name": "Medium Aquamarine",
-    "hex": "5fffaf"
+    "hex": "5fffaf",
+    "doc_text_color": "black"
   },
   {
     "code": 86,
     "extra": null,
     "name": "Aquamarine",
-    "hex": "5fffd7"
+    "hex": "5fffd7",
+    "doc_text_color": "black"
   },
   {
     "code": 87,
     "extra": null,
     "name": "Electric Blue",
-    "hex": "5fffff"
+    "hex": "5fffff",
+    "doc_text_color": "black"
   },
   {
     "code": 88,
     "extra": null,
     "name": "Deep Red",
-    "hex": "870000"
+    "hex": "870000",
+    "doc_text_color": "white"
   },
   {
     "code": 89,
     "extra": null,
     "name": "French Plum",
-    "hex": "87005f"
+    "hex": "87005f",
+    "doc_text_color": "white"
   },
   {
     "code": 90,
     "extra": null,
     "name": "Mardi Gras",
-    "hex": "870087"
+    "hex": "870087",
+    "doc_text_color": "white"
   },
   {
     "code": 91,
     "extra": "RYB",
     "name": "Violet",
-    "hex": "8700af"
+    "hex": "8700af",
+    "doc_text_color": "white"
   },
   {
     "code": 92,
     "extra": null,
     "name": "French Violet",
-    "hex": "8700d7"
+    "hex": "8700d7",
+    "doc_text_color": "white"
   },
   {
     "code": 93,
     "extra": null,
     "name": "Electric Violet",
-    "hex": "8700ff"
+    "hex": "8700ff",
+    "doc_text_color": "white"
   },
   {
     "code": 94,
     "extra": "Brown",
     "name": "Gamboge Orange",
-    "hex": "875f00"
+    "hex": "875f00",
+    "doc_text_color": "white"
   },
   {
     "code": 95,
     "extra": null,
     "name": "Deep Taupe",
-    "hex": "875f5f"
+    "hex": "875f5f",
+    "doc_text_color": "white"
   },
   {
     "code": 96,
     "extra": null,
     "name": "Chinese Violet",
-    "hex": "875f87"
+    "hex": "875f87",
+    "doc_text_color": "white"
   },
   {
     "code": 97,
     "extra": null,
     "name": "Royal Purple",
-    "hex": "875faf"
+    "hex": "875faf",
+    "doc_text_color": "white"
   },
   {
     "code": 98,
     "extra": null,
     "name": "Medium Purple",
-    "hex": "875fd7"
+    "hex": "875fd7",
+    "doc_text_color": "white"
   },
   {
     "code": 99,
     "extra": null,
     "name": "Violets Are Blue",
-    "hex": "875fff"
+    "hex": "875fff",
+    "doc_text_color": "white"
   },
   {
     "code": 100,
     "extra": null,
     "name": "Olive",
-    "hex": "878700"
+    "hex": "878700",
+    "doc_text_color": "white"
   },
   {
     "code": 101,
     "extra": null,
     "name": "Shadow",
-    "hex": "87875f"
+    "hex": "87875f",
+    "doc_text_color": "white"
   },
   {
     "code": 102,
     "extra": null,
     "name": "Taupe Gray",
-    "hex": "878787"
+    "hex": "878787",
+    "doc_text_color": "white"
   },
   {
     "code": 103,
     "extra": null,
     "name": "Cool Grey",
-    "hex": "8787af"
+    "hex": "8787af",
+    "doc_text_color": "white"
   },
   {
     "code": 104,
     "extra": null,
     "name": "Ube",
-    "hex": "8787d7"
+    "hex": "8787d7",
+    "doc_text_color": "white"
   },
   {
     "code": 105,
     "extra": null,
     "name": "Violets Are Blue",
-    "hex": "8787ff"
+    "hex": "8787ff",
+    "doc_text_color": "white"
   },
   {
     "code": 106,
     "extra": null,
     "name": "Apple Green",
-    "hex": "87af00"
+    "hex": "87af00",
+    "doc_text_color": "white"
   },
   {
     "code": 107,
     "extra": null,
     "name": "Asparagus",
-    "hex": "87af5f"
+    "hex": "87af5f",
+    "doc_text_color": "black"
   },
   {
     "code": 108,
     "extra": null,
     "name": "Dark Sea Green",
-    "hex": "87af87"
+    "hex": "87af87",
+    "doc_text_color": "black"
   },
   {
     "code": 109,
     "extra": null,
     "name": "Pewter Blue",
-    "hex": "87afaf"
+    "hex": "87afaf",
+    "doc_text_color": "black"
   },
   {
     "code": 110,
     "extra": null,
     "name": "Light Cobalt Blue",
-    "hex": "87afd7"
+    "hex": "87afd7",
+    "doc_text_color": "black"
   },
   {
     "code": 111,
     "extra": null,
     "name": "French Sky Blue",
-    "hex": "87afff"
+    "hex": "87afff",
+    "doc_text_color": "black"
   },
   {
     "code": 112,
     "extra": null,
     "name": "Alien Armpit",
-    "hex": "87d700"
+    "hex": "87d700",
+    "doc_text_color": "black"
   },
   {
     "code": 113,
     "extra": null,
     "name": "Mantis",
-    "hex": "87d75f"
+    "hex": "87d75f",
+    "doc_text_color": "black"
   },
   {
     "code": 114,
     "extra": null,
     "name": "Pastel Green",
-    "hex": "87d787"
+    "hex": "87d787",
+    "doc_text_color": "black"
   },
   {
     "code": 115,
     "extra": null,
     "name": "Pearl Aqua",
-    "hex": "87d7af"
+    "hex": "87d7af",
+    "doc_text_color": "black"
   },
   {
     "code": 116,
     "extra": null,
     "name": "Middle Blue Green",
-    "hex": "87d7d7"
+    "hex": "87d7d7",
+    "doc_text_color": "black"
   },
   {
     "code": 117,
     "extra": null,
     "name": "Pale Cyan",
-    "hex": "87d7ff"
+    "hex": "87d7ff",
+    "doc_text_color": "black"
   },
   {
     "code": 118,
     "extra": "Web",
     "name": "Chartreuse",
-    "hex": "87ff00"
+    "hex": "87ff00",
+    "doc_text_color": "black"
   },
   {
     "code": 119,
     "extra": null,
     "name": "Screamin' Green",
-    "hex": "87ff5f"
+    "hex": "87ff5f",
+    "doc_text_color": "black"
   },
   {
     "code": 120,
     "extra": null,
     "name": "Light Green",
-    "hex": "87ff87"
+    "hex": "87ff87",
+    "doc_text_color": "black"
   },
   {
     "code": 121,
     "extra": null,
     "name": "Mint Green",
-    "hex": "87ffaf"
+    "hex": "87ffaf",
+    "doc_text_color": "black"
   },
   {
     "code": 122,
     "extra": null,
     "name": "Aquamarine",
-    "hex": "87ffd7"
+    "hex": "87ffd7",
+    "doc_text_color": "black"
   },
   {
     "code": 123,
     "extra": null,
     "name": "Electric Blue",
-    "hex": "87ffff"
+    "hex": "87ffff",
+    "doc_text_color": "black"
   },
   {
     "code": 124,
     "extra": null,
     "name": "Dark Candy Apple Red",
-    "hex": "af0000"
+    "hex": "af0000",
+    "doc_text_color": "white"
   },
   {
     "code": 125,
     "extra": null,
     "name": "Jazzberry Jam",
-    "hex": "af005f"
+    "hex": "af005f",
+    "doc_text_color": "white"
   },
   {
     "code": 126,
     "extra": null,
     "name": "Flirt",
-    "hex": "af0087"
+    "hex": "af0087",
+    "doc_text_color": "white"
   },
   {
     "code": 127,
     "extra": null,
     "name": "Heliotrope Magenta",
-    "hex": "af00af"
+    "hex": "af00af",
+    "doc_text_color": "white"
   },
   {
     "code": 128,
     "extra": null,
     "name": "Vivid Mulberry",
-    "hex": "af00d7"
+    "hex": "af00d7",
+    "doc_text_color": "white"
   },
   {
     "code": 129,
     "extra": null,
     "name": "Electric Purple",
-    "hex": "af00ff"
+    "hex": "af00ff",
+    "doc_text_color": "white"
   },
   {
     "code": 130,
     "extra": null,
     "name": "Windsor Tan",
-    "hex": "af5f00"
+    "hex": "af5f00",
+    "doc_text_color": "white"
   },
   {
     "code": 131,
     "extra": null,
     "name": "Electric Brown",
-    "hex": "af5f5f"
+    "hex": "af5f5f",
+    "doc_text_color": "white"
   },
   {
     "code": 132,
     "extra": null,
     "name": "Turkish Rose",
-    "hex": "af5f87"
+    "hex": "af5f87",
+    "doc_text_color": "white"
   },
   {
     "code": 133,
     "extra": null,
     "name": "Pearly Purple",
-    "hex": "af5faf"
+    "hex": "af5faf",
+    "doc_text_color": "white"
   },
   {
     "code": 134,
     "extra": null,
     "name": "Rich Lilac",
-    "hex": "af5fd7"
+    "hex": "af5fd7",
+    "doc_text_color": "white"
   },
   {
     "code": 135,
     "extra": null,
     "name": "Lavender Indigo",
-    "hex": "af5fff"
+    "hex": "af5fff",
+    "doc_text_color": "white"
   },
   {
     "code": 136,
     "extra": null,
     "name": "Dark Goldenrod",
-    "hex": "af8700"
+    "hex": "af8700",
+    "doc_text_color": "white"
   },
   {
     "code": 137,
     "extra": "Metallic",
     "name": "Bronze",
-    "hex": "af875f"
+    "hex": "af875f",
+    "doc_text_color": "white"
   },
   {
     "code": 138,
     "extra": null,
     "name": "English Lavender",
-    "hex": "af8787"
+    "hex": "af8787",
+    "doc_text_color": "white"
   },
   {
     "code": 139,
     "extra": null,
     "name": "Opera Mauve",
-    "hex": "af87af"
+    "hex": "af87af",
+    "doc_text_color": "white"
   },
   {
     "code": 140,
     "extra": "Floral",
     "name": "Lavender",
-    "hex": "af87d7"
+    "hex": "af87d7",
+    "doc_text_color": "white"
   },
   {
     "code": 141,
     "extra": null,
     "name": "Bright Lavender",
-    "hex": "af87ff"
+    "hex": "af87ff",
+    "doc_text_color": "white"
   },
   {
     "code": 142,
     "extra": null,
     "name": "Light Gold",
-    "hex": "afaf00"
+    "hex": "afaf00",
+    "doc_text_color": "black"
   },
   {
     "code": 143,
     "extra": null,
     "name": "Olive Green",
-    "hex": "afaf5f"
+    "hex": "afaf5f",
+    "doc_text_color": "black"
   },
   {
     "code": 144,
     "extra": null,
     "name": "Sage",
-    "hex": "afaf87"
+    "hex": "afaf87",
+    "doc_text_color": "black"
   },
   {
     "code": 145,
     "extra": null,
     "name": "Silver Foil",
-    "hex": "afafaf"
+    "hex": "afafaf",
+    "doc_text_color": "black"
   },
   {
     "code": 146,
     "extra": null,
     "name": "Wild Blue Yonder",
-    "hex": "afafd7"
+    "hex": "afafd7",
+    "doc_text_color": "black"
   },
   {
     "code": 147,
     "extra": null,
     "name": "Maximum Blue Purple",
-    "hex": "afafff"
+    "hex": "afafff",
+    "doc_text_color": "black"
   },
   {
     "code": 148,
     "extra": null,
     "name": "Vivid Lime Green",
-    "hex": "afd700"
+    "hex": "afd700",
+    "doc_text_color": "black"
   },
   {
     "code": 149,
     "extra": null,
     "name": "June Bud",
-    "hex": "afd75f"
+    "hex": "afd75f",
+    "doc_text_color": "black"
   },
   {
     "code": 150,
     "extra": "Crayola",
     "name": "Yellow-Green",
-    "hex": "afd787"
+    "hex": "afd787",
+    "doc_text_color": "black"
   },
   {
     "code": 151,
     "extra": null,
     "name": "Light Moss Green",
-    "hex": "afd7af"
+    "hex": "afd7af",
+    "doc_text_color": "black"
   },
   {
     "code": 152,
     "extra": null,
     "name": "Crystal",
-    "hex": "afd7d7"
+    "hex": "afd7d7",
+    "doc_text_color": "black"
   },
   {
     "code": 153,
     "extra": null,
     "name": "Fresh Air",
-    "hex": "afd7ff"
+    "hex": "afd7ff",
+    "doc_text_color": "black"
   },
   {
     "code": 154,
     "extra": null,
     "name": "Spring Bud",
-    "hex": "afff00"
+    "hex": "afff00",
+    "doc_text_color": "black"
   },
   {
     "code": 155,
     "extra": null,
     "name": "Inchworm",
-    "hex": "afff5f"
+    "hex": "afff5f",
+    "doc_text_color": "black"
   },
   {
     "code": 156,
     "extra": null,
     "name": "Mint Green",
-    "hex": "afff87"
+    "hex": "afff87",
+    "doc_text_color": "black"
   },
   {
     "code": 157,
     "extra": null,
     "name": "Menthol",
-    "hex": "afffaf"
+    "hex": "afffaf",
+    "doc_text_color": "black"
   },
   {
     "code": 158,
     "extra": null,
     "name": "Magic Mint",
-    "hex": "afffd7"
+    "hex": "afffd7",
+    "doc_text_color": "black"
   },
   {
     "code": 159,
     "extra": null,
     "name": "Celeste",
-    "hex": "afffff"
+    "hex": "afffff",
+    "doc_text_color": "black"
   },
   {
     "code": 160,
     "extra": null,
     "name": "Rosso Corsa",
-    "hex": "d70000"
+    "hex": "d70000",
+    "doc_text_color": "white"
   },
   {
     "code": 161,
     "extra": null,
     "name": "Royal Red",
-    "hex": "d7005f"
+    "hex": "d7005f",
+    "doc_text_color": "white"
   },
   {
     "code": 162,
     "extra": null,
     "name": "Mexican Pink",
-    "hex": "d70087"
+    "hex": "d70087",
+    "doc_text_color": "white"
   },
   {
     "code": 163,
     "extra": null,
     "name": "Deep Magenta",
-    "hex": "d700af"
+    "hex": "d700af",
+    "doc_text_color": "white"
   },
   {
     "code": 164,
     "extra": null,
     "name": "Deep Magenta",
-    "hex": "d700d7"
+    "hex": "d700d7",
+    "doc_text_color": "white"
   },
   {
     "code": 165,
     "extra": null,
     "name": "Phlox",
-    "hex": "d700ff"
+    "hex": "d700ff",
+    "doc_text_color": "white"
   },
   {
     "code": 166,
     "extra": "Tawny",
     "name": "Tenné",
-    "hex": "d75f00"
+    "hex": "d75f00",
+    "doc_text_color": "white"
   },
   {
     "code": 167,
     "extra": null,
     "name": "Indian Red",
-    "hex": "d75f5f"
+    "hex": "d75f5f",
+    "doc_text_color": "white"
   },
   {
     "code": 168,
     "extra": null,
     "name": "Blush",
-    "hex": "d75f87"
+    "hex": "d75f87",
+    "doc_text_color": "white"
   },
   {
     "code": 169,
     "extra": null,
     "name": "Super Pink",
-    "hex": "d75faf"
+    "hex": "d75faf",
+    "doc_text_color": "white"
   },
   {
     "code": 170,
     "extra": null,
     "name": "Orchid",
-    "hex": "d75fd7"
+    "hex": "d75fd7",
+    "doc_text_color": "white"
   },
   {
     "code": 171,
     "extra": null,
     "name": "Heliotrope",
-    "hex": "d75fff"
+    "hex": "d75fff",
+    "doc_text_color": "white"
   },
   {
     "code": 172,
     "extra": null,
     "name": "Harvest Gold",
-    "hex": "d78700"
+    "hex": "d78700",
+    "doc_text_color": "white"
   },
   {
     "code": 173,
     "extra": null,
     "name": "Raw Sienna",
-    "hex": "d7875f"
+    "hex": "d7875f",
+    "doc_text_color": "white"
   },
   {
     "code": 174,
     "extra": null,
     "name": "New York Pink",
-    "hex": "d78787"
+    "hex": "d78787",
+    "doc_text_color": "white"
   },
   {
     "code": 175,
     "extra": null,
     "name": "Middle Purple",
-    "hex": "d787af"
+    "hex": "d787af",
+    "doc_text_color": "white"
   },
   {
     "code": 176,
     "extra": null,
     "name": "Deep Mauve",
-    "hex": "d787d7"
+    "hex": "d787d7",
+    "doc_text_color": "white"
   },
   {
     "code": 177,
     "extra": null,
     "name": "Bright Lilac",
-    "hex": "d787ff"
+    "hex": "d787ff",
+    "doc_text_color": "black"
   },
   {
     "code": 178,
     "extra": null,
     "name": "Mustard Yellow",
-    "hex": "d7af00"
+    "hex": "d7af00",
+    "doc_text_color": "black"
   },
   {
     "code": 179,
     "extra": null,
     "name": "Earth Yellow",
-    "hex": "d7af5f"
+    "hex": "d7af5f",
+    "doc_text_color": "black"
   },
   {
     "code": 180,
     "extra": null,
     "name": "Tan",
-    "hex": "d7af87"
+    "hex": "d7af87",
+    "doc_text_color": "black"
   },
   {
     "code": 181,
     "extra": null,
     "name": "Pale Chestnut",
-    "hex": "d7afaf"
+    "hex": "d7afaf",
+    "doc_text_color": "black"
   },
   {
     "code": 182,
     "extra": null,
     "name": "Pink Lavender",
-    "hex": "d7afd7"
+    "hex": "d7afd7",
+    "doc_text_color": "black"
   },
   {
     "code": 183,
     "extra": null,
     "name": "Mauve",
-    "hex": "d7afff"
+    "hex": "d7afff",
+    "doc_text_color": "black"
   },
   {
     "code": 184,
     "extra": null,
     "name": "Citrine",
-    "hex": "d7d700"
+    "hex": "d7d700",
+    "doc_text_color": "black"
   },
   {
     "code": 185,
     "extra": null,
     "name": "Chinese Green",
-    "hex": "d7d75f"
+    "hex": "d7d75f",
+    "doc_text_color": "black"
   },
   {
     "code": 186,
     "extra": null,
     "name": "Medium Spring Bud",
-    "hex": "d7d787"
+    "hex": "d7d787",
+    "doc_text_color": "black"
   },
   {
     "code": 187,
     "extra": null,
     "name": "Pastel Gray",
-    "hex": "d7d7af"
+    "hex": "d7d7af",
+    "doc_text_color": "black"
   },
   {
     "code": 188,
     "extra": null,
     "name": "Light Silver",
-    "hex": "d7d7d7"
+    "hex": "d7d7d7",
+    "doc_text_color": "black"
   },
   {
     "code": 189,
     "extra": null,
     "name": "Pale Lavender",
-    "hex": "d7d7ff"
+    "hex": "d7d7ff",
+    "doc_text_color": "black"
   },
   {
     "code": 190,
     "extra": "Traditional",
     "name": "Chartreuse",
-    "hex": "d7ff00"
+    "hex": "d7ff00",
+    "doc_text_color": "black"
   },
   {
     "code": 191,
     "extra": null,
     "name": "Maximum Green Yellow",
-    "hex": "d7ff5f"
+    "hex": "d7ff5f",
+    "doc_text_color": "black"
   },
   {
     "code": 192,
     "extra": null,
     "name": "Mindaro",
-    "hex": "d7ff87"
+    "hex": "d7ff87",
+    "doc_text_color": "black"
   },
   {
     "code": 193,
     "extra": null,
     "name": "Tea Green",
-    "hex": "d7ffaf"
+    "hex": "d7ffaf",
+    "doc_text_color": "black"
   },
   {
     "code": 194,
     "extra": null,
     "name": "Nyanza",
-    "hex": "d7ffd7"
+    "hex": "d7ffd7",
+    "doc_text_color": "black"
   },
   {
     "code": 195,
     "extra": null,
     "name": "Light Cyan",
-    "hex": "d7ffff"
+    "hex": "d7ffff",
+    "doc_text_color": "black"
   },
   {
     "code": 196,
     "extra": null,
     "name": "Red",
-    "hex": "ff0000"
+    "hex": "ff0000",
+    "doc_text_color": "white"
   },
   {
     "code": 197,
     "extra": null,
     "name": "Vivid Raspberry",
-    "hex": "ff005f"
+    "hex": "ff005f",
+    "doc_text_color": "white"
   },
   {
     "code": 198,
     "extra": null,
     "name": "Bright Pink",
-    "hex": "ff0087"
+    "hex": "ff0087",
+    "doc_text_color": "white"
   },
   {
     "code": 199,
     "extra": null,
     "name": "Fashion Fuchsia",
-    "hex": "ff00af"
+    "hex": "ff00af",
+    "doc_text_color": "white"
   },
   {
     "code": 200,
     "extra": null,
     "name": "Shocking Pink",
-    "hex": "ff00d7"
+    "hex": "ff00d7",
+    "doc_text_color": "white"
   },
   {
     "code": 201,
     "extra": null,
     "name": "Fuchsia",
-    "hex": "ff00ff"
+    "hex": "ff00ff",
+    "doc_text_color": "white"
   },
   {
     "code": 202,
     "extra": null,
     "name": "Vivid Orange",
-    "hex": "ff5f00"
+    "hex": "ff5f00",
+    "doc_text_color": "white"
   },
   {
     "code": 203,
     "extra": null,
     "name": "Pastel Red",
-    "hex": "ff5f5f"
+    "hex": "ff5f5f",
+    "doc_text_color": "white"
   },
   {
     "code": 204,
     "extra": null,
     "name": "Strawberry",
-    "hex": "ff5f87"
+    "hex": "ff5f87",
+    "doc_text_color": "white"
   },
   {
     "code": 205,
     "extra": null,
     "name": "Hot Pink",
-    "hex": "ff5faf"
+    "hex": "ff5faf",
+    "doc_text_color": "white"
   },
   {
     "code": 206,
     "extra": null,
     "name": "Light Deep Pink",
-    "hex": "ff5fd7"
+    "hex": "ff5fd7",
+    "doc_text_color": "white"
   },
   {
     "code": 207,
     "extra": "Crayola",
     "name": "Shocking Pink",
-    "hex": "ff5fff"
+    "hex": "ff5fff",
+    "doc_text_color": "white"
   },
   {
     "code": 208,
     "extra": null,
     "name": "American Orange",
-    "hex": "ff8700"
+    "hex": "ff8700",
+    "doc_text_color": "white"
   },
   {
     "code": 209,
     "extra": null,
     "name": "Coral",
-    "hex": "ff875f"
+    "hex": "ff875f",
+    "doc_text_color": "white"
   },
   {
     "code": 210,
     "extra": null,
     "name": "Tulip",
-    "hex": "ff8787"
+    "hex": "ff8787",
+    "doc_text_color": "black"
   },
   {
     "code": 211,
     "extra": null,
     "name": "Tickle Me Pink",
-    "hex": "ff87af"
+    "hex": "ff87af",
+    "doc_text_color": "black"
   },
   {
     "code": 212,
     "extra": null,
     "name": "Princess Perfume",
-    "hex": "ff87d7"
+    "hex": "ff87d7",
+    "doc_text_color": "black"
   },
   {
     "code": 213,
     "extra": null,
     "name": "Fuchsia Pink",
-    "hex": "ff87ff"
+    "hex": "ff87ff",
+    "doc_text_color": "black"
   },
   {
     "code": 214,
     "extra": null,
     "name": "Chinese Yellow",
-    "hex": "ffaf00"
+    "hex": "ffaf00",
+    "doc_text_color": "black"
   },
   {
     "code": 215,
     "extra": null,
     "name": "Rajah",
-    "hex": "ffaf5f"
+    "hex": "ffaf5f",
+    "doc_text_color": "black"
   },
   {
     "code": 216,
     "extra": null,
     "name": "Macaroni And Cheese",
-    "hex": "ffaf87"
+    "hex": "ffaf87",
+    "doc_text_color": "black"
   },
   {
     "code": 217,
     "extra": null,
     "name": "Melon",
-    "hex": "ffafaf"
+    "hex": "ffafaf",
+    "doc_text_color": "black"
   },
   {
     "code": 218,
     "extra": null,
     "name": "Lavender Pink",
-    "hex": "ffafd7"
+    "hex": "ffafd7",
+    "doc_text_color": "black"
   },
   {
     "code": 219,
     "extra": null,
     "name": "Rich Brilliant Lavender",
-    "hex": "ffafff"
+    "hex": "ffafff",
+    "doc_text_color": "black"
   },
   {
     "code": 220,
     "extra": "Golden",
     "name": "Gold (Web)",
-    "hex": "ffd700"
+    "hex": "ffd700",
+    "doc_text_color": "black"
   },
   {
     "code": 221,
     "extra": null,
     "name": "Naples Yellow",
-    "hex": "ffd75f"
+    "hex": "ffd75f",
+    "doc_text_color": "black"
   },
   {
     "code": 222,
     "extra": null,
     "name": "Jasmine",
-    "hex": "ffd787"
+    "hex": "ffd787",
+    "doc_text_color": "black"
   },
   {
     "code": 223,
     "extra": null,
     "name": "Light Orange",
-    "hex": "ffd7af"
+    "hex": "ffd7af",
+    "doc_text_color": "black"
   },
   {
     "code": 224,
     "extra": null,
     "name": "Pale Pink",
-    "hex": "ffd7d7"
+    "hex": "ffd7d7",
+    "doc_text_color": "black"
   },
   {
     "code": 225,
     "extra": null,
     "name": "Pink Lace",
-    "hex": "ffd7ff"
+    "hex": "ffd7ff",
+    "doc_text_color": "black"
   },
   {
     "code": 226,
     "extra": null,
     "name": "Yellow",
-    "hex": "ffff00"
+    "hex": "ffff00",
+    "doc_text_color": "black"
   },
   {
     "code": 227,
     "extra": null,
     "name": "Laser Lemon",
-    "hex": "ffff5f"
+    "hex": "ffff5f",
+    "doc_text_color": "black"
   },
   {
     "code": 228,
     "extra": null,
     "name": "Pastel Yellow",
-    "hex": "ffff87"
+    "hex": "ffff87",
+    "doc_text_color": "black"
   },
   {
     "code": 229,
     "extra": null,
     "name": "Calamansi",
-    "hex": "ffffaf"
+    "hex": "ffffaf",
+    "doc_text_color": "black"
   },
   {
     "code": 230,
     "extra": null,
     "name": "Cream",
-    "hex": "ffffd7"
+    "hex": "ffffd7",
+    "doc_text_color": "black"
   },
   {
     "code": 231,
     "extra": null,
     "name": "White",
-    "hex": "ffffff"
+    "hex": "ffffff",
+    "doc_text_color": "black"
   },
   {
     "code": 232,
     "extra": null,
     "name": "Vampire Black",
-    "hex": "080808"
+    "hex": "080808",
+    "doc_text_color": "white"
   },
   {
     "code": 233,
     "extra": null,
     "name": "Chinese Black",
-    "hex": "121212"
+    "hex": "121212",
+    "doc_text_color": "white"
   },
   {
     "code": 234,
     "extra": null,
     "name": "Eerie Black",
-    "hex": "1c1c1c"
+    "hex": "1c1c1c",
+    "doc_text_color": "white"
   },
   {
     "code": 235,
     "extra": null,
     "name": "Raisin Black",
-    "hex": "262626"
+    "hex": "262626",
+    "doc_text_color": "white"
   },
   {
     "code": 236,
     "extra": null,
     "name": "Dark Charcoal",
-    "hex": "303030"
+    "hex": "303030",
+    "doc_text_color": "white"
   },
   {
     "code": 237,
     "extra": null,
     "name": "Black Olive",
-    "hex": "3a3a3a"
+    "hex": "3a3a3a",
+    "doc_text_color": "white"
   },
   {
     "code": 238,
     "extra": null,
     "name": "Outer Space",
-    "hex": "444444"
+    "hex": "444444",
+    "doc_text_color": "white"
   },
   {
     "code": 239,
     "extra": null,
     "name": "Dark Liver",
-    "hex": "4e4e4e"
+    "hex": "4e4e4e",
+    "doc_text_color": "white"
   },
   {
     "code": 240,
     "extra": null,
     "name": "Davy's Grey",
-    "hex": "585858"
+    "hex": "585858",
+    "doc_text_color": "white"
   },
   {
     "code": 241,
     "extra": null,
     "name": "Granite Gray",
-    "hex": "626262"
+    "hex": "626262",
+    "doc_text_color": "white"
   },
   {
     "code": 242,
     "extra": null,
     "name": "Dim Gray",
-    "hex": "6c6c6c"
+    "hex": "6c6c6c",
+    "doc_text_color": "white"
   },
   {
     "code": 243,
     "extra": null,
     "name": "Sonic Silver",
-    "hex": "767676"
+    "hex": "767676",
+    "doc_text_color": "white"
   },
   {
     "code": 244,
     "extra": "HTML/CSS Gray",
     "name": "Gray",
-    "hex": "808080"
+    "hex": "808080",
+    "doc_text_color": "white"
   },
   {
     "code": 245,
     "extra": null,
     "name": "Philippine Gray",
-    "hex": "8a8a8a"
+    "hex": "8a8a8a",
+    "doc_text_color": "white"
   },
   {
     "code": 246,
     "extra": null,
     "name": "Spanish Gray",
-    "hex": "949494"
+    "hex": "949494",
+    "doc_text_color": "white"
   },
   {
     "code": 247,
     "extra": null,
     "name": "Spanish Gray",
-    "hex": "9e9e9e"
+    "hex": "9e9e9e",
+    "doc_text_color": "white"
   },
   {
     "code": 248,
     "extra": "X11",
     "name": "Dark Gray",
-    "hex": "a8a8a8"
+    "hex": "a8a8a8",
+    "doc_text_color": "black"
   },
   {
     "code": 249,
     "extra": null,
     "name": "Philippine Silver",
-    "hex": "b2b2b2"
+    "hex": "b2b2b2",
+    "doc_text_color": "black"
   },
   {
     "code": 250,
     "extra": "X11",
     "name": "Gray",
-    "hex": "bcbcbc"
+    "hex": "bcbcbc",
+    "doc_text_color": "black"
   },
   {
     "code": 251,
     "extra": null,
     "name": "Silver Sand",
-    "hex": "c6c6c6"
+    "hex": "c6c6c6",
+    "doc_text_color": "black"
   },
   {
     "code": 252,
     "extra": null,
     "name": "American Silver",
-    "hex": "d0d0d0"
+    "hex": "d0d0d0",
+    "doc_text_color": "black"
   },
   {
     "code": 253,
     "extra": null,
     "name": "Gainsboro",
-    "hex": "dadada"
+    "hex": "dadada",
+    "doc_text_color": "black"
   },
   {
     "code": 254,
     "extra": null,
     "name": "Platinum",
-    "hex": "e4e4e4"
+    "hex": "e4e4e4",
+    "doc_text_color": "black"
   },
   {
     "code": 255,
     "extra": null,
     "name": "Bright Gray",
-    "hex": "eeeeee"
+    "hex": "eeeeee",
+    "doc_text_color": "black"
   }
 ]

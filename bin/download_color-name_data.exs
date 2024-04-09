@@ -33,6 +33,9 @@ color_data =
     result_body = Req.get!("https://www.color-name.com/hex/#{hex}").body |> Floki.parse_document!()
     color_code = result_body |> Floki.find("h4.color-code") |> hd() |> Floki.text()
 
+    text_color = result_body |> Floki.find("div.welcome-title-child h1") |> Floki.attribute("class") |> List.first()
+    text_color = if text_color == "color-white", do: :white, else: :black
+
     name =
       color_code
       |> String.replace("\t", "")
@@ -46,9 +49,9 @@ color_data =
         %{"info" => info, "name" => name} -> {String.trim(name), info}
       end
 
-    IO.puts(light_green() <> "Color Name: #{name}   Extra info: #{info}" <> reset())
+    IO.puts(light_green() <> "Color Name: #{name}   Extra info: #{info}   doc_text_color: #{text_color}" <> reset())
     Process.sleep(sleep_time_ms)
-    {[%{name: name, hex: hex, extra: info, code: ansi_color_code.code}] ++ data, index + 1}
+    {[%{name: name, hex: hex, extra: info, code: ansi_color_code.code, doc_text_color: text_color}] ++ data, index + 1}
   end)
   |> elem(0)
   |> Enum.reverse()
