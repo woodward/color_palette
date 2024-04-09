@@ -1,6 +1,8 @@
 defmodule ColorPalette.FooBar do
   @moduledoc false
 
+  import ColorPalette.Color
+
   defmacro __before_compile__(_env) do
     quote do
       @ansi_color_codes Path.join(__DIR__, "color_palette/ansi_color_codes.json")
@@ -11,27 +13,24 @@ defmodule ColorPalette.FooBar do
 
       @colors ColorPalette.ColorNames.collate(@ansi_color_codes, @color_data)
 
-      # @colors
-      # |> Enum.each(fn color ->
-      #   case color.names do
-      #     [] ->
-      #       color_name = "color_#{color.code}"
-      #       def_color(String.to_atom(color_name), [color.code])
-      #       background_name = (color_name <> "_background") |> String.to_atom()
-      #       def_background_color(background_name, [color.code])
+      @colors
+      |> Enum.each(fn {color_name, colors} ->
+        case colors do
+          [] ->
+            # I don't think I'll ever reach here...
+            :ok
 
-      #     names ->
-      #       names
-      #       |> Enum.each(fn color_name ->
-      #         def_color(String.to_atom(color_name), [color.code])
-      #         background_name = (color_name <> "_background") |> String.to_atom()
-      #         def_background_color(background_name, [color.code])
-      #       end)
-      #   end
-      # end)
+          colors ->
+            first_color = colors |> List.first()
+            def_color(color_name, [first_color.ansi_code])
+            background_name = "#{color_name}_background" |> String.to_atom()
+            def_background_color(background_name, [first_color.ansi_code])
+        end
+      end)
 
       def ansi_color_codes, do: @ansi_color_codes
       def color_data, do: @color_data
+      def colors, do: @colors
     end
   end
 

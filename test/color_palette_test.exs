@@ -94,4 +94,21 @@ defmodule ColorPaletteTest do
              }
     end
   end
+
+  describe "colors" do
+    test "returns the map of color names to color data" do
+      colors = ColorPalette.colors()
+      assert length(Map.keys(colors)) == 181
+    end
+  end
+
+  describe "color functions" do
+    test "creates functions for the various colors" do
+      assert ColorPalette.aero_blue() == "\e[38;5;158m"
+      assert ColorPalette.aero_blue_background() == "\e[48;5;158m"
+
+      assert ColorPalette.mercury() == "\e[38;5;254m"
+      assert ColorPalette.mercury_background() == "\e[48;5;254m"
+    end
+  end
 end
