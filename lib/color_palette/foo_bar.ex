@@ -14,6 +14,9 @@ defmodule ColorPalette.FooBar do
       @color_data Path.join(__DIR__, "color_palette/color_data_api_colors.json")
                   |> ColorPalette.FooBar.read_json_file!()
 
+      @color_name_dot_com_data Path.join(__DIR__, "color_palette/color-name.com_colors.json")
+                               |> ColorPalette.FooBar.read_json_file!()
+
       @colors ColorPalette.ColorNames.collate(@ansi_color_codes, @color_data)
 
       @io_ansi_colors [:black, :red, :green, :yellow, :blue, :magenta, :cyan, :white]
@@ -35,6 +38,7 @@ defmodule ColorPalette.FooBar do
 
       def ansi_color_codes, do: @ansi_color_codes
       def color_data, do: @color_data
+      def color_name_dot_com_data, do: @color_name_dot_com_data
       def colors, do: @colors
       def io_ansi_colors, do: @io_ansi_colors
     end
