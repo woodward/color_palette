@@ -16,11 +16,11 @@ defmodule Display do
     ColorPalette.colors()
     |> Enum.sort()
     |> Enum.map(fn {name, color} ->
-      hex = color |> List.first() |> Map.get(:hex) |> Map.get(:value)
+      hex = color.ansi_color_code.hex
 
       IO.puts(
         apply(ColorPalette, name, []) <>
-          "This is color :#{String.pad_trailing(Atom.to_string(name), 21)}  Hex value: #{hex}" <> reset()
+          "This is color :#{String.pad_trailing(Atom.to_string(name), 21)}  Hex value: ##{hex}" <> reset()
       )
     end)
   end

@@ -1,7 +1,7 @@
 defmodule ColorPalette.ColorNames do
   @moduledoc false
 
-  # alias ColorPalette.Color
+  alias ColorPalette.Color
 
   def collate(ansi_color_codes, color_data) do
     ansi_color_codes
@@ -16,8 +16,16 @@ defmodule ColorPalette.ColorNames do
     end)
     |> Enum.map(fn {name, colors} ->
       sorted_colors = colors |> Enum.sort_by(& &1.name.distance)
-      sorted_colors = sorted_colors |> Enum.map(&Map.put(&1, :doc_text_color, doc_text_color(&1)))
-      {name, sorted_colors}
+      first_color = sorted_colors |> List.first()
+
+      color = %Color{
+        name: name,
+        color_data: sorted_colors,
+        ansi_color_code: first_color.ansi_color_code,
+        doc_text_color: doc_text_color(first_color)
+      }
+
+      {name, color}
     end)
     |> Enum.into(%{})
   end
@@ -40,10 +48,10 @@ defmodule ColorPalette.ColorNames do
     end
   end
 
-  def add_code_to_color_data(ansi_codes, color_data) do
-    Enum.zip(ansi_codes, color_data)
-    |> Enum.map(fn {ansi_code, color_datum} ->
-      Map.merge(color_datum, %{ansi_code: ansi_code.code})
+  def add_code_to_color_data(ansi_color_codes, color_data) do
+    Enum.zip(ansi_color_codes, color_data)
+    |> Enum.map(fn {ansi_color_code, color_datum} ->
+      Map.merge(color_datum, %{ansi_color_code: ansi_color_code})
     end)
   end
 end
