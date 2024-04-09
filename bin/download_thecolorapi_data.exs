@@ -36,6 +36,6 @@ color_data =
   |> Enum.reverse()
 
 IO.puts(light_green() <> "Downloaded #{length(color_data)} color data items" <> reset())
-IO.puts(light_yellow() <> "Writing color data to color_data.json" <> reset())
-File.write!("color_data.json", Jason.encode!(color_data, pretty: true))
+IO.puts(light_yellow() <> "Writing color data to color_data_api_colors.json" <> reset())
+File.write!("color_data_api_colors.json", Jason.encode!(color_data, pretty: true))
 IO.puts(light_green() <> "Color data writen." <> reset())

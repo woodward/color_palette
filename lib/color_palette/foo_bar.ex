@@ -11,7 +11,7 @@ defmodule ColorPalette.FooBar do
                         |> ColorPalette.FooBar.read_json_file!()
                         |> Enum.map(&(%ANSIColorCode{} |> Map.merge(&1)))
 
-      @color_data Path.join(__DIR__, "color_palette/color_data.json")
+      @color_data Path.join(__DIR__, "color_palette/color_data_api_colors.json")
                   |> ColorPalette.FooBar.read_json_file!()
 
       @colors ColorPalette.ColorNames.collate(@ansi_color_codes, @color_data)
