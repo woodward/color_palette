@@ -59,6 +59,10 @@ defmodule ColorPalette.ColorNamesTest do
       assert ColorNames.color_name_to_atom("Screamin' Green") == [:screamin_green]
     end
 
+    test "works for colors with dashes" do
+      assert ColorNames.color_name_to_atom("Yellow-Green") == [:yellow_green]
+    end
+
     test "returns two colors if a slash" do
       assert ColorNames.color_name_to_atom("Magenta / Fuchsia") == [:magenta, :fuchsia]
     end

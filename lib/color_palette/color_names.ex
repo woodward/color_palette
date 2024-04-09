@@ -37,6 +37,7 @@ defmodule ColorPalette.ColorNames do
     |> Enum.map(&String.trim(&1))
     |> Enum.map(&String.replace(&1, " ", "_"))
     |> Enum.map(&String.replace(&1, "'", ""))
+    |> Enum.map(&String.replace(&1, "-", "_"))
     |> Enum.map(&String.to_atom(&1))
   end
 
