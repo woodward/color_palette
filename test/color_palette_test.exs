@@ -158,4 +158,17 @@ defmodule ColorPaletteTest do
       assert ColorPalette.io_ansi_colors() == [:black, :red, :green, :yellow, :blue, :magenta, :cyan, :white]
     end
   end
+
+  describe "includes functions for the color-name.com colors" do
+    test "these functions are defined" do
+      assert ColorPalette.american_silver() == "\e[38;5;252m"
+      assert ColorPalette.american_silver_background() == "\e[48;5;252m"
+
+      assert ColorPalette.raisin_black() == "\e[38;5;235m"
+      assert ColorPalette.raisin_black_background() == "\e[48;5;235m"
+
+      assert ColorPalette.inchworm() == "\e[38;5;155m"
+      assert ColorPalette.inchworm_background() == "\e[48;5;155m"
+    end
+  end
 end

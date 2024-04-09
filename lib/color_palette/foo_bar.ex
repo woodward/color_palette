@@ -36,6 +36,15 @@ defmodule ColorPalette.FooBar do
         def_background_color(background_name, [color.ansi_color_code.code])
       end)
 
+      @color_name_dot_com_data
+      |> Enum.each(fn color ->
+        code = color.code
+        color_name = color.name |> ColorPalette.ColorNames.color_name_to_atom() |> List.first()
+        def_color(color_name, [code])
+        background_name = "#{color_name}_background" |> String.to_atom()
+        def_background_color(background_name, [code])
+      end)
+
       def ansi_color_codes, do: @ansi_color_codes
       def color_data, do: @color_data
       def color_name_dot_com_data, do: @color_name_dot_com_data
