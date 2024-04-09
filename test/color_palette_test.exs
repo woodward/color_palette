@@ -94,18 +94,4 @@ defmodule ColorPaletteTest do
              }
     end
   end
-
-  describe "add_code_to_color_data" do
-    test "adds the ANSI code to the color data" do
-      ansi_codes = ColorPalette.ansi_color_codes()
-      color_data = ColorPalette.color_data()
-      color_data = ColorPalette.add_code_to_color_data(ansi_codes, color_data)
-
-      first = color_data |> List.first()
-      assert first.ansi_code == 0
-
-      last = color_data |> List.last()
-      assert last.ansi_code == 255
-    end
-  end
 end

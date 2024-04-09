@@ -9,6 +9,8 @@ defmodule ColorPalette.FooBar do
       @color_data Path.join(__DIR__, "color_palette/color_data.json")
                   |> ColorPalette.FooBar.read_json_file!()
 
+      @colors ColorPalette.ColorNames.collate(@ansi_color_codes, @color_data)
+
       # @colors
       # |> Enum.each(fn color ->
       #   case color.names do
