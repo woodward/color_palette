@@ -54,4 +54,19 @@ defmodule ColorPalette.ColorNames do
       Map.merge(color_datum, %{ansi_color_code: ansi_color_code})
     end)
   end
+
+  def convert_color_name_dot_com_data(ansi_color_codes, color_name_dot_com_data) do
+    add_code_to_color_data(ansi_color_codes, color_name_dot_com_data)
+    |> Enum.reduce(%{}, fn color_data, acc ->
+      color_name = color_data.name |> color_name_to_atom() |> List.first()
+
+      color = %Color{
+        name: color_name,
+        ansi_color_code: color_data.ansi_color_code,
+        doc_text_color: String.to_atom(color_data.doc_text_color)
+      }
+
+      Map.put(acc, color_name, color)
+    end)
+  end
 end

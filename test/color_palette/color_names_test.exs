@@ -4,6 +4,7 @@ defmodule ColorPalette.ColorNamesTest do
 
   alias ColorPalette.ColorNames
   alias ColorPalette.ANSIColorCode
+  alias ColorPalette.Color
 
   describe "annotate" do
     test "adds color names and doc_text_color to ansi color codes" do
@@ -74,6 +75,25 @@ defmodule ColorPalette.ColorNamesTest do
 
       last = color_data |> List.last()
       assert last.ansi_color_code == %ANSIColorCode{code: 255, hex: "eeeeee", rgb: [238, 238, 238]}
+    end
+  end
+
+  describe "collate_color_name_dot_com_data" do
+    test "converts the color-name.com data into a map" do
+      ansi_codes = ColorPalette.ansi_color_codes()
+      color_name_dot_com_data = ColorPalette.color_name_dot_com_data()
+
+      color_data = ColorNames.convert_color_name_dot_com_data(ansi_codes, color_name_dot_com_data)
+
+      assert Map.keys(color_data) |> length() == 225
+
+      alien_armpit = color_data.alien_armpit
+
+      assert alien_armpit == %Color{
+               name: :alien_armpit,
+               doc_text_color: :black,
+               ansi_color_code: %ANSIColorCode{code: 112, hex: "87d700", rgb: [135, 215, 0]}
+             }
     end
   end
 end
