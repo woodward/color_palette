@@ -18,6 +18,7 @@ defmodule ColorPaletteTest do
 
       assert first_code == %ANSIColorCode{
                code: 0,
+               color_group: :gray_and_black,
                hex: "000000",
                rgb: [0, 0, 0]
              }
@@ -26,6 +27,7 @@ defmodule ColorPaletteTest do
 
       assert last_code == %ANSIColorCode{
                code: 255,
+               color_group: :gray_and_black,
                hex: "eeeeee",
                rgb: [238, 238, 238]
              }

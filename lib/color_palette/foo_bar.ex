@@ -55,12 +55,8 @@ defmodule ColorPalette.FooBar do
       @io_ansi_colors
       |> Map.keys()
       |> Enum.each(fn color ->
-        if !String.starts_with?(Atom.to_string(color), "light_") do
-          delegate_to_io_ansi(color)
-          delegate_to_io_ansi(String.to_atom("#{color}_background"))
-          delegate_to_io_ansi(String.to_atom("light_#{color}"))
-          delegate_to_io_ansi(String.to_atom("light_#{color}_background"))
-        end
+        delegate_to_io_ansi(color)
+        delegate_to_io_ansi(String.to_atom("#{color}_background"))
       end)
 
       @colors

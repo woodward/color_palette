@@ -1,5 +1,5 @@
 [
-  { "code": 0, "color_group": null },
+  { "code": 0, "color_group": "gray_and_black" },
   { "code": 1, "color_group": null },
   { "code": 2, "color_group": "green" },
   { "code": 3, "color_group": null },
@@ -14,7 +14,7 @@
   { "code": 12, "color_group": null },
   { "code": 13, "color_group": null },
   { "code": 14, "color_group": null },
-  { "code": 15, "color_group": null },
+  { "code": 15, "color_group": "white" },
   { "code": 16, "color_group": null },
   { "code": 17, "color_group": null },
   { "code": 18, "color_group": null },

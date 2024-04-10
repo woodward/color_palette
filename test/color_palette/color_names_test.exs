@@ -75,10 +75,10 @@ defmodule ColorPalette.ColorNamesTest do
       color_data = ColorNames.add_code_to_color_data(ansi_codes, color_data)
 
       first = color_data |> List.first()
-      assert first.ansi_color_code == %ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0]}
+      assert first.ansi_color_code == %ANSIColorCode{code: 0, color_group: :gray_and_black, hex: "000000", rgb: [0, 0, 0]}
 
       last = color_data |> List.last()
-      assert last.ansi_color_code == %ANSIColorCode{code: 255, hex: "eeeeee", rgb: [238, 238, 238]}
+      assert last.ansi_color_code == %ANSIColorCode{code: 255, color_group: :gray_and_black, hex: "eeeeee", rgb: [238, 238, 238]}
     end
   end
 
@@ -112,7 +112,7 @@ defmodule ColorPalette.ColorNamesTest do
       black = color_names.black
 
       assert black == %Color{
-               ansi_color_code: %ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0]},
+               ansi_color_code: %ANSIColorCode{code: 0, color_group: :gray_and_black, hex: "000000", rgb: [0, 0, 0]},
                color_data: [],
                doc_text_color: :white,
                name: :black
