@@ -83,4 +83,21 @@ defmodule ColorPalette.ColorNames do
       })
     end)
   end
+
+  def find_duplicates(color_names) do
+    ansi_codes_to_names =
+      color_names
+      |> Enum.reduce(%{}, fn {color_name, color_data}, acc ->
+        code = color_data.ansi_color_code.code
+        Map.update(acc, code, [color_name], fn value -> [color_name] ++ value end)
+      end)
+
+    color_names
+    |> Enum.map(fn {color_name, color_data} ->
+      code = color_data.ansi_color_code.code
+      colors_for_this_code = Map.get(ansi_codes_to_names, code) |> Enum.reject(&(&1 == color_name))
+      {color_name, %{color_data | same_as: colors_for_this_code}}
+    end)
+    |> Enum.into(%{})
+  end
 end

@@ -119,4 +119,22 @@ defmodule ColorPalette.ColorNamesTest do
              }
     end
   end
+
+  describe "find_duplicates/1" do
+    test "annotates the colors with duplicate function names" do
+      color_names = %{
+        black1: %Color{ansi_color_code: %ANSIColorCode{code: 1}},
+        black2: %Color{ansi_color_code: %ANSIColorCode{code: 1}},
+        some_other_color: %Color{ansi_color_code: %ANSIColorCode{code: 2}}
+      }
+
+      color_names_with_same_as = ColorNames.find_duplicates(color_names)
+
+      assert color_names_with_same_as == %{
+               black1: %Color{ansi_color_code: %ANSIColorCode{code: 1}, same_as: [:black2]},
+               black2: %Color{ansi_color_code: %ANSIColorCode{code: 1}, same_as: [:black1]},
+               some_other_color: %Color{ansi_color_code: %ANSIColorCode{code: 2}, same_as: []}
+             }
+    end
+  end
 end

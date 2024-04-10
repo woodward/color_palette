@@ -42,6 +42,7 @@ defmodule ColorPalette.FooBar do
 
       @all_colors @colors
                   |> Map.merge(ColorPalette.ColorNames.convert_ansi_colors_to_color_names(@ansi_color_codes, @io_ansi_colors))
+                  |> ColorPalette.ColorNames.find_duplicates()
 
       @io_ansi_colors
       |> Map.keys()
