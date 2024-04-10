@@ -70,4 +70,38 @@ defmodule ColorPalette.ColorNames do
       Map.put(acc, color_name, color)
     end)
   end
+
+  def convert_ansi_colors_to_color_names(ansi_color_codes, ansi_colors) do
+    ansi_colors = ansi_colors |> Enum.flat_map(&[&1, String.to_atom("light_#{&1}")])
+
+    ansi_colors
+    |> Enum.reduce(%{}, fn ansi_color, acc ->
+      ansi_code = Map.get(io_ansi_name_to_code(), ansi_color)
+      ansi_color_code = ansi_color_codes |> Enum.find(&(&1.code == ansi_code))
+
+      Map.put(acc, ansi_color, %Color{
+        name: ansi_color,
+        doc_text_color: :black,
+        ansi_color_code: ansi_color_code
+      })
+    end)
+  end
+
+  def io_ansi_name_to_code do
+    [:black, :red, :green, :yellow, :blue, :magenta, :cyan, :white]
+    |> Enum.with_index()
+    |> Enum.reduce(%{}, fn {color, code}, acc ->
+      acc
+      |> Map.put(color, code + 0)
+      |> Map.put(String.to_atom("light_#{color}"), code + 8)
+
+      # |> Map.put(String.to_atom("#{color}_background"), code + 40)
+      # |> Map.put(String.to_atom("light_#{color}_background"), code + 100)
+
+      # |> Map.put(color, code + 30)
+      # |> Map.put(String.to_atom("light_#{color}"), code + 90)
+      # |> Map.put(String.to_atom("#{color}_background"), code + 40)
+      # |> Map.put(String.to_atom("light_#{color}_background"), code + 100)
+    end)
+  end
 end
