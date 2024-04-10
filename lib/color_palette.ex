@@ -1,5 +1,7 @@
 defmodule ColorPalette do
-  @moduledoc false
+  @moduledoc """
+  Foo
+  """
 
   defdelegate reset(), to: IO.ANSI
 
