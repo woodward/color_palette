@@ -13,7 +13,7 @@ defmodule Display do
   end
 
   def all do
-    ColorPalette.colors()
+    ColorPalette.all_colors()
     |> Enum.sort()
     |> Enum.map(fn {name, color} ->
       hex = color.ansi_color_code.hex

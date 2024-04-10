@@ -40,6 +40,9 @@ defmodule ColorPalette.FooBar do
         light_white: %{code: 15, doc_text_color: :black}
       }
 
+      @all_colors @colors
+                  |> Map.merge(ColorPalette.ColorNames.convert_ansi_colors_to_color_names(@ansi_color_codes, @io_ansi_colors))
+
       @io_ansi_colors
       |> Map.keys()
       |> Enum.each(fn color ->
@@ -62,6 +65,7 @@ defmodule ColorPalette.FooBar do
       def color_data, do: @color_data
       def color_name_dot_com_data, do: @color_name_dot_com_data
       def colors, do: @colors
+      def all_colors, do: @all_colors
       def io_ansi_colors, do: @io_ansi_colors
     end
   end
