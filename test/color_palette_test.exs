@@ -153,12 +153,6 @@ defmodule ColorPaletteTest do
     end
   end
 
-  describe "standard_colors" do
-    test "returns the list of standard colors" do
-      assert ColorPalette.io_ansi_colors() == [:black, :red, :green, :yellow, :blue, :magenta, :cyan, :white]
-    end
-  end
-
   describe "includes functions for the color-name.com colors" do
     test "these functions are defined" do
       assert ColorPalette.american_silver() == "\e[38;5;252m"
@@ -169,6 +163,31 @@ defmodule ColorPaletteTest do
 
       assert ColorPalette.inchworm() == "\e[38;5;155m"
       assert ColorPalette.inchworm_background() == "\e[48;5;155m"
+    end
+  end
+
+  describe "io_ansi_colors/0" do
+    test "returns the correct color code for one of the IO.ANSI color names" do
+      io_ansi_name_to_code = ColorPalette.io_ansi_colors()
+
+      assert io_ansi_name_to_code == %{
+               black: %{code: 0, doc_text_color: :white},
+               blue: %{code: 4, doc_text_color: :white},
+               cyan: %{code: 6, doc_text_color: :white},
+               green: %{code: 2, doc_text_color: :white},
+               magenta: %{code: 5, doc_text_color: :white},
+               red: %{code: 1, doc_text_color: :white},
+               white: %{code: 7, doc_text_color: :black},
+               yellow: %{code: 3, doc_text_color: :white},
+               light_black: %{code: 8, doc_text_color: :white},
+               light_blue: %{code: 12, doc_text_color: :white},
+               light_cyan: %{code: 14, doc_text_color: :white},
+               light_green: %{code: 10, doc_text_color: :white},
+               light_magenta: %{code: 13, doc_text_color: :white},
+               light_red: %{code: 9, doc_text_color: :white},
+               light_white: %{code: 15, doc_text_color: :black},
+               light_yellow: %{code: 11, doc_text_color: :white}
+             }
     end
   end
 end

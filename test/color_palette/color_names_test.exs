@@ -114,33 +114,8 @@ defmodule ColorPalette.ColorNamesTest do
       assert black == %Color{
                ansi_color_code: %ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0]},
                color_data: [],
-               doc_text_color: :black,
+               doc_text_color: :white,
                name: :black
-             }
-    end
-  end
-
-  describe "ansi_color_code_for_name/2" do
-    test "returns the correct color code for one of the IO.ANSI color names" do
-      io_ansi_name_to_code = ColorNames.io_ansi_name_to_code()
-
-      assert io_ansi_name_to_code == %{
-               black: 0,
-               blue: 4,
-               cyan: 6,
-               green: 2,
-               light_black: 8,
-               light_blue: 12,
-               light_cyan: 14,
-               light_green: 10,
-               light_magenta: 13,
-               light_red: 9,
-               light_white: 15,
-               light_yellow: 11,
-               magenta: 5,
-               red: 1,
-               white: 7,
-               yellow: 3
              }
     end
   end
