@@ -18,18 +18,11 @@ defmodule ColorPalette.Color do
       Sets foreground color to #{name}.
       </div>
       """
-      @spec unquote(name)() :: String.t()
       def unquote(name)() do
         apply(IO.ANSI, :color, unquote(code))
       end
-    end
-  end
 
-  defmacro def_background_color(name, code) do
-    quote bind_quoted: [name: name, code: code] do
-      @doc false
-      @spec unquote(name)() :: String.t()
-      def unquote(name)() do
+      def unquote(String.to_atom("#{name}_background"))() do
         apply(IO.ANSI, :color_background, unquote(code))
       end
     end
