@@ -5,5 +5,5 @@ defmodule ColorPalette do
 
   defdelegate reset(), to: IO.ANSI
 
-  @before_compile ColorPalette.FooBar
+  @before_compile ColorPalette.PrecompileHook
 end
