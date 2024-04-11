@@ -100,4 +100,12 @@ defmodule ColorPalette.ColorNames do
     end)
     |> Enum.into(%{})
   end
+
+  def clear_out_color_data(color_names) do
+    color_names
+    |> Enum.map(fn {color_name, color} ->
+      {color_name, %{color | color_data: []}}
+    end)
+    |> Enum.into(%{})
+  end
 end

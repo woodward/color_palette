@@ -137,4 +137,22 @@ defmodule ColorPalette.ColorNamesTest do
              }
     end
   end
+
+  describe "clear_out_color_data" do
+    test "clears out the color data array" do
+      color_names = %{
+        black: %Color{color_data: ["something"]},
+        white: %Color{color_data: ["something else"]},
+        yellow: %Color{color_data: []}
+      }
+
+      cleared_out = ColorNames.clear_out_color_data(color_names)
+
+      assert cleared_out == %{
+               black: %Color{color_data: []},
+               white: %Color{color_data: []},
+               yellow: %Color{color_data: []}
+             }
+    end
+  end
 end

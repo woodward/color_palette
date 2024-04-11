@@ -58,6 +58,7 @@ defmodule ColorPalette.PrecompileHook do
       @colors @api_colors
               |> Map.merge(ColorPalette.ColorNames.convert_ansi_colors_to_color_names(@io_ansi_colors, @ansi_color_codes))
               |> ColorPalette.ColorNames.find_duplicates()
+              |> ColorPalette.ColorNames.clear_out_color_data()
 
       @io_ansi_colors
       |> Map.keys()
