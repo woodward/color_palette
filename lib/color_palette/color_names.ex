@@ -5,7 +5,7 @@ defmodule ColorPalette.ColorNames do
 
   def convert_color_data_api_data(ansi_color_codes, color_data) do
     ansi_color_codes
-    |> add_code_to_color_data(color_data)
+    |> add_ansi_code_to_colors(color_data)
     |> Enum.reduce(%{}, fn color_data, acc ->
       names = color_data.name.value |> color_name_to_atom()
 
@@ -49,7 +49,7 @@ defmodule ColorPalette.ColorNames do
     end
   end
 
-  def add_code_to_color_data(ansi_color_codes, color_data) do
+  def add_ansi_code_to_colors(ansi_color_codes, color_data) do
     Enum.zip(ansi_color_codes, color_data)
     |> Enum.map(fn {ansi_color_code, color_datum} ->
       Map.merge(color_datum, %{ansi_color_code: ansi_color_code})
@@ -57,7 +57,7 @@ defmodule ColorPalette.ColorNames do
   end
 
   def convert_color_name_dot_com_data(ansi_color_codes, color_name_dot_com_data) do
-    add_code_to_color_data(ansi_color_codes, color_name_dot_com_data)
+    add_ansi_code_to_colors(ansi_color_codes, color_name_dot_com_data)
     |> Enum.reduce(%{}, fn color_data, acc ->
       color_name = color_data.name |> color_name_to_atom() |> List.first()
 
