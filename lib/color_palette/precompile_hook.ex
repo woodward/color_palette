@@ -50,12 +50,10 @@ defmodule ColorPalette.PrecompileHook do
                                    |> Path.join("color_palette/color-name.com_colors.json")
                                    |> Utils.read_json_file!()
 
-      @api_colors ColorPalette.ColorNames.convert_color_data_api_raw_data(@color_data_api_raw_data, @ansi_color_codes)
-                  |> Map.merge(
-                    ColorPalette.ColorNames.convert_color_name_dot_com_raw_data(@color_name_dot_com_raw_data, @ansi_color_codes)
-                  )
-
-      @colors @api_colors
+      @colors ColorPalette.ColorNames.convert_color_data_api_raw_data(@color_data_api_raw_data, @ansi_color_codes)
+              |> Map.merge(
+                ColorPalette.ColorNames.convert_color_name_dot_com_raw_data(@color_name_dot_com_raw_data, @ansi_color_codes)
+              )
               |> Map.merge(ColorPalette.ColorNames.convert_ansi_colors_to_color_names(@io_ansi_colors, @ansi_color_codes))
               |> ColorPalette.ColorNames.find_duplicates()
               |> ColorPalette.ColorNames.clear_out_color_data()
@@ -75,7 +73,6 @@ defmodule ColorPalette.PrecompileHook do
       def ansi_color_codes, do: @ansi_color_codes
       def color_data_api_raw_data, do: @color_data_api_raw_data
       def color_name_dot_com_raw_data, do: @color_name_dot_com_raw_data
-      def api_colors, do: @api_colors
       def colors, do: @colors
       def io_ansi_colors, do: @io_ansi_colors
     end
