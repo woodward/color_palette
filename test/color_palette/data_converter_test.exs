@@ -1,8 +1,8 @@
-defmodule ColorPalette.ColorNamesTest do
+defmodule ColorPalette.DataConverterTest do
   @moduledoc false
   use ExUnit.Case
 
-  alias ColorPalette.ColorNames
+  alias ColorPalette.DataConverter
   alias ColorPalette.ANSIColorCode
   alias ColorPalette.Color
 
@@ -10,7 +10,7 @@ defmodule ColorPalette.ColorNamesTest do
     test "adds color names and text_contrast_color to ansi color codes" do
       color_codes = ColorPalette.ansi_color_codes()
       color_data = ColorPalette.color_data_api_raw_data()
-      colors = ColorNames.convert_color_data_api_raw_data(color_data, color_codes)
+      colors = DataConverter.convert_color_data_api_raw_data(color_data, color_codes)
 
       black = colors.black
 
@@ -24,7 +24,7 @@ defmodule ColorPalette.ColorNamesTest do
     test "sorts colors based on their distance" do
       color_codes = ColorPalette.ansi_color_codes()
       color_data = ColorPalette.color_data_api_raw_data()
-      colors = ColorNames.convert_color_data_api_raw_data(color_data, color_codes)
+      colors = DataConverter.convert_color_data_api_raw_data(color_data, color_codes)
 
       blueberry = colors.blueberry
       assert length(blueberry.color_data) == 5
@@ -59,7 +59,7 @@ defmodule ColorPalette.ColorNamesTest do
 
       color_groups = [:gray_and_black, :yellow, :white]
 
-      color_groups_to_ansi_color_codes = ColorNames.color_groups_to_ansi_color_codes(ansi_color_codes, color_groups)
+      color_groups_to_ansi_color_codes = DataConverter.color_groups_to_ansi_color_codes(ansi_color_codes, color_groups)
 
       assert color_groups_to_ansi_color_codes == %{
                gray_and_black: [
@@ -75,23 +75,23 @@ defmodule ColorPalette.ColorNamesTest do
 
   describe "color_name_to_atom" do
     test "converts a color name to an atom" do
-      assert ColorNames.color_name_to_atom("Black") == [:black]
+      assert DataConverter.color_name_to_atom("Black") == [:black]
     end
 
     test "snake cases multi-word colors" do
-      assert ColorNames.color_name_to_atom("Rose of Sharon") == [:rose_of_sharon]
+      assert DataConverter.color_name_to_atom("Rose of Sharon") == [:rose_of_sharon]
     end
 
     test "works for colors with apostrophes" do
-      assert ColorNames.color_name_to_atom("Screamin' Green") == [:screamin_green]
+      assert DataConverter.color_name_to_atom("Screamin' Green") == [:screamin_green]
     end
 
     test "works for colors with dashes" do
-      assert ColorNames.color_name_to_atom("Yellow-Green") == [:yellow_green]
+      assert DataConverter.color_name_to_atom("Yellow-Green") == [:yellow_green]
     end
 
     test "returns two colors if a slash" do
-      assert ColorNames.color_name_to_atom("Magenta / Fuchsia") == [:magenta, :fuchsia]
+      assert DataConverter.color_name_to_atom("Magenta / Fuchsia") == [:magenta, :fuchsia]
     end
   end
 
@@ -99,7 +99,7 @@ defmodule ColorPalette.ColorNamesTest do
     test "adds the ANSI code to the color data" do
       ansi_codes = ColorPalette.ansi_color_codes()
       color_data = ColorPalette.color_data_api_raw_data()
-      color_data = ColorNames.add_ansi_code_to_colors(ansi_codes, color_data)
+      color_data = DataConverter.add_ansi_code_to_colors(ansi_codes, color_data)
 
       first = color_data |> List.first()
       assert first.ansi_color_code == %ANSIColorCode{code: 0, color_group: :gray_and_black, hex: "000000", rgb: [0, 0, 0]}
@@ -114,7 +114,7 @@ defmodule ColorPalette.ColorNamesTest do
       ansi_codes = ColorPalette.ansi_color_codes()
       color_name_dot_com_raw_data = ColorPalette.color_name_dot_com_raw_data()
 
-      color_data = ColorNames.convert_color_name_dot_com_raw_data(color_name_dot_com_raw_data, ansi_codes)
+      color_data = DataConverter.convert_color_name_dot_com_raw_data(color_name_dot_com_raw_data, ansi_codes)
 
       assert Map.keys(color_data) |> length() == 225
 
@@ -134,7 +134,7 @@ defmodule ColorPalette.ColorNamesTest do
       ansi_codes = ColorPalette.ansi_color_codes()
       ansi_colors = ColorPalette.io_ansi_colors()
 
-      color_names = ColorNames.convert_ansi_colors_to_color_names(ansi_colors, ansi_codes)
+      color_names = DataConverter.convert_ansi_colors_to_color_names(ansi_colors, ansi_codes)
 
       assert Map.keys(color_names) |> length() == 16
       black = color_names.black
@@ -157,7 +157,7 @@ defmodule ColorPalette.ColorNamesTest do
         some_other_color: %Color{ansi_color_code: %ANSIColorCode{code: 2}}
       }
 
-      color_names_with_same_as = ColorNames.find_duplicates(color_names)
+      color_names_with_same_as = DataConverter.find_duplicates(color_names)
 
       assert color_names_with_same_as == %{
                black1: %Color{ansi_color_code: %ANSIColorCode{code: 1}, same_as: [:black2]},
@@ -175,7 +175,7 @@ defmodule ColorPalette.ColorNamesTest do
         yellow: %Color{color_data: []}
       }
 
-      cleared_out = ColorNames.clear_out_color_data(color_names)
+      cleared_out = DataConverter.clear_out_color_data(color_names)
 
       assert cleared_out == %{
                black: %Color{color_data: []},

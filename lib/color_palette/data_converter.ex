@@ -1,4 +1,4 @@
-defmodule ColorPalette.ColorNames do
+defmodule ColorPalette.DataConverter do
   @moduledoc false
 
   alias ColorPalette.Color

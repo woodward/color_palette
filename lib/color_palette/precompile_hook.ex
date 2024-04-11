@@ -7,6 +7,7 @@ defmodule ColorPalette.PrecompileHook do
   defmacro __before_compile__(_env) do
     quote do
       alias ColorPalette.Utils
+      alias ColorPalette.DataConverter
 
       @io_ansi_colors %{
         black: %{code: 0, text_contrast_color: :white},
@@ -57,7 +58,7 @@ defmodule ColorPalette.PrecompileHook do
                         |> Enum.map(&Map.merge(%ANSIColorCode{}, &1))
 
       @color_groups_to_ansi_color_codes @ansi_color_codes
-                                        |> ColorPalette.ColorNames.color_groups_to_ansi_color_codes(@color_groups)
+                                        |> DataConverter.color_groups_to_ansi_color_codes(@color_groups)
 
       @color_data_api_raw_data __DIR__
                                |> Path.join("color_palette/color_data_api_colors.json")
@@ -67,13 +68,11 @@ defmodule ColorPalette.PrecompileHook do
                                    |> Path.join("color_palette/color-name.com_colors.json")
                                    |> Utils.read_json_file!()
 
-      @colors ColorPalette.ColorNames.convert_color_data_api_raw_data(@color_data_api_raw_data, @ansi_color_codes)
-              |> Map.merge(
-                ColorPalette.ColorNames.convert_color_name_dot_com_raw_data(@color_name_dot_com_raw_data, @ansi_color_codes)
-              )
-              |> Map.merge(ColorPalette.ColorNames.convert_ansi_colors_to_color_names(@io_ansi_colors, @ansi_color_codes))
-              |> ColorPalette.ColorNames.find_duplicates()
-              |> ColorPalette.ColorNames.clear_out_color_data()
+      @colors DataConverter.convert_color_data_api_raw_data(@color_data_api_raw_data, @ansi_color_codes)
+              |> Map.merge(DataConverter.convert_color_name_dot_com_raw_data(@color_name_dot_com_raw_data, @ansi_color_codes))
+              |> Map.merge(DataConverter.convert_ansi_colors_to_color_names(@io_ansi_colors, @ansi_color_codes))
+              |> DataConverter.find_duplicates()
+              |> DataConverter.clear_out_color_data()
 
       @colors
       |> Enum.each(fn {color_name, color} ->
@@ -89,11 +88,11 @@ defmodule ColorPalette.PrecompileHook do
 
       def ansi_color_codes, do: @ansi_color_codes
       def color_data_api_raw_data, do: @color_data_api_raw_data
+      def color_groups_to_ansi_color_codes, do: @color_groups_to_ansi_color_codes
+      def color_groups, do: @color_groups
       def color_name_dot_com_raw_data, do: @color_name_dot_com_raw_data
       def colors, do: @colors
       def io_ansi_colors, do: @io_ansi_colors
-      def color_groups_to_ansi_color_codes, do: @color_groups_to_ansi_color_codes
-      def color_groups, do: @color_groups
     end
   end
 end
