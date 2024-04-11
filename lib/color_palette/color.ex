@@ -11,8 +11,13 @@ defmodule ColorPalette.Color do
     same_as: []
   ]
 
-  defmacro def_color(name, code) do
-    quote bind_quoted: [name: name, code: code] do
+  defmacro def_color(name, hex, text_contrast_color, code) do
+    quote bind_quoted: [name: name, text_contrast_color: text_contrast_color, hex: hex, code: code] do
+      @doc """
+      <div style="color: #{text_contrast_color}; background-color: ##{hex}; padding: 1rem;">
+      Sets foreground color to #{name}.
+      </div>
+      """
       @spec unquote(name)() :: String.t()
       def unquote(name)() do
         apply(IO.ANSI, :color, unquote(code))
@@ -22,6 +27,7 @@ defmodule ColorPalette.Color do
 
   defmacro def_background_color(name, code) do
     quote bind_quoted: [name: name, code: code] do
+      @doc false
       @spec unquote(name)() :: String.t()
       def unquote(name)() do
         apply(IO.ANSI, :color_background, unquote(code))

@@ -1,21 +1,18 @@
 # ColorPalette
 
-** Brings additional named IO.ANSI color codes into Elixir.
+A library which brings additional named colors into Elixir (in addition to the standard
+(IO.ANSI colors)[https://hexdocs.pm/elixir/IO.ANSI.html]).
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `color_palette` to your list of dependencies in `mix.exs`:
+The package can be installed by adding `color_palette` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:color_palette, "~> 0.1.0"}
+    {:color_palette, "~> 0.1"}
   ]
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/color_palette>.
-
+Documentation can be found (here)[https://hexdocs.pm/color_palette/readme.html].

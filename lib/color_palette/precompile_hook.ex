@@ -83,7 +83,7 @@ defmodule ColorPalette.PrecompileHook do
           delegate_to_io_ansi(color_name)
           delegate_to_io_ansi(String.to_atom("#{color_name}_background"))
         else
-          def_color(color_name, [color.ansi_color_code.code])
+          def_color(color_name, color.ansi_color_code.hex, color.text_contrast_color, [color.ansi_color_code.code])
           background_name = "#{color_name}_background" |> String.to_atom()
           def_background_color(background_name, [color.ansi_color_code.code])
         end
