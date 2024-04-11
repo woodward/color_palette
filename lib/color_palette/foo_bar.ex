@@ -8,6 +8,7 @@ defmodule ColorPalette.FooBar do
   defmacro __before_compile__(_env) do
     quote do
       alias ColorPalette.Utils
+      alias ColorPalette.IoAnsiColor
 
       @ansi_color_codes_by_group Path.join(__DIR__, "color_palette/ansi_color_codes_by_group.json")
                                  |> Utils.read_json_file!()
@@ -31,12 +32,12 @@ defmodule ColorPalette.FooBar do
                   |> Map.merge(
                     ColorPalette.ColorNames.convert_ansi_colors_to_color_names(
                       @ansi_color_codes,
-                      ColorPalette.ANSIColorCode.io_ansi_colors()
+                      IoAnsiColor.colors()
                     )
                   )
                   |> ColorPalette.ColorNames.find_duplicates()
 
-      ColorPalette.ANSIColorCode.io_ansi_colors()
+      IoAnsiColor.colors()
       |> Map.keys()
       |> Enum.each(fn color ->
         delegate_to_io_ansi(color)
@@ -57,7 +58,7 @@ defmodule ColorPalette.FooBar do
       def colors, do: @colors
       def all_colors, do: @all_colors
 
-      defdelegate io_ansi_colors, to: ColorPalette.ANSIColorCode
+      defdelegate io_ansi_colors, to: ColorPalette.IoAnsiColor, as: :colors
     end
   end
 end
