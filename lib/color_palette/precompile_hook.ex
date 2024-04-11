@@ -79,15 +79,16 @@ defmodule ColorPalette.PrecompileHook do
 
       @colors
       |> Enum.each(fn {color_name, color} ->
+        hex = color.ansi_color_code.hex
+        code = color.ansi_color_code.code
+        text_contrast_color = color.text_contrast_color
+
         if color.source == :io_ansi do
-          delegate_to_io_ansi(color_name)
-          delegate_to_io_ansi(String.to_atom("#{color_name}_background"))
+          delegate_to_io_ansi(color_name, hex, text_contrast_color, code)
+          background_color_name = String.to_atom("#{color_name}_background")
+          delegate_to_io_ansi(background_color_name, hex, text_contrast_color, code + 10)
         else
-          IO.puts("------")
-
-          def_color(color_name, color.ansi_color_code.hex, color.text_contrast_color, [color.ansi_color_code.code])
-
-          # def_background_color(background_name, [color.ansi_color_code.code])
+          def_color(color_name, hex, text_contrast_color, [code])
         end
       end)
 

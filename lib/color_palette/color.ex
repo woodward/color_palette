@@ -15,7 +15,7 @@ defmodule ColorPalette.Color do
     quote bind_quoted: [name: name, text_contrast_color: text_contrast_color, hex: hex, code: code] do
       @doc """
       <div style="color: #{text_contrast_color}; background-color: ##{hex}; padding: 1rem;">
-      Sets foreground color to #{name}.
+      Sets foreground color to <strong>#{name}</strong>.  Hex value ##{hex}.  ANSI code #{code}.
       </div>
       """
       def unquote(name)() do
@@ -28,8 +28,16 @@ defmodule ColorPalette.Color do
     end
   end
 
-  defmacro delegate_to_io_ansi(name) do
-    quote bind_quoted: [name: name] do
+  defmacro delegate_to_io_ansi(name, hex, text_contrast_color, code) do
+    quote bind_quoted: [name: name, text_contrast_color: text_contrast_color, hex: hex, code: code] do
+      @doc """
+      <div style="color: #{text_contrast_color}; background-color: ##{hex}; padding: 1rem;">
+      See
+      <a href="https://hexdocs.pm/elixir/IO.ANSI.html##{name}/0">IO.ANSI.#{name}</a>
+      <br />
+      Hex value ##{hex}.  ANSI code #{code}.
+      </div>
+      """
       defdelegate unquote(name)(), to: IO.ANSI
     end
   end

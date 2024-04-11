@@ -6,7 +6,8 @@ defmodule ColorPalette do
 
   ## Group 2: Colors
 
-  See below
+  See below for the color descriptions.  Note that there are background versions of each color;
+  e.g., `tea_green_background/0` is the background color for `tea_green/0`.
 
   """
 
