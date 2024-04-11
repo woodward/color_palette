@@ -2,13 +2,12 @@ defmodule ColorPalette.PrecompileHook do
   @moduledoc false
 
   import ColorPalette.Color
+
   alias ColorPalette.ANSIColorCode
+  alias ColorPalette.DataConverter
 
   defmacro __before_compile__(_env) do
     quote do
-      alias ColorPalette.Utils
-      alias ColorPalette.DataConverter
-
       @io_ansi_colors %{
         black: %{code: 0, text_contrast_color: :white},
         red: %{code: 1, text_contrast_color: :white},
@@ -45,12 +44,14 @@ defmodule ColorPalette.PrecompileHook do
 
       @ansi_color_codes_by_group __DIR__
                                  |> Path.join("color_palette/ansi_color_codes_by_group.json")
-                                 |> Utils.read_json_file!()
+                                 |> File.read!()
+                                 |> Jason.decode!(keys: :atoms)
                                  |> Enum.map(&if &1.color_group, do: String.to_atom(&1.color_group), else: nil)
 
       @ansi_color_codes __DIR__
                         |> Path.join("color_palette/ansi_color_codes.json")
-                        |> Utils.read_json_file!()
+                        |> File.read!()
+                        |> Jason.decode!(keys: :atoms)
                         |> Enum.zip(@ansi_color_codes_by_group)
                         |> Enum.map(fn {ansi_color_code, color_group} ->
                           Map.put(ansi_color_code, :color_group, color_group)
@@ -62,11 +63,13 @@ defmodule ColorPalette.PrecompileHook do
 
       @color_data_api_raw_data __DIR__
                                |> Path.join("color_palette/color_data_api_colors.json")
-                               |> Utils.read_json_file!()
+                               |> File.read!()
+                               |> Jason.decode!(keys: :atoms)
 
       @color_name_dot_com_raw_data __DIR__
                                    |> Path.join("color_palette/color-name.com_colors.json")
-                                   |> Utils.read_json_file!()
+                                   |> File.read!()
+                                   |> Jason.decode!(keys: :atoms)
 
       @colors DataConverter.convert_color_data_api_raw_data(@color_data_api_raw_data, @ansi_color_codes)
               |> Map.merge(DataConverter.convert_color_name_dot_com_raw_data(@color_name_dot_com_raw_data, @ansi_color_codes))
