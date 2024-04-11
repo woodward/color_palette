@@ -28,6 +28,20 @@ defmodule ColorPalette.PrecompileHook do
         light_white: %{code: 15, text_contrast_color: :black}
       }
 
+      @color_groups [
+        :blue,
+        :brown,
+        :cyan,
+        :gray_and_black,
+        :green,
+        :orange,
+        :pink,
+        :purple_violet_and_magenta,
+        :red,
+        :white,
+        :yellow
+      ]
+
       @ansi_color_codes_by_group __DIR__
                                  |> Path.join("color_palette/ansi_color_codes_by_group.json")
                                  |> Utils.read_json_file!()
@@ -41,6 +55,9 @@ defmodule ColorPalette.PrecompileHook do
                           Map.put(ansi_color_code, :color_group, color_group)
                         end)
                         |> Enum.map(&Map.merge(%ANSIColorCode{}, &1))
+
+      @color_groups_to_ansi_color_codes @ansi_color_codes
+                                        |> ColorPalette.ColorNames.color_groups_to_ansi_color_codes(@color_groups)
 
       @color_data_api_raw_data __DIR__
                                |> Path.join("color_palette/color_data_api_colors.json")
@@ -75,6 +92,8 @@ defmodule ColorPalette.PrecompileHook do
       def color_name_dot_com_raw_data, do: @color_name_dot_com_raw_data
       def colors, do: @colors
       def io_ansi_colors, do: @io_ansi_colors
+      def color_groups_to_ansi_color_codes, do: @color_groups_to_ansi_color_codes
+      def color_groups, do: @color_groups
     end
   end
 end

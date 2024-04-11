@@ -31,6 +31,20 @@ defmodule ColorPalette.ColorNames do
     |> Enum.into(%{})
   end
 
+  def color_groups_to_ansi_color_codes(ansi_color_codes, color_groups) do
+    color_groups_to_ansi_color_codes =
+      color_groups
+      |> Enum.reduce(%{}, fn color_group, acc ->
+        Map.put(acc, color_group, [])
+      end)
+
+    ansi_color_codes
+    |> Enum.reduce(color_groups_to_ansi_color_codes, fn ansi_color_code, acc ->
+      color_group = ansi_color_code.color_group
+      Map.update(acc, color_group, [ansi_color_code], fn value -> [ansi_color_code] ++ value end)
+    end)
+  end
+
   def color_name_to_atom(name) do
     name
     |> String.downcase()

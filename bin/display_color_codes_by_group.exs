@@ -7,8 +7,6 @@ Mix.install([
 defmodule Display do
   import ColorPalette
 
-  alias ColorPalette.ColorGroup
-
   def print_color(ansi_color_code, name) do
     code = ansi_color_code.code
 
@@ -30,9 +28,10 @@ defmodule Display do
   end
 
   def all do
-    color_groups = ColorGroup.groups()
     colors = ColorPalette.colors()
-    codes_without_color_groups = ColorPalette.ansi_color_codes() |> Enum.filter(&(&1.color_group == nil))
+    color_codes_by_color_groups = ColorPalette.color_groups_to_ansi_color_codes()
+
+    codes_without_color_groups = Map.get(color_codes_by_color_groups, nil)
 
     codes_without_color_groups
     |> Enum.map(fn ansi_color_code ->
@@ -45,18 +44,19 @@ defmodule Display do
     IO.puts(light_yellow() <> "==================================================================================" <> reset())
     IO.puts("\n")
 
-    color_groups
-    |> Enum.each(fn group ->
-      IO.puts("Group:  #{group}")
-      IO.puts(" ")
-      colors_for_group = ColorPalette.ansi_color_codes() |> Enum.filter(&(&1.color_group == group))
+    color_codes_by_color_groups
+    |> Enum.each(fn {group, colors_for_group} ->
+      if group != nil do
+        IO.puts("Group:  #{group}")
+        IO.puts(" ")
 
-      colors_for_group
-      |> Enum.each(fn ansi_color_code ->
-        name = name_for_color(colors, ansi_color_code)
-        print_color(ansi_color_code, name)
-      end)
-      IO.puts(light_yellow() <> "---------------------------------------------" <> reset())
+        colors_for_group
+        |> Enum.each(fn ansi_color_code ->
+          name = name_for_color(colors, ansi_color_code)
+          print_color(ansi_color_code, name)
+        end)
+        IO.puts(light_yellow() <> "---------------------------------------------" <> reset())
+      end
     end)
 
     num_color_codes_without_color_groups = length(codes_without_color_groups)

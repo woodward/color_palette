@@ -34,6 +34,17 @@ defmodule ColorPaletteTest do
     end
   end
 
+  describe "color_groups_to_ansi_color_codes" do
+    test "returns the mapping of color groups to ansi color codes" do
+      color_groups_to_ansi_color_codes = ColorPalette.color_groups_to_ansi_color_codes()
+
+      assert length(Map.keys(color_groups_to_ansi_color_codes)) == 12
+
+      gray_and_black = color_groups_to_ansi_color_codes.gray_and_black
+      assert length(gray_and_black) == 25
+    end
+  end
+
   describe "color_data/0" do
     test "returns the list of color data elements" do
       color_data = ColorPalette.color_data_api_raw_data()

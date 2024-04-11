@@ -48,6 +48,31 @@ defmodule ColorPalette.ColorNamesTest do
     end
   end
 
+  describe "color_groups_to_ansi_color_codes" do
+    test "collates the ansi color codes by color group" do
+      ansi_color_codes = [
+        %ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black},
+        %ANSIColorCode{code: 233, hex: "121212", rgb: [18, 18, 18], color_group: :gray_and_black},
+        %ANSIColorCode{code: 191, hex: "d7ff5f", rgb: [215, 255, 95], color_group: :yellow},
+        %ANSIColorCode{code: 161, hex: "d7005f", rgb: [215, 0, 95], color_group: nil}
+      ]
+
+      color_groups = [:gray_and_black, :yellow, :white]
+
+      color_groups_to_ansi_color_codes = ColorNames.color_groups_to_ansi_color_codes(ansi_color_codes, color_groups)
+
+      assert color_groups_to_ansi_color_codes == %{
+               gray_and_black: [
+                 %ANSIColorCode{code: 233, hex: "121212", rgb: [18, 18, 18], color_group: :gray_and_black},
+                 %ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black}
+               ],
+               nil: [%ANSIColorCode{code: 161, hex: "d7005f", rgb: [215, 0, 95], color_group: nil}],
+               yellow: [%ANSIColorCode{code: 191, hex: "d7ff5f", rgb: [215, 255, 95], color_group: :yellow}],
+               white: []
+             }
+    end
+  end
+
   describe "color_name_to_atom" do
     test "converts a color name to an atom" do
       assert ColorNames.color_name_to_atom("Black") == [:black]
