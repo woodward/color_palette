@@ -3,7 +3,8 @@
 Mix.install([
   {:jason, "~> 1.4"},
   {:req, "~> 0.4"},
-  {:floki, "~> 0.36"}
+  {:floki, "~> 0.36"},
+  {:color_palette, path: Path.join(__DIR__, "../")}
 ])
 
 import IO.ANSI
@@ -30,7 +31,8 @@ color_data =
     IO.puts("==========================================")
     hex = ansi_color_code.hex
     IO.puts(light_yellow() <> "Index: #{index}.  Hex: #{hex}" <> reset())
-    result_body = Req.get!("https://www.color-name.com/hex/#{hex}").body |> Floki.parse_document!()
+    url = ColorPalette.DataURLs.color_name_dot_com_html(hex)
+    result_body = Req.get!(url).body |> Floki.parse_document!()
     color_code = result_body |> Floki.find("h4.color-code") |> hd() |> Floki.text()
 
     text_color = result_body |> Floki.find("div.welcome-title-child h1") |> Floki.attribute("class") |> List.first()

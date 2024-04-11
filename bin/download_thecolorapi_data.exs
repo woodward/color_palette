@@ -2,7 +2,8 @@
 
 Mix.install([
   {:jason, "~> 1.4"},
-  {:req, "~> 0.4"}
+  {:req, "~> 0.4"},
+  {:color_palette, path: Path.join(__DIR__, "../")}
 ])
 
 import IO.ANSI
@@ -20,7 +21,7 @@ IO.puts(light_green() <> "There are #{length(color_codes)} color codes" <> reset
 code = color_codes |> hd()
 IO.puts(light_blue() <> "First color code: #{inspect(code)}" <> reset())
 
-# color_codes = color_codes |> Enum.take(3)
+color_codes = color_codes |> Enum.take(3)
 sleep_time = 400
 
 color_data =
@@ -28,7 +29,8 @@ color_data =
   |> Enum.reduce({[], 0}, fn code, {data, index} ->
     IO.puts("==========================================")
     IO.puts(light_yellow() <> "Index: #{index}.  Hex: #{code.hex}" <> reset())
-    result_body = Req.get!("https://www.thecolorapi.com/id?hex=#{code.hex}&format=json").body
+    url = ColorPalette.DataURLs.color_api_data(code.hex)
+    result_body = Req.get!(url).body
     Process.sleep(sleep_time)
     {[result_body] ++ data, index + 1}
   end)
