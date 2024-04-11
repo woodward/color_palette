@@ -11,11 +11,12 @@ defmodule ColorPalette.Color do
     same_as: []
   ]
 
-  defmacro def_color(name, hex, text_contrast_color, code) do
-    quote bind_quoted: [name: name, text_contrast_color: text_contrast_color, hex: hex, code: code] do
+  defmacro def_color(name, hex, text_contrast_color, same_as, code) do
+    quote bind_quoted: [name: name, text_contrast_color: text_contrast_color, hex: hex, code: code, same_as: same_as] do
       @doc """
       <div style="color: #{text_contrast_color}; background-color: ##{hex}; padding: 1rem;">
       Sets foreground color to <strong>#{name}</strong>.  Hex value ##{hex}.  ANSI code #{inspect(code)}.
+      #{ColorPalette.ExDocFns.same_as(same_as, hex, text_contrast_color)}
       </div>
       """
       def unquote(name)() do
