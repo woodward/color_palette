@@ -49,9 +49,9 @@ color_data =
         %{"info" => info, "name" => name} -> {String.trim(name), info}
       end
 
-    IO.puts(light_green() <> "Color Name: #{name}   Extra info: #{info}   doc_text_color: #{text_color}" <> reset())
+    IO.puts(light_green() <> "Color Name: #{name}   Extra info: #{info}   text_contrast_color: #{text_color}" <> reset())
     Process.sleep(sleep_time_ms)
-    {[%{name: name, hex: hex, extra: info, code: ansi_color_code.code, doc_text_color: text_color}] ++ data, index + 1}
+    {[%{name: name, hex: hex, extra: info, code: ansi_color_code.code, text_contrast_color: text_color}] ++ data, index + 1}
   end)
   |> elem(0)
   |> Enum.reverse()

@@ -22,7 +22,7 @@ defmodule ColorPalette.ColorNames do
         name: name,
         color_data: sorted_colors,
         ansi_color_code: first_color.ansi_color_code,
-        doc_text_color: doc_text_color(first_color)
+        text_contrast_color: text_contrast_color(first_color)
       }
 
       {name, color}
@@ -41,7 +41,7 @@ defmodule ColorPalette.ColorNames do
     |> Enum.map(&String.to_atom(&1))
   end
 
-  def doc_text_color(color) do
+  def text_contrast_color(color) do
     case color.contrast.value do
       "#ffffff" -> :white
       "#000000" -> :black
@@ -64,7 +64,7 @@ defmodule ColorPalette.ColorNames do
       color = %Color{
         name: color_name,
         ansi_color_code: color_data.ansi_color_code,
-        doc_text_color: String.to_atom(color_data.doc_text_color)
+        text_contrast_color: String.to_atom(color_data.text_contrast_color)
       }
 
       Map.put(acc, color_name, color)
@@ -78,7 +78,7 @@ defmodule ColorPalette.ColorNames do
 
       Map.put(acc, color_name, %Color{
         name: color_name,
-        doc_text_color: color_data.doc_text_color,
+        text_contrast_color: color_data.text_contrast_color,
         ansi_color_code: ansi_color_code
       })
     end)

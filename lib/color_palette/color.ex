@@ -4,7 +4,7 @@ defmodule ColorPalette.Color do
   defstruct [
     :name,
     :ansi_color_code,
-    :doc_text_color,
+    :text_contrast_color,
     color_data: [],
     same_as: []
   ]
