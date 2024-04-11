@@ -7,7 +7,26 @@ defmodule ColorPalette.PrecompileHook do
   defmacro __before_compile__(_env) do
     quote do
       alias ColorPalette.Utils
-      alias ColorPalette.IoAnsiColor
+
+      @io_ansi_colors %{
+        black: %{code: 0, doc_text_color: :white},
+        red: %{code: 1, doc_text_color: :white},
+        green: %{code: 2, doc_text_color: :white},
+        yellow: %{code: 3, doc_text_color: :white},
+        blue: %{code: 4, doc_text_color: :white},
+        magenta: %{code: 5, doc_text_color: :white},
+        cyan: %{code: 6, doc_text_color: :white},
+        white: %{code: 7, doc_text_color: :black},
+        #
+        light_black: %{code: 8, doc_text_color: :white},
+        light_red: %{code: 9, doc_text_color: :white},
+        light_green: %{code: 10, doc_text_color: :white},
+        light_yellow: %{code: 11, doc_text_color: :white},
+        light_blue: %{code: 12, doc_text_color: :white},
+        light_magenta: %{code: 13, doc_text_color: :white},
+        light_cyan: %{code: 14, doc_text_color: :white},
+        light_white: %{code: 15, doc_text_color: :black}
+      }
 
       @ansi_color_codes_by_group __DIR__
                                  |> Path.join("color_palette/ansi_color_codes_by_group.json")
@@ -37,10 +56,10 @@ defmodule ColorPalette.PrecompileHook do
                   )
 
       @colors @api_colors
-              |> Map.merge(ColorPalette.ColorNames.convert_ansi_colors_to_color_names(IoAnsiColor.colors(), @ansi_color_codes))
+              |> Map.merge(ColorPalette.ColorNames.convert_ansi_colors_to_color_names(@io_ansi_colors, @ansi_color_codes))
               |> ColorPalette.ColorNames.find_duplicates()
 
-      IoAnsiColor.colors()
+      @io_ansi_colors
       |> Map.keys()
       |> Enum.each(fn color ->
         delegate_to_io_ansi(color)
@@ -59,8 +78,7 @@ defmodule ColorPalette.PrecompileHook do
       def color_name_dot_com_raw_data, do: @color_name_dot_com_raw_data
       def api_colors, do: @api_colors
       def colors, do: @colors
-
-      defdelegate io_ansi_colors, to: IoAnsiColor, as: :colors
+      def io_ansi_colors, do: @io_ansi_colors
     end
   end
 end
