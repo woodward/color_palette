@@ -36,7 +36,7 @@ defmodule ColorPaletteTest do
 
   describe "color_data/0" do
     test "returns the list of color data elements" do
-      color_data = ColorPalette.color_data()
+      color_data = ColorPalette.color_data_api_data()
       assert length(color_data) == 256
 
       first_color_data = color_data |> List.first()

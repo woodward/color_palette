@@ -21,13 +21,10 @@ defmodule ColorPalette.FooBar do
                         end)
                         |> Enum.map(&(%ANSIColorCode{} |> Map.merge(&1)))
 
-      @color_data Path.join(__DIR__, "color_palette/color_data_api_colors.json")
-                  |> Utils.read_json_file!()
+      @color_data_api_data Path.join(__DIR__, "color_palette/color_data_api_colors.json") |> Utils.read_json_file!()
+      @color_name_dot_com_data Path.join(__DIR__, "color_palette/color-name.com_colors.json") |> Utils.read_json_file!()
 
-      @color_name_dot_com_data Path.join(__DIR__, "color_palette/color-name.com_colors.json")
-                               |> Utils.read_json_file!()
-
-      @colors ColorPalette.ColorNames.collate(@ansi_color_codes, @color_data)
+      @colors ColorPalette.ColorNames.collate(@ansi_color_codes, @color_data_api_data)
               |> Map.merge(ColorPalette.ColorNames.convert_color_name_dot_com_data(@ansi_color_codes, @color_name_dot_com_data))
 
       @io_ansi_colors %{
@@ -70,7 +67,7 @@ defmodule ColorPalette.FooBar do
 
       def ansi_color_codes, do: @ansi_color_codes
       def ansi_color_codes_by_group, do: @ansi_color_codes_by_group
-      def color_data, do: @color_data
+      def color_data_api_data, do: @color_data_api_data
       def color_name_dot_com_data, do: @color_name_dot_com_data
       def colors, do: @colors
       def all_colors, do: @all_colors

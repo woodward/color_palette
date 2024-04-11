@@ -9,7 +9,7 @@ defmodule ColorPalette.ColorNamesTest do
   describe "annotate" do
     test "adds color names and doc_text_color to ansi color codes" do
       color_codes = ColorPalette.ansi_color_codes()
-      color_data = ColorPalette.color_data()
+      color_data = ColorPalette.color_data_api_data()
       colors = ColorNames.collate(color_codes, color_data)
 
       black = colors.black
@@ -22,7 +22,7 @@ defmodule ColorPalette.ColorNamesTest do
 
     test "sorts colors based on their distance" do
       color_codes = ColorPalette.ansi_color_codes()
-      color_data = ColorPalette.color_data()
+      color_data = ColorPalette.color_data_api_data()
       colors = ColorNames.collate(color_codes, color_data)
 
       blueberry = colors.blueberry
@@ -71,7 +71,7 @@ defmodule ColorPalette.ColorNamesTest do
   describe "add_code_to_color_data" do
     test "adds the ANSI code to the color data" do
       ansi_codes = ColorPalette.ansi_color_codes()
-      color_data = ColorPalette.color_data()
+      color_data = ColorPalette.color_data_api_data()
       color_data = ColorNames.add_code_to_color_data(ansi_codes, color_data)
 
       first = color_data |> List.first()
