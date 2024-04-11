@@ -20,13 +20,15 @@ defmodule ColorPalette.FooBar do
                         |> Enum.map(fn {ansi_color_code, color_group} ->
                           Map.put(ansi_color_code, :color_group, color_group)
                         end)
-                        |> Enum.map(&(%ANSIColorCode{} |> Map.merge(&1)))
+                        |> Enum.map(&Map.merge(%ANSIColorCode{}, &1))
 
-      @color_data_api_data Path.join(__DIR__, "color_palette/color_data_api_colors.json") |> Utils.read_json_file!()
-      @color_name_dot_com_data Path.join(__DIR__, "color_palette/color-name.com_colors.json") |> Utils.read_json_file!()
+      @color_data_api_raw_data Path.join(__DIR__, "color_palette/color_data_api_colors.json") |> Utils.read_json_file!()
+      @color_name_dot_com_raw_data Path.join(__DIR__, "color_palette/color-name.com_colors.json") |> Utils.read_json_file!()
 
-      @colors ColorPalette.ColorNames.convert_color_data_api_data(@color_data_api_data, @ansi_color_codes)
-              |> Map.merge(ColorPalette.ColorNames.convert_color_name_dot_com_data(@color_name_dot_com_data, @ansi_color_codes))
+      @colors ColorPalette.ColorNames.convert_color_data_api_raw_data(@color_data_api_raw_data, @ansi_color_codes)
+              |> Map.merge(
+                ColorPalette.ColorNames.convert_color_name_dot_com_raw_data(@color_name_dot_com_raw_data, @ansi_color_codes)
+              )
 
       @all_colors @colors
                   |> Map.merge(
@@ -49,9 +51,8 @@ defmodule ColorPalette.FooBar do
       end)
 
       def ansi_color_codes, do: @ansi_color_codes
-      def ansi_color_codes_by_group, do: @ansi_color_codes_by_group
-      def color_data_api_data, do: @color_data_api_data
-      def color_name_dot_com_data, do: @color_name_dot_com_data
+      def color_data_api_raw_data, do: @color_data_api_raw_data
+      def color_name_dot_com_raw_data, do: @color_name_dot_com_raw_data
       def colors, do: @colors
       def all_colors, do: @all_colors
 
