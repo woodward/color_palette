@@ -3,7 +3,7 @@ defmodule ColorPalette.ColorNames do
 
   alias ColorPalette.Color
 
-  def collate(ansi_color_codes, color_data) do
+  def convert_color_data_api_data(ansi_color_codes, color_data) do
     ansi_color_codes
     |> add_code_to_color_data(color_data)
     |> Enum.reduce(%{}, fn color_data, acc ->

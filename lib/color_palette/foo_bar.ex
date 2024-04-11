@@ -24,7 +24,7 @@ defmodule ColorPalette.FooBar do
       @color_data_api_data Path.join(__DIR__, "color_palette/color_data_api_colors.json") |> Utils.read_json_file!()
       @color_name_dot_com_data Path.join(__DIR__, "color_palette/color-name.com_colors.json") |> Utils.read_json_file!()
 
-      @colors ColorPalette.ColorNames.collate(@ansi_color_codes, @color_data_api_data)
+      @colors ColorPalette.ColorNames.convert_color_data_api_data(@ansi_color_codes, @color_data_api_data)
               |> Map.merge(ColorPalette.ColorNames.convert_color_name_dot_com_data(@ansi_color_codes, @color_name_dot_com_data))
 
       @io_ansi_colors %{

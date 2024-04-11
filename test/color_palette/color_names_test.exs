@@ -10,7 +10,7 @@ defmodule ColorPalette.ColorNamesTest do
     test "adds color names and doc_text_color to ansi color codes" do
       color_codes = ColorPalette.ansi_color_codes()
       color_data = ColorPalette.color_data_api_data()
-      colors = ColorNames.collate(color_codes, color_data)
+      colors = ColorNames.convert_color_data_api_data(color_codes, color_data)
 
       black = colors.black
 
@@ -23,7 +23,7 @@ defmodule ColorPalette.ColorNamesTest do
     test "sorts colors based on their distance" do
       color_codes = ColorPalette.ansi_color_codes()
       color_data = ColorPalette.color_data_api_data()
-      colors = ColorNames.collate(color_codes, color_data)
+      colors = ColorNames.convert_color_data_api_data(color_codes, color_data)
 
       blueberry = colors.blueberry
       assert length(blueberry.color_data) == 5
@@ -82,7 +82,7 @@ defmodule ColorPalette.ColorNamesTest do
     end
   end
 
-  describe "collate_color_name_dot_com_data" do
+  describe "convert_color_data_api_data_color_name_dot_com_data" do
     test "converts the color-name.com data into a map" do
       ansi_codes = ColorPalette.ansi_color_codes()
       color_name_dot_com_data = ColorPalette.color_name_dot_com_data()
