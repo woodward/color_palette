@@ -60,18 +60,16 @@ defmodule ColorPalette.PrecompileHook do
               |> ColorPalette.ColorNames.find_duplicates()
               |> ColorPalette.ColorNames.clear_out_color_data()
 
-      @io_ansi_colors
-      |> Map.keys()
-      |> Enum.each(fn color ->
-        delegate_to_io_ansi(color)
-        delegate_to_io_ansi(String.to_atom("#{color}_background"))
-      end)
-
-      @api_colors
+      @colors
       |> Enum.each(fn {color_name, color} ->
-        def_color(color_name, [color.ansi_color_code.code])
-        background_name = "#{color_name}_background" |> String.to_atom()
-        def_background_color(background_name, [color.ansi_color_code.code])
+        if color.source == :io_ansi do
+          delegate_to_io_ansi(color_name)
+          delegate_to_io_ansi(String.to_atom("#{color_name}_background"))
+        else
+          def_color(color_name, [color.ansi_color_code.code])
+          background_name = "#{color_name}_background" |> String.to_atom()
+          def_background_color(background_name, [color.ansi_color_code.code])
+        end
       end)
 
       def ansi_color_codes, do: @ansi_color_codes
