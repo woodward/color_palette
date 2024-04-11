@@ -22,7 +22,8 @@ defmodule ColorPalette.ColorNames do
         name: name,
         color_data: sorted_colors,
         ansi_color_code: first_color.ansi_color_code,
-        text_contrast_color: text_contrast_color(first_color)
+        text_contrast_color: text_contrast_color(first_color),
+        source: :color_data_api
       }
 
       {name, color}
@@ -64,7 +65,8 @@ defmodule ColorPalette.ColorNames do
       color = %Color{
         name: color_name,
         ansi_color_code: color_data.ansi_color_code,
-        text_contrast_color: String.to_atom(color_data.text_contrast_color)
+        text_contrast_color: String.to_atom(color_data.text_contrast_color),
+        source: :color_name_dot_com
       }
 
       Map.put(acc, color_name, color)
@@ -79,7 +81,8 @@ defmodule ColorPalette.ColorNames do
       Map.put(acc, color_name, %Color{
         name: color_name,
         text_contrast_color: color_data.text_contrast_color,
-        ansi_color_code: ansi_color_code
+        ansi_color_code: ansi_color_code,
+        source: :io_ansi
       })
     end)
   end

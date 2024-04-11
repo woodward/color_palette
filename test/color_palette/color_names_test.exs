@@ -17,6 +17,7 @@ defmodule ColorPalette.ColorNamesTest do
       assert black.name == :black
       assert black.ansi_color_code == %ANSIColorCode{code: 16, hex: "000000", rgb: [0, 0, 0]}
       assert black.text_contrast_color == :white
+      assert black.source == :color_data_api
       assert length(black.color_data) == 2
     end
 
@@ -30,6 +31,7 @@ defmodule ColorPalette.ColorNamesTest do
 
       assert blueberry.ansi_color_code == %ANSIColorCode{code: 69, hex: "5f87ff", rgb: [95, 135, 255]}
       assert blueberry.text_contrast_color == :black
+      assert blueberry.source == :color_data_api
 
       first_blueberry_color = blueberry.color_data |> List.first()
       assert first_blueberry_color.ansi_color_code == %ANSIColorCode{code: 69, hex: "5f87ff", rgb: [95, 135, 255]}
@@ -96,7 +98,8 @@ defmodule ColorPalette.ColorNamesTest do
       assert alien_armpit == %Color{
                name: :alien_armpit,
                text_contrast_color: :black,
-               ansi_color_code: %ANSIColorCode{code: 112, hex: "87d700", rgb: [135, 215, 0]}
+               ansi_color_code: %ANSIColorCode{code: 112, hex: "87d700", rgb: [135, 215, 0]},
+               source: :color_name_dot_com
              }
     end
   end
@@ -115,7 +118,8 @@ defmodule ColorPalette.ColorNamesTest do
                ansi_color_code: %ANSIColorCode{code: 0, color_group: :gray_and_black, hex: "000000", rgb: [0, 0, 0]},
                color_data: [],
                text_contrast_color: :white,
-               name: :black
+               name: :black,
+               source: :io_ansi
              }
     end
   end

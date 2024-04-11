@@ -5,6 +5,8 @@ defmodule ColorPalette.Color do
     :name,
     :ansi_color_code,
     :text_contrast_color,
+    # :source can be one of :io_ansi, :color_name_dot_com, or :color_data_api:
+    :source,
     color_data: [],
     same_as: []
   ]
