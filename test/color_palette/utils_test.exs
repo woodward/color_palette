@@ -1,12 +1,12 @@
-defmodule ColorPalette.FooBarTest do
+defmodule ColorPalette.UtilsTest do
   @moduledoc false
   use ExUnit.Case
 
-  alias ColorPalette.FooBar
+  alias ColorPalette.Utils
 
   describe "read_json_file" do
     test "reads in the JSON file with the colors" do
-      colors = FooBar.read_json_file!("lib/color_palette/ansi_color_codes.json")
+      colors = Utils.read_json_file!("lib/color_palette/ansi_color_codes.json")
       assert length(colors) == 256
       first_color = colors |> List.first()
       assert first_color == %{code: 0, hex: "000000", rgb: [0, 0, 0]}

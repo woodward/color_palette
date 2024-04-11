@@ -1,7 +1,13 @@
 defmodule ColorPalette.Color do
   @moduledoc false
 
-  defstruct [:name, :ansi_color_code, :doc_text_color, color_data: [], same_as: []]
+  defstruct [
+    :name,
+    :ansi_color_code,
+    :doc_text_color,
+    color_data: [],
+    same_as: []
+  ]
 
   defmacro def_color(name, code) do
     quote bind_quoted: [name: name, code: code] do

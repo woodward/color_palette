@@ -7,12 +7,14 @@ defmodule ColorPalette.FooBar do
 
   defmacro __before_compile__(_env) do
     quote do
+      alias ColorPalette.Utils
+
       @ansi_color_codes_by_group Path.join(__DIR__, "color_palette/ansi_color_codes_by_group.json")
-                                 |> ColorPalette.FooBar.read_json_file!()
+                                 |> Utils.read_json_file!()
                                  |> Enum.map(&if &1.color_group, do: String.to_atom(&1.color_group), else: nil)
 
       @ansi_color_codes Path.join(__DIR__, "color_palette/ansi_color_codes.json")
-                        |> ColorPalette.FooBar.read_json_file!()
+                        |> Utils.read_json_file!()
                         |> Enum.zip(@ansi_color_codes_by_group)
                         |> Enum.map(fn {ansi_color_code, color_group} ->
                           Map.put(ansi_color_code, :color_group, color_group)
@@ -20,10 +22,10 @@ defmodule ColorPalette.FooBar do
                         |> Enum.map(&(%ANSIColorCode{} |> Map.merge(&1)))
 
       @color_data Path.join(__DIR__, "color_palette/color_data_api_colors.json")
-                  |> ColorPalette.FooBar.read_json_file!()
+                  |> Utils.read_json_file!()
 
       @color_name_dot_com_data Path.join(__DIR__, "color_palette/color-name.com_colors.json")
-                               |> ColorPalette.FooBar.read_json_file!()
+                               |> Utils.read_json_file!()
 
       @colors ColorPalette.ColorNames.collate(@ansi_color_codes, @color_data)
               |> Map.merge(ColorPalette.ColorNames.convert_color_name_dot_com_data(@ansi_color_codes, @color_name_dot_com_data))
@@ -75,6 +77,4 @@ defmodule ColorPalette.FooBar do
       def io_ansi_colors, do: @io_ansi_colors
     end
   end
-
-  def read_json_file!(filename), do: filename |> File.read!() |> Jason.decode!(keys: :atoms)
 end
