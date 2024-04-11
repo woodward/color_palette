@@ -13,7 +13,7 @@ IO.puts(light_yellow() <> "Downloading color data from thecolorapi.com..." <> re
 # Sample URL:
 # https://www.thecolorapi.com/id?hex=00ffff&format=json
 
-ansi_color_code_filename = Path.join(__DIR__, "../lib/color_palette/ansi_color_codes.json")
+ansi_color_code_filename = Path.join(__DIR__, "../lib/color_palette/data/ansi_color_codes.json")
 color_codes = ansi_color_code_filename |> File.read!() |> Jason.decode!(keys: :atoms)
 
 IO.puts(light_green() <> "There are #{length(color_codes)} color codes" <> reset())

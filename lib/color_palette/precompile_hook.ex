@@ -43,13 +43,13 @@ defmodule ColorPalette.PrecompileHook do
       ]
 
       @ansi_color_codes_by_group __DIR__
-                                 |> Path.join("color_palette/ansi_color_codes_by_group.json")
+                                 |> Path.join("color_palette/data/ansi_color_codes_by_group.json")
                                  |> File.read!()
                                  |> Jason.decode!(keys: :atoms)
                                  |> Enum.map(&if &1.color_group, do: String.to_atom(&1.color_group), else: nil)
 
       @ansi_color_codes __DIR__
-                        |> Path.join("color_palette/ansi_color_codes.json")
+                        |> Path.join("color_palette/data/ansi_color_codes.json")
                         |> File.read!()
                         |> Jason.decode!(keys: :atoms)
                         |> Enum.zip(@ansi_color_codes_by_group)
@@ -62,12 +62,12 @@ defmodule ColorPalette.PrecompileHook do
                                         |> DataConverter.color_groups_to_ansi_color_codes(@color_groups)
 
       @color_data_api_raw_data __DIR__
-                               |> Path.join("color_palette/color_data_api_colors.json")
+                               |> Path.join("color_palette/data/color_data_api_colors.json")
                                |> File.read!()
                                |> Jason.decode!(keys: :atoms)
 
       @color_name_dot_com_raw_data __DIR__
-                                   |> Path.join("color_palette/color-name.com_colors.json")
+                                   |> Path.join("color_palette/data/color-name.com_colors.json")
                                    |> File.read!()
                                    |> Jason.decode!(keys: :atoms)
 
