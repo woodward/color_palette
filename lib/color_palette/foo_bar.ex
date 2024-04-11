@@ -25,15 +25,12 @@ defmodule ColorPalette.FooBar do
       @color_data_api_data Path.join(__DIR__, "color_palette/color_data_api_colors.json") |> Utils.read_json_file!()
       @color_name_dot_com_data Path.join(__DIR__, "color_palette/color-name.com_colors.json") |> Utils.read_json_file!()
 
-      @colors ColorPalette.ColorNames.convert_color_data_api_data(@ansi_color_codes, @color_data_api_data)
-              |> Map.merge(ColorPalette.ColorNames.convert_color_name_dot_com_data(@ansi_color_codes, @color_name_dot_com_data))
+      @colors ColorPalette.ColorNames.convert_color_data_api_data(@color_data_api_data, @ansi_color_codes)
+              |> Map.merge(ColorPalette.ColorNames.convert_color_name_dot_com_data(@color_name_dot_com_data, @ansi_color_codes))
 
       @all_colors @colors
                   |> Map.merge(
-                    ColorPalette.ColorNames.convert_ansi_colors_to_color_names(
-                      @ansi_color_codes,
-                      IoAnsiColor.colors()
-                    )
+                    ColorPalette.ColorNames.convert_ansi_colors_to_color_names(IoAnsiColor.colors(), @ansi_color_codes)
                   )
                   |> ColorPalette.ColorNames.find_duplicates()
 
@@ -58,7 +55,7 @@ defmodule ColorPalette.FooBar do
       def colors, do: @colors
       def all_colors, do: @all_colors
 
-      defdelegate io_ansi_colors, to: ColorPalette.IoAnsiColor, as: :colors
+      defdelegate io_ansi_colors, to: IoAnsiColor, as: :colors
     end
   end
 end
