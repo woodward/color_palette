@@ -33,8 +33,7 @@ defmodule ColorPalette.Color do
       @doc """
       <div style="color: #{text_contrast_color}; background-color: ##{hex}; padding: 1rem;">
       See
-      <a href="https://hexdocs.pm/elixir/IO.ANSI.html##{name}/0">IO.ANSI.#{name}</a>
-      <br />
+      <a style="color: #{text_contrast_color}; background-color: ##{hex}; padding-right: 3rem;" href="https://hexdocs.pm/elixir/IO.ANSI.html##{name}/0">IO.ANSI.#{name}/0</a>
       Hex value ##{hex}.  ANSI code #{code}.
       </div>
       """
