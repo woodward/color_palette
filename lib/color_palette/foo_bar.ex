@@ -27,31 +27,16 @@ defmodule ColorPalette.FooBar do
       @colors ColorPalette.ColorNames.convert_color_data_api_data(@ansi_color_codes, @color_data_api_data)
               |> Map.merge(ColorPalette.ColorNames.convert_color_name_dot_com_data(@ansi_color_codes, @color_name_dot_com_data))
 
-      @io_ansi_colors %{
-        black: %{code: 0, doc_text_color: :white},
-        red: %{code: 1, doc_text_color: :white},
-        green: %{code: 2, doc_text_color: :white},
-        yellow: %{code: 3, doc_text_color: :white},
-        blue: %{code: 4, doc_text_color: :white},
-        magenta: %{code: 5, doc_text_color: :white},
-        cyan: %{code: 6, doc_text_color: :white},
-        white: %{code: 7, doc_text_color: :black},
-        #
-        light_black: %{code: 8, doc_text_color: :white},
-        light_red: %{code: 9, doc_text_color: :white},
-        light_green: %{code: 10, doc_text_color: :white},
-        light_yellow: %{code: 11, doc_text_color: :white},
-        light_blue: %{code: 12, doc_text_color: :white},
-        light_magenta: %{code: 13, doc_text_color: :white},
-        light_cyan: %{code: 14, doc_text_color: :white},
-        light_white: %{code: 15, doc_text_color: :black}
-      }
-
       @all_colors @colors
-                  |> Map.merge(ColorPalette.ColorNames.convert_ansi_colors_to_color_names(@ansi_color_codes, @io_ansi_colors))
+                  |> Map.merge(
+                    ColorPalette.ColorNames.convert_ansi_colors_to_color_names(
+                      @ansi_color_codes,
+                      ColorPalette.ANSIColorCode.io_ansi_colors()
+                    )
+                  )
                   |> ColorPalette.ColorNames.find_duplicates()
 
-      @io_ansi_colors
+      ColorPalette.ANSIColorCode.io_ansi_colors()
       |> Map.keys()
       |> Enum.each(fn color ->
         delegate_to_io_ansi(color)
@@ -71,7 +56,8 @@ defmodule ColorPalette.FooBar do
       def color_name_dot_com_data, do: @color_name_dot_com_data
       def colors, do: @colors
       def all_colors, do: @all_colors
-      def io_ansi_colors, do: @io_ansi_colors
+
+      defdelegate io_ansi_colors, to: ColorPalette.ANSIColorCode
     end
   end
 end
