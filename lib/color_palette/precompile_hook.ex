@@ -2,7 +2,6 @@ defmodule ColorPalette.PrecompileHook do
   @moduledoc false
 
   import ColorPalette.Color
-  # alias ColorPalette.Color
   alias ColorPalette.ANSIColorCode
 
   defmacro __before_compile__(_env) do
@@ -37,11 +36,9 @@ defmodule ColorPalette.PrecompileHook do
                     ColorPalette.ColorNames.convert_color_name_dot_com_raw_data(@color_name_dot_com_raw_data, @ansi_color_codes)
                   )
 
-      @all_colors @api_colors
-                  |> Map.merge(
-                    ColorPalette.ColorNames.convert_ansi_colors_to_color_names(IoAnsiColor.colors(), @ansi_color_codes)
-                  )
-                  |> ColorPalette.ColorNames.find_duplicates()
+      @colors @api_colors
+              |> Map.merge(ColorPalette.ColorNames.convert_ansi_colors_to_color_names(IoAnsiColor.colors(), @ansi_color_codes))
+              |> ColorPalette.ColorNames.find_duplicates()
 
       IoAnsiColor.colors()
       |> Map.keys()
@@ -61,7 +58,7 @@ defmodule ColorPalette.PrecompileHook do
       def color_data_api_raw_data, do: @color_data_api_raw_data
       def color_name_dot_com_raw_data, do: @color_name_dot_com_raw_data
       def api_colors, do: @api_colors
-      def all_colors, do: @all_colors
+      def colors, do: @colors
 
       defdelegate io_ansi_colors, to: IoAnsiColor, as: :colors
     end
