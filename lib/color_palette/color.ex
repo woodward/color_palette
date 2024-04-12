@@ -1,5 +1,7 @@
 defmodule ColorPalette.Color do
-  @moduledoc false
+  @moduledoc """
+  A struct which represents one of the 255 ANSI colors.
+  """
 
   defstruct [
     :name,
@@ -23,6 +25,7 @@ defmodule ColorPalette.Color do
         apply(IO.ANSI, :color, unquote(code))
       end
 
+      @doc false
       def unquote(String.to_atom("#{name}_background"))() do
         apply(IO.ANSI, :color_background, unquote(code))
       end
