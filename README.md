@@ -1,6 +1,6 @@
 # ColorPalette
 
-A library which brings additional named colors into Elixir (in addition to the standard
+A library which brings additional named colors into Elixir (in addition to the 16 standard named
 `IO.ANSI` colors.
 
 ## Installation
@@ -45,8 +45,19 @@ end
 MyModule.fancy_print()
 ```
 
-So add some [:alien_armpit](ColorPalette.html#alien_armpit/0) to your scripts!  Or how about some
-[:caribbean_green_pearl](ColorPalette.html#caribbean_green_pearl/0), or [:macaroni_and_cheese](ColorPalette.html#macaroni_and_cheese/0), 
-or some [:very_light_malachite_green](ColorPalette.html#very_light_malachite_green/0).
+So add some 
+<a href="ColorPalette.html#alien_armpit/0" style="padding: 0.5rem; color: black; background-color: #87d700;">:alien_armpit</a>
+to your scripts!  Or how about some
+<a href="ColorPalette.html#true_blue/0" style="padding: 0.5rem; color: white; background-color: #005fd7;">:true_blue</a>,
+or 
+<a href="ColorPalette.html#macaroni_and_cheese/0" style="padding: 0.5rem; color: black; background-color: #ffaf87;">:macaroni_and_cheese</a>
+or 
+<a href="ColorPalette.html#bright_turquoise/0" style="padding: 0.5rem; color: black; background-color: #00ffd7;">:bright_turquoise</a>
+or 
+<a href="ColorPalette.html#dark_candy_apple_red/0" style="padding: 0.5rem; color: white; background-color: #af0000;">:dark_candy_apple_red</a>
+or 
+<a href="ColorPalette.html#laser_lemon/0" style="padding: 0.5rem; color: black; background-color: #ffff5f;">:laser_lemon</a>
+or some
+<a href="ColorPalette.html#very_light_malachite_green/0" style="padding: 0.5rem; color: black; background-color: #5fff87;">:very_light_malachite_green</a>
 
 See the main module page for `ColorPalette` to see a list of all of the colors!
