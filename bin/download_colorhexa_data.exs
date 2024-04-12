@@ -31,7 +31,7 @@ color_data =
     IO.puts("==========================================")
     hex = ansi_color_code.hex
     IO.puts(light_yellow() <> "Index: #{index}.  Hex: #{hex}" <> reset())
-    url = ColorPalette.DataURLs.colorhexa_html(hex)
+    url = ColorPalette.DataURLs.url(:colorhexa, hex: hex)
     result_body = Req.get!(url).body |> Floki.parse_document!()
     color_name = result_body |> Floki.find("#header-title") |> hd() |> Floki.text()
 

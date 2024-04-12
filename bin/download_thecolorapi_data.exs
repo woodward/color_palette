@@ -29,7 +29,7 @@ color_data =
   |> Enum.reduce({[], 0}, fn code, {data, index} ->
     IO.puts("==========================================")
     IO.puts(light_yellow() <> "Index: #{index}.  Hex: #{code.hex}" <> reset())
-    url = ColorPalette.DataURLs.color_api_data(code.hex)
+    url = ColorPalette.DataURLs.url(:color_data_api, hex: code.hex, format: :json)
     result_body = Req.get!(url).body
     Process.sleep(sleep_time)
     {[result_body] ++ data, index + 1}
