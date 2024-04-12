@@ -1,7 +1,8 @@
 # ColorPalette
 
 A library which brings additional named colors [via 8 bit ANSI color escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit)
-into Elixir (in addition to the 16 standard named `IO.ANSI` colors, such as `:red`, `:black`, `:light_cyan`, etc.)
+into Elixir (in addition to the 16 standard named `IO.ANSI` colors, such as `:red`, `:blue`, `:cyan`, 
+`:light_red`, `:light_blue`, `:light_cyan`, etc.)
 
 ## Installation
 
@@ -16,7 +17,7 @@ end
 ```
 
 Documentation can be found [here](https://hexdocs.pm/color_palette/readme.html) and a 
-[full list of colors here](ColorPalette.html#summary).
+[full list of colors here](https://hexdocs.pm/color_palette/ColorPalette.html#summary).
 
 ## Usage
 
@@ -45,18 +46,18 @@ MyModule.fancy_print()
 ```
 
 So add some 
-<a href="ColorPalette.html#alien_armpit/0" style="padding: 0.5rem; color: black; background-color: #87d700;">:alien_armpit</a>
+<a href="https://hexdocs.pm/color_palette/ColorPalette.html#alien_armpit/0" style="padding: 0.5rem; color: black; background-color: #87d700;">:alien_armpit</a>
 to your scripts!  Or how about some
-<a href="ColorPalette.html#true_blue/0" style="padding: 0.5rem; color: white; background-color: #005fd7;">:true_blue</a>,
+<a href="https://hexdocs.pm/color_palette/ColorPalette.html#true_blue/0" style="padding: 0.5rem; color: white; background-color: #005fd7;">:true_blue</a>,
 or 
-<a href="ColorPalette.html#macaroni_and_cheese/0" style="padding: 0.5rem; color: black; background-color: #ffaf87;">:macaroni_and_cheese</a>
+<a href="https://hexdocs.pm/color_palette/ColorPalette.html#macaroni_and_cheese/0" style="padding: 0.5rem; color: black; background-color: #ffaf87;">:macaroni_and_cheese</a>
 or 
-<a href="ColorPalette.html#bright_turquoise/0" style="padding: 0.5rem; color: black; background-color: #00ffd7;">:bright_turquoise</a>
+<a href="https://hexdocs.pm/color_palette/ColorPalette.html#bright_turquoise/0" style="padding: 0.5rem; color: black; background-color: #00ffd7;">:bright_turquoise</a>
 or 
-<a href="ColorPalette.html#dark_candy_apple_red/0" style="padding: 0.5rem; color: white; background-color: #af0000;">:dark_candy_apple_red</a>
+<a href="https://hexdocs.pm/color_palette/ColorPalette.html#dark_candy_apple_red/0" style="padding: 0.5rem; color: white; background-color: #af0000;">:dark_candy_apple_red</a>
 or 
-<a href="ColorPalette.html#laser_lemon/0" style="padding: 0.5rem; color: black; background-color: #ffff5f;">:laser_lemon</a>
+<a href="https://hexdocs.pm/color_palette/ColorPalette.html#laser_lemon/0" style="padding: 0.5rem; color: black; background-color: #ffff5f;">:laser_lemon</a>
 or some
-<a href="ColorPalette.html#very_light_malachite_green/0" style="padding: 0.5rem; color: black; background-color: #5fff87;">:very_light_malachite_green</a>
+<a href="https://hexdocs.pm/color_palette/ColorPalette.html#very_light_malachite_green/0" style="padding: 0.5rem; color: black; background-color: #5fff87;">:very_light_malachite_green</a>
 
-See the main module page for `ColorPalette` to see a list of all of the colors!
+See the main module page for [ColorPalette](https://hexdocs.pm/color_palette/ColorPalette.html) to see a list of all of the colors!
