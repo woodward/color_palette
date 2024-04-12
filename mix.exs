@@ -1,13 +1,20 @@
 defmodule ColorPalette.MixProject do
   use Mix.Project
 
+  @source_url "https://github.com/woodward/color_palette"
+  @version "0.1.0"
+
   def project do
     [
       app: :color_palette,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.16",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      licenses: "LICENSE.txt",
+      description: "A color library for Elixir scripts",
+      package: package(),
+      links: [""],
 
       # Docs
       name: "ColorPalette",
@@ -29,6 +36,17 @@ defmodule ColorPalette.MixProject do
     [
       {:jason, "~> 1.4"},
       {:ex_doc, "~> 0.32", only: :dev, runtime: false}
+    ]
+  end
+
+  defp package do
+    [
+      maintainers: ["Greg Woodward"],
+      licenses: ["MIT"],
+      links: %{
+        "Changelog" => "#{@source_url}/blob/main/CHANGELOG.md",
+        "GitHub" => @source_url
+      }
     ]
   end
 end
