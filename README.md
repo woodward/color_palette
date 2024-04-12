@@ -1,7 +1,8 @@
 # ColorPalette
 
 A library which brings additional named colors [via 8 bit ANSI color escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit)
-into Elixir (in addition to the 16 standard named `IO.ANSI` colors, such as `:red`, `:black`, `:light_cyan`, etc.)
+into Elixir (in addition to the 16 standard named `IO.ANSI` colors, such as `:red`, `:blue`, `:cyan`, 
+`:light_red`, `:light_blue`, `:light_cyan`, etc.)
 
 ## Installation
 
