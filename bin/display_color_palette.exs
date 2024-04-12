@@ -1,7 +1,8 @@
 #!/usr/bin/env elixir
 
 Mix.install([
-  {:color_palette, path: Path.join(__DIR__, "../")}
+  {:color_palette, "~> 0.1"}
+  # {:color_palette, path: Path.join(__DIR__, "../")}
 ])
 
 defmodule Display do
