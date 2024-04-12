@@ -1,7 +1,7 @@
 # ColorPalette
 
-A library which brings additional named colors into Elixir (in addition to the 16 standard named
-`IO.ANSI` colors.
+A library which brings additional named colors [via 8 bit ANSI color escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit)
+into Elixir (in addition to the 16 standard named `IO.ANSI` colors, such as `:red`, `:black`, `:light_cyan`, etc.)
 
 ## Installation
 
@@ -22,9 +22,8 @@ Documentation can be found [here](https://hexdocs.pm/color_palette/readme.html) 
 
 This hex package adds some ~364 additional named colors to use in Elixir terminal scripts, based on 
 the 256 ANSI color code sequences (so some of the color names are duplicates and reference the same color).  
-These are in addition to the 16 named colors in `IO.ANSI` (e.g., `:black`, `:red`, `:light_cyan`, etc.) 
 Note that some of the colors are approximations, as the color space for the ANSI color codes is rather 
-limited.  The values were obtained by accessing [TheColorAPI](https://www.thecolorapi.com/) and 
+limited (it's 8 bit).  The values were obtained by accessing [TheColorAPI](https://www.thecolorapi.com/) and 
 also [color-name.com](https://www.color-name.com/).
 
 Usage is similar to `IO.ANSI`.  So in your Elixir script module, you can either reference ColorPalette

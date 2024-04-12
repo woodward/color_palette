@@ -10,9 +10,10 @@ defmodule ColorPalette do
 
   ## Colors
 
-  See below for the color descriptions.  ***IMPORTANT*** Note that there are background versions for
+  See below for the color descriptions.  ***IMPORTANT*** Note that there are **background versions** for
   each color; e.g., the function `tea_green_background/0` (which is not listed below) is the
-  background color for `tea_green/0`.
+  background color for
+  <a href="ColorPalette.html#tea_green/0" style="padding: 0.5rem; color: black; background-color: #d7ffaf;">tea_green/0</a>
 
   """
 
