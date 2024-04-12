@@ -194,12 +194,12 @@ defmodule ColorPaletteTest do
                yellow: %{code: 3, text_contrast_color: :white},
                light_black: %{code: 8, text_contrast_color: :white},
                light_blue: %{code: 12, text_contrast_color: :white},
-               light_cyan: %{code: 14, text_contrast_color: :white},
-               light_green: %{code: 10, text_contrast_color: :white},
+               light_cyan: %{code: 14, text_contrast_color: :black},
+               light_green: %{code: 10, text_contrast_color: :black},
                light_magenta: %{code: 13, text_contrast_color: :white},
                light_red: %{code: 9, text_contrast_color: :white},
                light_white: %{code: 15, text_contrast_color: :black},
-               light_yellow: %{code: 11, text_contrast_color: :white}
+               light_yellow: %{code: 11, text_contrast_color: :black}
              }
     end
   end
