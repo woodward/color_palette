@@ -85,10 +85,8 @@ defmodule ColorPalette.PrecompileHook do
 
         if color.source == :io_ansi do
           delegate_to_io_ansi(color_name, hex, text_contrast_color, code)
-          background_color_name = String.to_atom("#{color_name}_background")
-          delegate_to_io_ansi(background_color_name, hex, text_contrast_color, code + 10)
         else
-          def_color(color_name, hex, text_contrast_color, color.same_as, code)
+          def_color(color_name, hex, text_contrast_color, color.same_as, color.source, code)
         end
       end)
 

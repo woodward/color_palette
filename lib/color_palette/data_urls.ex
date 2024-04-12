@@ -10,9 +10,4 @@ defmodule ColorPalette.DataURLs do
     hex = Keyword.get(opts, :hex)
     "https://www.thecolorapi.com/id?hex=#{hex}&format=#{format}"
   end
-
-  def color_to_opts(color) do
-    ansi_color_code = color.ansi_color_code
-    [hex: ansi_color_code.hex, name: color.name]
-  end
 end

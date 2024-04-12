@@ -10,7 +10,18 @@ defmodule ColorPalette.ExDocFns do
 
   def color_link(name, hex, text_contrast_color) do
     """
-    <a style="color: #{text_contrast_color}; background-color: ##{hex}; padding-right: 3rem;" href="ColorPalette.html##{name}/0">#{name}</a>
+    <a style="color: #{text_contrast_color}; background-color: ##{hex};" href="ColorPalette.html##{name}/0">#{name}</a>
     """
   end
+
+  def source_link(source, text_contrast_color, hex) do
+    url = ColorPalette.DataURLs.url(source, hex: hex)
+
+    """
+    <a style="color: #{text_contrast_color}; background-color: ##{hex}; padding-right: 2rem;" href="#{url}">Source: #{source_name(source)}</a>
+    """
+  end
+
+  def source_name(:color_name_dot_com), do: "color-name.com"
+  def source_name(:color_data_api), do: "The Color API"
 end
