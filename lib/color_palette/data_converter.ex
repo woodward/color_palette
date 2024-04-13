@@ -125,4 +125,17 @@ defmodule ColorPalette.DataConverter do
     end)
     |> Enum.into(%{})
   end
+
+  def unnamed_ansi_color_codes(ansi_color_codes, colors) do
+    colors_code_values =
+      colors
+      |> Enum.reduce(MapSet.new(), fn {_color_name, color}, acc ->
+        MapSet.put(acc, color.ansi_color_code.code)
+      end)
+
+    ansi_color_codes
+    |> Enum.reject(fn ansi_color_code ->
+      MapSet.member?(colors_code_values, ansi_color_code.code)
+    end)
+  end
 end
