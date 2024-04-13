@@ -2,6 +2,7 @@ defmodule ColorPaletteTest do
   use ExUnit.Case
 
   alias ColorPalette.ANSIColorCode
+  alias ColorPalette.Color
 
   describe "functions which delegate to IO.ANSI" do
     test "reset() delegates to IO.ANSI" do
@@ -112,7 +113,7 @@ defmodule ColorPaletteTest do
   describe "colors" do
     test "returns the map of color names to color data" do
       colors = ColorPalette.colors()
-      assert length(Map.keys(colors)) == 364
+      assert length(Map.keys(colors)) == 385
     end
   end
 
@@ -207,7 +208,22 @@ defmodule ColorPaletteTest do
   describe "unnamed_ansi_color_codes" do
     test "returns a list of IO ansi color codes without a name" do
       color_codes_with_no_names = ColorPalette.unnamed_ansi_color_codes()
-      assert color_codes_with_no_names |> length() == 21
+      assert color_codes_with_no_names |> length() == 0
+    end
+  end
+
+  describe "find_by_hex" do
+    test "returns the color with the specified hex value" do
+      color = ColorPalette.find_by_hex("5f5fff")
+
+      assert color == %Color{
+               ansi_color_code: %ANSIColorCode{code: 63, hex: "5f5fff", rgb: [95, 95, 255], color_group: nil},
+               color_data: [],
+               name: :very_light_blue,
+               same_as: [],
+               source: :color_name_dot_com,
+               text_contrast_color: :white
+             }
     end
   end
 

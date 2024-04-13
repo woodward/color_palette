@@ -80,9 +80,12 @@ defmodule ColorPalette.PrecompileHook do
       @io_ansi_colors @io_ansi_color_names
                       |> DataConverter.convert_ansi_colors_to_color_names(@ansi_color_codes)
 
-      @colors @color_data_api_colors
-              |> Map.merge(@color_name_dot_com_colors)
-              |> Map.merge(@io_ansi_colors)
+      @colors_untransformed @color_data_api_colors
+                            |> Map.merge(@color_name_dot_com_colors)
+                            |> Map.merge(@io_ansi_colors)
+
+      @colors @colors_untransformed
+              |> DataConverter.backfill_missing_names(@ansi_color_codes, @color_data_api_raw_data)
               |> DataConverter.find_duplicates()
               |> DataConverter.clear_out_color_data()
 
@@ -106,6 +109,9 @@ defmodule ColorPalette.PrecompileHook do
       def color_name_dot_com_raw_data, do: @color_name_dot_com_raw_data
       def colors, do: @colors
       def io_ansi_color_names, do: @io_ansi_color_names
+      def color_data_api_colors, do: @color_data_api_colors
+      def color_data_api_raw_data, do: @color_data_api_raw_data
+      def colors_untransformed, do: @colors_untransformed
     end
   end
 end

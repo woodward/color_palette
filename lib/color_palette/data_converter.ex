@@ -140,11 +140,42 @@ defmodule ColorPalette.DataConverter do
     |> Enum.into(%{})
   end
 
+  def find_by_hex(color_names, hex) do
+    hex = hex |> String.replace("#", "")
+
+    case color_names |> Enum.find(fn {_color_name, color} -> color.ansi_color_code.hex == hex end) do
+      nil -> {:error, "Hex value ##{hex} not found"}
+      result -> result |> elem(1)
+    end
+  end
+
   def unnamed_ansi_color_codes(ansi_color_codes, colors) do
     ansi_color_codes_to_color_names(ansi_color_codes, colors)
     |> Enum.reject(fn {_ansi_color_code, color_names} ->
       length(color_names) > 0
     end)
     |> Enum.map(fn {ansi_color_code, _color_names} -> ansi_color_code end)
+  end
+
+  def backfill_missing_names(color_names, ansi_color_codes, color_data_api_colors) do
+    unnamed_ansi_color_codes = unnamed_ansi_color_codes(ansi_color_codes, color_names)
+
+    unnamed_ansi_color_codes
+    |> Enum.reduce(color_names, fn unnamed_ansi_color_code, acc ->
+      missing_code = unnamed_ansi_color_code.code
+      {raw_data, _rest} = List.pop_at(color_data_api_colors, missing_code)
+      name = raw_data.name.value
+      hex = raw_data.hex.clean
+      new_name = color_name_to_atom("#{name}_#{hex}") |> List.first()
+
+      color = %Color{
+        name: new_name,
+        ansi_color_code: unnamed_ansi_color_code,
+        source: :color_data_api,
+        text_contrast_color: text_contrast_color(raw_data)
+      }
+
+      Map.put(acc, new_name, color)
+    end)
   end
 end

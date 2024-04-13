@@ -109,6 +109,48 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "find_by_hex" do
+    setup do
+      colors = %{
+        mystic_pearl: %ColorPalette.Color{
+          name: :mystic_pearl,
+          ansi_color_code: %ColorPalette.ANSIColorCode{
+            hex: "d75f87"
+          }
+        },
+        spring_green_00ff5f: %ColorPalette.Color{
+          name: :spring_green_00ff5f,
+          ansi_color_code: %ColorPalette.ANSIColorCode{
+            hex: "00ff5f"
+          }
+        },
+        pompadour: %ColorPalette.Color{
+          name: :pompadour,
+          ansi_color_code: %ColorPalette.ANSIColorCode{
+            hex: "5f005f"
+          }
+        }
+      }
+
+      [colors: colors]
+    end
+
+    test "returns the color with the specified hex value", %{colors: colors} do
+      pompadour = DataConverter.find_by_hex(colors, "5f005f")
+      assert pompadour.name == :pompadour
+    end
+
+    test "also works if there is a # in the hex value", %{colors: colors} do
+      pompadour = DataConverter.find_by_hex(colors, "#5f005f")
+      assert pompadour.name == :pompadour
+    end
+
+    test "returns an error if the hex value is not found", %{colors: colors} do
+      result = DataConverter.find_by_hex(colors, "#aabbcc")
+      assert result == {:error, "Hex value #aabbcc not found"}
+    end
+  end
+
   describe "convert_color_data_api_raw_data_color_name_dot_com_raw_data" do
     test "converts the color-name.com data into a map" do
       ansi_codes = ColorPalette.ansi_color_codes()
@@ -216,6 +258,36 @@ defmodule ColorPalette.DataConverterTest do
       ansi_color_codes = [%ANSIColorCode{code: 1}, %ANSIColorCode{code: 2}, %ANSIColorCode{code: 3}]
       color_codes_with_no_names = DataConverter.unnamed_ansi_color_codes(ansi_color_codes, colors)
       assert color_codes_with_no_names == [%ANSIColorCode{code: 3}]
+    end
+  end
+
+  describe "backfill_missing_names/3" do
+    test "gets other color names for codes which do not have a name" do
+      ansi_color_codes = ColorPalette.ansi_color_codes()
+      color_names = ColorPalette.colors_untransformed()
+      color_data_api_raw_data = ColorPalette.color_data_api_raw_data()
+
+      unnamed_ansi_color_codes = DataConverter.unnamed_ansi_color_codes(ansi_color_codes, color_names)
+      assert length(unnamed_ansi_color_codes) == 21
+      last_unnamed = unnamed_ansi_color_codes |> Enum.sort_by(& &1.code) |> List.last()
+      assert last_unnamed == %ANSIColorCode{code: 246, color_group: :gray_and_black, hex: "949494", rgb: [148, 148, 148]}
+
+      with_names_backfilled = DataConverter.backfill_missing_names(color_names, ansi_color_codes, color_data_api_raw_data)
+
+      unnamed_ansi_color_codes_after_backfill = DataConverter.unnamed_ansi_color_codes(ansi_color_codes, with_names_backfilled)
+      assert length(unnamed_ansi_color_codes_after_backfill) == 0
+
+      gray_949494 = with_names_backfilled |> DataConverter.find_by_hex("949494")
+      assert gray_949494.name == :gray_949494
+      assert gray_949494.source == :color_data_api
+      assert gray_949494.text_contrast_color == :black
+
+      assert gray_949494.ansi_color_code == %ANSIColorCode{
+               code: 246,
+               color_group: :gray_and_black,
+               hex: "949494",
+               rgb: [148, 148, 148]
+             }
     end
   end
 end

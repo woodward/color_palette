@@ -7,6 +7,7 @@ defmodule ColorPalette do
   - `color_groups/0` - 11 color groups based on the [web extended colors](https://en.wikipedia.org/wiki/Web_colors#Extended_colors)
   - `io_ansi_color_names/0` - The `IO.ANSI` colors and their corresponding text contrast colors.
   - `reset/0` - Delegates to the `IO.ANSI.reset/0` function.
+  - `find_by_hex/1` - Finds a color by its hex value.
 
   ## Colors
 
@@ -28,4 +29,6 @@ defmodule ColorPalette do
   def ansi_color_codes_to_color_names do
     ColorPalette.DataConverter.ansi_color_codes_to_color_names(ansi_color_codes(), colors())
   end
+
+  def find_by_hex(hex), do: ColorPalette.DataConverter.find_by_hex(colors(), hex)
 end
