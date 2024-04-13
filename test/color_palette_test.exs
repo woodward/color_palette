@@ -179,9 +179,9 @@ defmodule ColorPaletteTest do
     end
   end
 
-  describe "io_ansi_colors/0" do
+  describe "io_ansi_color_names/0" do
     test "returns the correct color code for one of the IO.ANSI color names" do
-      io_ansi_name_to_code = ColorPalette.io_ansi_colors()
+      io_ansi_name_to_code = ColorPalette.io_ansi_color_names()
 
       assert io_ansi_name_to_code == %{
                black: %{code: 0, text_contrast_color: :white},

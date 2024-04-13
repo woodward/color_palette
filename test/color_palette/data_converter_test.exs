@@ -132,7 +132,7 @@ defmodule ColorPalette.DataConverterTest do
   describe "convert_ansi_colors_to_color_names" do
     test "works" do
       ansi_codes = ColorPalette.ansi_color_codes()
-      ansi_colors = ColorPalette.io_ansi_colors()
+      ansi_colors = ColorPalette.io_ansi_color_names()
 
       color_names = DataConverter.convert_ansi_colors_to_color_names(ansi_colors, ansi_codes)
 

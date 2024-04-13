@@ -8,7 +8,7 @@ defmodule ColorPalette.PrecompileHook do
 
   defmacro __before_compile__(_env) do
     quote do
-      @io_ansi_colors %{
+      @io_ansi_color_names %{
         black: %{code: 0, text_contrast_color: :white},
         red: %{code: 1, text_contrast_color: :white},
         green: %{code: 2, text_contrast_color: :white},
@@ -71,9 +71,18 @@ defmodule ColorPalette.PrecompileHook do
                                    |> File.read!()
                                    |> Jason.decode!(keys: :atoms)
 
-      @colors DataConverter.convert_color_data_api_raw_data(@color_data_api_raw_data, @ansi_color_codes)
-              |> Map.merge(DataConverter.convert_color_name_dot_com_raw_data(@color_name_dot_com_raw_data, @ansi_color_codes))
-              |> Map.merge(DataConverter.convert_ansi_colors_to_color_names(@io_ansi_colors, @ansi_color_codes))
+      @color_data_api_colors @color_data_api_raw_data
+                             |> DataConverter.convert_color_data_api_raw_data(@ansi_color_codes)
+
+      @color_name_dot_com_colors @color_name_dot_com_raw_data
+                                 |> DataConverter.convert_color_name_dot_com_raw_data(@ansi_color_codes)
+
+      @io_ansi_colors @io_ansi_color_names
+                      |> DataConverter.convert_ansi_colors_to_color_names(@ansi_color_codes)
+
+      @colors @color_data_api_colors
+              |> Map.merge(@color_name_dot_com_colors)
+              |> Map.merge(@io_ansi_colors)
               |> DataConverter.find_duplicates()
               |> DataConverter.clear_out_color_data()
 
@@ -96,7 +105,7 @@ defmodule ColorPalette.PrecompileHook do
       def color_groups, do: @color_groups
       def color_name_dot_com_raw_data, do: @color_name_dot_com_raw_data
       def colors, do: @colors
-      def io_ansi_colors, do: @io_ansi_colors
+      def io_ansi_color_names, do: @io_ansi_color_names
     end
   end
 end

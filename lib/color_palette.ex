@@ -5,7 +5,7 @@ defmodule ColorPalette do
   - `ansi_color_codes/0` - A list of all 256 ANSI color codes
   - `color_groups_to_ansi_color_codes/0` - A map between the color group and the ANSI color codes
   - `color_groups/0` - 11 color groups based on the [web extended colors](https://en.wikipedia.org/wiki/Web_colors#Extended_colors)
-  - `io_ansi_colors/0` - The `IO.ANSI` colors and their corresponding text contrast colors.
+  - `io_ansi_color_names/0` - The `IO.ANSI` colors and their corresponding text contrast colors.
   - `reset/0` - Delegates to the `IO.ANSI.reset/0` function.
 
   ## Colors
