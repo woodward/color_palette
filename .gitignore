@@ -24,3 +24,6 @@ color_palette-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+/guides/ansi_color_codes.md
+/guides/color_groups.md

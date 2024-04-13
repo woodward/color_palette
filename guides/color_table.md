@@ -1,15 +1,12 @@
-<!-- From: https://en.wikipedia.org/wiki/ANSI_escape_code -->
+# ANSI Color Table
 
-<table
-  class="collapsible mw-collapsible mw-made-collapsible"
-  style="text-align:center;font-size:80%;width:100%;background:#f6f6f6;cursor:default;"
-  cellpadding="0"
-  cellspacing="1"
->
+From [ANSI Escape Codes](https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit)
+
+<table style="text-align:center;font-size:80%;width:100%;background:#f6f6f6;cursor:default;" cellpadding="0" cellspacing="1" >
   <tbody>
     <tr>
       <th colspan="36">
-        <button type="button" class="mw-collapsible-toggle mw-collapsible-toggle-default" aria-expanded="true" tabindex="0"><span class="mw-collapsible-text">hide</span></button>256-color mode — foreground: ESC[38;5;#m &nbsp; background: ESC[48;5;#m
+        256-color mode — foreground: ESC[38;5;#m &nbsp; background: ESC[48;5;#m
       </th>
     </tr>
 

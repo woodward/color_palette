@@ -19,8 +19,9 @@ defmodule ColorPalette.MixProject do
       source_url: "https://github.com/woodward/color_palette",
       docs: [
         main: "ColorPalette",
-        extras: ["README.md"]
-      ]
+        extras: ["README.md", "guides/color_table.md", "guides/ansi_color_codes.md", "guides/color_groups.md"]
+      ],
+      aliases: aliases()
     ]
   end
 
@@ -37,6 +38,10 @@ defmodule ColorPalette.MixProject do
     ]
   end
 
+  defp aliases do
+    [docs: ["generate_guides", "docs"]]
+  end
+
   defp package do
     [
       maintainers: ["Greg Woodward"],
@@ -44,7 +49,14 @@ defmodule ColorPalette.MixProject do
       links: %{
         "GitHub" => @source_url
       },
-      files: ~w(README.md lib mix.exs LICENSE.md)
+      files: [
+        "README.md",
+        "lib mix.exs",
+        "LICENSE.md",
+        "guides/color_table.md",
+        "guides/ansi_color_codes.md",
+        "guides/color_groups.md"
+      ]
     ]
   end
 end
