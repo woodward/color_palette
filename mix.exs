@@ -43,7 +43,8 @@ defmodule ColorPalette.MixProject do
       licenses: ["MIT"],
       links: %{
         "GitHub" => @source_url
-      }
+      },
+      files: ~w(README.md lib mix.exs LICENSE.md)
     ]
   end
 end
