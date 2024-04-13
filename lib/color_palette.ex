@@ -24,4 +24,8 @@ defmodule ColorPalette do
   def unnamed_ansi_color_codes do
     ColorPalette.DataConverter.unnamed_ansi_color_codes(ansi_color_codes(), colors())
   end
+
+  def ansi_color_codes_to_color_names do
+    ColorPalette.DataConverter.ansi_color_codes_to_color_names(ansi_color_codes(), colors())
+  end
 end

@@ -167,6 +167,26 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "ansi_color_codes_to_color_names/2" do
+    test "groups by ansi color codes" do
+      ansi_color_codes = [%ANSIColorCode{code: 1}, %ANSIColorCode{code: 2}, %ANSIColorCode{code: 3}]
+
+      color_names = %{
+        black1: %Color{ansi_color_code: %ANSIColorCode{code: 1}},
+        black2: %Color{ansi_color_code: %ANSIColorCode{code: 1}},
+        some_other_color: %Color{ansi_color_code: %ANSIColorCode{code: 2}}
+      }
+
+      ansi_color_codes_to_color_names = DataConverter.ansi_color_codes_to_color_names(ansi_color_codes, color_names)
+
+      assert ansi_color_codes_to_color_names == %{
+               %ColorPalette.ANSIColorCode{code: 1} => [:black2, :black1],
+               %ColorPalette.ANSIColorCode{code: 2} => [:some_other_color],
+               %ColorPalette.ANSIColorCode{code: 3} => []
+             }
+    end
+  end
+
   describe "clear_out_color_data" do
     test "clears out the color data array" do
       color_names = %{

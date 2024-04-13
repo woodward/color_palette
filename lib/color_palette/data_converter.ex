@@ -101,6 +101,20 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  def ansi_color_codes_to_color_names(ansi_color_codes, colors) do
+    ansi_color_codes_to_color_names =
+      ansi_color_codes
+      |> Enum.reduce(%{}, fn ansi_color_code, acc ->
+        Map.put(acc, ansi_color_code, [])
+      end)
+
+    colors
+    |> Enum.reduce(ansi_color_codes_to_color_names, fn {color_name, color_data}, acc ->
+      ansi_color_code = color_data.ansi_color_code
+      Map.update(acc, ansi_color_code, [color_name], fn value -> [color_name] ++ value end)
+    end)
+  end
+
   def find_duplicates(color_names) do
     ansi_codes_to_names =
       color_names

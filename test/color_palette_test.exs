@@ -210,4 +210,21 @@ defmodule ColorPaletteTest do
       assert color_codes_with_no_names |> length() == 21
     end
   end
+
+  describe "ansi_color_codes_to_color_names" do
+    test "returns a list of IO ansi color codes without a name" do
+      ansi_color_codes_to_color_names = ColorPalette.ansi_color_codes_to_color_names()
+      assert ansi_color_codes_to_color_names |> Map.keys() |> length() == 256
+
+      key_values =
+        ansi_color_codes_to_color_names
+        |> Map.to_list()
+        |> Enum.sort_by(fn {ansi_color_code, _} -> ansi_color_code.code end)
+
+      first = key_values |> List.first()
+
+      assert first ==
+               {%ColorPalette.ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black}, [:black]}
+    end
+  end
 end
