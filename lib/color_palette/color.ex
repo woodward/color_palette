@@ -26,8 +26,8 @@ defmodule ColorPalette.Color do
       <div style="color: #{text_contrast_color}; background-color: ##{hex}; padding: 1rem;">
       Sets foreground color to <strong>#{name}</strong>.  Hex value ##{hex}.  ANSI code #{code}.
       <br />
-      #{ColorPalette.ExDocFns.source_link(source, text_contrast_color, hex)}
-      #{ColorPalette.ExDocFns.same_as(same_as, hex, text_contrast_color)}
+      #{ColorPalette.ExDocUtils.source_link(source, text_contrast_color, hex)}
+      #{ColorPalette.ExDocUtils.same_as(same_as, hex, text_contrast_color)}
       </div>
       """
       def unquote(name)() do

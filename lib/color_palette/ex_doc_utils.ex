@@ -1,5 +1,7 @@
-defmodule ColorPalette.ExDocFns do
-  @moduledoc false
+defmodule ColorPalette.ExDocUtils do
+  @moduledoc """
+  Utility functions for building the ExDocs
+  """
 
   def same_as([], _hex, _text_contrast_color), do: ""
 
