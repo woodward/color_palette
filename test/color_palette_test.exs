@@ -203,4 +203,11 @@ defmodule ColorPaletteTest do
              }
     end
   end
+
+  describe "unnamed_ansi_color_codes" do
+    test "returns a list of IO ansi color codes without a name" do
+      color_codes_with_no_names = ColorPalette.unnamed_ansi_color_codes()
+      assert color_codes_with_no_names |> length() == 21
+    end
+  end
 end

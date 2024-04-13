@@ -20,4 +20,8 @@ defmodule ColorPalette do
   defdelegate reset(), to: IO.ANSI
 
   @before_compile ColorPalette.PrecompileHook
+
+  def unnamed_ansi_color_codes do
+    ColorPalette.DataConverter.unnamed_ansi_color_codes(ansi_color_codes(), colors())
+  end
 end
