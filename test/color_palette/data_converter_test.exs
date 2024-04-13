@@ -151,6 +151,46 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "find_by_code" do
+    setup do
+      colors = %{
+        mystic_pearl: %ColorPalette.Color{
+          name: :mystic_pearl,
+          ansi_color_code: %ColorPalette.ANSIColorCode{
+            code: 168
+          }
+        },
+        spring_green_00ff5f: %ColorPalette.Color{
+          name: :spring_green_00ff5f,
+          ansi_color_code: %ColorPalette.ANSIColorCode{
+            code: 48
+          }
+        },
+        pompadour: %ColorPalette.Color{
+          name: :pompadour,
+          ansi_color_code: %ColorPalette.ANSIColorCode{
+            code: 53
+          }
+        }
+      }
+
+      [colors: colors]
+    end
+
+    test "returns the color with the specified code", %{colors: colors} do
+      pompadour = DataConverter.find_by_code(colors, 53)
+      assert pompadour.name == :pompadour
+    end
+
+    test "returns an error if the code is not in the specified range", %{colors: colors} do
+      result = DataConverter.find_by_code(colors, -1)
+      assert result == {:error, "Code -1 is not valid"}
+
+      result = DataConverter.find_by_code(colors, 257)
+      assert result == {:error, "Code 257 is not valid"}
+    end
+  end
+
   describe "convert_color_data_api_raw_data_color_name_dot_com_raw_data" do
     test "converts the color-name.com data into a map" do
       ansi_codes = ColorPalette.ansi_color_codes()

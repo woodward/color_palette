@@ -227,6 +227,21 @@ defmodule ColorPaletteTest do
     end
   end
 
+  describe "find_by_code" do
+    test "returns the color with the specified code" do
+      color = ColorPalette.find_by_code(63)
+
+      assert color == %Color{
+               ansi_color_code: %ANSIColorCode{code: 63, hex: "5f5fff", rgb: [95, 95, 255], color_group: nil},
+               color_data: [],
+               name: :very_light_blue,
+               same_as: [],
+               source: :color_name_dot_com,
+               text_contrast_color: :white
+             }
+    end
+  end
+
   describe "ansi_color_codes_to_color_names" do
     test "returns a list of IO ansi color codes without a name" do
       ansi_color_codes_to_color_names = ColorPalette.ansi_color_codes_to_color_names()

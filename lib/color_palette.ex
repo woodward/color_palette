@@ -8,6 +8,7 @@ defmodule ColorPalette do
   - `io_ansi_color_names/0` - The `IO.ANSI` colors and their corresponding text contrast colors.
   - `reset/0` - Delegates to the `IO.ANSI.reset/0` function.
   - `find_by_hex/1` - Finds a color by its hex value.
+  - `find_by_code/1` - Finds a color by its ANSI code number (e.g., 0..255).
 
   ## Colors
 
@@ -20,15 +21,19 @@ defmodule ColorPalette do
 
   defdelegate reset(), to: IO.ANSI
 
+  alias ColorPalette.DataConverter
+
   @before_compile ColorPalette.PrecompileHook
 
   def unnamed_ansi_color_codes do
-    ColorPalette.DataConverter.unnamed_ansi_color_codes(ansi_color_codes(), colors())
+    DataConverter.unnamed_ansi_color_codes(ansi_color_codes(), colors())
   end
 
   def ansi_color_codes_to_color_names do
-    ColorPalette.DataConverter.ansi_color_codes_to_color_names(ansi_color_codes(), colors())
+    DataConverter.ansi_color_codes_to_color_names(ansi_color_codes(), colors())
   end
 
-  def find_by_hex(hex), do: ColorPalette.DataConverter.find_by_hex(colors(), hex)
+  def find_by_hex(hex), do: colors() |> DataConverter.find_by_hex(hex)
+
+  def find_by_code(code), do: colors() |> DataConverter.find_by_code(code)
 end
