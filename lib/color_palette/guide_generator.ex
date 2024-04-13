@@ -19,7 +19,7 @@ defmodule ColorPalette.GuideGenerator do
     content =
       color_groups
       |> Enum.reduce(content, fn {color_group, ansi_color_codes}, acc ->
-        acc = acc <> color_group_name(color_group)
+        acc = acc <> color_group_name(color_group, length(ansi_color_codes))
 
         ansi_color_codes
         |> Enum.sort_by(& &1.code)
@@ -94,16 +94,17 @@ defmodule ColorPalette.GuideGenerator do
     |> Enum.join(", ")
   end
 
-  def color_group_name(nil), do: "## Uncategorized\n\n"
+  def color_group_name(nil, count), do: "## Uncategorized (#{count})\n\n"
 
-  def color_group_name(name) do
+  def color_group_name(name, count) do
     names =
       name
       |> Atom.to_string()
       |> String.split("_")
       |> Enum.map(&String.capitalize(&1))
-      |> Enum.join(" ")
+      |> Enum.join(", ")
+      |> String.replace(", And, ", " and ")
 
-    "## #{names}\n\n"
+    "## #{names} (#{count})\n\n"
   end
 end
