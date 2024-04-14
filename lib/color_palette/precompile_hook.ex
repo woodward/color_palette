@@ -97,7 +97,7 @@ defmodule ColorPalette.PrecompileHook do
         text_contrast_color = color.text_contrast_color
 
         if color.source == :io_ansi do
-          delegate_to_io_ansi(color_name, hex, text_contrast_color, code)
+          delegate_to_io_ansi(color_name, hex, text_contrast_color, color_group, code)
         else
           def_color(color_name, hex, text_contrast_color, color.same_as, color.source, color_group, code)
         end
