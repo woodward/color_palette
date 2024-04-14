@@ -78,7 +78,7 @@ defmodule ColorPalette.GuideGenerator do
       if color_group, do: ColorPalette.ExDocUtils.color_group_link(hex, text_contrast_color, color_group), else: nil
 
     """
-    <div style="color: #{text_contrast_color}; background-color: ##{hex}; #{div_styling}">
+    <div style="color: #{text_contrast_color}; background-color: ##{hex}; #{div_styling}" id="color-#{code}">
       <span style="margin-right: 2rem; font-weight: bold;">#{code}:</span>
       <span style="margin-right: 2rem;">Hex: ##{hex} </span>
       <span>
