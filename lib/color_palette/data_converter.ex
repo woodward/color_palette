@@ -35,19 +35,27 @@ defmodule ColorPalette.DataConverter do
     Enum.zip(color_data, ansi_color_codes)
     |> Enum.map(fn {raw_color, ansi_color_code} ->
       name = raw_color.name.value |> new_color_name_to_atom()
-      distance_to_closest_named_hex = raw_color.name.distance
-      exact_name_match? = raw_color.name.exact_match_name
-      closest_named_hex = raw_color.name.closest_named_hex |> String.replace("#", "")
+      names = if is_list(name), do: name, else: [name]
 
-      %Color{
-        name: name,
-        ansi_color_code: ansi_color_code,
-        text_contrast_color: text_contrast_color(raw_color),
-        source: :color_data_api,
-        distance_to_closest_named_hex: distance_to_closest_named_hex,
-        exact_name_match?: exact_name_match?,
-        closest_named_hex: closest_named_hex
-      }
+      colors =
+        names
+        |> Enum.map(fn color_name ->
+          distance_to_closest_named_hex = raw_color.name.distance
+          exact_name_match? = raw_color.name.exact_match_name
+          closest_named_hex = raw_color.name.closest_named_hex |> String.replace("#", "")
+
+          %Color{
+            name: color_name,
+            ansi_color_code: ansi_color_code,
+            text_contrast_color: text_contrast_color(raw_color),
+            source: :color_data_api,
+            distance_to_closest_named_hex: distance_to_closest_named_hex,
+            exact_name_match?: exact_name_match?,
+            closest_named_hex: closest_named_hex
+          }
+        end)
+
+      if length(colors) == 1, do: List.first(colors), else: colors
     end)
   end
 
@@ -153,6 +161,20 @@ defmodule ColorPalette.DataConverter do
         ansi_color_code: ansi_color_code,
         source: :io_ansi
       })
+    end)
+  end
+
+  def new_color_names_to_colors(colors) do
+    colors
+    |> Enum.reduce(%{}, fn color, acc ->
+      if is_list(color) do
+        color
+        |> Enum.reduce(acc, fn individual_color, acc ->
+          Map.update(acc, individual_color.name, [individual_color], fn value -> [individual_color] ++ value end)
+        end)
+      else
+        Map.update(acc, color.name, [color], fn value -> [color] ++ value end)
+      end
     end)
   end
 

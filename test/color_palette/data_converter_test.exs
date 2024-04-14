@@ -44,6 +44,35 @@ defmodule ColorPalette.DataConverterTest do
       assert electric_violet.closest_named_hex == "8B00FF"
       assert electric_violet.distance_to_closest_named_hex == 1368
       assert electric_violet.exact_name_match? == false
+
+      # ------------------------
+
+      magenta_fuschia = colors |> Enum.at(201)
+
+      assert magenta_fuschia == [
+               %ColorPalette.Color{
+                 name: :magenta,
+                 ansi_color_code: %ColorPalette.ANSIColorCode{code: 201, hex: "ff00ff", rgb: [255, 0, 255], color_group: :pink},
+                 text_contrast_color: :black,
+                 source: :color_data_api,
+                 closest_named_hex: "FF00FF",
+                 distance_to_closest_named_hex: 0,
+                 exact_name_match?: true,
+                 color_data_deprecated: [],
+                 same_as: []
+               },
+               %ColorPalette.Color{
+                 name: :fuchsia,
+                 ansi_color_code: %ColorPalette.ANSIColorCode{code: 201, hex: "ff00ff", rgb: [255, 0, 255], color_group: :pink},
+                 text_contrast_color: :black,
+                 source: :color_data_api,
+                 closest_named_hex: "FF00FF",
+                 distance_to_closest_named_hex: 0,
+                 exact_name_match?: true,
+                 color_data_deprecated: [],
+                 same_as: []
+               }
+             ]
     end
   end
 
@@ -428,6 +457,117 @@ defmodule ColorPalette.DataConverterTest do
                  same_as: []
                }
              ]
+    end
+  end
+
+  describe "new_color_names_to_colors" do
+    test "groups colors by color names" do
+      colors = [
+        %ColorPalette.Color{
+          name: :alien_armpit,
+          ansi_color_code: %ColorPalette.ANSIColorCode{code: 112, hex: "87d700", rgb: [135, 215, 0], color_group: :green},
+          text_contrast_color: :black,
+          source: :color_name_dot_com,
+          closest_named_hex: nil,
+          distance_to_closest_named_hex: nil,
+          exact_name_match?: false,
+          color_data_deprecated: [],
+          same_as: []
+        },
+        %ColorPalette.Color{
+          name: :black,
+          ansi_color_code: %ColorPalette.ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black},
+          text_contrast_color: :white,
+          source: :io_ansi,
+          closest_named_hex: nil,
+          distance_to_closest_named_hex: nil,
+          exact_name_match?: false,
+          color_data_deprecated: [],
+          same_as: []
+        },
+        %ColorPalette.Color{
+          name: :cyan,
+          ansi_color_code: %ColorPalette.ANSIColorCode{code: 6, hex: "008080", rgb: [0, 128, 128], color_group: :cyan},
+          text_contrast_color: :white,
+          source: :io_ansi,
+          closest_named_hex: nil,
+          distance_to_closest_named_hex: nil,
+          exact_name_match?: false,
+          color_data_deprecated: [],
+          same_as: [:teal]
+        },
+        %ColorPalette.Color{
+          name: :cyan,
+          ansi_color_code: %ColorPalette.ANSIColorCode{code: 45, hex: "00d7ff", rgb: [0, 215, 255], color_group: :blue},
+          text_contrast_color: :black,
+          source: :color_name_dot_com,
+          closest_named_hex: nil,
+          distance_to_closest_named_hex: nil,
+          exact_name_match?: false,
+          color_data_deprecated: [],
+          same_as: []
+        }
+      ]
+
+      grouped = DataConverter.new_color_names_to_colors(colors)
+
+      assert grouped == %{
+               cyan: [
+                 %ColorPalette.Color{
+                   name: :cyan,
+                   ansi_color_code: %ColorPalette.ANSIColorCode{code: 45, hex: "00d7ff", rgb: [0, 215, 255], color_group: :blue},
+                   text_contrast_color: :black,
+                   source: :color_name_dot_com,
+                   closest_named_hex: nil,
+                   distance_to_closest_named_hex: nil,
+                   exact_name_match?: false,
+                   color_data_deprecated: [],
+                   same_as: []
+                 },
+                 %ColorPalette.Color{
+                   ansi_color_code: %ColorPalette.ANSIColorCode{code: 6, color_group: :cyan, hex: "008080", rgb: [0, 128, 128]},
+                   closest_named_hex: nil,
+                   color_data_deprecated: [],
+                   distance_to_closest_named_hex: nil,
+                   exact_name_match?: false,
+                   name: :cyan,
+                   same_as: [:teal],
+                   source: :io_ansi,
+                   text_contrast_color: :white
+                 }
+               ],
+               black: [
+                 %ColorPalette.Color{
+                   name: :black,
+                   ansi_color_code: %ColorPalette.ANSIColorCode{
+                     code: 0,
+                     hex: "000000",
+                     rgb: [0, 0, 0],
+                     color_group: :gray_and_black
+                   },
+                   text_contrast_color: :white,
+                   source: :io_ansi,
+                   closest_named_hex: nil,
+                   distance_to_closest_named_hex: nil,
+                   exact_name_match?: false,
+                   color_data_deprecated: [],
+                   same_as: []
+                 }
+               ],
+               alien_armpit: [
+                 %ColorPalette.Color{
+                   name: :alien_armpit,
+                   ansi_color_code: %ColorPalette.ANSIColorCode{code: 112, hex: "87d700", rgb: [135, 215, 0], color_group: :green},
+                   text_contrast_color: :black,
+                   source: :color_name_dot_com,
+                   closest_named_hex: nil,
+                   distance_to_closest_named_hex: nil,
+                   exact_name_match?: false,
+                   color_data_deprecated: [],
+                   same_as: []
+                 }
+               ]
+             }
     end
   end
 
