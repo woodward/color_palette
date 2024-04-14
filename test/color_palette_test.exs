@@ -39,10 +39,10 @@ defmodule ColorPaletteTest do
     test "returns the mapping of color groups to ansi color codes" do
       color_groups_to_ansi_color_codes = ColorPalette.color_groups_to_ansi_color_codes()
 
-      assert length(Map.keys(color_groups_to_ansi_color_codes)) == 12
+      assert length(Map.keys(color_groups_to_ansi_color_codes)) == 11
 
       gray_and_black = color_groups_to_ansi_color_codes.gray_and_black
-      assert length(gray_and_black) == 25
+      assert length(gray_and_black) == 32
     end
   end
 
@@ -217,7 +217,7 @@ defmodule ColorPaletteTest do
       color = ColorPalette.find_by_hex("5f5fff")
 
       assert color == %Color{
-               ansi_color_code: %ANSIColorCode{code: 63, hex: "5f5fff", rgb: [95, 95, 255], color_group: nil},
+               ansi_color_code: %ANSIColorCode{code: 63, hex: "5f5fff", rgb: [95, 95, 255], color_group: :blue},
                color_data: [],
                name: :very_light_blue,
                same_as: [],
@@ -232,7 +232,7 @@ defmodule ColorPaletteTest do
       color = ColorPalette.find_by_code(63)
 
       assert color == %Color{
-               ansi_color_code: %ANSIColorCode{code: 63, hex: "5f5fff", rgb: [95, 95, 255], color_group: nil},
+               ansi_color_code: %ANSIColorCode{code: 63, hex: "5f5fff", rgb: [95, 95, 255], color_group: :blue},
                color_data: [],
                name: :very_light_blue,
                same_as: [],

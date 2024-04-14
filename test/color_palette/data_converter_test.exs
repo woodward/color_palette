@@ -15,7 +15,7 @@ defmodule ColorPalette.DataConverterTest do
       black = colors.black
 
       assert black.name == :black
-      assert black.ansi_color_code == %ANSIColorCode{code: 16, hex: "000000", rgb: [0, 0, 0]}
+      assert black.ansi_color_code == %ANSIColorCode{code: 16, hex: "000000", color_group: :gray_and_black, rgb: [0, 0, 0]}
       assert black.text_contrast_color == :white
       assert black.source == :color_data_api
       assert length(black.color_data) == 2
@@ -29,18 +29,31 @@ defmodule ColorPalette.DataConverterTest do
       blueberry = colors.blueberry
       assert length(blueberry.color_data) == 5
 
-      assert blueberry.ansi_color_code == %ANSIColorCode{code: 69, hex: "5f87ff", rgb: [95, 135, 255]}
+      assert blueberry.ansi_color_code == %ANSIColorCode{code: 69, hex: "5f87ff", color_group: :blue, rgb: [95, 135, 255]}
       assert blueberry.text_contrast_color == :black
       assert blueberry.source == :color_data_api
 
       first_blueberry_color = blueberry.color_data |> List.first()
-      assert first_blueberry_color.ansi_color_code == %ANSIColorCode{code: 69, hex: "5f87ff", rgb: [95, 135, 255]}
+
+      assert first_blueberry_color.ansi_color_code == %ANSIColorCode{
+               code: 69,
+               hex: "5f87ff",
+               color_group: :blue,
+               rgb: [95, 135, 255]
+             }
+
       assert first_blueberry_color.name.distance == 1685
       assert first_blueberry_color.hex.value == "#5F87FF"
 
       last_blueberry_color = blueberry.color_data |> List.last()
 
-      assert last_blueberry_color.ansi_color_code == %ANSIColorCode{code: 99, hex: "875fff", rgb: [135, 95, 255]}
+      assert last_blueberry_color.ansi_color_code == %ANSIColorCode{
+               code: 99,
+               hex: "875fff",
+               color_group: :purple_violet_and_magenta,
+               rgb: [135, 95, 255]
+             }
+
       assert last_blueberry_color.name.distance == 7219
 
       distances = blueberry.color_data |> Enum.map(& &1.name.distance)
@@ -205,7 +218,7 @@ defmodule ColorPalette.DataConverterTest do
       assert alien_armpit == %Color{
                name: :alien_armpit,
                text_contrast_color: :black,
-               ansi_color_code: %ANSIColorCode{code: 112, hex: "87d700", rgb: [135, 215, 0]},
+               ansi_color_code: %ANSIColorCode{code: 112, hex: "87d700", color_group: :green, rgb: [135, 215, 0]},
                source: :color_name_dot_com
              }
     end
