@@ -13,12 +13,13 @@ defmodule ColorPalette.Color do
     same_as: []
   ]
 
-  defmacro def_color(name, hex, text_contrast_color, same_as, source, code) do
+  defmacro def_color(name, hex, text_contrast_color, same_as, source, color_group, code) do
     quote bind_quoted: [
             name: name,
             text_contrast_color: text_contrast_color,
             hex: hex,
             code: code,
+            color_group: color_group,
             source: source,
             same_as: same_as
           ] do
@@ -28,6 +29,7 @@ defmodule ColorPalette.Color do
       <br />
       #{ColorPalette.ExDocUtils.source_link(source, text_contrast_color, hex)}
       #{ColorPalette.ExDocUtils.same_as(same_as, hex, text_contrast_color)}
+      #{ColorPalette.ExDocUtils.color_group_link(hex, text_contrast_color, color_group)}
       </div>
       """
       def unquote(name)() do

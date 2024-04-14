@@ -109,7 +109,7 @@ defmodule ColorPalette.GuideGenerator do
       |> String.replace(", And, ", " and ")
 
     """
-    <div style="margin-top: 5rem;" />
+    <div style="margin-top: 5rem;" id=#{name} />
     ## #{names} (#{count})\n\n
     """
   end

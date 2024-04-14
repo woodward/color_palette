@@ -92,13 +92,14 @@ defmodule ColorPalette.PrecompileHook do
       @colors
       |> Enum.each(fn {color_name, color} ->
         hex = color.ansi_color_code.hex
+        color_group = color.ansi_color_code.color_group
         code = color.ansi_color_code.code
         text_contrast_color = color.text_contrast_color
 
         if color.source == :io_ansi do
           delegate_to_io_ansi(color_name, hex, text_contrast_color, code)
         else
-          def_color(color_name, hex, text_contrast_color, color.same_as, color.source, code)
+          def_color(color_name, hex, text_contrast_color, color.same_as, color.source, color_group, code)
         end
       end)
 

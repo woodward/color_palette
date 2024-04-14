@@ -7,7 +7,12 @@ defmodule ColorPalette.ExDocUtils do
 
   def same_as(same_as, hex, text_contrast_color) do
     links = same_as |> Enum.map(&color_link(&1, hex, text_contrast_color)) |> Enum.join(", ")
-    "Same as: " <> links
+
+    """
+    <span style="padding-right: 2rem;">
+      Same as: #{links}
+    </span>
+    """
   end
 
   def color_link(name, hex, text_contrast_color) do
@@ -21,6 +26,14 @@ defmodule ColorPalette.ExDocUtils do
 
     """
     <a style="color: #{text_contrast_color}; background-color: ##{hex}; padding-right: 2rem;" href="#{url}">Source: #{source_name(source)}</a>
+    """
+  end
+
+  def color_group_link(hex, text_contrast_color, color_group) do
+    url = "color_groups.html##{color_group}"
+
+    """
+    <a style="color: #{text_contrast_color}; background-color: ##{hex}; padding-right: 2rem;" href="#{url}">Color Group: #{color_group}</a>
     """
   end
 
