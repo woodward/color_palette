@@ -76,6 +76,119 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "new_group_colors_by_name" do
+    test "groups colors by name" do
+      colors = [
+        [
+          %ColorPalette.Color{
+            name: :black,
+            ansi_color_code: %ColorPalette.ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black},
+            text_contrast_color: :white,
+            closest_named_hex: nil,
+            distance_to_closest_named_hex: 0,
+            source: [:io_ansi],
+            exact_name_match?: true,
+            color_data_deprecated: [],
+            same_as: []
+          },
+          %ColorPalette.Color{
+            name: :black,
+            ansi_color_code: %ColorPalette.ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black},
+            text_contrast_color: :white,
+            closest_named_hex: "000000",
+            distance_to_closest_named_hex: 0,
+            source: [:color_data_api],
+            exact_name_match?: true,
+            color_data_deprecated: [],
+            same_as: []
+          },
+          %ColorPalette.Color{
+            name: :black,
+            ansi_color_code: %ColorPalette.ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black},
+            text_contrast_color: :white,
+            closest_named_hex: nil,
+            distance_to_closest_named_hex: nil,
+            source: [:color_name_dot_com],
+            exact_name_match?: false,
+            color_data_deprecated: [],
+            same_as: []
+          }
+        ],
+        [
+          %ColorPalette.Color{
+            name: :purple_pizzazz,
+            ansi_color_code: %ColorPalette.ANSIColorCode{code: 200, hex: "ff00d7", rgb: [255, 0, 215], color_group: :pink},
+            text_contrast_color: :black,
+            closest_named_hex: "FF00CC",
+            distance_to_closest_named_hex: 123,
+            source: [:color_data_api],
+            exact_name_match?: false,
+            color_data_deprecated: [],
+            same_as: []
+          },
+          %ColorPalette.Color{
+            name: :shocking_pink,
+            ansi_color_code: %ColorPalette.ANSIColorCode{code: 200, hex: "ff00d7", rgb: [255, 0, 215], color_group: :pink},
+            text_contrast_color: :white,
+            closest_named_hex: nil,
+            distance_to_closest_named_hex: nil,
+            source: [:color_name_dot_com],
+            exact_name_match?: false,
+            color_data_deprecated: [],
+            same_as: []
+          }
+        ]
+      ]
+
+      grouped = DataConverter.new_group_colors_by_name(colors)
+
+      assert grouped == [
+               [
+                 %ColorPalette.Color{
+                   name: :black,
+                   ansi_color_code: %ColorPalette.ANSIColorCode{
+                     code: 0,
+                     hex: "000000",
+                     rgb: [0, 0, 0],
+                     color_group: :gray_and_black
+                   },
+                   text_contrast_color: :white,
+                   closest_named_hex: nil,
+                   distance_to_closest_named_hex: 0,
+                   source: [:io_ansi, :color_data_api, :color_name_dot_com],
+                   exact_name_match?: true,
+                   color_data_deprecated: [],
+                   same_as: []
+                 }
+               ],
+               [
+                 %ColorPalette.Color{
+                   name: :purple_pizzazz,
+                   ansi_color_code: %ColorPalette.ANSIColorCode{code: 200, hex: "ff00d7", rgb: [255, 0, 215], color_group: :pink},
+                   text_contrast_color: :black,
+                   closest_named_hex: "FF00CC",
+                   distance_to_closest_named_hex: 123,
+                   source: [:color_data_api],
+                   exact_name_match?: false,
+                   color_data_deprecated: [],
+                   same_as: []
+                 },
+                 %ColorPalette.Color{
+                   name: :shocking_pink,
+                   ansi_color_code: %ColorPalette.ANSIColorCode{code: 200, hex: "ff00d7", rgb: [255, 0, 215], color_group: :pink},
+                   text_contrast_color: :white,
+                   closest_named_hex: nil,
+                   distance_to_closest_named_hex: nil,
+                   source: [:color_name_dot_com],
+                   exact_name_match?: false,
+                   color_data_deprecated: [],
+                   same_as: []
+                 }
+               ]
+             ]
+    end
+  end
+
   describe "annotate" do
     test "adds color names and text_contrast_color to ansi color codes" do
       color_codes = ColorPalette.ansi_color_codes()

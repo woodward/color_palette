@@ -133,6 +133,26 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  def new_group_colors_by_name(colors) do
+    colors
+    |> Enum.map(fn colors_for_code ->
+      grouped_by_name =
+        colors_for_code
+        |> List.flatten()
+        |> Enum.group_by(& &1.name)
+
+      grouped_by_name
+      |> Enum.map(fn {_color_name, colors_for_this_name} ->
+        [first_color | rest] = colors_for_this_name
+
+        rest
+        |> Enum.reduce(first_color, fn next_color, acc ->
+          %{acc | source: acc.source ++ next_color.source}
+        end)
+      end)
+    end)
+  end
+
   def new_convert_color_name_dot_com_raw_data(color_name_dot_com_raw_data, ansi_color_codes) do
     Enum.zip(color_name_dot_com_raw_data, ansi_color_codes)
     |> Enum.map(fn {raw_color, ansi_color_code} ->

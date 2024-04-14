@@ -112,6 +112,7 @@ defmodule ColorPalette.PrecompileHook do
                                     @new_color_name_dot_com_colors)
                                  |> DataConverter.new_color_names_to_colors()
 
+      @new_colors_grouped_by_name @new_all_colors |> DataConverter.new_group_colors_by_name()
       # Data good above here
       # --------------------
 
@@ -155,6 +156,7 @@ defmodule ColorPalette.PrecompileHook do
       def new_color_data_api_colors, do: @new_color_data_api_colors
       def new_all_colors, do: @new_all_colors
       def new_color_names_to_colors, do: @new_color_names_to_colors
+      def new_colors_grouped_by_name, do: @new_colors_grouped_by_name
     end
   end
 end
