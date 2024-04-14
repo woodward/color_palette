@@ -134,7 +134,7 @@ defmodule ColorPalette.DataConverter do
     |> Enum.into(%{})
   end
 
-  def clear_out_color_data(color_names) do
+  def clear_out_color_data_deprecated(color_names) do
     color_names
     |> Enum.map(fn {color_name, color} ->
       {color_name, %{color | color_data_deprecated: []}}

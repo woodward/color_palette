@@ -290,7 +290,7 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "clear_out_color_data" do
+  describe "clear_out_color_data_deprecated" do
     test "clears out the color data array" do
       color_names = %{
         black: %Color{color_data_deprecated: ["something"]},
@@ -298,7 +298,7 @@ defmodule ColorPalette.DataConverterTest do
         yellow: %Color{color_data_deprecated: []}
       }
 
-      cleared_out = DataConverter.clear_out_color_data(color_names)
+      cleared_out = DataConverter.clear_out_color_data_deprecated(color_names)
 
       assert cleared_out == %{
                black: %Color{color_data_deprecated: []},
