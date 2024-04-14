@@ -339,6 +339,98 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "combine_colors/3" do
+    test "merges the three types of colors" do
+      io_ansi_colors = ColorPalette.new_io_ansi_colors()
+      color_data_api = ColorPalette.new_color_data_api_colors()
+      color_name_dot_com = ColorPalette.new_color_name_dot_com_colors()
+
+      combined = DataConverter.combine_colors(io_ansi_colors, color_data_api, color_name_dot_com)
+
+      assert length(combined) == 256
+
+      magenta = combined |> Enum.at(5)
+
+      assert magenta == [
+               %ColorPalette.Color{
+                 name: :magenta,
+                 ansi_color_code: %ColorPalette.ANSIColorCode{
+                   code: 5,
+                   hex: "800080",
+                   rgb: [128, 0, 128],
+                   color_group: :purple_violet_and_magenta
+                 },
+                 text_contrast_color: :white,
+                 source: :io_ansi,
+                 closest_named_hex: nil,
+                 distance_to_closest_named_hex: 0,
+                 exact_name_match?: true,
+                 color_data_deprecated: [],
+                 same_as: []
+               },
+               %ColorPalette.Color{
+                 name: :fresh_eggplant,
+                 ansi_color_code: %ColorPalette.ANSIColorCode{
+                   code: 5,
+                   hex: "800080",
+                   rgb: [128, 0, 128],
+                   color_group: :purple_violet_and_magenta
+                 },
+                 text_contrast_color: :white,
+                 source: :color_data_api,
+                 closest_named_hex: "990066",
+                 distance_to_closest_named_hex: 1981,
+                 exact_name_match?: false,
+                 color_data_deprecated: [],
+                 same_as: []
+               },
+               %ColorPalette.Color{
+                 name: :patriarch,
+                 ansi_color_code: %ColorPalette.ANSIColorCode{
+                   code: 5,
+                   hex: "800080",
+                   rgb: [128, 0, 128],
+                   color_group: :purple_violet_and_magenta
+                 },
+                 text_contrast_color: :white,
+                 source: :color_name_dot_com,
+                 closest_named_hex: nil,
+                 distance_to_closest_named_hex: nil,
+                 exact_name_match?: false,
+                 color_data_deprecated: [],
+                 same_as: []
+               }
+             ]
+
+      alien_armpit = combined |> Enum.at(112)
+
+      assert alien_armpit == [
+               %ColorPalette.Color{
+                 name: :sheen_green,
+                 ansi_color_code: %ColorPalette.ANSIColorCode{code: 112, hex: "87d700", rgb: [135, 215, 0], color_group: :green},
+                 text_contrast_color: :black,
+                 source: :color_data_api,
+                 closest_named_hex: "8FD400",
+                 distance_to_closest_named_hex: 83,
+                 exact_name_match?: false,
+                 color_data_deprecated: [],
+                 same_as: []
+               },
+               %ColorPalette.Color{
+                 name: :alien_armpit,
+                 ansi_color_code: %ColorPalette.ANSIColorCode{code: 112, hex: "87d700", rgb: [135, 215, 0], color_group: :green},
+                 text_contrast_color: :black,
+                 source: :color_name_dot_com,
+                 closest_named_hex: nil,
+                 distance_to_closest_named_hex: nil,
+                 exact_name_match?: false,
+                 color_data_deprecated: [],
+                 same_as: []
+               }
+             ]
+    end
+  end
+
   describe "find_duplicates/1" do
     test "annotates the colors with duplicate function names" do
       color_names = %{

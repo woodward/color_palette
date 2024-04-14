@@ -171,6 +171,23 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  def combine_colors(io_ansi_colors, color_data_api_colors, color_name_dot_com_colors) do
+    # Should be 256 - 16:
+    required_padding = length(color_data_api_colors) - length(io_ansi_colors)
+
+    nil_padding = 0..required_padding |> Enum.reduce([], fn _index, acc -> [nil] ++ acc end)
+    io_ansi_colors_padded_with_nils = io_ansi_colors ++ nil_padding
+
+    Enum.zip(io_ansi_colors_padded_with_nils, color_data_api_colors)
+    |> Enum.zip(color_name_dot_com_colors)
+    |> Enum.map(fn {{io_ansi, color_data_api}, color_name_dot_com} ->
+      [io_ansi, color_data_api, color_name_dot_com]
+    end)
+    |> Enum.map(fn colors_for_code ->
+      colors_for_code |> Enum.reject(&(&1 == nil))
+    end)
+  end
+
   def ansi_color_codes_to_color_names(ansi_color_codes, colors) do
     ansi_color_codes_to_color_names =
       ansi_color_codes
