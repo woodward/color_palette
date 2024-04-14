@@ -32,7 +32,7 @@ defmodule ColorPalette.GuideGenerator do
           hex = ansi_color_code.hex
           code = ansi_color_code.code
 
-          acc <> color_block(code, hex, text_contrast_color, color_names, "padding: 0.5rem;")
+          acc <> color_block(code, hex, text_contrast_color, color_names, nil, "padding: 0.5rem;")
         end)
       end)
 
@@ -62,16 +62,20 @@ defmodule ColorPalette.GuideGenerator do
         text_contrast_color = color.text_contrast_color
         hex = ansi_color_code.hex
         code = ansi_color_code.code
+        color_group = ansi_color_code.color_group
 
-        acc <> color_block(code, hex, text_contrast_color, color_names, "padding: 1rem; margin-bottom: 1rem")
+        acc <> color_block(code, hex, text_contrast_color, color_names, color_group, "padding: 1rem; margin-bottom: 1rem")
       end)
 
     File.write!("guides/ansi_color_codes.md", content)
     :ok
   end
 
-  def color_block(code, hex, text_contrast_color, color_names, div_styling) do
+  def color_block(code, hex, text_contrast_color, color_names, color_group, div_styling) do
     color_names_label = if length(color_names) == 1, do: "Color Name", else: "Color Names"
+
+    color_group_link =
+      if color_group, do: ColorPalette.ExDocUtils.color_group_link(hex, text_contrast_color, color_group), else: nil
 
     """
     <div style="color: #{text_contrast_color}; background-color: ##{hex}; #{div_styling}">
@@ -79,7 +83,10 @@ defmodule ColorPalette.GuideGenerator do
       <span style="margin-right: 2rem;">Hex: ##{hex} </span>
       <span>
         <span style="margin-right: 1rem;">#{color_names_label}: </span>
-        #{color_links(color_names, hex, text_contrast_color)}
+        <span style="margin-right: 1rem;">
+          #{color_links(color_names, hex, text_contrast_color)}
+        </span>
+        #{color_group_link}
       </span>
     </div>\n\n
     """
