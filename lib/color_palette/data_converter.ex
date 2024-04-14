@@ -48,6 +48,7 @@ defmodule ColorPalette.DataConverter do
   def color_name_to_atom(name) do
     name
     |> String.downcase()
+    |> String.replace(~r/\(.*\)/, "")
     |> String.split("/")
     |> Enum.map(&String.trim(&1))
     |> Enum.map(&String.replace(&1, " ", "_"))

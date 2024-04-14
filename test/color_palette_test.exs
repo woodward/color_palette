@@ -113,7 +113,7 @@ defmodule ColorPaletteTest do
   describe "colors" do
     test "returns the map of color names to color data" do
       colors = ColorPalette.colors()
-      assert length(Map.keys(colors)) == 385
+      assert length(Map.keys(colors)) == 384
     end
   end
 

@@ -106,6 +106,10 @@ defmodule ColorPalette.DataConverterTest do
     test "returns two colors if a slash" do
       assert DataConverter.color_name_to_atom("Magenta / Fuchsia") == [:magenta, :fuchsia]
     end
+
+    test "gets rid of content in parens" do
+      assert DataConverter.color_name_to_atom("Gold (Web)") == [:gold]
+    end
   end
 
   describe "add_ansi_code_to_colors" do
