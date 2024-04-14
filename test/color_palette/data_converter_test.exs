@@ -18,7 +18,7 @@ defmodule ColorPalette.DataConverterTest do
       assert black.ansi_color_code == %ANSIColorCode{code: 16, hex: "000000", color_group: :gray_and_black, rgb: [0, 0, 0]}
       assert black.text_contrast_color == :white
       assert black.source == :color_data_api
-      assert length(black.color_data) == 2
+      assert length(black.color_data_deprecated) == 2
     end
 
     test "sorts colors based on their distance" do
@@ -27,13 +27,13 @@ defmodule ColorPalette.DataConverterTest do
       colors = DataConverter.convert_color_data_api_raw_data(color_data, color_codes)
 
       blueberry = colors.blueberry
-      assert length(blueberry.color_data) == 5
+      assert length(blueberry.color_data_deprecated) == 5
 
       assert blueberry.ansi_color_code == %ANSIColorCode{code: 69, hex: "5f87ff", color_group: :blue, rgb: [95, 135, 255]}
       assert blueberry.text_contrast_color == :black
       assert blueberry.source == :color_data_api
 
-      first_blueberry_color = blueberry.color_data |> List.first()
+      first_blueberry_color = blueberry.color_data_deprecated |> List.first()
 
       assert first_blueberry_color.ansi_color_code == %ANSIColorCode{
                code: 69,
@@ -45,7 +45,7 @@ defmodule ColorPalette.DataConverterTest do
       assert first_blueberry_color.name.distance == 1685
       assert first_blueberry_color.hex.value == "#5F87FF"
 
-      last_blueberry_color = blueberry.color_data |> List.last()
+      last_blueberry_color = blueberry.color_data_deprecated |> List.last()
 
       assert last_blueberry_color.ansi_color_code == %ANSIColorCode{
                code: 99,
@@ -56,7 +56,7 @@ defmodule ColorPalette.DataConverterTest do
 
       assert last_blueberry_color.name.distance == 7219
 
-      distances = blueberry.color_data |> Enum.map(& &1.name.distance)
+      distances = blueberry.color_data_deprecated |> Enum.map(& &1.name.distance)
       assert distances == [1685, 3475, 3579, 6609, 7219]
     end
   end
@@ -244,7 +244,7 @@ defmodule ColorPalette.DataConverterTest do
 
       assert black == %Color{
                ansi_color_code: %ANSIColorCode{code: 0, color_group: :gray_and_black, hex: "000000", rgb: [0, 0, 0]},
-               color_data: [],
+               color_data_deprecated: [],
                text_contrast_color: :white,
                name: :black,
                source: :io_ansi
@@ -293,17 +293,17 @@ defmodule ColorPalette.DataConverterTest do
   describe "clear_out_color_data" do
     test "clears out the color data array" do
       color_names = %{
-        black: %Color{color_data: ["something"]},
-        white: %Color{color_data: ["something else"]},
-        yellow: %Color{color_data: []}
+        black: %Color{color_data_deprecated: ["something"]},
+        white: %Color{color_data_deprecated: ["something else"]},
+        yellow: %Color{color_data_deprecated: []}
       }
 
       cleared_out = DataConverter.clear_out_color_data(color_names)
 
       assert cleared_out == %{
-               black: %Color{color_data: []},
-               white: %Color{color_data: []},
-               yellow: %Color{color_data: []}
+               black: %Color{color_data_deprecated: []},
+               white: %Color{color_data_deprecated: []},
+               yellow: %Color{color_data_deprecated: []}
              }
     end
   end

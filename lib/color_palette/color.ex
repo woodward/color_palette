@@ -9,7 +9,7 @@ defmodule ColorPalette.Color do
     :text_contrast_color,
     # :source can be one of :io_ansi, :color_name_dot_com, or :color_data_api:
     :source,
-    color_data: [],
+    color_data_deprecated: [],
     same_as: []
   ]
 

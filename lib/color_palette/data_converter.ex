@@ -20,7 +20,7 @@ defmodule ColorPalette.DataConverter do
 
       color = %Color{
         name: name,
-        color_data: sorted_colors,
+        color_data_deprecated: sorted_colors,
         ansi_color_code: first_color.ansi_color_code,
         text_contrast_color: text_contrast_color(first_color),
         source: :color_data_api
@@ -137,7 +137,7 @@ defmodule ColorPalette.DataConverter do
   def clear_out_color_data(color_names) do
     color_names
     |> Enum.map(fn {color_name, color} ->
-      {color_name, %{color | color_data: []}}
+      {color_name, %{color | color_data_deprecated: []}}
     end)
     |> Enum.into(%{})
   end

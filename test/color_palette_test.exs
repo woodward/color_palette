@@ -218,7 +218,7 @@ defmodule ColorPaletteTest do
 
       assert color == %Color{
                ansi_color_code: %ANSIColorCode{code: 63, hex: "5f5fff", rgb: [95, 95, 255], color_group: :blue},
-               color_data: [],
+               color_data_deprecated: [],
                name: :very_light_blue,
                same_as: [],
                source: :color_name_dot_com,
@@ -233,7 +233,7 @@ defmodule ColorPaletteTest do
 
       assert color == %Color{
                ansi_color_code: %ANSIColorCode{code: 63, hex: "5f5fff", rgb: [95, 95, 255], color_group: :blue},
-               color_data: [],
+               color_data_deprecated: [],
                name: :very_light_blue,
                same_as: [],
                source: :color_name_dot_com,
