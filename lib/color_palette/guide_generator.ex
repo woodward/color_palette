@@ -70,12 +70,14 @@ defmodule ColorPalette.GuideGenerator do
   end
 
   def color_block(code, hex, text_contrast_color, color_names, div_styling) do
+    color_names_label = if length(color_names) == 1, do: "Color Name", else: "Color Names"
+
     """
     <div style="color: #{text_contrast_color}; background-color: ##{hex}; #{div_styling}">
       <span style="margin-right: 2rem; font-weight: bold;">#{code}:</span>
       <span style="margin-right: 2rem;">Hex: ##{hex} </span>
       <span>
-        <span style="margin-right: 1rem;">Color Names: </span>
+        <span style="margin-right: 1rem;">#{color_names_label}: </span>
         #{color_links(color_names, hex, text_contrast_color)}
       </span>
     </div>\n\n
