@@ -157,11 +157,11 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "add_ansi_code_to_colors" do
+  describe "deprecated_add_ansi_code_to_colors" do
     test "adds the ANSI code to the color data" do
       ansi_codes = ColorPalette.ansi_color_codes()
       color_data = ColorPalette.color_data_api_raw_data()
-      color_data = DataConverter.add_ansi_code_to_colors(ansi_codes, color_data)
+      color_data = DataConverter.deprecated_add_ansi_code_to_colors(ansi_codes, color_data)
 
       first = color_data |> List.first()
       assert first.ansi_color_code == %ANSIColorCode{code: 0, color_group: :gray_and_black, hex: "000000", rgb: [0, 0, 0]}
