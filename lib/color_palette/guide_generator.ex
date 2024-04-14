@@ -104,7 +104,7 @@ defmodule ColorPalette.GuideGenerator do
     |> Enum.join(", ")
   end
 
-  def color_group_name(nil, count), do: "## Uncategorized (#{count})\n\n"
+  def color_group_name(nil, count), do: "## Uncategorized (#{count} colors)\n\n"
 
   def color_group_name(name, count) do
     names =
@@ -117,7 +117,7 @@ defmodule ColorPalette.GuideGenerator do
 
     """
     <div style="margin-top: 5rem;" id=#{name} />
-    ## #{names} (#{count})\n\n
+    ## #{names} (#{count} colors)\n\n
     """
   end
 end
