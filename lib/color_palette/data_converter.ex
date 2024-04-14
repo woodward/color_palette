@@ -49,6 +49,7 @@ defmodule ColorPalette.DataConverter do
     name
     |> String.downcase()
     |> String.replace(~r/\(.*\)/, "")
+    |> String.replace(~r/é/, "")
     |> String.split("/")
     |> Enum.map(&String.trim(&1))
     |> Enum.map(&String.replace(&1, " ", "_"))

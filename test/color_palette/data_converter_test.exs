@@ -110,6 +110,10 @@ defmodule ColorPalette.DataConverterTest do
     test "gets rid of content in parens" do
       assert DataConverter.color_name_to_atom("Gold (Web)") == [:gold]
     end
+
+    test "drops the é on :tenné" do
+      assert DataConverter.color_name_to_atom("Tenné") == [:tenn]
+    end
   end
 
   describe "add_ansi_code_to_colors" do
