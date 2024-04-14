@@ -61,3 +61,21 @@ or some
 <a href="https://hexdocs.pm/color_palette/ColorPalette.html#very_light_malachite_green/0" style="padding: 0.5rem; color: black; background-color: #5fff87;">:very_light_malachite_green</a>
 
 See the main module page for [ColorPalette](https://hexdocs.pm/color_palette/ColorPalette.html) to see a list of all of the colors!
+
+## Data Sources
+
+The 256 IO ANSI color codes are readily available, and a copy of them are stored in JSON format 
+[in this data directory.](https://github.com/woodward/color_palette/blob/main/lib/color_palette/data/ansi_color_codes.json).
+These colors were manually grouped by the `ColorPalette` author into 11 color groups 
+[in this file](https://github.com/woodward/color_palette/blob/main/lib/color_palette/data/ansi_color_codes_by_group.json) 
+(loosely based on the grouping of the [web extended colors from here](https://en.wikipedia.org/wiki/Web_colors#Extended_colors));
+note that this was a subjective process.
+The 16 `IO.ANSI` color names are stored as a [module variable here.](https://github.com/woodward/color_palette/blob/main/lib/color_palette/precompile_hook.ex)
+Color names were obtained from [color-name.com](https://www.color-name.com/) and 
+[thecolorapi.com](https://www.thecolorapi.com/); `Mix.install/2` Elixir scripts to download 
+this data are found [here](https://github.com/woodward/color_palette/blob/main/bin/download_color-name_data.exs)
+and [here](https://github.com/woodward/color_palette/blob/main/bin/download_thecolorapi_data.exs), respectively.
+Color names were also downloaded from [colorhexa.com](https://www.colorhexa.com/) 
+[(via this script)](https://github.com/woodward/color_palette/blob/main/bin/download_colorhexa_data.exs), 
+but [the data](https://github.com/woodward/color_palette/blob/main/lib/color_palette/data/colorhexa.com_colors.json) 
+was not found to be very interesting, and so these color names were not included.
