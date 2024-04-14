@@ -1,0 +1,18 @@
+[
+  { "code": 0, "name": "black", "text_contrast_color": "white" },
+  { "code": 1, "name": "red", "text_contrast_color": "white" },
+  { "code": 2, "name": "green", "text_contrast_color": "white" },
+  { "code": 3, "name": "yellow", "text_contrast_color": "white" },
+  { "code": 4, "name": "blue", "text_contrast_color": "white" },
+  { "code": 5, "name": "magenta", "text_contrast_color": "white" },
+  { "code": 6, "name": "cyan", "text_contrast_color": "white" },
+  { "code": 7, "name": "white", "text_contrast_color": "black" },
+  { "code": 8, "name": "light_black", "text_contrast_color": "white" },
+  { "code": 9, "name": "light_red", "text_contrast_color": "white" },
+  { "code": 10, "name": "light_green", "text_contrast_color": "black" },
+  { "code": 11, "name": "light_yellow", "text_contrast_color": "black" },
+  { "code": 12, "name": "light_blue", "text_contrast_color": "white" },
+  { "code": 13, "name": "light_magenta", "text_contrast_color": "white" },
+  { "code": 14, "name": "light_cyan", "text_contrast_color": "black" },
+  { "code": 15, "name": "light_white", "text_contrast_color": "black" }
+]

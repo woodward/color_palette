@@ -28,25 +28,17 @@ defmodule ColorPalette.PrecompileHook do
         light_white: %{code: 15, text_contrast_color: :black}
       }
 
-      @new_io_ansi_color_names [
-        %{name: :black, code: 0, text_contrast_color: :white},
-        %{name: :red, code: 1, text_contrast_color: :white},
-        %{name: :green, code: 2, text_contrast_color: :white},
-        %{name: :yellow, code: 3, text_contrast_color: :white},
-        %{name: :blue, code: 4, text_contrast_color: :white},
-        %{name: :magenta, code: 5, text_contrast_color: :white},
-        %{name: :cyan, code: 6, text_contrast_color: :white},
-        %{name: :white, code: 7, text_contrast_color: :black},
-        #
-        %{name: :light_black, code: 8, text_contrast_color: :white},
-        %{name: :light_red, code: 9, text_contrast_color: :white},
-        %{name: :light_green, code: 10, text_contrast_color: :black},
-        %{name: :light_yellow, code: 11, text_contrast_color: :black},
-        %{name: :light_blue, code: 12, text_contrast_color: :white},
-        %{name: :light_magenta, code: 13, text_contrast_color: :white},
-        %{name: :light_cyan, code: 14, text_contrast_color: :black},
-        %{name: :light_white, code: 15, text_contrast_color: :black}
-      ]
+      @new_io_ansi_color_names __DIR__
+                               |> Path.join("color_palette/data/ansi_color_names.json")
+                               |> File.read!()
+                               |> Jason.decode!(keys: :atoms)
+                               |> Enum.map(
+                                 &%{
+                                   &1
+                                   | name: String.to_atom(&1.name),
+                                     text_contrast_color: String.to_atom(&1.text_contrast_color)
+                                 }
+                               )
 
       @color_groups [
         :blue,
