@@ -31,6 +31,26 @@ defmodule ColorPalette.DataConverter do
     |> Enum.into(%{})
   end
 
+  def new_convert_color_data_api_raw_data(color_data, ansi_color_codes) do
+    Enum.zip(color_data, ansi_color_codes)
+    |> Enum.map(fn {raw_color, ansi_color_code} ->
+      name = raw_color.name.value |> new_color_name_to_atom()
+      distance_to_closest_named_hex = raw_color.name.distance
+      exact_name_match? = raw_color.name.exact_match_name
+      closest_named_hex = raw_color.name.closest_named_hex |> String.replace("#", "")
+
+      %Color{
+        name: name,
+        ansi_color_code: ansi_color_code,
+        text_contrast_color: text_contrast_color(raw_color),
+        source: :color_data_api,
+        distance_to_closest_named_hex: distance_to_closest_named_hex,
+        exact_name_match?: exact_name_match?,
+        closest_named_hex: closest_named_hex
+      }
+    end)
+  end
+
   def color_groups_to_ansi_color_codes(ansi_color_codes, color_groups) do
     color_groups_to_ansi_color_codes =
       color_groups
@@ -56,6 +76,22 @@ defmodule ColorPalette.DataConverter do
     |> Enum.map(&String.replace(&1, "'", ""))
     |> Enum.map(&String.replace(&1, "-", "_"))
     |> Enum.map(&String.to_atom(&1))
+  end
+
+  def new_color_name_to_atom(name) do
+    names =
+      name
+      |> String.downcase()
+      |> String.replace(~r/\(.*\)/, "")
+      |> String.replace(~r/é/, "")
+      |> String.split("/")
+      |> Enum.map(&String.trim(&1))
+      |> Enum.map(&String.replace(&1, " ", "_"))
+      |> Enum.map(&String.replace(&1, "'", ""))
+      |> Enum.map(&String.replace(&1, "-", "_"))
+      |> Enum.map(&String.to_atom(&1))
+
+    if length(names) == 1, do: List.first(names), else: names
   end
 
   def text_contrast_color(color) do

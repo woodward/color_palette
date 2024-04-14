@@ -6,6 +6,47 @@ defmodule ColorPalette.DataConverterTest do
   alias ColorPalette.ANSIColorCode
   alias ColorPalette.Color
 
+  describe "new_convert_color_data_api_raw_data" do
+    test "adds color names and text_contrast_color to ansi color codes" do
+      color_codes = ColorPalette.ansi_color_codes()
+      color_data = ColorPalette.color_data_api_raw_data()
+
+      colors = DataConverter.new_convert_color_data_api_raw_data(color_data, color_codes)
+      assert length(colors) == 256
+
+      # ------------------------
+
+      black = colors |> List.first()
+
+      assert black.name == :black
+      assert black.ansi_color_code == %ANSIColorCode{code: 0, hex: "000000", color_group: :gray_and_black, rgb: [0, 0, 0]}
+      assert black.text_contrast_color == :white
+      assert black.source == :color_data_api
+      assert black.closest_named_hex == "000000"
+      assert black.distance_to_closest_named_hex == 0
+      assert black.exact_name_match? == true
+
+      # ------------------------
+
+      electric_violet = colors |> Enum.at(129)
+
+      assert electric_violet.name == :electric_violet
+
+      assert electric_violet.ansi_color_code == %ANSIColorCode{
+               code: 129,
+               color_group: :purple_violet_and_magenta,
+               hex: "af00ff",
+               rgb: [175, 0, 255]
+             }
+
+      assert electric_violet.text_contrast_color == :white
+      assert electric_violet.source == :color_data_api
+      assert electric_violet.closest_named_hex == "8B00FF"
+      assert electric_violet.distance_to_closest_named_hex == 1368
+      assert electric_violet.exact_name_match? == false
+    end
+  end
+
   describe "annotate" do
     test "adds color names and text_contrast_color to ansi color codes" do
       color_codes = ColorPalette.ansi_color_codes()
