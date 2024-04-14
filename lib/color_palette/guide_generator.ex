@@ -18,6 +18,7 @@ defmodule ColorPalette.GuideGenerator do
 
     content =
       color_groups
+      |> Enum.sort_by(fn {color_group, _} -> color_group end)
       |> Enum.reduce(content, fn {color_group, ansi_color_codes}, acc ->
         acc = acc <> color_group_name(color_group, length(ansi_color_codes))
 
@@ -107,6 +108,9 @@ defmodule ColorPalette.GuideGenerator do
       |> Enum.join(", ")
       |> String.replace(", And, ", " and ")
 
-    "## #{names} (#{count})\n\n"
+    """
+    <div style="margin-top: 5rem;" />
+    ## #{names} (#{count})\n\n
+    """
   end
 end
