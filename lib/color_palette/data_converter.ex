@@ -178,16 +178,16 @@ defmodule ColorPalette.DataConverter do
       {raw_data, _rest} = List.pop_at(color_data_api_colors, missing_code)
       name = raw_data.name.value
       hex = raw_data.hex.clean
-      new_name = color_name_to_atom("#{name}_#{hex}") |> List.first()
+      rename = color_name_to_atom("#{name}_#{hex}") |> List.first()
 
       color = %Color{
-        name: new_name,
+        name: rename,
         ansi_color_code: unnamed_ansi_color_code,
         source: :color_data_api,
         text_contrast_color: text_contrast_color(raw_data)
       }
 
-      Map.put(acc, new_name, color)
+      Map.put(acc, rename, color)
     end)
   end
 end
