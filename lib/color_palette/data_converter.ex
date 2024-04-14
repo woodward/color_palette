@@ -23,7 +23,7 @@ defmodule ColorPalette.DataConverter do
         color_data_deprecated: sorted_colors,
         ansi_color_code: first_color.ansi_color_code,
         text_contrast_color: text_contrast_color(first_color),
-        source: :color_data_api
+        source: [:color_data_api]
       }
 
       {name, color}
@@ -48,7 +48,7 @@ defmodule ColorPalette.DataConverter do
             name: color_name,
             ansi_color_code: ansi_color_code,
             text_contrast_color: text_contrast_color(raw_color),
-            source: :color_data_api,
+            source: [:color_data_api],
             distance_to_closest_named_hex: distance_to_closest_named_hex,
             exact_name_match?: exact_name_match?,
             closest_named_hex: closest_named_hex
@@ -126,7 +126,7 @@ defmodule ColorPalette.DataConverter do
         name: color_name,
         ansi_color_code: color_data.ansi_color_code,
         text_contrast_color: String.to_atom(color_data.text_contrast_color),
-        source: :color_name_dot_com
+        source: [:color_name_dot_com]
       }
 
       Map.put(acc, color_name, color)
@@ -142,7 +142,7 @@ defmodule ColorPalette.DataConverter do
         name: color_name,
         ansi_color_code: ansi_color_code,
         text_contrast_color: String.to_atom(raw_color.text_contrast_color),
-        source: :color_name_dot_com,
+        source: [:color_name_dot_com],
         exact_name_match?: false,
         distance_to_closest_named_hex: nil,
         closest_named_hex: nil
@@ -159,7 +159,7 @@ defmodule ColorPalette.DataConverter do
         name: color_name,
         text_contrast_color: color_data.text_contrast_color,
         ansi_color_code: ansi_color_code,
-        source: :io_ansi
+        source: [:io_ansi]
       })
     end)
   end
@@ -185,7 +185,7 @@ defmodule ColorPalette.DataConverter do
         name: ansi_color.name,
         text_contrast_color: ansi_color.text_contrast_color,
         ansi_color_code: ansi_color_code,
-        source: :io_ansi,
+        source: [:io_ansi],
         closest_named_hex: nil,
         exact_name_match?: true,
         distance_to_closest_named_hex: 0
@@ -290,7 +290,7 @@ defmodule ColorPalette.DataConverter do
       color = %Color{
         name: rename,
         ansi_color_code: unnamed_ansi_color_code,
-        source: :color_data_api,
+        source: [:color_data_api],
         text_contrast_color: text_contrast_color(raw_data)
       }
 

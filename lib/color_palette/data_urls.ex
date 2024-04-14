@@ -1,13 +1,17 @@
 defmodule ColorPalette.DataURLs do
   @moduledoc false
 
-  def url(:color_name_dot_com, hex: hex), do: "https://www.color-name.com/hex/#{hex}"
-  def url(:io_ansi, name: color), do: "https://hexdocs.pm/elixir/IO.ANSI.html##{color}/0"
-  def url(:colorhexa, hex: hex), do: "https://www.colorhexa.com/#{hex}"
-
-  def url(:color_data_api, opts) do
-    format = Keyword.get(opts, :format, :html)
+  def url(type, opts) do
+    name = Keyword.get(opts, :name)
     hex = Keyword.get(opts, :hex)
-    "https://www.thecolorapi.com/id?hex=#{hex}&format=#{format}"
+    format = Keyword.get(opts, :format, :html)
+
+    case type do
+      :io_ansi -> "https://hexdocs.pm/elixir/IO.ANSI.html##{name}/0"
+      :colorhexa -> "https://www.colorhexa.com/#{hex}"
+      :color_name_dot_com -> "https://www.color-name.com/hex/#{hex}"
+      :color_data_api -> "https://www.thecolorapi.com/id?hex=#{hex}&format=#{format}"
+      type -> raise "Unsupported data URL type: #{type}"
+    end
   end
 end

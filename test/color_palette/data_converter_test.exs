@@ -21,7 +21,7 @@ defmodule ColorPalette.DataConverterTest do
       assert black.name == :black
       assert black.ansi_color_code == %ANSIColorCode{code: 0, hex: "000000", color_group: :gray_and_black, rgb: [0, 0, 0]}
       assert black.text_contrast_color == :white
-      assert black.source == :color_data_api
+      assert black.source == [:color_data_api]
       assert black.closest_named_hex == "000000"
       assert black.distance_to_closest_named_hex == 0
       assert black.exact_name_match? == true
@@ -40,7 +40,7 @@ defmodule ColorPalette.DataConverterTest do
              }
 
       assert electric_violet.text_contrast_color == :white
-      assert electric_violet.source == :color_data_api
+      assert electric_violet.source == [:color_data_api]
       assert electric_violet.closest_named_hex == "8B00FF"
       assert electric_violet.distance_to_closest_named_hex == 1368
       assert electric_violet.exact_name_match? == false
@@ -54,7 +54,7 @@ defmodule ColorPalette.DataConverterTest do
                  name: :magenta,
                  ansi_color_code: %ColorPalette.ANSIColorCode{code: 201, hex: "ff00ff", rgb: [255, 0, 255], color_group: :pink},
                  text_contrast_color: :black,
-                 source: :color_data_api,
+                 source: [:color_data_api],
                  closest_named_hex: "FF00FF",
                  distance_to_closest_named_hex: 0,
                  exact_name_match?: true,
@@ -65,7 +65,7 @@ defmodule ColorPalette.DataConverterTest do
                  name: :fuchsia,
                  ansi_color_code: %ColorPalette.ANSIColorCode{code: 201, hex: "ff00ff", rgb: [255, 0, 255], color_group: :pink},
                  text_contrast_color: :black,
-                 source: :color_data_api,
+                 source: [:color_data_api],
                  closest_named_hex: "FF00FF",
                  distance_to_closest_named_hex: 0,
                  exact_name_match?: true,
@@ -87,7 +87,7 @@ defmodule ColorPalette.DataConverterTest do
       assert black.name == :black
       assert black.ansi_color_code == %ANSIColorCode{code: 16, hex: "000000", color_group: :gray_and_black, rgb: [0, 0, 0]}
       assert black.text_contrast_color == :white
-      assert black.source == :color_data_api
+      assert black.source == [:color_data_api]
       assert length(black.color_data_deprecated) == 2
     end
 
@@ -101,7 +101,7 @@ defmodule ColorPalette.DataConverterTest do
 
       assert blueberry.ansi_color_code == %ANSIColorCode{code: 69, hex: "5f87ff", color_group: :blue, rgb: [95, 135, 255]}
       assert blueberry.text_contrast_color == :black
-      assert blueberry.source == :color_data_api
+      assert blueberry.source == [:color_data_api]
 
       first_blueberry_color = blueberry.color_data_deprecated |> List.first()
 
@@ -297,7 +297,7 @@ defmodule ColorPalette.DataConverterTest do
                name: :alien_armpit,
                text_contrast_color: :black,
                ansi_color_code: %ANSIColorCode{code: 112, hex: "87d700", color_group: :green, rgb: [135, 215, 0]},
-               source: :color_name_dot_com
+               source: [:color_name_dot_com]
              }
     end
   end
@@ -317,7 +317,7 @@ defmodule ColorPalette.DataConverterTest do
                name: :alien_armpit,
                text_contrast_color: :black,
                ansi_color_code: %ANSIColorCode{code: 112, hex: "87d700", color_group: :green, rgb: [135, 215, 0]},
-               source: :color_name_dot_com,
+               source: [:color_name_dot_com],
                closest_named_hex: nil,
                distance_to_closest_named_hex: nil,
                exact_name_match?: false
@@ -340,7 +340,7 @@ defmodule ColorPalette.DataConverterTest do
                color_data_deprecated: [],
                text_contrast_color: :white,
                name: :black,
-               source: :io_ansi
+               source: [:io_ansi]
              }
     end
   end
@@ -360,7 +360,7 @@ defmodule ColorPalette.DataConverterTest do
                color_data_deprecated: [],
                text_contrast_color: :white,
                name: :black,
-               source: :io_ansi,
+               source: [:io_ansi],
                exact_name_match?: true,
                distance_to_closest_named_hex: 0,
                closest_named_hex: nil
@@ -390,7 +390,7 @@ defmodule ColorPalette.DataConverterTest do
                    color_group: :purple_violet_and_magenta
                  },
                  text_contrast_color: :white,
-                 source: :io_ansi,
+                 source: [:io_ansi],
                  closest_named_hex: nil,
                  distance_to_closest_named_hex: 0,
                  exact_name_match?: true,
@@ -406,7 +406,7 @@ defmodule ColorPalette.DataConverterTest do
                    color_group: :purple_violet_and_magenta
                  },
                  text_contrast_color: :white,
-                 source: :color_data_api,
+                 source: [:color_data_api],
                  closest_named_hex: "990066",
                  distance_to_closest_named_hex: 1981,
                  exact_name_match?: false,
@@ -422,7 +422,7 @@ defmodule ColorPalette.DataConverterTest do
                    color_group: :purple_violet_and_magenta
                  },
                  text_contrast_color: :white,
-                 source: :color_name_dot_com,
+                 source: [:color_name_dot_com],
                  closest_named_hex: nil,
                  distance_to_closest_named_hex: nil,
                  exact_name_match?: false,
@@ -438,7 +438,7 @@ defmodule ColorPalette.DataConverterTest do
                  name: :sheen_green,
                  ansi_color_code: %ColorPalette.ANSIColorCode{code: 112, hex: "87d700", rgb: [135, 215, 0], color_group: :green},
                  text_contrast_color: :black,
-                 source: :color_data_api,
+                 source: [:color_data_api],
                  closest_named_hex: "8FD400",
                  distance_to_closest_named_hex: 83,
                  exact_name_match?: false,
@@ -449,7 +449,7 @@ defmodule ColorPalette.DataConverterTest do
                  name: :alien_armpit,
                  ansi_color_code: %ColorPalette.ANSIColorCode{code: 112, hex: "87d700", rgb: [135, 215, 0], color_group: :green},
                  text_contrast_color: :black,
-                 source: :color_name_dot_com,
+                 source: [:color_name_dot_com],
                  closest_named_hex: nil,
                  distance_to_closest_named_hex: nil,
                  exact_name_match?: false,
@@ -659,7 +659,7 @@ defmodule ColorPalette.DataConverterTest do
 
       gray_949494 = with_names_backfilled |> DataConverter.find_by_hex("949494")
       assert gray_949494.name == :gray_949494
-      assert gray_949494.source == :color_data_api
+      assert gray_949494.source == [:color_data_api]
       assert gray_949494.text_contrast_color == :black
 
       assert gray_949494.ansi_color_code == %ANSIColorCode{

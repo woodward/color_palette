@@ -7,10 +7,10 @@ defmodule ColorPalette.Color do
     :name,
     :ansi_color_code,
     :text_contrast_color,
-    # :source can be one of :io_ansi, :color_name_dot_com, or :color_data_api:
-    :source,
+    # :source can be one or more of :io_ansi, :color_name_dot_com, or :color_data_api:
     :closest_named_hex,
     :distance_to_closest_named_hex,
+    source: [],
     exact_name_match?: false,
     color_data_deprecated: [],
     same_as: []
@@ -30,7 +30,7 @@ defmodule ColorPalette.Color do
       <div style="color: #{text_contrast_color}; background-color: ##{hex}; padding: 1rem;">
       Sets foreground color to <strong>#{name}</strong>.  Hex value ##{hex}.  ANSI code #{code}.
       <br />
-      #{ColorPalette.ExDocUtils.source_link(source, text_contrast_color, hex)}
+      #{ColorPalette.ExDocUtils.source_links(source, text_contrast_color, hex, name)}
       #{ColorPalette.ExDocUtils.same_as(same_as, hex, text_contrast_color)}
       #{ColorPalette.ExDocUtils.color_group_link(hex, text_contrast_color, color_group)}
       </div>
