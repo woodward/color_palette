@@ -125,6 +125,23 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  def new_convert_color_name_dot_com_raw_data(color_name_dot_com_raw_data, ansi_color_codes) do
+    Enum.zip(color_name_dot_com_raw_data, ansi_color_codes)
+    |> Enum.map(fn {raw_color, ansi_color_code} ->
+      color_name = raw_color.name |> new_color_name_to_atom()
+
+      %Color{
+        name: color_name,
+        ansi_color_code: ansi_color_code,
+        text_contrast_color: String.to_atom(raw_color.text_contrast_color),
+        source: :color_name_dot_com,
+        exact_name_match?: false,
+        distance_to_closest_named_hex: nil,
+        closest_named_hex: nil
+      }
+    end)
+  end
+
   def convert_ansi_colors_to_color_names(ansi_colors, ansi_color_codes) do
     ansi_colors
     |> Enum.reduce(%{}, fn {color_name, color_data}, acc ->

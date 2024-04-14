@@ -273,6 +273,29 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "new_convert_color_name_dot_com_raw_data" do
+    test "converts the color-name.com raw data into a list of Colors" do
+      ansi_codes = ColorPalette.ansi_color_codes()
+      color_name_dot_com_raw_data = ColorPalette.color_name_dot_com_raw_data()
+
+      colors = DataConverter.new_convert_color_name_dot_com_raw_data(color_name_dot_com_raw_data, ansi_codes)
+
+      assert length(colors) == 256
+
+      alien_armpit = colors |> Enum.at(112)
+
+      assert alien_armpit == %Color{
+               name: :alien_armpit,
+               text_contrast_color: :black,
+               ansi_color_code: %ANSIColorCode{code: 112, hex: "87d700", color_group: :green, rgb: [135, 215, 0]},
+               source: :color_name_dot_com,
+               closest_named_hex: nil,
+               distance_to_closest_named_hex: nil,
+               exact_name_match?: false
+             }
+    end
+  end
+
   describe "convert_ansi_colors_to_color_names" do
     test "works" do
       ansi_codes = ColorPalette.ansi_color_codes()
