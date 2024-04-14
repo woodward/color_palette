@@ -316,6 +316,29 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "new_convert_ansi_colors_to_color_names" do
+    test "works" do
+      ansi_codes = ColorPalette.ansi_color_codes()
+      ansi_colors = ColorPalette.new_io_ansi_color_names()
+
+      colors = DataConverter.new_convert_ansi_colors_to_color_names(ansi_colors, ansi_codes)
+
+      assert length(colors) == 16
+      black = colors |> List.first()
+
+      assert black == %Color{
+               ansi_color_code: %ANSIColorCode{code: 0, color_group: :gray_and_black, hex: "000000", rgb: [0, 0, 0]},
+               color_data_deprecated: [],
+               text_contrast_color: :white,
+               name: :black,
+               source: :io_ansi,
+               exact_name_match?: true,
+               distance_to_closest_named_hex: 0,
+               closest_named_hex: nil
+             }
+    end
+  end
+
   describe "find_duplicates/1" do
     test "annotates the colors with duplicate function names" do
       color_names = %{

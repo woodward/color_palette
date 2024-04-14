@@ -28,6 +28,26 @@ defmodule ColorPalette.PrecompileHook do
         light_white: %{code: 15, text_contrast_color: :black}
       }
 
+      @new_io_ansi_color_names [
+        %{name: :black, code: 0, text_contrast_color: :white},
+        %{name: :red, code: 1, text_contrast_color: :white},
+        %{name: :green, code: 2, text_contrast_color: :white},
+        %{name: :yellow, code: 3, text_contrast_color: :white},
+        %{name: :blue, code: 4, text_contrast_color: :white},
+        %{name: :magenta, code: 5, text_contrast_color: :white},
+        %{name: :cyan, code: 6, text_contrast_color: :white},
+        %{name: :white, code: 7, text_contrast_color: :black},
+        #
+        %{name: :light_black, code: 8, text_contrast_color: :white},
+        %{name: :light_red, code: 9, text_contrast_color: :white},
+        %{name: :light_green, code: 10, text_contrast_color: :black},
+        %{name: :light_yellow, code: 11, text_contrast_color: :black},
+        %{name: :light_blue, code: 12, text_contrast_color: :white},
+        %{name: :light_magenta, code: 13, text_contrast_color: :white},
+        %{name: :light_cyan, code: 14, text_contrast_color: :black},
+        %{name: :light_white, code: 15, text_contrast_color: :black}
+      ]
+
       @color_groups [
         :blue,
         :brown,
@@ -77,9 +97,6 @@ defmodule ColorPalette.PrecompileHook do
       @new_color_data_api_colors @color_data_api_raw_data
                                  |> DataConverter.new_convert_color_data_api_raw_data(@ansi_color_codes)
 
-      # Data good above here
-      # --------------------
-
       @color_name_dot_com_colors @color_name_dot_com_raw_data
                                  |> DataConverter.convert_color_name_dot_com_raw_data(@ansi_color_codes)
 
@@ -88,6 +105,12 @@ defmodule ColorPalette.PrecompileHook do
 
       @io_ansi_colors @io_ansi_color_names
                       |> DataConverter.convert_ansi_colors_to_color_names(@ansi_color_codes)
+
+      @new_io_ansi_colors @new_io_ansi_color_names
+                          |> DataConverter.new_convert_ansi_colors_to_color_names(@ansi_color_codes)
+
+      # Data good above here
+      # --------------------
 
       @colors_untransformed @color_data_api_colors
                             |> Map.merge(@color_name_dot_com_colors)
@@ -119,6 +142,7 @@ defmodule ColorPalette.PrecompileHook do
       def color_name_dot_com_raw_data, do: @color_name_dot_com_raw_data
       def colors, do: @colors
       def io_ansi_color_names, do: @io_ansi_color_names
+      def new_io_ansi_color_names, do: @new_io_ansi_color_names
       def color_data_api_colors, do: @color_data_api_colors
       def color_data_api_raw_data, do: @color_data_api_raw_data
       def colors_untransformed, do: @colors_untransformed
