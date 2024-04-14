@@ -138,22 +138,22 @@ defmodule ColorPalette.PrecompileHook do
         end
       end)
 
+      def color_groups_to_ansi_color_codes, do: @color_groups_to_ansi_color_codes
+      def colors, do: @colors
+      def color_data_api_colors, do: @color_data_api_colors
+      def color_data_api_raw_data, do: @color_data_api_raw_data
+      def colors_untransformed, do: @colors_untransformed
+      def io_ansi_color_names, do: @io_ansi_color_names
+
+      def color_groups, do: @color_groups
       def ansi_color_codes, do: @ansi_color_codes
       def color_data_api_raw_data, do: @color_data_api_raw_data
-      def color_groups_to_ansi_color_codes, do: @color_groups_to_ansi_color_codes
-      def color_groups, do: @color_groups
       def color_name_dot_com_raw_data, do: @color_name_dot_com_raw_data
-      def colors, do: @colors
-      def io_ansi_color_names, do: @io_ansi_color_names
       def new_io_ansi_colors, do: @new_io_ansi_colors
       def new_io_ansi_color_names, do: @new_io_ansi_color_names
       def new_color_name_dot_com_colors, do: @new_color_name_dot_com_colors
       def new_color_data_api_colors, do: @new_color_data_api_colors
-      def new_color_data_api_colors, do: @new_color_data_api_colors
       def new_all_colors, do: @new_all_colors
-      def color_data_api_colors, do: @color_data_api_colors
-      def color_data_api_raw_data, do: @color_data_api_raw_data
-      def colors_untransformed, do: @colors_untransformed
       def new_color_names_to_colors, do: @new_color_names_to_colors
     end
   end
