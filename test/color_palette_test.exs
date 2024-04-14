@@ -222,7 +222,10 @@ defmodule ColorPaletteTest do
                name: :very_light_blue,
                same_as: [],
                source: :color_name_dot_com,
-               text_contrast_color: :white
+               text_contrast_color: :white,
+               closest_named_hex: nil,
+               distance_to_closest_named_hex: nil,
+               exact_name_match?: false
              }
     end
   end
@@ -237,7 +240,10 @@ defmodule ColorPaletteTest do
                name: :very_light_blue,
                same_as: [],
                source: :color_name_dot_com,
-               text_contrast_color: :white
+               text_contrast_color: :white,
+               closest_named_hex: nil,
+               distance_to_closest_named_hex: nil,
+               exact_name_match?: false
              }
     end
   end

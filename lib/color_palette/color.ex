@@ -9,6 +9,9 @@ defmodule ColorPalette.Color do
     :text_contrast_color,
     # :source can be one of :io_ansi, :color_name_dot_com, or :color_data_api:
     :source,
+    :closest_named_hex,
+    :distance_to_closest_named_hex,
+    exact_name_match?: false,
     color_data_deprecated: [],
     same_as: []
   ]
