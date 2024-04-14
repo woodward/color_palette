@@ -151,14 +151,14 @@ defmodule ColorPalette.DataConverter do
     end
   end
 
+  def find_by_code(_color_names, code) when code < 0 or code > 255 do
+    {:error, "Code #{code} is not valid"}
+  end
+
   def find_by_code(color_names, code) do
-    if code < 0 || code > 256 do
-      {:error, "Code #{code} is not valid"}
-    else
-      color_names
-      |> Enum.find(fn {_color_name, color} -> color.ansi_color_code.code == code end)
-      |> elem(1)
-    end
+    color_names
+    |> Enum.find(fn {_color_name, color} -> color.ansi_color_code.code == code end)
+    |> elem(1)
   end
 
   def unnamed_ansi_color_codes(ansi_color_codes, colors) do
