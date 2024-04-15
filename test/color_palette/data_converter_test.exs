@@ -339,12 +339,12 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "convert_ansi_colors_to_color_names" do
+  describe "convert_ansi_colors_to_colors" do
     test "works" do
       ansi_codes = ColorPalette.ansi_color_codes()
       ansi_colors = ColorPalette.new_io_ansi_color_names()
 
-      colors = DataConverter.convert_ansi_colors_to_color_names(ansi_colors, ansi_codes)
+      colors = DataConverter.convert_ansi_colors_to_colors(ansi_colors, ansi_codes)
 
       assert length(colors) == 16
       black = colors |> List.first()

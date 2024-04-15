@@ -48,6 +48,21 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  def convert_ansi_colors_to_colors(ansi_colors, ansi_color_codes) do
+    Enum.zip(ansi_colors, ansi_color_codes)
+    |> Enum.map(fn {ansi_color, ansi_color_code} ->
+      %Color{
+        name: ansi_color.name,
+        text_contrast_color: ansi_color.text_contrast_color,
+        ansi_color_code: ansi_color_code,
+        source: [:io_ansi],
+        closest_named_hex: nil,
+        exact_name_match?: true,
+        distance_to_closest_named_hex: 0
+      }
+    end)
+  end
+
   def color_groups_to_ansi_color_codes(ansi_color_codes, color_groups) do
     color_groups_to_ansi_color_codes =
       color_groups
@@ -120,21 +135,6 @@ defmodule ColorPalette.DataConverter do
       else
         Map.update(acc, color.name, [color], fn value -> [color] ++ value end)
       end
-    end)
-  end
-
-  def convert_ansi_colors_to_color_names(ansi_colors, ansi_color_codes) do
-    Enum.zip(ansi_colors, ansi_color_codes)
-    |> Enum.map(fn {ansi_color, ansi_color_code} ->
-      %Color{
-        name: ansi_color.name,
-        text_contrast_color: ansi_color.text_contrast_color,
-        ansi_color_code: ansi_color_code,
-        source: [:io_ansi],
-        closest_named_hex: nil,
-        exact_name_match?: true,
-        distance_to_closest_named_hex: 0
-      }
     end)
   end
 
