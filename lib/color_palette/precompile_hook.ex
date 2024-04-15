@@ -137,7 +137,6 @@ defmodule ColorPalette.PrecompileHook do
 
       def color_groups, do: @color_groups
       def ansi_color_codes, do: @ansi_color_codes
-      def color_data_api_raw_data, do: @color_data_api_raw_data
       def color_name_dot_com_raw_data, do: @color_name_dot_com_raw_data
 
       def io_ansi_colors, do: @io_ansi_colors
