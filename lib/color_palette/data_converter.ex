@@ -69,7 +69,7 @@ defmodule ColorPalette.DataConverter do
     end
   end
 
-  def new_group_colors_by_name(colors) do
+  def group_colors_by_name(colors) do
     colors
     |> Enum.map(fn colors_for_code ->
       colors_for_code = colors_for_code |> List.flatten()

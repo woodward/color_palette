@@ -74,7 +74,7 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "new_group_colors_by_name" do
+  describe "group_colors_by_name" do
     test "groups colors by name" do
       colors = [
         [
@@ -133,7 +133,7 @@ defmodule ColorPalette.DataConverterTest do
         ]
       ]
 
-      grouped = DataConverter.new_group_colors_by_name(colors)
+      grouped = DataConverter.group_colors_by_name(colors)
 
       assert grouped == [
                [

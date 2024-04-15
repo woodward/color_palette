@@ -98,7 +98,7 @@ defmodule ColorPalette.PrecompileHook do
                         @new_color_name_dot_com_colors
                       )
 
-      @new_colors_grouped_by_name @new_all_colors |> DataConverter.new_group_colors_by_name()
+      @new_colors_grouped_by_name @new_all_colors |> DataConverter.group_colors_by_name()
 
       @color_names_to_colors @new_colors_grouped_by_name
                              |> List.flatten()
