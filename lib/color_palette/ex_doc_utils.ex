@@ -22,8 +22,12 @@ defmodule ColorPalette.ExDocUtils do
   end
 
   def source_links(sources, text_contrast_color, hex, name) do
+    source_span = """
+    <span style="margin-right: 2rem;"> Source: </span>
+    """
+
     sources
-    |> Enum.reduce("", fn source, acc ->
+    |> Enum.reduce(source_span, fn source, acc ->
       acc <> source_link(source, text_contrast_color, hex, name)
     end)
   end
@@ -32,7 +36,7 @@ defmodule ColorPalette.ExDocUtils do
     url = ColorPalette.DataURLs.url(source, hex: hex, name: name)
 
     """
-    <a style="color: #{text_contrast_color}; background-color: ##{hex}; padding-right: 2rem;" href="#{url}">Source: #{source_name(source)}</a>
+    <a style="color: #{text_contrast_color}; background-color: ##{hex}; padding-right: 2rem;" href="#{url}">#{source_name(source)}</a>
     """
   end
 
