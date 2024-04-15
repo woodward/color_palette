@@ -119,9 +119,6 @@ defmodule ColorPalette.PrecompileHook do
                                         end)
                                         |> Enum.into(%{})
 
-      # Data good above here
-      # --------------------
-
       @colors_untransformed @color_data_api_colors
                             |> Map.merge(@color_name_dot_com_colors)
                             |> Map.merge(@io_ansi_colors)
@@ -131,7 +128,12 @@ defmodule ColorPalette.PrecompileHook do
               |> DataConverter.find_duplicates_deprecated()
               |> DataConverter.clear_out_color_data_deprecated()
 
-      @colors
+      @missing_colors @new_unique_color_names_to_colors |> DataConverter.new_unnamed_ansi_color_codes()
+      @new_colors_missing_names DataConverter.create_names_for_missing_colors(@new_all_colors, @missing_colors)
+      @new_all_colors_final @new_unique_color_names_to_colors |> Map.merge(@new_colors_missing_names)
+
+      @new_all_colors_final
+      # @colors
       |> Enum.each(fn {color_name, color} ->
         hex = color.ansi_color_code.hex
         color_group = color.ansi_color_code.color_group
@@ -164,6 +166,10 @@ defmodule ColorPalette.PrecompileHook do
       def new_color_names_to_colors, do: @new_color_names_to_colors
       def new_colors_grouped_by_name, do: @new_colors_grouped_by_name
       def new_unique_color_names_to_colors, do: @new_unique_color_names_to_colors
+
+      def missing_colors, do: @missing_colors
+      def new_colors_missing_names, do: @new_colors_missing_names
+      def new_all_colors_final, do: @new_all_colors_final
     end
   end
 end

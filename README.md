@@ -21,7 +21,7 @@ Documentation can be found [here](https://hexdocs.pm/color_palette/readme.html) 
 
 ## Usage
 
-This hex package adds 383 additional named colors to use in Elixir terminal scripts, based on 
+This hex package adds 396 additional named colors to use in Elixir terminal scripts, based on 
 the 256 ANSI color code sequences (so some of the color names are duplicates and reference the same color).  
 Note that some of the colors are approximations, as the color space for the ANSI color codes is rather 
 limited (it's 8 bit).  The values were obtained by accessing [TheColorAPI](https://www.thecolorapi.com/) and 
