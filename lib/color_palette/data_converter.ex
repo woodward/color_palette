@@ -123,7 +123,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  def new_convert_ansi_colors_to_color_names(ansi_colors, ansi_color_codes) do
+  def convert_ansi_colors_to_color_names(ansi_colors, ansi_color_codes) do
     Enum.zip(ansi_colors, ansi_color_codes)
     |> Enum.map(fn {ansi_color, ansi_color_code} ->
       %Color{
