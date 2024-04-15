@@ -69,13 +69,6 @@ defmodule ColorPalette.DataConverter do
     end
   end
 
-  def deprecated_add_ansi_code_to_colors(ansi_color_codes, color_data) do
-    Enum.zip(ansi_color_codes, color_data)
-    |> Enum.map(fn {ansi_color_code, color_datum} ->
-      Map.merge(color_datum, %{ansi_color_code: ansi_color_code})
-    end)
-  end
-
   def new_group_colors_by_name(colors) do
     colors
     |> Enum.map(fn colors_for_code ->
