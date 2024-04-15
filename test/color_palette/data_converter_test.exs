@@ -204,33 +204,33 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "new_color_name_to_atom" do
+  describe "color_name_to_atom" do
     test "converts a color name to an atom" do
-      assert DataConverter.new_color_name_to_atom("Black") == :black
+      assert DataConverter.color_name_to_atom("Black") == :black
     end
 
     test "snake cases multi-word colors" do
-      assert DataConverter.new_color_name_to_atom("Rose of Sharon") == :rose_of_sharon
+      assert DataConverter.color_name_to_atom("Rose of Sharon") == :rose_of_sharon
     end
 
     test "works for colors with apostrophes" do
-      assert DataConverter.new_color_name_to_atom("Screamin' Green") == :screamin_green
+      assert DataConverter.color_name_to_atom("Screamin' Green") == :screamin_green
     end
 
     test "works for colors with dashes" do
-      assert DataConverter.new_color_name_to_atom("Yellow-Green") == :yellow_green
+      assert DataConverter.color_name_to_atom("Yellow-Green") == :yellow_green
     end
 
     test "returns two colors if a slash" do
-      assert DataConverter.new_color_name_to_atom("Magenta / Fuchsia") == [:magenta, :fuchsia]
+      assert DataConverter.color_name_to_atom("Magenta / Fuchsia") == [:magenta, :fuchsia]
     end
 
     test "gets rid of content in parens" do
-      assert DataConverter.new_color_name_to_atom("Gold (Web)") == :gold
+      assert DataConverter.color_name_to_atom("Gold (Web)") == :gold
     end
 
     test "drops the é on :tenné" do
-      assert DataConverter.new_color_name_to_atom("Tenné") == :tenn
+      assert DataConverter.color_name_to_atom("Tenné") == :tenn
     end
   end
 

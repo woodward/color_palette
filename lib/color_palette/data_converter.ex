@@ -6,7 +6,7 @@ defmodule ColorPalette.DataConverter do
   def convert_color_data_api_raw_data(color_data, ansi_color_codes) do
     Enum.zip(color_data, ansi_color_codes)
     |> Enum.map(fn {raw_color, ansi_color_code} ->
-      name = raw_color.name.value |> new_color_name_to_atom()
+      name = raw_color.name.value |> color_name_to_atom()
       names = if is_list(name), do: name, else: [name]
 
       colors =
@@ -45,7 +45,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  def new_color_name_to_atom(name) do
+  def color_name_to_atom(name) do
     names =
       name
       |> String.downcase()
@@ -95,7 +95,7 @@ defmodule ColorPalette.DataConverter do
   def convert_color_name_dot_com_raw_data(color_name_dot_com_raw_data, ansi_color_codes) do
     Enum.zip(color_name_dot_com_raw_data, ansi_color_codes)
     |> Enum.map(fn {raw_color, ansi_color_code} ->
-      color_name = raw_color.name |> new_color_name_to_atom()
+      color_name = raw_color.name |> color_name_to_atom()
 
       %Color{
         name: color_name,
@@ -204,7 +204,7 @@ defmodule ColorPalette.DataConverter do
     missing_names
     |> Enum.reduce(%{}, fn code, acc ->
       color = all_colors |> Enum.at(code) |> List.first()
-      rename = new_color_name_to_atom("#{color.name}_#{color.ansi_color_code.hex}")
+      rename = color_name_to_atom("#{color.name}_#{color.ansi_color_code.hex}")
       renamed_color = %{color | name: rename}
       Map.put(acc, rename, renamed_color)
     end)
