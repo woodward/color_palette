@@ -95,9 +95,6 @@ defmodule ColorPalette.PrecompileHook do
       @new_color_name_dot_com_colors @color_name_dot_com_raw_data
                                      |> DataConverter.new_convert_color_name_dot_com_raw_data(@ansi_color_codes)
 
-      @io_ansi_colors @io_ansi_color_names
-                      |> DataConverter.convert_ansi_colors_to_color_names(@ansi_color_codes)
-
       @new_io_ansi_colors @new_io_ansi_color_names
                           |> DataConverter.new_convert_ansi_colors_to_color_names(@ansi_color_codes)
 
@@ -138,7 +135,6 @@ defmodule ColorPalette.PrecompileHook do
       end)
 
       def color_groups_to_ansi_color_codes, do: @color_groups_to_ansi_color_codes
-      # def colors, do: @colors
       def color_data_api_colors, do: @color_data_api_colors
       def color_data_api_raw_data, do: @color_data_api_raw_data
       def io_ansi_color_names, do: @io_ansi_color_names
