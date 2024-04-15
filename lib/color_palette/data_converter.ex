@@ -89,22 +89,6 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  def convert_color_name_dot_com_raw_data(color_name_dot_com_raw_data, ansi_color_codes) do
-    deprecated_add_ansi_code_to_colors(ansi_color_codes, color_name_dot_com_raw_data)
-    |> Enum.reduce(%{}, fn color_data, acc ->
-      color_name = color_data.name |> color_name_to_atom() |> List.first()
-
-      color = %Color{
-        name: color_name,
-        ansi_color_code: color_data.ansi_color_code,
-        text_contrast_color: String.to_atom(color_data.text_contrast_color),
-        source: [:color_name_dot_com]
-      }
-
-      Map.put(acc, color_name, color)
-    end)
-  end
-
   def new_group_colors_by_name(colors) do
     colors
     |> Enum.map(fn colors_for_code ->
