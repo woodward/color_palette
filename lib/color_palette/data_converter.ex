@@ -92,7 +92,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  def new_convert_color_name_dot_com_raw_data(color_name_dot_com_raw_data, ansi_color_codes) do
+  def convert_color_name_dot_com_raw_data(color_name_dot_com_raw_data, ansi_color_codes) do
     Enum.zip(color_name_dot_com_raw_data, ansi_color_codes)
     |> Enum.map(fn {raw_color, ansi_color_code} ->
       color_name = raw_color.name |> new_color_name_to_atom()

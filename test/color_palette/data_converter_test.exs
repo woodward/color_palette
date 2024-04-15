@@ -316,12 +316,12 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "new_convert_color_name_dot_com_raw_data" do
+  describe "convert_color_name_dot_com_raw_data" do
     test "converts the color-name.com raw data into a list of Colors" do
       ansi_codes = ColorPalette.ansi_color_codes()
       color_name_dot_com_raw_data = ColorPalette.color_name_dot_com_raw_data()
 
-      colors = DataConverter.new_convert_color_name_dot_com_raw_data(color_name_dot_com_raw_data, ansi_codes)
+      colors = DataConverter.convert_color_name_dot_com_raw_data(color_name_dot_com_raw_data, ansi_codes)
 
       assert length(colors) == 256
 
