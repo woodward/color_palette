@@ -186,24 +186,24 @@ defmodule ColorPaletteTest do
     test "returns the correct color code for one of the IO.ANSI color names" do
       io_ansi_name_to_code = ColorPalette.io_ansi_color_names()
 
-      assert io_ansi_name_to_code == %{
-               black: %{code: 0, text_contrast_color: :white},
-               blue: %{code: 4, text_contrast_color: :white},
-               cyan: %{code: 6, text_contrast_color: :white},
-               green: %{code: 2, text_contrast_color: :white},
-               magenta: %{code: 5, text_contrast_color: :white},
-               red: %{code: 1, text_contrast_color: :white},
-               white: %{code: 7, text_contrast_color: :black},
-               yellow: %{code: 3, text_contrast_color: :white},
-               light_black: %{code: 8, text_contrast_color: :white},
-               light_blue: %{code: 12, text_contrast_color: :white},
-               light_cyan: %{code: 14, text_contrast_color: :black},
-               light_green: %{code: 10, text_contrast_color: :black},
-               light_magenta: %{code: 13, text_contrast_color: :white},
-               light_red: %{code: 9, text_contrast_color: :white},
-               light_white: %{code: 15, text_contrast_color: :black},
-               light_yellow: %{code: 11, text_contrast_color: :black}
-             }
+      assert io_ansi_name_to_code == [
+               %{code: 0, name: :black, text_contrast_color: :white},
+               %{code: 1, name: :red, text_contrast_color: :white},
+               %{code: 2, name: :green, text_contrast_color: :white},
+               %{code: 3, name: :yellow, text_contrast_color: :white},
+               %{code: 4, name: :blue, text_contrast_color: :white},
+               %{code: 5, name: :magenta, text_contrast_color: :white},
+               %{code: 6, name: :cyan, text_contrast_color: :white},
+               %{code: 7, name: :white, text_contrast_color: :black},
+               %{code: 8, name: :light_black, text_contrast_color: :white},
+               %{code: 9, name: :light_red, text_contrast_color: :white},
+               %{code: 10, name: :light_green, text_contrast_color: :black},
+               %{code: 11, name: :light_yellow, text_contrast_color: :black},
+               %{code: 12, name: :light_blue, text_contrast_color: :white},
+               %{code: 13, name: :light_magenta, text_contrast_color: :white},
+               %{code: 14, name: :light_cyan, text_contrast_color: :black},
+               %{code: 15, name: :light_white, text_contrast_color: :black}
+             ]
     end
   end
 

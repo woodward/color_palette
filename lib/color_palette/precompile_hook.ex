@@ -8,37 +8,17 @@ defmodule ColorPalette.PrecompileHook do
 
   defmacro __before_compile__(_env) do
     quote do
-      @io_ansi_color_names %{
-        black: %{code: 0, text_contrast_color: :white},
-        red: %{code: 1, text_contrast_color: :white},
-        green: %{code: 2, text_contrast_color: :white},
-        yellow: %{code: 3, text_contrast_color: :white},
-        blue: %{code: 4, text_contrast_color: :white},
-        magenta: %{code: 5, text_contrast_color: :white},
-        cyan: %{code: 6, text_contrast_color: :white},
-        white: %{code: 7, text_contrast_color: :black},
-        #
-        light_black: %{code: 8, text_contrast_color: :white},
-        light_red: %{code: 9, text_contrast_color: :white},
-        light_green: %{code: 10, text_contrast_color: :black},
-        light_yellow: %{code: 11, text_contrast_color: :black},
-        light_blue: %{code: 12, text_contrast_color: :white},
-        light_magenta: %{code: 13, text_contrast_color: :white},
-        light_cyan: %{code: 14, text_contrast_color: :black},
-        light_white: %{code: 15, text_contrast_color: :black}
-      }
-
-      @new_io_ansi_color_names __DIR__
-                               |> Path.join("color_palette/data/ansi_color_names.json")
-                               |> File.read!()
-                               |> Jason.decode!(keys: :atoms)
-                               |> Enum.map(
-                                 &%{
-                                   &1
-                                   | name: String.to_atom(&1.name),
-                                     text_contrast_color: String.to_atom(&1.text_contrast_color)
-                                 }
-                               )
+      @io_ansi_color_names __DIR__
+                           |> Path.join("color_palette/data/ansi_color_names.json")
+                           |> File.read!()
+                           |> Jason.decode!(keys: :atoms)
+                           |> Enum.map(
+                             &%{
+                               &1
+                               | name: String.to_atom(&1.name),
+                                 text_contrast_color: String.to_atom(&1.text_contrast_color)
+                             }
+                           )
 
       @color_groups [
         :blue,
@@ -89,7 +69,7 @@ defmodule ColorPalette.PrecompileHook do
       @color_name_dot_com_colors @color_name_dot_com_raw_data
                                  |> DataConverter.convert_color_name_dot_com_raw_data(@ansi_color_codes)
 
-      @io_ansi_colors @new_io_ansi_color_names
+      @io_ansi_colors @io_ansi_color_names
                       |> DataConverter.convert_ansi_colors_to_colors(@ansi_color_codes)
 
       @all_colors DataConverter.combine_colors(
@@ -133,14 +113,13 @@ defmodule ColorPalette.PrecompileHook do
 
       def color_groups_to_ansi_color_codes, do: @color_groups_to_ansi_color_codes
       def color_data_api_raw_data, do: @color_data_api_raw_data
-      def io_ansi_color_names, do: @io_ansi_color_names
 
       def color_groups, do: @color_groups
       def ansi_color_codes, do: @ansi_color_codes
       def color_name_dot_com_raw_data, do: @color_name_dot_com_raw_data
 
       def io_ansi_colors, do: @io_ansi_colors
-      def new_io_ansi_color_names, do: @new_io_ansi_color_names
+      def io_ansi_color_names, do: @io_ansi_color_names
       def color_name_dot_com_colors, do: @color_name_dot_com_colors
       def color_data_api_colors, do: @color_data_api_colors
       def all_colors, do: @all_colors
