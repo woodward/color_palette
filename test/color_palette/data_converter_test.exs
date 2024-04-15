@@ -189,61 +189,6 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "annotate" do
-    test "adds color names and text_contrast_color to ansi color codes" do
-      color_codes = ColorPalette.ansi_color_codes()
-      color_data = ColorPalette.color_data_api_raw_data()
-      colors = DataConverter.convert_color_data_api_raw_data(color_data, color_codes)
-
-      black = colors.black
-
-      assert black.name == :black
-      assert black.ansi_color_code == %ANSIColorCode{code: 16, hex: "000000", color_group: :gray_and_black, rgb: [0, 0, 0]}
-      assert black.text_contrast_color == :white
-      assert black.source == [:color_data_api]
-      assert length(black.color_data_deprecated) == 2
-    end
-
-    test "sorts colors based on their distance" do
-      color_codes = ColorPalette.ansi_color_codes()
-      color_data = ColorPalette.color_data_api_raw_data()
-      colors = DataConverter.convert_color_data_api_raw_data(color_data, color_codes)
-
-      blueberry = colors.blueberry
-      assert length(blueberry.color_data_deprecated) == 5
-
-      assert blueberry.ansi_color_code == %ANSIColorCode{code: 69, hex: "5f87ff", color_group: :blue, rgb: [95, 135, 255]}
-      assert blueberry.text_contrast_color == :black
-      assert blueberry.source == [:color_data_api]
-
-      first_blueberry_color = blueberry.color_data_deprecated |> List.first()
-
-      assert first_blueberry_color.ansi_color_code == %ANSIColorCode{
-               code: 69,
-               hex: "5f87ff",
-               color_group: :blue,
-               rgb: [95, 135, 255]
-             }
-
-      assert first_blueberry_color.name.distance == 1685
-      assert first_blueberry_color.hex.value == "#5F87FF"
-
-      last_blueberry_color = blueberry.color_data_deprecated |> List.last()
-
-      assert last_blueberry_color.ansi_color_code == %ANSIColorCode{
-               code: 99,
-               hex: "875fff",
-               color_group: :purple_violet_and_magenta,
-               rgb: [135, 95, 255]
-             }
-
-      assert last_blueberry_color.name.distance == 7219
-
-      distances = blueberry.color_data_deprecated |> Enum.map(& &1.name.distance)
-      assert distances == [1685, 3475, 3579, 6609, 7219]
-    end
-  end
-
   describe "color_groups_to_ansi_color_codes" do
     test "collates the ansi color codes by color group" do
       ansi_color_codes = [
@@ -392,26 +337,6 @@ defmodule ColorPalette.DataConverterTest do
 
       result = DataConverter.find_by_code(colors, 257)
       assert result == {:error, "Code 257 is not valid"}
-    end
-  end
-
-  describe "convert_color_data_api_raw_data_color_name_dot_com_raw_data" do
-    test "converts the color-name.com data into a map" do
-      ansi_codes = ColorPalette.ansi_color_codes()
-      color_name_dot_com_raw_data = ColorPalette.color_name_dot_com_raw_data()
-
-      color_data = DataConverter.convert_color_name_dot_com_raw_data(color_name_dot_com_raw_data, ansi_codes)
-
-      assert Map.keys(color_data) |> length() == 225
-
-      alien_armpit = color_data.alien_armpit
-
-      assert alien_armpit == %Color{
-               name: :alien_armpit,
-               text_contrast_color: :black,
-               ansi_color_code: %ANSIColorCode{code: 112, hex: "87d700", color_group: :green, rgb: [135, 215, 0]},
-               source: [:color_name_dot_com]
-             }
     end
   end
 

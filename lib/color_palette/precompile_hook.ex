@@ -83,9 +83,6 @@ defmodule ColorPalette.PrecompileHook do
                                    |> File.read!()
                                    |> Jason.decode!(keys: :atoms)
 
-      @color_data_api_colors @color_data_api_raw_data
-                             |> DataConverter.convert_color_data_api_raw_data(@ansi_color_codes)
-
       @new_color_data_api_colors @color_data_api_raw_data
                                  |> DataConverter.new_convert_color_data_api_raw_data(@ansi_color_codes)
 
@@ -135,7 +132,6 @@ defmodule ColorPalette.PrecompileHook do
       end)
 
       def color_groups_to_ansi_color_codes, do: @color_groups_to_ansi_color_codes
-      def color_data_api_colors, do: @color_data_api_colors
       def color_data_api_raw_data, do: @color_data_api_raw_data
       def io_ansi_color_names, do: @io_ansi_color_names
 

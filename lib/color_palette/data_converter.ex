@@ -3,34 +3,6 @@ defmodule ColorPalette.DataConverter do
 
   alias ColorPalette.Color
 
-  def convert_color_data_api_raw_data(color_data, ansi_color_codes) do
-    ansi_color_codes
-    |> deprecated_add_ansi_code_to_colors(color_data)
-    |> Enum.reduce(%{}, fn color_data, acc ->
-      names = color_data.name.value |> color_name_to_atom()
-
-      names
-      |> Enum.reduce(acc, fn name, acc ->
-        Map.update(acc, name, [color_data], fn colors -> [color_data | colors] end)
-      end)
-    end)
-    |> Enum.map(fn {name, colors} ->
-      sorted_colors = colors |> Enum.sort_by(& &1.name.distance)
-      first_color = sorted_colors |> List.first()
-
-      color = %Color{
-        name: name,
-        color_data_deprecated: sorted_colors,
-        ansi_color_code: first_color.ansi_color_code,
-        text_contrast_color: text_contrast_color(first_color),
-        source: [:color_data_api]
-      }
-
-      {name, color}
-    end)
-    |> Enum.into(%{})
-  end
-
   def new_convert_color_data_api_raw_data(color_data, ansi_color_codes) do
     Enum.zip(color_data, ansi_color_codes)
     |> Enum.map(fn {raw_color, ansi_color_code} ->
