@@ -339,25 +339,6 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "convert_ansi_colors_to_color_names" do
-    test "works" do
-      ansi_codes = ColorPalette.ansi_color_codes()
-      ansi_colors = ColorPalette.io_ansi_color_names()
-
-      color_names = DataConverter.convert_ansi_colors_to_color_names(ansi_colors, ansi_codes)
-
-      assert Map.keys(color_names) |> length() == 16
-      black = color_names.black
-
-      assert black == %Color{
-               ansi_color_code: %ANSIColorCode{code: 0, color_group: :gray_and_black, hex: "000000", rgb: [0, 0, 0]},
-               text_contrast_color: :white,
-               name: :black,
-               source: [:io_ansi]
-             }
-    end
-  end
-
   describe "new_convert_ansi_colors_to_color_names" do
     test "works" do
       ansi_codes = ColorPalette.ansi_color_codes()

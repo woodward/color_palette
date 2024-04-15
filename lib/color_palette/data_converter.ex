@@ -109,20 +109,6 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  def convert_ansi_colors_to_color_names(ansi_colors, ansi_color_codes) do
-    ansi_colors
-    |> Enum.reduce(%{}, fn {color_name, color_data}, acc ->
-      ansi_color_code = ansi_color_codes |> Enum.find(&(&1.code == color_data.code))
-
-      Map.put(acc, color_name, %Color{
-        name: color_name,
-        text_contrast_color: color_data.text_contrast_color,
-        ansi_color_code: ansi_color_code,
-        source: [:io_ansi]
-      })
-    end)
-  end
-
   def color_names_to_colors(colors) do
     colors
     |> Enum.reduce(%{}, fn color, acc ->
