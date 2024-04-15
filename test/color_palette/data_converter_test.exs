@@ -590,20 +590,6 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "io_ansi_colors_with_no_names" do
-    test "returns a list of IO ansi color codes without a name" do
-      colors = %{
-        black1: %Color{ansi_color_code: %ANSIColorCode{code: 1}},
-        black2: %Color{ansi_color_code: %ANSIColorCode{code: 1}},
-        some_other_color: %Color{ansi_color_code: %ANSIColorCode{code: 2}}
-      }
-
-      ansi_color_codes = [%ANSIColorCode{code: 1}, %ANSIColorCode{code: 2}, %ANSIColorCode{code: 3}]
-      color_codes_with_no_names = DataConverter.unnamed_ansi_color_codes(ansi_color_codes, colors)
-      assert color_codes_with_no_names == [%ANSIColorCode{code: 3}]
-    end
-  end
-
   describe "new_unnamed_ansi_color_codes" do
     test "returns a list of IO ansi color codes without a name" do
       colors = ColorPalette.unique_color_names_to_colors()
