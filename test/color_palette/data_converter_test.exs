@@ -802,34 +802,4 @@ defmodule ColorPalette.DataConverterTest do
              }
     end
   end
-
-  describe "backfill_missing_names/3" do
-    test "gets other color names for codes which do not have a name" do
-      ansi_color_codes = ColorPalette.ansi_color_codes()
-      color_names = ColorPalette.colors_untransformed()
-      color_data_api_raw_data = ColorPalette.color_data_api_raw_data()
-
-      unnamed_ansi_color_codes = DataConverter.unnamed_ansi_color_codes(ansi_color_codes, color_names)
-      assert length(unnamed_ansi_color_codes) == 21
-      last_unnamed = unnamed_ansi_color_codes |> Enum.sort_by(& &1.code) |> List.last()
-      assert last_unnamed == %ANSIColorCode{code: 246, color_group: :gray_and_black, hex: "949494", rgb: [148, 148, 148]}
-
-      with_names_backfilled = DataConverter.backfill_missing_names(color_names, ansi_color_codes, color_data_api_raw_data)
-
-      unnamed_ansi_color_codes_after_backfill = DataConverter.unnamed_ansi_color_codes(ansi_color_codes, with_names_backfilled)
-      assert length(unnamed_ansi_color_codes_after_backfill) == 0
-
-      gray_949494 = with_names_backfilled |> DataConverter.find_by_hex("949494")
-      assert gray_949494.name == :gray_949494
-      assert gray_949494.source == [:color_data_api]
-      assert gray_949494.text_contrast_color == :black
-
-      assert gray_949494.ansi_color_code == %ANSIColorCode{
-               code: 246,
-               color_group: :gray_and_black,
-               hex: "949494",
-               rgb: [148, 148, 148]
-             }
-    end
-  end
 end

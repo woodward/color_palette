@@ -320,26 +320,4 @@ defmodule ColorPalette.DataConverter do
       Map.put(acc, rename, renamed_color)
     end)
   end
-
-  def backfill_missing_names(color_names, ansi_color_codes, color_data_api_colors) do
-    unnamed_ansi_color_codes = unnamed_ansi_color_codes(ansi_color_codes, color_names)
-
-    unnamed_ansi_color_codes
-    |> Enum.reduce(color_names, fn unnamed_ansi_color_code, acc ->
-      missing_code = unnamed_ansi_color_code.code
-      {raw_data, _rest} = List.pop_at(color_data_api_colors, missing_code)
-      name = raw_data.name.value
-      hex = raw_data.hex.clean
-      rename = color_name_to_atom("#{name}_#{hex}") |> List.first()
-
-      color = %Color{
-        name: rename,
-        ansi_color_code: unnamed_ansi_color_code,
-        source: [:color_data_api],
-        text_contrast_color: text_contrast_color(raw_data)
-      }
-
-      Map.put(acc, rename, color)
-    end)
-  end
 end
