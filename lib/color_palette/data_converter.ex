@@ -45,19 +45,6 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  def color_name_to_atom(name) do
-    name
-    |> String.downcase()
-    |> String.replace(~r/\(.*\)/, "")
-    |> String.replace(~r/é/, "")
-    |> String.split("/")
-    |> Enum.map(&String.trim(&1))
-    |> Enum.map(&String.replace(&1, " ", "_"))
-    |> Enum.map(&String.replace(&1, "'", ""))
-    |> Enum.map(&String.replace(&1, "-", "_"))
-    |> Enum.map(&String.to_atom(&1))
-  end
-
   def new_color_name_to_atom(name) do
     names =
       name
@@ -246,7 +233,7 @@ defmodule ColorPalette.DataConverter do
     missing_names
     |> Enum.reduce(%{}, fn code, acc ->
       color = all_colors |> Enum.at(code) |> List.first()
-      rename = color_name_to_atom("#{color.name}_#{color.ansi_color_code.hex}") |> List.first()
+      rename = new_color_name_to_atom("#{color.name}_#{color.ansi_color_code.hex}")
       renamed_color = %{color | name: rename}
       Map.put(acc, rename, renamed_color)
     end)
