@@ -311,6 +311,16 @@ defmodule ColorPalette.DataConverter do
     MapSet.difference(ansi_color_code_set, color_set) |> MapSet.to_list() |> Enum.sort()
   end
 
+  def create_names_for_missing_colors(all_colors, missing_names) do
+    missing_names
+    |> Enum.reduce(%{}, fn code, acc ->
+      color = all_colors |> Enum.at(code) |> List.first()
+      rename = color_name_to_atom("#{color.name}_#{color.ansi_color_code.hex}") |> List.first()
+      renamed_color = %{color | name: rename}
+      Map.put(acc, rename, renamed_color)
+    end)
+  end
+
   def backfill_missing_names(color_names, ansi_color_codes, color_data_api_colors) do
     unnamed_ansi_color_codes = unnamed_ansi_color_codes(ansi_color_codes, color_names)
 

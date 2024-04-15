@@ -770,6 +770,39 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "create_names_for_missing_colors/2" do
+    test "creates some fake color names for colors which are missing names" do
+      all_colors = ColorPalette.new_all_colors()
+      missing_names = [22, 33]
+      new_names = DataConverter.create_names_for_missing_colors(all_colors, missing_names)
+
+      assert new_names == %{
+               azure_radiance_0087ff: %Color{
+                 name: :azure_radiance_0087ff,
+                 ansi_color_code: %ANSIColorCode{code: 33, hex: "0087ff", rgb: [0, 135, 255], color_group: :blue},
+                 text_contrast_color: :black,
+                 closest_named_hex: "007FFF",
+                 distance_to_closest_named_hex: 66,
+                 source: [:color_data_api],
+                 exact_name_match?: false,
+                 color_data_deprecated: [],
+                 same_as: []
+               },
+               camarone_005f00: %Color{
+                 name: :camarone_005f00,
+                 ansi_color_code: %ANSIColorCode{code: 22, hex: "005f00", rgb: [0, 95, 0], color_group: :green},
+                 text_contrast_color: :white,
+                 closest_named_hex: "00581A",
+                 distance_to_closest_named_hex: 1031,
+                 source: [:color_data_api],
+                 exact_name_match?: false,
+                 color_data_deprecated: [],
+                 same_as: []
+               }
+             }
+    end
+  end
+
   describe "backfill_missing_names/3" do
     test "gets other color names for codes which do not have a name" do
       ansi_color_codes = ColorPalette.ansi_color_codes()
