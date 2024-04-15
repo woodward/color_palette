@@ -100,11 +100,11 @@ defmodule ColorPalette.PrecompileHook do
 
       @new_colors_grouped_by_name @new_all_colors |> DataConverter.new_group_colors_by_name()
 
-      @new_color_names_to_colors @new_colors_grouped_by_name
-                                 |> List.flatten()
-                                 |> DataConverter.new_color_names_to_colors()
+      @color_names_to_colors @new_colors_grouped_by_name
+                             |> List.flatten()
+                             |> DataConverter.color_names_to_colors()
 
-      @unique_color_names_to_colors @new_color_names_to_colors
+      @unique_color_names_to_colors @color_names_to_colors
                                     |> Enum.map(fn {color_name, colors} ->
                                       {color_name, List.first(colors)}
                                     end)
@@ -145,7 +145,7 @@ defmodule ColorPalette.PrecompileHook do
       def new_color_name_dot_com_colors, do: @new_color_name_dot_com_colors
       def new_color_data_api_colors, do: @new_color_data_api_colors
       def new_all_colors, do: @new_all_colors
-      def new_color_names_to_colors, do: @new_color_names_to_colors
+      def color_names_to_colors, do: @color_names_to_colors
       def new_colors_grouped_by_name, do: @new_colors_grouped_by_name
       def unique_color_names_to_colors, do: @unique_color_names_to_colors
 

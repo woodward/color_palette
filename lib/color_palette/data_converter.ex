@@ -123,7 +123,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  def new_color_names_to_colors(colors) do
+  def color_names_to_colors(colors) do
     colors
     |> Enum.reduce(%{}, fn color, acc ->
       if is_list(color) do

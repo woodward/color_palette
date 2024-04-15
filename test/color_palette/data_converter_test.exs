@@ -467,7 +467,7 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "new_color_names_to_colors" do
+  describe "color_names_to_colors" do
     test "groups colors by color names" do
       colors = [
         %ColorPalette.Color{
@@ -512,7 +512,7 @@ defmodule ColorPalette.DataConverterTest do
         }
       ]
 
-      grouped = DataConverter.new_color_names_to_colors(colors)
+      grouped = DataConverter.color_names_to_colors(colors)
 
       assert grouped == %{
                cyan: [
