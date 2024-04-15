@@ -123,11 +123,6 @@ defmodule ColorPalette.PrecompileHook do
                             |> Map.merge(@color_name_dot_com_colors)
                             |> Map.merge(@io_ansi_colors)
 
-      # @colors @colors_untransformed
-      #         |> DataConverter.backfill_missing_names(@ansi_color_codes, @color_data_api_raw_data)
-      #         |> DataConverter.find_duplicates_deprecated()
-      #         |> DataConverter.clear_out_color_data_deprecated()
-
       @missing_colors @new_unique_color_names_to_colors |> DataConverter.new_unnamed_ansi_color_codes()
       @new_colors_missing_names DataConverter.create_names_for_missing_colors(@new_all_colors, @missing_colors)
       @new_all_colors_final @new_unique_color_names_to_colors |> Map.merge(@new_colors_missing_names)

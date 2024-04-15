@@ -684,24 +684,6 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "find_duplicates_deprecated/1" do
-    test "annotates the colors with duplicate function names" do
-      color_names = %{
-        black1: %Color{ansi_color_code: %ANSIColorCode{code: 1}},
-        black2: %Color{ansi_color_code: %ANSIColorCode{code: 1}},
-        some_other_color: %Color{ansi_color_code: %ANSIColorCode{code: 2}}
-      }
-
-      color_names_with_same_as = DataConverter.find_duplicates_deprecated(color_names)
-
-      assert color_names_with_same_as == %{
-               black1: %Color{ansi_color_code: %ANSIColorCode{code: 1}, same_as: [:black2]},
-               black2: %Color{ansi_color_code: %ANSIColorCode{code: 1}, same_as: [:black1]},
-               some_other_color: %Color{ansi_color_code: %ANSIColorCode{code: 2}, same_as: []}
-             }
-    end
-  end
-
   describe "ansi_color_codes_to_color_names/2" do
     test "groups by ansi color codes" do
       ansi_color_codes = [%ANSIColorCode{code: 1}, %ANSIColorCode{code: 2}, %ANSIColorCode{code: 3}]
@@ -718,24 +700,6 @@ defmodule ColorPalette.DataConverterTest do
                %ColorPalette.ANSIColorCode{code: 1} => [:black2, :black1],
                %ColorPalette.ANSIColorCode{code: 2} => [:some_other_color],
                %ColorPalette.ANSIColorCode{code: 3} => []
-             }
-    end
-  end
-
-  describe "clear_out_color_data_deprecated" do
-    test "clears out the color data array" do
-      color_names = %{
-        black: %Color{color_data_deprecated: ["something"]},
-        white: %Color{color_data_deprecated: ["something else"]},
-        yellow: %Color{color_data_deprecated: []}
-      }
-
-      cleared_out = DataConverter.clear_out_color_data_deprecated(color_names)
-
-      assert cleared_out == %{
-               black: %Color{color_data_deprecated: []},
-               white: %Color{color_data_deprecated: []},
-               yellow: %Color{color_data_deprecated: []}
              }
     end
   end
