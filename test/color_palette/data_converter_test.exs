@@ -606,7 +606,7 @@ defmodule ColorPalette.DataConverterTest do
 
   describe "new_unnamed_ansi_color_codes" do
     test "returns a list of IO ansi color codes without a name" do
-      colors = ColorPalette.new_unique_color_names_to_colors()
+      colors = ColorPalette.unique_color_names_to_colors()
 
       color_codes_with_no_names = DataConverter.new_unnamed_ansi_color_codes(colors)
 

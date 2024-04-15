@@ -104,18 +104,18 @@ defmodule ColorPalette.PrecompileHook do
                                  |> List.flatten()
                                  |> DataConverter.new_color_names_to_colors()
 
-      @new_unique_color_names_to_colors @new_color_names_to_colors
-                                        |> Enum.map(fn {color_name, colors} ->
-                                          {color_name, List.first(colors)}
-                                        end)
-                                        |> Enum.into(%{})
+      @unique_color_names_to_colors @new_color_names_to_colors
+                                    |> Enum.map(fn {color_name, colors} ->
+                                      {color_name, List.first(colors)}
+                                    end)
+                                    |> Enum.into(%{})
 
-      @ansi_color_codes_without_names @new_unique_color_names_to_colors |> DataConverter.new_unnamed_ansi_color_codes()
+      @ansi_color_codes_without_names @unique_color_names_to_colors |> DataConverter.new_unnamed_ansi_color_codes()
       @generated_names_for_unnamed_colors DataConverter.create_names_for_missing_colors(
                                             @new_all_colors,
                                             @ansi_color_codes_without_names
                                           )
-      @colors @new_unique_color_names_to_colors |> Map.merge(@generated_names_for_unnamed_colors)
+      @colors @unique_color_names_to_colors |> Map.merge(@generated_names_for_unnamed_colors)
 
       @colors
       |> Enum.each(fn {color_name, color} ->
@@ -147,7 +147,7 @@ defmodule ColorPalette.PrecompileHook do
       def new_all_colors, do: @new_all_colors
       def new_color_names_to_colors, do: @new_color_names_to_colors
       def new_colors_grouped_by_name, do: @new_colors_grouped_by_name
-      def new_unique_color_names_to_colors, do: @new_unique_color_names_to_colors
+      def unique_color_names_to_colors, do: @unique_color_names_to_colors
 
       def ansi_color_codes_without_names, do: @ansi_color_codes_without_names
       def generated_names_for_unnamed_colors, do: @generated_names_for_unnamed_colors
