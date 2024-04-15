@@ -12,7 +12,6 @@ defmodule ColorPalette.Color do
     :distance_to_closest_named_hex,
     source: [],
     exact_name_match?: false,
-    color_data_deprecated: [],
     same_as: []
   ]
 

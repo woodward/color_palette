@@ -58,7 +58,6 @@ defmodule ColorPalette.DataConverterTest do
                  closest_named_hex: "FF00FF",
                  distance_to_closest_named_hex: 0,
                  exact_name_match?: true,
-                 color_data_deprecated: [],
                  same_as: []
                },
                %ColorPalette.Color{
@@ -69,7 +68,6 @@ defmodule ColorPalette.DataConverterTest do
                  closest_named_hex: "FF00FF",
                  distance_to_closest_named_hex: 0,
                  exact_name_match?: true,
-                 color_data_deprecated: [],
                  same_as: []
                }
              ]
@@ -88,7 +86,6 @@ defmodule ColorPalette.DataConverterTest do
             distance_to_closest_named_hex: 0,
             source: [:io_ansi],
             exact_name_match?: true,
-            color_data_deprecated: [],
             same_as: []
           },
           %ColorPalette.Color{
@@ -99,7 +96,6 @@ defmodule ColorPalette.DataConverterTest do
             distance_to_closest_named_hex: 0,
             source: [:color_data_api],
             exact_name_match?: true,
-            color_data_deprecated: [],
             same_as: []
           },
           %ColorPalette.Color{
@@ -110,7 +106,6 @@ defmodule ColorPalette.DataConverterTest do
             distance_to_closest_named_hex: nil,
             source: [:color_name_dot_com],
             exact_name_match?: false,
-            color_data_deprecated: [],
             same_as: []
           }
         ],
@@ -123,7 +118,6 @@ defmodule ColorPalette.DataConverterTest do
             distance_to_closest_named_hex: 123,
             source: [:color_data_api],
             exact_name_match?: false,
-            color_data_deprecated: [],
             same_as: []
           },
           %ColorPalette.Color{
@@ -134,7 +128,6 @@ defmodule ColorPalette.DataConverterTest do
             distance_to_closest_named_hex: nil,
             source: [:color_name_dot_com],
             exact_name_match?: false,
-            color_data_deprecated: [],
             same_as: []
           }
         ]
@@ -157,7 +150,6 @@ defmodule ColorPalette.DataConverterTest do
                    distance_to_closest_named_hex: 0,
                    source: [:io_ansi, :color_data_api, :color_name_dot_com],
                    exact_name_match?: true,
-                   color_data_deprecated: [],
                    same_as: []
                  }
                ],
@@ -170,7 +162,6 @@ defmodule ColorPalette.DataConverterTest do
                    distance_to_closest_named_hex: 123,
                    source: [:color_data_api],
                    exact_name_match?: false,
-                   color_data_deprecated: [],
                    same_as: [:shocking_pink]
                  },
                  %ColorPalette.Color{
@@ -181,7 +172,6 @@ defmodule ColorPalette.DataConverterTest do
                    distance_to_closest_named_hex: nil,
                    source: [:color_name_dot_com],
                    exact_name_match?: false,
-                   color_data_deprecated: [],
                    same_as: [:purple_pizzazz]
                  }
                ]
@@ -361,7 +351,6 @@ defmodule ColorPalette.DataConverterTest do
 
       assert black == %Color{
                ansi_color_code: %ANSIColorCode{code: 0, color_group: :gray_and_black, hex: "000000", rgb: [0, 0, 0]},
-               color_data_deprecated: [],
                text_contrast_color: :white,
                name: :black,
                source: [:io_ansi]
@@ -381,7 +370,6 @@ defmodule ColorPalette.DataConverterTest do
 
       assert black == %Color{
                ansi_color_code: %ANSIColorCode{code: 0, color_group: :gray_and_black, hex: "000000", rgb: [0, 0, 0]},
-               color_data_deprecated: [],
                text_contrast_color: :white,
                name: :black,
                source: [:io_ansi],
@@ -418,7 +406,6 @@ defmodule ColorPalette.DataConverterTest do
                  closest_named_hex: nil,
                  distance_to_closest_named_hex: 0,
                  exact_name_match?: true,
-                 color_data_deprecated: [],
                  same_as: []
                },
                %ColorPalette.Color{
@@ -434,7 +421,6 @@ defmodule ColorPalette.DataConverterTest do
                  closest_named_hex: "990066",
                  distance_to_closest_named_hex: 1981,
                  exact_name_match?: false,
-                 color_data_deprecated: [],
                  same_as: []
                },
                %ColorPalette.Color{
@@ -450,7 +436,6 @@ defmodule ColorPalette.DataConverterTest do
                  closest_named_hex: nil,
                  distance_to_closest_named_hex: nil,
                  exact_name_match?: false,
-                 color_data_deprecated: [],
                  same_as: []
                }
              ]
@@ -466,7 +451,6 @@ defmodule ColorPalette.DataConverterTest do
                  closest_named_hex: "8FD400",
                  distance_to_closest_named_hex: 83,
                  exact_name_match?: false,
-                 color_data_deprecated: [],
                  same_as: []
                },
                %ColorPalette.Color{
@@ -477,7 +461,6 @@ defmodule ColorPalette.DataConverterTest do
                  closest_named_hex: nil,
                  distance_to_closest_named_hex: nil,
                  exact_name_match?: false,
-                 color_data_deprecated: [],
                  same_as: []
                }
              ]
@@ -495,7 +478,6 @@ defmodule ColorPalette.DataConverterTest do
           closest_named_hex: nil,
           distance_to_closest_named_hex: nil,
           exact_name_match?: false,
-          color_data_deprecated: [],
           same_as: []
         },
         %ColorPalette.Color{
@@ -506,7 +488,6 @@ defmodule ColorPalette.DataConverterTest do
           closest_named_hex: nil,
           distance_to_closest_named_hex: nil,
           exact_name_match?: false,
-          color_data_deprecated: [],
           same_as: []
         },
         %ColorPalette.Color{
@@ -517,7 +498,6 @@ defmodule ColorPalette.DataConverterTest do
           closest_named_hex: nil,
           distance_to_closest_named_hex: nil,
           exact_name_match?: false,
-          color_data_deprecated: [],
           same_as: [:teal]
         },
         %ColorPalette.Color{
@@ -528,7 +508,6 @@ defmodule ColorPalette.DataConverterTest do
           closest_named_hex: nil,
           distance_to_closest_named_hex: nil,
           exact_name_match?: false,
-          color_data_deprecated: [],
           same_as: []
         }
       ]
@@ -545,13 +524,11 @@ defmodule ColorPalette.DataConverterTest do
                    closest_named_hex: nil,
                    distance_to_closest_named_hex: nil,
                    exact_name_match?: false,
-                   color_data_deprecated: [],
                    same_as: []
                  },
                  %ColorPalette.Color{
                    ansi_color_code: %ColorPalette.ANSIColorCode{code: 6, color_group: :cyan, hex: "008080", rgb: [0, 128, 128]},
                    closest_named_hex: nil,
-                   color_data_deprecated: [],
                    distance_to_closest_named_hex: nil,
                    exact_name_match?: false,
                    name: :cyan,
@@ -574,7 +551,6 @@ defmodule ColorPalette.DataConverterTest do
                    closest_named_hex: nil,
                    distance_to_closest_named_hex: nil,
                    exact_name_match?: false,
-                   color_data_deprecated: [],
                    same_as: []
                  }
                ],
@@ -587,7 +563,6 @@ defmodule ColorPalette.DataConverterTest do
                    closest_named_hex: nil,
                    distance_to_closest_named_hex: nil,
                    exact_name_match?: false,
-                   color_data_deprecated: [],
                    same_as: []
                  }
                ]
@@ -660,7 +635,6 @@ defmodule ColorPalette.DataConverterTest do
                  distance_to_closest_named_hex: 66,
                  source: [:color_data_api],
                  exact_name_match?: false,
-                 color_data_deprecated: [],
                  same_as: []
                },
                camarone_005f00: %Color{
@@ -671,7 +645,6 @@ defmodule ColorPalette.DataConverterTest do
                  distance_to_closest_named_hex: 1031,
                  source: [:color_data_api],
                  exact_name_match?: false,
-                 color_data_deprecated: [],
                  same_as: []
                }
              }
