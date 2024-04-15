@@ -202,7 +202,7 @@ defmodule ColorPalette.DataConverter do
     |> elem(1)
   end
 
-  def new_unnamed_ansi_color_codes(color_map) do
+  def unnamed_ansi_color_codes(color_map) do
     ansi_color_code_set = 0..255 |> Range.to_list() |> MapSet.new()
 
     color_set =

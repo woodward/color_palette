@@ -110,7 +110,7 @@ defmodule ColorPalette.PrecompileHook do
                                     end)
                                     |> Enum.into(%{})
 
-      @ansi_color_codes_without_names @unique_color_names_to_colors |> DataConverter.new_unnamed_ansi_color_codes()
+      @ansi_color_codes_without_names @unique_color_names_to_colors |> DataConverter.unnamed_ansi_color_codes()
       @generated_names_for_unnamed_colors DataConverter.create_names_for_missing_colors(
                                             @new_all_colors,
                                             @ansi_color_codes_without_names
