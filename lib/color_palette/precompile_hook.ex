@@ -111,8 +111,11 @@ defmodule ColorPalette.PrecompileHook do
                                         |> Enum.into(%{})
 
       @ansi_color_codes_without_names @new_unique_color_names_to_colors |> DataConverter.new_unnamed_ansi_color_codes()
-      @new_colors_missing_names DataConverter.create_names_for_missing_colors(@new_all_colors, @ansi_color_codes_without_names)
-      @colors @new_unique_color_names_to_colors |> Map.merge(@new_colors_missing_names)
+      @generated_names_for_unnamed_colors DataConverter.create_names_for_missing_colors(
+                                            @new_all_colors,
+                                            @ansi_color_codes_without_names
+                                          )
+      @colors @new_unique_color_names_to_colors |> Map.merge(@generated_names_for_unnamed_colors)
 
       @colors
       |> Enum.each(fn {color_name, color} ->
@@ -136,6 +139,7 @@ defmodule ColorPalette.PrecompileHook do
       def ansi_color_codes, do: @ansi_color_codes
       def color_data_api_raw_data, do: @color_data_api_raw_data
       def color_name_dot_com_raw_data, do: @color_name_dot_com_raw_data
+
       def new_io_ansi_colors, do: @new_io_ansi_colors
       def new_io_ansi_color_names, do: @new_io_ansi_color_names
       def new_color_name_dot_com_colors, do: @new_color_name_dot_com_colors
@@ -146,7 +150,7 @@ defmodule ColorPalette.PrecompileHook do
       def new_unique_color_names_to_colors, do: @new_unique_color_names_to_colors
 
       def ansi_color_codes_without_names, do: @ansi_color_codes_without_names
-      def new_colors_missing_names, do: @new_colors_missing_names
+      def generated_names_for_unnamed_colors, do: @generated_names_for_unnamed_colors
       def colors, do: @colors
     end
   end
