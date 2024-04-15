@@ -112,8 +112,8 @@ defmodule ColorPaletteTest do
 
   describe "colors" do
     test "returns the map of color names to color data" do
-      colors = ColorPalette.colors()
-      assert length(Map.keys(colors)) == 383
+      colors = ColorPalette.new_all_colors_final()
+      assert length(Map.keys(colors)) == 396
     end
   end
 
@@ -222,7 +222,7 @@ defmodule ColorPaletteTest do
                ansi_color_code: %ANSIColorCode{code: 63, hex: "5f5fff", rgb: [95, 95, 255], color_group: :blue},
                color_data_deprecated: [],
                name: :very_light_blue,
-               same_as: [],
+               same_as: [:blueberry],
                source: [:color_name_dot_com],
                text_contrast_color: :white,
                closest_named_hex: nil,
@@ -240,7 +240,7 @@ defmodule ColorPaletteTest do
                ansi_color_code: %ANSIColorCode{code: 63, hex: "5f5fff", rgb: [95, 95, 255], color_group: :blue},
                color_data_deprecated: [],
                name: :very_light_blue,
-               same_as: [],
+               same_as: [:blueberry],
                source: [:color_name_dot_com],
                text_contrast_color: :white,
                closest_named_hex: nil,
@@ -263,7 +263,8 @@ defmodule ColorPaletteTest do
       first = key_values |> List.first()
 
       assert first ==
-               {%ColorPalette.ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black}, [:black]}
+               {%ColorPalette.ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black},
+                [:black_000000]}
     end
   end
 end

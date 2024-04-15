@@ -26,14 +26,14 @@ defmodule ColorPalette do
   @before_compile ColorPalette.PrecompileHook
 
   def unnamed_ansi_color_codes do
-    DataConverter.unnamed_ansi_color_codes(ansi_color_codes(), colors())
+    DataConverter.unnamed_ansi_color_codes(ansi_color_codes(), new_all_colors_final())
   end
 
   def ansi_color_codes_to_color_names do
-    DataConverter.ansi_color_codes_to_color_names(ansi_color_codes(), colors())
+    DataConverter.ansi_color_codes_to_color_names(ansi_color_codes(), new_all_colors_final())
   end
 
-  def find_by_hex(hex), do: colors() |> DataConverter.find_by_hex(hex)
+  def find_by_hex(hex), do: new_all_colors_final() |> DataConverter.find_by_hex(hex)
 
-  def find_by_code(code), do: colors() |> DataConverter.find_by_code(code)
+  def find_by_code(code), do: new_all_colors_final() |> DataConverter.find_by_code(code)
 end

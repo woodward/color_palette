@@ -10,7 +10,7 @@ defmodule FindMissing do
   @moduledoc false
 
   def find do
-    colors = ColorPalette.colors()
+    colors = ColorPalette.new_all_colors_final()
 
     IO.puts(light_cyan() <> "All colors: #{length(Map.keys(colors))}" <> reset())
 
