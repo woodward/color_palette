@@ -754,6 +754,22 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "new_unnamed_ansi_color_codes" do
+    test "returns a list of IO ansi color codes without a name" do
+      colors = ColorPalette.new_unique_color_names_to_colors()
+
+      color_codes_with_no_names = DataConverter.new_unnamed_ansi_color_codes(colors)
+
+      assert length(color_codes_with_no_names) == 34
+
+      first_five = color_codes_with_no_names |> Enum.take(5)
+      last_five = color_codes_with_no_names |> Enum.reverse() |> Enum.take(5) |> Enum.sort()
+
+      assert first_five == [0, 1, 2, 3, 4]
+      assert last_five == [171, 200, 234, 244, 246]
+    end
+  end
+
   describe "backfill_missing_names/3" do
     test "gets other color names for codes which do not have a name" do
       ansi_color_codes = ColorPalette.ansi_color_codes()
