@@ -9,12 +9,12 @@ defmodule Display do
   import ColorPalette
 
   def stats do
-    colors = ColorPalette.new_all_colors_final() |> Map.keys() |> length()
+    colors = ColorPalette.colors() |> Map.keys() |> length()
     IO.puts(yellow() <> "\nThere are #{colors} unique color names\n" <> reset())
   end
 
   def all do
-    ColorPalette.new_all_colors_final()
+    ColorPalette.colors()
     |> Enum.sort()
     |> Enum.map(fn {name, color} ->
       hex = color.ansi_color_code.hex

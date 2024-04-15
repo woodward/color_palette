@@ -28,7 +28,7 @@ defmodule Display do
   end
 
   def all do
-    colors = ColorPalette.new_all_colors_final()
+    colors = ColorPalette.colors()
     color_codes_by_color_groups = ColorPalette.color_groups_to_ansi_color_codes()
 
     codes_without_color_groups = Map.get(color_codes_by_color_groups, nil)

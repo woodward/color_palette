@@ -13,7 +13,7 @@ defmodule ColorPalette.GuideGenerator do
     """
 
     color_groups = ColorPalette.color_groups_to_ansi_color_codes()
-    colors = ColorPalette.new_all_colors_final()
+    colors = ColorPalette.colors()
     ansi_color_codes_to_color_names = ColorPalette.ansi_color_codes_to_color_names()
 
     content =
@@ -50,7 +50,7 @@ defmodule ColorPalette.GuideGenerator do
     """
 
     ansi_color_codes = ColorPalette.ansi_color_codes_to_color_names()
-    colors = ColorPalette.new_all_colors_final()
+    colors = ColorPalette.colors()
 
     content =
       ansi_color_codes
