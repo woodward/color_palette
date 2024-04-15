@@ -363,9 +363,9 @@ defmodule ColorPalette.DataConverterTest do
 
   describe "combine_colors/3" do
     test "merges the three types of colors" do
-      io_ansi_colors = ColorPalette.new_io_ansi_colors()
-      color_data_api = ColorPalette.new_color_data_api_colors()
-      color_name_dot_com = ColorPalette.new_color_name_dot_com_colors()
+      io_ansi_colors = ColorPalette.io_ansi_colors()
+      color_data_api = ColorPalette.color_data_api_colors()
+      color_name_dot_com = ColorPalette.color_name_dot_com_colors()
 
       combined = DataConverter.combine_colors(io_ansi_colors, color_data_api, color_name_dot_com)
 
@@ -589,7 +589,7 @@ defmodule ColorPalette.DataConverterTest do
 
   describe "create_names_for_missing_colors/2" do
     test "creates some fake color names for colors which are missing names" do
-      all_colors = ColorPalette.new_all_colors()
+      all_colors = ColorPalette.all_colors()
       missing_names = [22, 33]
       new_names = DataConverter.create_names_for_missing_colors(all_colors, missing_names)
 
