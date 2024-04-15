@@ -136,12 +136,12 @@ defmodule ColorPalette.DataConverter do
   def new_group_colors_by_name(colors) do
     colors
     |> Enum.map(fn colors_for_code ->
-      grouped_by_name =
-        colors_for_code
-        |> List.flatten()
-        |> Enum.group_by(& &1.name)
+      colors_for_code = colors_for_code |> List.flatten()
 
-      grouped_by_name
+      names_for_this_code = colors_for_code |> Enum.map(& &1.name)
+
+      colors_for_code
+      |> Enum.group_by(& &1.name)
       |> Enum.map(fn {_color_name, colors_for_this_name} ->
         [first_color | rest] = colors_for_this_name
 
@@ -149,6 +149,9 @@ defmodule ColorPalette.DataConverter do
         |> Enum.reduce(first_color, fn next_color, acc ->
           %{acc | source: acc.source ++ next_color.source}
         end)
+      end)
+      |> Enum.map(fn color ->
+        %{color | same_as: names_for_this_code |> Enum.reject(&(&1 == color.name))}
       end)
     end)
   end

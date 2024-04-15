@@ -171,7 +171,7 @@ defmodule ColorPalette.DataConverterTest do
                    source: [:color_data_api],
                    exact_name_match?: false,
                    color_data_deprecated: [],
-                   same_as: []
+                   same_as: [:shocking_pink]
                  },
                  %ColorPalette.Color{
                    name: :shocking_pink,
@@ -182,7 +182,7 @@ defmodule ColorPalette.DataConverterTest do
                    source: [:color_name_dot_com],
                    exact_name_match?: false,
                    color_data_deprecated: [],
-                   same_as: []
+                   same_as: [:purple_pizzazz]
                  }
                ]
              ]
