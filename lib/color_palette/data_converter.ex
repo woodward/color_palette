@@ -247,7 +247,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  def find_duplicates(color_names) do
+  def find_duplicates_deprecated(color_names) do
     ansi_codes_to_names =
       color_names
       |> Enum.reduce(%{}, fn {color_name, color_data}, acc ->

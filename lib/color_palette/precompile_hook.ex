@@ -128,7 +128,7 @@ defmodule ColorPalette.PrecompileHook do
 
       @colors @colors_untransformed
               |> DataConverter.backfill_missing_names(@ansi_color_codes, @color_data_api_raw_data)
-              |> DataConverter.find_duplicates()
+              |> DataConverter.find_duplicates_deprecated()
               |> DataConverter.clear_out_color_data_deprecated()
 
       @colors
