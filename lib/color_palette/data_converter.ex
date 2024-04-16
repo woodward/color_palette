@@ -137,20 +137,25 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  def combine_colors(io_ansi_colors, color_data_api_colors, color_name_dot_com_colors) do
-    # Should be 256 - 16:
-    required_padding = length(color_data_api_colors) - length(io_ansi_colors)
+  def multi_zip(lists) do
+    [first_list | remaining] = lists
+    length_of_first_list = length(first_list)
 
-    nil_padding = 0..required_padding |> Enum.reduce([], fn _index, acc -> [nil] ++ acc end)
-    io_ansi_colors_padded_with_nils = io_ansi_colors ++ nil_padding
-
-    Enum.zip(io_ansi_colors_padded_with_nils, color_data_api_colors)
-    |> Enum.zip(color_name_dot_com_colors)
-    |> Enum.map(fn {{io_ansi, color_data_api}, color_name_dot_com} ->
-      [io_ansi, color_data_api, color_name_dot_com]
+    remaining
+    |> Enum.each(fn list ->
+      if length(list) != length_of_first_list do
+        raise "The lists must all be of the same length"
+      end
     end)
-    |> Enum.map(fn colors_for_code ->
-      colors_for_code |> Enum.reject(&(&1 == nil))
+
+    initial_combined = List.duplicate([], length_of_first_list)
+
+    lists
+    |> Enum.reduce(initial_combined, fn list, acc ->
+      Enum.zip(acc, list)
+      |> Enum.map(fn {acc_list, elem_list} ->
+        (acc_list ++ [elem_list]) |> List.flatten() |> Enum.reject(&(&1 == nil))
+      end)
     end)
   end
 
