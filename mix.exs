@@ -2,7 +2,7 @@ defmodule ColorPalette.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/woodward/color_palette"
-  @version "0.1.1"
+  @version "0.1.2"
 
   def project do
     [
@@ -51,7 +51,8 @@ defmodule ColorPalette.MixProject do
       },
       files: [
         "README.md",
-        "lib mix.exs",
+        "lib",
+        "mix.exs",
         "LICENSE.md",
         "guides/color_table.md",
         "guides/ansi_color_codes.md",
