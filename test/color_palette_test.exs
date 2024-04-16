@@ -219,7 +219,8 @@ defmodule ColorPaletteTest do
                text_contrast_color: :white,
                closest_named_hex: nil,
                distance_to_closest_named_hex: nil,
-               exact_name_match?: false
+               exact_name_match?: false,
+               renamed?: false
              }
     end
   end
@@ -236,7 +237,8 @@ defmodule ColorPaletteTest do
                text_contrast_color: :white,
                closest_named_hex: nil,
                distance_to_closest_named_hex: nil,
-               exact_name_match?: false
+               exact_name_match?: false,
+               renamed?: false
              }
     end
   end

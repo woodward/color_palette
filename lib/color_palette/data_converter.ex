@@ -214,7 +214,7 @@ defmodule ColorPalette.DataConverter do
     |> Enum.reduce(%{}, fn code, acc ->
       color = all_colors |> Enum.at(code) |> List.first()
       name_with_hex_suffix = color_name_to_atom("#{color.name}_#{color.ansi_color_code.hex}")
-      renamed_color = %{color | name: name_with_hex_suffix}
+      renamed_color = %{color | name: name_with_hex_suffix, renamed?: true}
       Map.put(acc, name_with_hex_suffix, renamed_color)
     end)
   end

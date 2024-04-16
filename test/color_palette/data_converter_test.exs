@@ -589,7 +589,8 @@ defmodule ColorPalette.DataConverterTest do
                  distance_to_closest_named_hex: 66,
                  source: [:color_data_api],
                  exact_name_match?: false,
-                 same_as: []
+                 same_as: [],
+                 renamed?: true
                },
                camarone_005f00: %Color{
                  name: :camarone_005f00,
@@ -599,7 +600,8 @@ defmodule ColorPalette.DataConverterTest do
                  distance_to_closest_named_hex: 1031,
                  source: [:color_data_api],
                  exact_name_match?: false,
-                 same_as: []
+                 same_as: [],
+                 renamed?: true
                }
              }
     end
