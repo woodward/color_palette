@@ -53,4 +53,5 @@ defmodule ColorPalette.ExDocUtils do
   def source_name(:color_name_dot_com), do: "color-name.com"
   def source_name(:io_ansi), do: "IO.ANSI"
   def source_name(:color_data_api), do: "The Color API"
+  def source_name(:colorhexa), do: "ColorHexa"
 end

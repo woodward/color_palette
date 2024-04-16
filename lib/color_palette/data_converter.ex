@@ -31,6 +31,32 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  def convert_colorhexa_raw_data(colorhexa_raw_data, ansi_color_codes) do
+    Enum.zip(colorhexa_raw_data, ansi_color_codes)
+    |> Enum.map(fn {raw_color, ansi_color_code} ->
+      name = raw_color.name |> color_name_to_atom()
+      names = if is_list(name), do: name, else: [name]
+
+      colors =
+        names
+        |> Enum.map(fn color_name ->
+          text_contrast_color = if String.contains?(Atom.to_string(color_name), "very_dark"), do: :white, else: :black
+
+          %Color{
+            name: color_name,
+            ansi_color_code: ansi_color_code,
+            text_contrast_color: text_contrast_color,
+            source: [:colorhexa],
+            exact_name_match?: false,
+            distance_to_closest_named_hex: nil,
+            closest_named_hex: nil
+          }
+        end)
+
+      if length(colors) == 1, do: List.first(colors), else: colors
+    end)
+  end
+
   def convert_color_name_dot_com_raw_data(color_name_dot_com_raw_data, ansi_color_codes) do
     Enum.zip(color_name_dot_com_raw_data, ansi_color_codes)
     |> Enum.map(fn {raw_color, ansi_color_code} ->
@@ -84,8 +110,11 @@ defmodule ColorPalette.DataConverter do
       |> String.replace(~r/\(.*\)/, "")
       |> String.replace(~r/é/, "")
       |> String.split("/")
+      |> Enum.map(&String.split(" - "))
+      |> List.flatten()
       |> Enum.map(&String.trim(&1))
       |> Enum.map(&String.replace(&1, " ", "_"))
+      |> Enum.map(&String.replace(&1, "__", "_"))
       |> Enum.map(&String.replace(&1, "'", ""))
       |> Enum.map(&String.replace(&1, "-", "_"))
       |> Enum.map(&String.to_atom(&1))
@@ -154,7 +183,7 @@ defmodule ColorPalette.DataConverter do
     |> Enum.reduce(initial_combined, fn list, acc ->
       Enum.zip(acc, list)
       |> Enum.map(fn {acc_list, elem_list} ->
-        (acc_list ++ [elem_list]) |> List.flatten()
+        (acc_list ++ [elem_list]) |> List.flatten() |> Enum.reject(&(&1 == nil))
       end)
     end)
   end
