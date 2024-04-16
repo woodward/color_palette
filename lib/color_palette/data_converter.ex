@@ -154,26 +154,8 @@ defmodule ColorPalette.DataConverter do
     |> Enum.reduce(initial_combined, fn list, acc ->
       Enum.zip(acc, list)
       |> Enum.map(fn {acc_list, elem_list} ->
-        (acc_list ++ [elem_list]) |> List.flatten()
+        (acc_list ++ [elem_list]) |> List.flatten() |> Enum.reject(&(&1 == nil))
       end)
-    end)
-  end
-
-  def pad_list(list, padding, desired_length) do
-    required_padding = desired_length - length(list)
-    list ++ List.duplicate(padding, required_padding)
-  end
-
-  def combine_colors(io_ansi_colors, color_data_api_colors, color_name_dot_com_colors) do
-    io_ansi_colors_padded_with_nils = pad_list(io_ansi_colors, nil, 256)
-
-    Enum.zip(io_ansi_colors_padded_with_nils, color_data_api_colors)
-    |> Enum.zip(color_name_dot_com_colors)
-    |> Enum.map(fn {{io_ansi, color_data_api}, color_name_dot_com} ->
-      [io_ansi, color_data_api, color_name_dot_com]
-    end)
-    |> Enum.map(fn colors_for_code ->
-      colors_for_code |> Enum.reject(&(&1 == nil))
     end)
   end
 

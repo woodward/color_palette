@@ -376,6 +376,20 @@ defmodule ColorPalette.DataConverterTest do
              ]
     end
 
+    test "filters out nil values" do
+      list1 = ["a", "b", nil]
+      list2 = ["dog", nil, "squirrel"]
+      list3 = [nil, "orange", "banana"]
+
+      combined = DataConverter.multi_zip([list1, list2, list3])
+
+      assert combined == [
+               ["a", "dog"],
+               ["b", "orange"],
+               ["squirrel", "banana"]
+             ]
+    end
+
     test "combines the lists, even if the elements are themselves list" do
       list1 = ["a", ["b", "c"], ["d", "e"]]
       list2 = ["dog", "cat", "squirrel"]
@@ -398,93 +412,6 @@ defmodule ColorPalette.DataConverterTest do
       assert_raise RuntimeError, fn ->
         DataConverter.multi_zip([list1, list2, list3])
       end
-    end
-  end
-
-  describe "combine_colors/3" do
-    test "merges the three types of colors" do
-      io_ansi_colors = ColorPalette.io_ansi_colors()
-      color_data_api = ColorPalette.color_data_api_colors()
-      color_name_dot_com = ColorPalette.color_name_dot_com_colors()
-
-      combined = DataConverter.combine_colors(io_ansi_colors, color_data_api, color_name_dot_com)
-
-      assert length(combined) == 256
-
-      magenta = combined |> Enum.at(5)
-
-      assert magenta == [
-               %ColorPalette.Color{
-                 name: :magenta,
-                 ansi_color_code: %ColorPalette.ANSIColorCode{
-                   code: 5,
-                   hex: "800080",
-                   rgb: [128, 0, 128],
-                   color_group: :purple_violet_and_magenta
-                 },
-                 text_contrast_color: :white,
-                 source: [:io_ansi],
-                 closest_named_hex: nil,
-                 distance_to_closest_named_hex: 0,
-                 exact_name_match?: true,
-                 same_as: []
-               },
-               %ColorPalette.Color{
-                 name: :fresh_eggplant,
-                 ansi_color_code: %ColorPalette.ANSIColorCode{
-                   code: 5,
-                   hex: "800080",
-                   rgb: [128, 0, 128],
-                   color_group: :purple_violet_and_magenta
-                 },
-                 text_contrast_color: :white,
-                 source: [:color_data_api],
-                 closest_named_hex: "990066",
-                 distance_to_closest_named_hex: 1981,
-                 exact_name_match?: false,
-                 same_as: []
-               },
-               %ColorPalette.Color{
-                 name: :patriarch,
-                 ansi_color_code: %ColorPalette.ANSIColorCode{
-                   code: 5,
-                   hex: "800080",
-                   rgb: [128, 0, 128],
-                   color_group: :purple_violet_and_magenta
-                 },
-                 text_contrast_color: :white,
-                 source: [:color_name_dot_com],
-                 closest_named_hex: nil,
-                 distance_to_closest_named_hex: nil,
-                 exact_name_match?: false,
-                 same_as: []
-               }
-             ]
-
-      alien_armpit = combined |> Enum.at(112)
-
-      assert alien_armpit == [
-               %ColorPalette.Color{
-                 name: :sheen_green,
-                 ansi_color_code: %ColorPalette.ANSIColorCode{code: 112, hex: "87d700", rgb: [135, 215, 0], color_group: :green},
-                 text_contrast_color: :black,
-                 source: [:color_data_api],
-                 closest_named_hex: "8FD400",
-                 distance_to_closest_named_hex: 83,
-                 exact_name_match?: false,
-                 same_as: []
-               },
-               %ColorPalette.Color{
-                 name: :alien_armpit,
-                 ansi_color_code: %ColorPalette.ANSIColorCode{code: 112, hex: "87d700", rgb: [135, 215, 0], color_group: :green},
-                 text_contrast_color: :black,
-                 source: [:color_name_dot_com],
-                 closest_named_hex: nil,
-                 distance_to_closest_named_hex: nil,
-                 exact_name_match?: false,
-                 same_as: []
-               }
-             ]
     end
   end
 
@@ -624,14 +551,6 @@ defmodule ColorPalette.DataConverterTest do
 
       assert first_five == [0, 1, 2, 3, 4]
       assert last_five == [171, 200, 234, 244, 246]
-    end
-  end
-
-  describe "pad_list" do
-    test "pads a list to a certain length with a certain value" do
-      list = ["apple", "orange"]
-      padded = DataConverter.pad_list(list, "banana", 5)
-      assert padded == ["apple", "orange", "banana", "banana", "banana"]
     end
   end
 

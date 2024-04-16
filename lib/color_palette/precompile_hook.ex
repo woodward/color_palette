@@ -72,11 +72,11 @@ defmodule ColorPalette.PrecompileHook do
       @io_ansi_colors @io_ansi_color_names
                       |> DataConverter.convert_ansi_colors_to_colors(@ansi_color_codes)
 
-      @all_colors DataConverter.combine_colors(
-                    @io_ansi_colors,
+      @all_colors DataConverter.multi_zip([
+                    @io_ansi_colors ++ List.duplicate(nil, 256 - 16),
                     @color_data_api_colors,
                     @color_name_dot_com_colors
-                  )
+                  ])
 
       # @all_colors DataConverter.multi_zip([
       #               DataConverter.pad_list(@io_ansi_colors, nil, 256),
