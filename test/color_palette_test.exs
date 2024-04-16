@@ -113,7 +113,7 @@ defmodule ColorPaletteTest do
   describe "colors" do
     test "returns the map of color names to color data" do
       colors = ColorPalette.colors()
-      assert length(Map.keys(colors)) == 396
+      assert length(Map.keys(colors)) == 505
     end
   end
 
@@ -212,14 +212,14 @@ defmodule ColorPaletteTest do
       color = ColorPalette.find_by_hex("5f5fff")
 
       assert color == %Color{
-               ansi_color_code: %ANSIColorCode{code: 63, hex: "5f5fff", rgb: [95, 95, 255], color_group: :blue},
-               name: :very_light_blue,
-               same_as: [:blueberry],
-               source: [:color_name_dot_com],
-               text_contrast_color: :white,
-               closest_named_hex: nil,
-               distance_to_closest_named_hex: nil,
-               exact_name_match?: false
+               ansi_color_code: %ANSIColorCode{code: 63, color_group: :blue, hex: "5f5fff", rgb: [95, 95, 255]},
+               closest_named_hex: "4F86F7",
+               distance_to_closest_named_hex: 3579,
+               exact_name_match?: false,
+               name: :blueberry_5f5fff,
+               same_as: [],
+               source: [:color_data_api],
+               text_contrast_color: :white
              }
     end
   end
@@ -229,14 +229,14 @@ defmodule ColorPaletteTest do
       color = ColorPalette.find_by_code(63)
 
       assert color == %Color{
-               ansi_color_code: %ANSIColorCode{code: 63, hex: "5f5fff", rgb: [95, 95, 255], color_group: :blue},
-               name: :very_light_blue,
-               same_as: [:blueberry],
-               source: [:color_name_dot_com],
-               text_contrast_color: :white,
-               closest_named_hex: nil,
-               distance_to_closest_named_hex: nil,
-               exact_name_match?: false
+               ansi_color_code: %ANSIColorCode{code: 63, color_group: :blue, hex: "5f5fff", rgb: [95, 95, 255]},
+               closest_named_hex: "4F86F7",
+               distance_to_closest_named_hex: 3579,
+               exact_name_match?: false,
+               name: :blueberry_5f5fff,
+               same_as: [],
+               source: [:color_data_api],
+               text_contrast_color: :white
              }
     end
   end

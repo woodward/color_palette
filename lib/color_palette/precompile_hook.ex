@@ -74,13 +74,17 @@ defmodule ColorPalette.PrecompileHook do
       @color_name_dot_com_colors @color_name_dot_com_raw_data
                                  |> DataConverter.convert_color_name_dot_com_raw_data(@ansi_color_codes)
 
+      @colorhexa_colors @colorhexa_raw_data
+                        |> DataConverter.convert_colorhexa_raw_data(@ansi_color_codes)
+
       @io_ansi_colors @io_ansi_color_names
                       |> DataConverter.convert_ansi_colors_to_colors(@ansi_color_codes)
 
       @all_colors DataConverter.multi_zip([
                     @io_ansi_colors ++ List.duplicate(nil, 256 - 16),
                     @color_data_api_colors,
-                    @color_name_dot_com_colors
+                    @color_name_dot_com_colors,
+                    @colorhexa_colors
                   ])
 
       @colors_grouped_by_name @all_colors |> DataConverter.group_colors_by_name()
@@ -127,6 +131,7 @@ defmodule ColorPalette.PrecompileHook do
       def io_ansi_colors, do: @io_ansi_colors
       def color_name_dot_com_colors, do: @color_name_dot_com_colors
       def color_data_api_colors, do: @color_data_api_colors
+      def colorhexa_colors, do: @colorhexa_colors
       def all_colors, do: @all_colors
 
       def color_names_to_colors, do: @color_names_to_colors
