@@ -232,6 +232,26 @@ defmodule ColorPalette.DataConverterTest do
     test "drops the é on :tenné" do
       assert DataConverter.color_name_to_atom("Tenné") == :tenn
     end
+
+    test "drops the '(mostly black)' phrase on colorhexa names" do
+      assert DataConverter.color_name_to_atom("Very dark gray (mostly black)") == :very_dark_gray
+    end
+
+    test "drops the '(or mostly pure)' phrase on colorhexa names" do
+      assert DataConverter.color_name_to_atom("Pure (or mostly pure) orange") == :pure_orange
+    end
+
+    test "changes the '[Pink tone]' phrase on colorhexa names" do
+      assert DataConverter.color_name_to_atom("Very pale red [Pink tone]") == :very_pale_red_pink_tone
+    end
+
+    test "changes the '[Olive tone]' phrase on colorhexa names" do
+      assert DataConverter.color_name_to_atom("Dark yellow [Olive tone]") == :dark_yellow_olive_tone
+    end
+
+    test "splits colorhexa names with a dash" do
+      assert DataConverter.color_name_to_atom("Very light cyan - lime green") == [:very_light_cyan, :lime_green]
+    end
   end
 
   describe "find_by_hex" do

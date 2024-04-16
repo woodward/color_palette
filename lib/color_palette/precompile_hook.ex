@@ -63,6 +63,11 @@ defmodule ColorPalette.PrecompileHook do
                                    |> File.read!()
                                    |> Jason.decode!(keys: :atoms)
 
+      @colorhexa_raw_data __DIR__
+                          |> Path.join("color_palette/data/colorhexa.com_colors.json")
+                          |> File.read!()
+                          |> Jason.decode!(keys: :atoms)
+
       @color_data_api_colors @color_data_api_raw_data
                              |> DataConverter.convert_color_data_api_raw_data(@ansi_color_codes)
 
@@ -114,6 +119,7 @@ defmodule ColorPalette.PrecompileHook do
       def color_groups_to_ansi_color_codes, do: @color_groups_to_ansi_color_codes
       def color_data_api_raw_data, do: @color_data_api_raw_data
       def color_name_dot_com_raw_data, do: @color_name_dot_com_raw_data
+      def colorhexa_raw_data, do: @colorhexa_raw_data
       def ansi_color_codes, do: @ansi_color_codes
       def color_groups, do: @color_groups
       def io_ansi_color_names, do: @io_ansi_color_names
