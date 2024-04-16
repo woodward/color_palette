@@ -78,6 +78,12 @@ defmodule ColorPalette.PrecompileHook do
                     @color_name_dot_com_colors
                   )
 
+      # @all_colors DataConverter.multi_zip([
+      #               DataConverter.pad_list(@io_ansi_colors, nil, 256),
+      #               @color_data_api_colors,
+      #               @color_name_dot_com_colors
+      #             ])
+
       @colors_grouped_by_name @all_colors |> DataConverter.group_colors_by_name()
 
       @color_names_to_colors @colors_grouped_by_name

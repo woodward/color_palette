@@ -361,6 +361,46 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "multi_zip" do
+    test "combines the lists" do
+      list1 = ["a", "b", "c"]
+      list2 = ["dog", "cat", "squirrel"]
+      list3 = ["apple", "orange", "banana"]
+
+      combined = DataConverter.multi_zip([list1, list2, list3])
+
+      assert combined == [
+               ["a", "dog", "apple"],
+               ["b", "cat", "orange"],
+               ["c", "squirrel", "banana"]
+             ]
+    end
+
+    test "combines the lists, even if the elements are themselves list" do
+      list1 = ["a", ["b", "c"], ["d", "e"]]
+      list2 = ["dog", "cat", "squirrel"]
+      list3 = ["apple", ["orange", "tangerine"], "banana"]
+
+      combined = DataConverter.multi_zip([list1, list2, list3])
+
+      assert combined == [
+               ["a", "dog", "apple"],
+               ["b", "c", "cat", "orange", "tangerine"],
+               ["d", "e", "squirrel", "banana"]
+             ]
+    end
+
+    test "raises an exception if the lists are not of the same length" do
+      list1 = ["a", "b", "c"]
+      list2 = ["dog", "cat"]
+      list3 = ["apple", "orange", "banana"]
+
+      assert_raise RuntimeError, fn ->
+        DataConverter.multi_zip([list1, list2, list3])
+      end
+    end
+  end
+
   describe "combine_colors/3" do
     test "merges the three types of colors" do
       io_ansi_colors = ColorPalette.io_ansi_colors()
@@ -584,6 +624,14 @@ defmodule ColorPalette.DataConverterTest do
 
       assert first_five == [0, 1, 2, 3, 4]
       assert last_five == [171, 200, 234, 244, 246]
+    end
+  end
+
+  describe "pad_list" do
+    test "pads a list to a certain length with a certain value" do
+      list = ["apple", "orange"]
+      padded = DataConverter.pad_list(list, "banana", 5)
+      assert padded == ["apple", "orange", "banana", "banana", "banana"]
     end
   end
 
