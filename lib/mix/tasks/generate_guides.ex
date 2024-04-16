@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.GenerateGuides do
   use Mix.Task
 
-  @shortdoc "Generates the guides"
+  @shortdoc "Generates the Color Groups and ANSI Color Codes guides"
 
   alias ColorPalette.GuideGenerator
 

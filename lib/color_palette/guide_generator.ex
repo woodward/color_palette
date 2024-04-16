@@ -71,7 +71,7 @@ defmodule ColorPalette.GuideGenerator do
     :ok
   end
 
-  def color_block(code, hex, text_contrast_color, color_names, color_group, div_styling) do
+  defp color_block(code, hex, text_contrast_color, color_names, color_group, div_styling) do
     color_names_label = if length(color_names) == 1, do: "Color Name", else: "Color Names"
 
     color_group_link =
@@ -92,7 +92,7 @@ defmodule ColorPalette.GuideGenerator do
     """
   end
 
-  def color_links(color_names, hex, text_contrast_color) do
+  defp color_links(color_names, hex, text_contrast_color) do
     color_names
     |> Enum.map(fn color_name ->
       """
@@ -104,9 +104,9 @@ defmodule ColorPalette.GuideGenerator do
     |> Enum.join(", ")
   end
 
-  def color_group_name(nil, count), do: "## Uncategorized (#{count} colors)\n\n"
+  defp color_group_name(nil, count), do: "## Uncategorized (#{count} colors)\n\n"
 
-  def color_group_name(name, count) do
+  defp color_group_name(name, count) do
     names =
       name
       |> Atom.to_string()

@@ -113,22 +113,26 @@ defmodule ColorPalette.PrecompileHook do
 
       def color_groups_to_ansi_color_codes, do: @color_groups_to_ansi_color_codes
       def color_data_api_raw_data, do: @color_data_api_raw_data
-
-      def color_groups, do: @color_groups
-      def ansi_color_codes, do: @ansi_color_codes
       def color_name_dot_com_raw_data, do: @color_name_dot_com_raw_data
+      def ansi_color_codes, do: @ansi_color_codes
+      def color_groups, do: @color_groups
+      def io_ansi_color_names, do: @io_ansi_color_names
 
       def io_ansi_colors, do: @io_ansi_colors
-      def io_ansi_color_names, do: @io_ansi_color_names
       def color_name_dot_com_colors, do: @color_name_dot_com_colors
       def color_data_api_colors, do: @color_data_api_colors
       def all_colors, do: @all_colors
+
       def color_names_to_colors, do: @color_names_to_colors
       def colors_grouped_by_name, do: @colors_grouped_by_name
       def unique_color_names_to_colors, do: @unique_color_names_to_colors
-
       def ansi_color_codes_without_names, do: @ansi_color_codes_without_names
+
       def generated_names_for_unnamed_colors, do: @generated_names_for_unnamed_colors
+
+      @doc """
+      A map between the color name and the `ColorPalette.Color` struct
+      """
       def colors, do: @colors
     end
   end

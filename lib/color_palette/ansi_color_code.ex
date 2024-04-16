@@ -5,5 +5,10 @@ defmodule ColorPalette.ANSIColorCode do
   A struct which represents one of the 256 ANSI colors.
   """
 
-  defstruct [:code, :hex, :rgb, :color_group]
+  defstruct [
+    :code,
+    :color_group,
+    :hex,
+    :rgb
+  ]
 end

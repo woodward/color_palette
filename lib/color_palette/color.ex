@@ -3,6 +3,8 @@ defmodule ColorPalette.Color do
   A struct which represents one of the 255 ANSI colors.
   """
 
+  alias ColorPalette.ExDocUtils
+
   defstruct [
     :name,
     :ansi_color_code,
@@ -29,9 +31,9 @@ defmodule ColorPalette.Color do
       <div style="color: #{text_contrast_color}; background-color: ##{hex}; padding: 1rem;">
       Sets foreground color to <strong>#{name}</strong>.  Hex value ##{hex}.  ANSI code #{code}.
       <br />
-      #{ColorPalette.ExDocUtils.source_links(source, text_contrast_color, hex, name)}
-      #{ColorPalette.ExDocUtils.same_as(same_as, hex, text_contrast_color)}
-      #{ColorPalette.ExDocUtils.color_group_link(hex, text_contrast_color, color_group)}
+      #{ExDocUtils.source_links(source, text_contrast_color, hex, name)}
+      #{ExDocUtils.same_as(same_as, hex, text_contrast_color)}
+      #{ExDocUtils.color_group_link(hex, text_contrast_color, color_group)}
       </div>
       """
       def unquote(name)() do
@@ -52,7 +54,7 @@ defmodule ColorPalette.Color do
       See
       <a style="color: #{text_contrast_color}; background-color: ##{hex}; padding-right: 3rem;" href="https://hexdocs.pm/elixir/IO.ANSI.html##{name}/0">IO.ANSI.#{name}/0</a>
       Hex value ##{hex}.  ANSI code #{code}.
-      #{ColorPalette.ExDocUtils.color_group_link(hex, text_contrast_color, color_group)}
+      #{ExDocUtils.color_group_link(hex, text_contrast_color, color_group)}
       </div>
       """
       defdelegate unquote(name)(), to: IO.ANSI

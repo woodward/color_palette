@@ -3,6 +3,8 @@ defmodule ColorPalette.ExDocUtils do
   Utility functions for building the ExDocs
   """
 
+  alias ColorPalette.DataURLs
+
   def same_as([], _hex, _text_contrast_color), do: ""
 
   def same_as(same_as, hex, text_contrast_color) do
@@ -33,7 +35,7 @@ defmodule ColorPalette.ExDocUtils do
   end
 
   def source_link(source, text_contrast_color, hex, name) do
-    url = ColorPalette.DataURLs.url(source, hex: hex, name: name)
+    url = DataURLs.url(source, hex: hex, name: name)
 
     """
     <a style="color: #{text_contrast_color}; background-color: ##{hex}; padding-right: 2rem;" href="#{url}">#{source_name(source)}</a>

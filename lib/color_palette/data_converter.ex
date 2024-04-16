@@ -105,7 +105,6 @@ defmodule ColorPalette.DataConverter do
     colors
     |> Enum.map(fn colors_for_code ->
       colors_for_code = colors_for_code |> List.flatten()
-
       names_for_this_code = colors_for_code |> Enum.map(& &1.name)
 
       colors_for_code
@@ -200,13 +199,13 @@ defmodule ColorPalette.DataConverter do
     MapSet.difference(ansi_color_code_set, color_set) |> MapSet.to_list() |> Enum.sort()
   end
 
-  def create_names_for_missing_colors(all_colors, missing_names) do
-    missing_names
+  def create_names_for_missing_colors(all_colors, color_codes_missing_names) do
+    color_codes_missing_names
     |> Enum.reduce(%{}, fn code, acc ->
       color = all_colors |> Enum.at(code) |> List.first()
-      rename = color_name_to_atom("#{color.name}_#{color.ansi_color_code.hex}")
-      renamed_color = %{color | name: rename}
-      Map.put(acc, rename, renamed_color)
+      name_with_hex_suffix = color_name_to_atom("#{color.name}_#{color.ansi_color_code.hex}")
+      renamed_color = %{color | name: name_with_hex_suffix}
+      Map.put(acc, name_with_hex_suffix, renamed_color)
     end)
   end
 end
