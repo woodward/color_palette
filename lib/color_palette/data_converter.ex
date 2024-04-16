@@ -83,11 +83,16 @@ defmodule ColorPalette.DataConverter do
       |> String.downcase()
       |> String.replace(~r/\(.*\)/, "")
       |> String.replace(~r/é/, "")
+      |> String.replace("[", "_")
+      |> String.replace("]", "")
       |> String.split("/")
       |> Enum.map(&String.trim(&1))
+      |> Enum.map(&String.split(&1, " - "))
+      |> List.flatten()
       |> Enum.map(&String.replace(&1, " ", "_"))
       |> Enum.map(&String.replace(&1, "'", ""))
       |> Enum.map(&String.replace(&1, "-", "_"))
+      |> Enum.map(&String.replace(&1, "__", "_"))
       |> Enum.map(&String.to_atom(&1))
 
     if length(names) == 1, do: List.first(names), else: names
