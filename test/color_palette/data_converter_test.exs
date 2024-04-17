@@ -142,8 +142,8 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "group_colors_by_name" do
-    test "groups colors by name" do
+  describe "annotate_same_as_field" do
+    test "groups by name" do
       colors = [
         [
           %ColorPalette.Color{
@@ -201,7 +201,7 @@ defmodule ColorPalette.DataConverterTest do
         ]
       ]
 
-      grouped = DataConverter.group_colors_by_name(colors)
+      grouped = DataConverter.annotate_same_as_field(colors)
 
       assert grouped == [
                [

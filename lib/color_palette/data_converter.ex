@@ -113,7 +113,7 @@ defmodule ColorPalette.DataConverter do
     end
   end
 
-  def group_colors_by_name(colors) do
+  def annotate_same_as_field(colors) do
     colors
     |> Enum.map(fn colors_for_code ->
       colors_for_code = colors_for_code |> List.flatten()

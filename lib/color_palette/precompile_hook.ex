@@ -87,9 +87,9 @@ defmodule ColorPalette.PrecompileHook do
                     @colorhexa_colors
                   ])
 
-      @colors_grouped_by_name @all_colors |> DataConverter.group_colors_by_name()
+      @all_colors_with_field_same_as @all_colors |> DataConverter.annotate_same_as_field()
 
-      @color_names_to_colors @colors_grouped_by_name
+      @color_names_to_colors @all_colors_with_field_same_as
                              |> List.flatten()
                              |> DataConverter.color_names_to_colors()
 
@@ -135,7 +135,7 @@ defmodule ColorPalette.PrecompileHook do
       def all_colors, do: @all_colors
 
       def color_names_to_colors, do: @color_names_to_colors
-      def colors_grouped_by_name, do: @colors_grouped_by_name
+      def all_colors_with_field_same_as, do: @all_colors_with_field_same_as
       def unique_color_names_to_colors, do: @unique_color_names_to_colors
       def ansi_color_codes_without_names, do: @ansi_color_codes_without_names
 
