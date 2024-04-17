@@ -32,4 +32,11 @@ defmodule ColorPalette do
   def find_by_hex(hex), do: colors() |> DataConverter.find_by_hex(hex)
 
   def find_by_code(code), do: colors() |> DataConverter.find_by_code(code)
+
+  def find_by_source(source) do
+    colors()
+    |> Enum.filter(fn {_name, color} ->
+      source in color.source
+    end)
+  end
 end

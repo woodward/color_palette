@@ -48,6 +48,32 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  def convert_colorhexa_raw_data(colorhexa_raw_data, ansi_color_codes) do
+    Enum.zip(colorhexa_raw_data, ansi_color_codes)
+    |> Enum.map(fn {raw_color, ansi_color_code} ->
+      name = raw_color.name |> color_name_to_atom()
+      names = if is_list(name), do: name, else: [name]
+
+      colors =
+        names
+        |> Enum.map(fn color_name ->
+          text_contrast_color = if String.contains?(Atom.to_string(color_name), "very_dark"), do: :white, else: :black
+
+          %Color{
+            name: color_name,
+            ansi_color_code: ansi_color_code,
+            text_contrast_color: text_contrast_color,
+            source: [:colorhexa],
+            exact_name_match?: false,
+            distance_to_closest_named_hex: nil,
+            closest_named_hex: nil
+          }
+        end)
+
+      if length(colors) == 1, do: List.first(colors), else: colors
+    end)
+  end
+
   def convert_ansi_colors_to_colors(ansi_colors, ansi_color_codes) do
     Enum.zip(ansi_colors, ansi_color_codes)
     |> Enum.map(fn {ansi_color, ansi_color_code} ->

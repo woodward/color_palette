@@ -113,7 +113,7 @@ defmodule ColorPaletteTest do
   describe "colors" do
     test "returns the map of color names to color data" do
       colors = ColorPalette.colors()
-      assert length(Map.keys(colors)) == 396
+      assert length(Map.keys(colors)) == 505
     end
   end
 
@@ -128,7 +128,6 @@ defmodule ColorPaletteTest do
   end
 
   describe "standard IO.ANSI colors" do
-    # Temporarily skip while refactor is in progress
     @tag :skip
     test "verify that the functions exist in ColorPalette for the standard IO.ANSI functions and that their outputs match" do
       assert ColorPalette.black() == IO.ANSI.black()
@@ -212,15 +211,15 @@ defmodule ColorPaletteTest do
       color = ColorPalette.find_by_hex("5f5fff")
 
       assert color == %Color{
-               ansi_color_code: %ANSIColorCode{code: 63, hex: "5f5fff", rgb: [95, 95, 255], color_group: :blue},
-               name: :very_light_blue,
-               same_as: [:blueberry],
-               source: [:color_name_dot_com],
-               text_contrast_color: :white,
-               closest_named_hex: nil,
-               distance_to_closest_named_hex: nil,
+               ansi_color_code: %ANSIColorCode{code: 63, color_group: :blue, hex: "5f5fff", rgb: [95, 95, 255]},
+               closest_named_hex: "4F86F7",
+               distance_to_closest_named_hex: 3579,
                exact_name_match?: false,
-               renamed?: false
+               name: :blueberry_5f5fff,
+               renamed?: true,
+               same_as: [],
+               source: [:color_data_api],
+               text_contrast_color: :white
              }
     end
   end
@@ -230,16 +229,32 @@ defmodule ColorPaletteTest do
       color = ColorPalette.find_by_code(63)
 
       assert color == %Color{
-               ansi_color_code: %ANSIColorCode{code: 63, hex: "5f5fff", rgb: [95, 95, 255], color_group: :blue},
-               name: :very_light_blue,
-               same_as: [:blueberry],
-               source: [:color_name_dot_com],
-               text_contrast_color: :white,
-               closest_named_hex: nil,
-               distance_to_closest_named_hex: nil,
+               ansi_color_code: %ANSIColorCode{code: 63, color_group: :blue, hex: "5f5fff", rgb: [95, 95, 255]},
+               closest_named_hex: "4F86F7",
+               distance_to_closest_named_hex: 3579,
                exact_name_match?: false,
-               renamed?: false
+               name: :blueberry_5f5fff,
+               renamed?: true,
+               same_as: [],
+               source: [:color_data_api],
+               text_contrast_color: :white
              }
+    end
+  end
+
+  describe "find_by_source" do
+    test "returns the colors as defined by their source" do
+      io_ansi_colors = ColorPalette.find_by_source(:io_ansi)
+      assert length(io_ansi_colors) == 13
+
+      color_name_dot_com_colors = ColorPalette.find_by_source(:color_name_dot_com)
+      assert length(color_name_dot_com_colors) == 206
+
+      color_data_api_colors = ColorPalette.find_by_source(:color_data_api)
+      assert length(color_data_api_colors) == 197
+
+      colorhexa_colors = ColorPalette.find_by_source(:colorhexa)
+      assert length(colorhexa_colors) == 129
     end
   end
 

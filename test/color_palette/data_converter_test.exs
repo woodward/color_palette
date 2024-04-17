@@ -74,6 +74,74 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "convert_colorhexa_raw_data" do
+    test "adds color names and text_contrast_color to ansi color codes" do
+      color_codes = ColorPalette.ansi_color_codes()
+      color_data = ColorPalette.colorhexa_raw_data()
+
+      colors = DataConverter.convert_colorhexa_raw_data(color_data, color_codes)
+      assert length(colors) == 256
+
+      # ------------------------
+
+      black = colors |> List.first()
+
+      assert black.name == :black
+      assert black.ansi_color_code == %ANSIColorCode{code: 0, hex: "000000", color_group: :gray_and_black, rgb: [0, 0, 0]}
+      assert black.text_contrast_color == :black
+      assert black.source == [:colorhexa]
+      assert black.closest_named_hex == nil
+      assert black.distance_to_closest_named_hex == nil
+      assert black.exact_name_match? == false
+
+      # ------------------------
+
+      pure_violet = colors |> Enum.at(129)
+
+      assert pure_violet.name == :pure_violet
+
+      assert pure_violet.ansi_color_code == %ANSIColorCode{
+               code: 129,
+               color_group: :purple_violet_and_magenta,
+               hex: "af00ff",
+               rgb: [175, 0, 255]
+             }
+
+      assert pure_violet.text_contrast_color == :black
+      assert pure_violet.source == [:colorhexa]
+      assert pure_violet.closest_named_hex == nil
+      assert pure_violet.distance_to_closest_named_hex == nil
+      assert pure_violet.exact_name_match? == false
+
+      # ------------------------
+
+      pale_cyan_and_lime_green = colors |> Enum.at(158)
+
+      assert pale_cyan_and_lime_green == [
+               %Color{
+                 name: :pale_cyan,
+                 ansi_color_code: %ANSIColorCode{code: 158, color_group: :cyan, hex: "afffd7", rgb: [175, 255, 215]},
+                 text_contrast_color: :black,
+                 closest_named_hex: nil,
+                 distance_to_closest_named_hex: nil,
+                 source: [:colorhexa],
+                 exact_name_match?: false,
+                 same_as: []
+               },
+               %Color{
+                 name: :lime_green,
+                 ansi_color_code: %ANSIColorCode{code: 158, color_group: :cyan, hex: "afffd7", rgb: [175, 255, 215]},
+                 text_contrast_color: :black,
+                 closest_named_hex: nil,
+                 distance_to_closest_named_hex: nil,
+                 source: [:colorhexa],
+                 exact_name_match?: false,
+                 same_as: []
+               }
+             ]
+    end
+  end
+
   describe "group_colors_by_name" do
     test "groups colors by name" do
       colors = [
@@ -564,13 +632,13 @@ defmodule ColorPalette.DataConverterTest do
 
       color_codes_with_no_names = DataConverter.unnamed_ansi_color_codes(colors)
 
-      assert length(color_codes_with_no_names) == 34
+      assert length(color_codes_with_no_names) == 33
 
       first_five = color_codes_with_no_names |> Enum.take(5)
       last_five = color_codes_with_no_names |> Enum.reverse() |> Enum.take(5) |> Enum.sort()
 
-      assert first_five == [0, 1, 2, 3, 4]
-      assert last_five == [171, 200, 234, 244, 246]
+      assert first_five == [0, 1, 3, 4, 6]
+      assert last_five == [163, 171, 234, 244, 246]
     end
   end
 
