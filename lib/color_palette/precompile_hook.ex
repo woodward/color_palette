@@ -80,14 +80,14 @@ defmodule ColorPalette.PrecompileHook do
       @io_ansi_colors @io_ansi_color_names
                       |> DataConverter.convert_ansi_colors_to_colors(@ansi_color_codes)
 
-      @all_colors DataConverter.multi_zip([
-                    @io_ansi_colors ++ List.duplicate(nil, 256 - 16),
-                    @color_data_api_colors,
-                    @color_name_dot_com_colors,
-                    @colorhexa_colors
-                  ])
+      @all_colors_initial DataConverter.multi_zip([
+                            @io_ansi_colors ++ List.duplicate(nil, 256 - 16),
+                            @color_data_api_colors,
+                            @color_name_dot_com_colors,
+                            @colorhexa_colors
+                          ])
 
-      @all_colors_with_field_same_as @all_colors |> DataConverter.annotate_same_as_field()
+      @all_colors_with_field_same_as @all_colors_initial |> DataConverter.annotate_same_as_field()
 
       @color_names_to_colors @all_colors_with_field_same_as
                              |> List.flatten()
@@ -101,7 +101,7 @@ defmodule ColorPalette.PrecompileHook do
 
       @ansi_color_codes_without_names @unique_color_names_to_colors |> DataConverter.unnamed_ansi_color_codes()
       @generated_names_for_unnamed_colors DataConverter.create_names_for_missing_colors(
-                                            @all_colors,
+                                            @all_colors_initial,
                                             @ansi_color_codes_without_names
                                           )
       @colors @unique_color_names_to_colors |> Map.merge(@generated_names_for_unnamed_colors)
@@ -132,7 +132,7 @@ defmodule ColorPalette.PrecompileHook do
       def color_name_dot_com_colors, do: @color_name_dot_com_colors
       def color_data_api_colors, do: @color_data_api_colors
       def colorhexa_colors, do: @colorhexa_colors
-      def all_colors, do: @all_colors
+      def all_colors_initial, do: @all_colors_initial
 
       def color_names_to_colors, do: @color_names_to_colors
       def all_colors_with_field_same_as, do: @all_colors_with_field_same_as

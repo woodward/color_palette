@@ -644,7 +644,7 @@ defmodule ColorPalette.DataConverterTest do
 
   describe "create_names_for_missing_colors/2" do
     test "creates some fake color names for colors which are missing names" do
-      all_colors = ColorPalette.all_colors()
+      all_colors = ColorPalette.all_colors_initial()
       missing_names = [22, 33]
       new_names = DataConverter.create_names_for_missing_colors(all_colors, missing_names)
 
