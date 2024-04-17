@@ -74,12 +74,12 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "convert_colorhexa_raw_data" do
+  describe "convert colorhexa raw data" do
     test "adds color names and text_contrast_color to ansi color codes" do
       color_codes = ColorPalette.ansi_color_codes()
       color_data = ColorPalette.colorhexa_raw_data()
 
-      colors = DataConverter.convert_colorhexa_raw_data(color_data, color_codes)
+      colors = DataConverter.convert_raw_color_data_to_colors(color_data, color_codes, :colorhexa)
       assert length(colors) == 256
 
       # ------------------------
@@ -404,12 +404,12 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "convert_color_name_dot_com_raw_data" do
+  describe "convert_raw_color_data_to_colors" do
     test "converts the color-name.com raw data into a list of Colors" do
       ansi_codes = ColorPalette.ansi_color_codes()
       color_name_dot_com_raw_data = ColorPalette.color_name_dot_com_raw_data()
 
-      colors = DataConverter.convert_color_name_dot_com_raw_data(color_name_dot_com_raw_data, ansi_codes)
+      colors = DataConverter.convert_raw_color_data_to_colors(color_name_dot_com_raw_data, ansi_codes, :color_name_dot_com)
 
       assert length(colors) == 256
 

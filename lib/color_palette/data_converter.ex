@@ -31,24 +31,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  def convert_color_name_dot_com_raw_data(color_name_dot_com_raw_data, ansi_color_codes) do
-    Enum.zip(color_name_dot_com_raw_data, ansi_color_codes)
-    |> Enum.map(fn {raw_color, ansi_color_code} ->
-      color_name = raw_color.name |> color_name_to_atom()
-
-      %Color{
-        name: color_name,
-        ansi_color_code: ansi_color_code,
-        text_contrast_color: String.to_atom(raw_color.text_contrast_color),
-        source: [:color_name_dot_com],
-        exact_name_match?: false,
-        distance_to_closest_named_hex: nil,
-        closest_named_hex: nil
-      }
-    end)
-  end
-
-  def convert_colorhexa_raw_data(colorhexa_raw_data, ansi_color_codes) do
+  def convert_raw_color_data_to_colors(colorhexa_raw_data, ansi_color_codes, source) do
     Enum.zip(colorhexa_raw_data, ansi_color_codes)
     |> Enum.map(fn {raw_color, ansi_color_code} ->
       name = raw_color.name |> color_name_to_atom()
@@ -61,7 +44,7 @@ defmodule ColorPalette.DataConverter do
             name: color_name,
             ansi_color_code: ansi_color_code,
             text_contrast_color: String.to_atom(raw_color.text_contrast_color),
-            source: [:colorhexa],
+            source: [source],
             exact_name_match?: false,
             distance_to_closest_named_hex: nil,
             closest_named_hex: nil

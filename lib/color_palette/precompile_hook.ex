@@ -72,10 +72,10 @@ defmodule ColorPalette.PrecompileHook do
                              |> DataConverter.convert_color_data_api_raw_data(@ansi_color_codes)
 
       @color_name_dot_com_colors @color_name_dot_com_raw_data
-                                 |> DataConverter.convert_color_name_dot_com_raw_data(@ansi_color_codes)
+                                 |> DataConverter.convert_raw_color_data_to_colors(@ansi_color_codes, :color_name_dot_com)
 
       @colorhexa_colors @colorhexa_raw_data
-                        |> DataConverter.convert_colorhexa_raw_data(@ansi_color_codes)
+                        |> DataConverter.convert_raw_color_data_to_colors(@ansi_color_codes, :colorhexa)
 
       @io_ansi_colors @io_ansi_color_names
                       |> DataConverter.convert_ansi_colors_to_colors(@ansi_color_codes)
