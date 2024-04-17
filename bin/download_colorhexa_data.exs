@@ -22,7 +22,7 @@ IO.puts(light_green() <> "There are #{length(color_codes)} color codes" <> reset
 code = color_codes |> hd()
 IO.puts(light_blue() <> "First color code: #{inspect(code)}" <> reset())
 
-# color_codes = color_codes |> Enum.take(20)
+# color_codes = color_codes |> Enum.take(30)
 sleep_time_ms = 600
 
 color_data =
@@ -42,9 +42,13 @@ color_data =
         result_body |> Floki.find(".color-description p strong") |> Floki.text()
       end
 
-    IO.puts(light_green() <> "Hex: #{hex}  Color Name: #{color_name}" <> reset())
+    # There will be either a class "tw" (for text-white) or "tb" (for text-black) on this element:
+    demo_element_classes = result_body |> Floki.find("#preview .color-demo .demo p") |> Floki.attribute("class")
+    text_contrast_color = if "tw" in demo_element_classes, do: :white, else: :black
+
+    IO.puts(light_green() <> "Hex: #{hex}  text_contrast_color: #{text_contrast_color}  Color Name: #{color_name}" <> reset())
     Process.sleep(sleep_time_ms)
-    {[%{name: color_name, hex: hex, code: ansi_color_code.code}] ++ data, index + 1}
+    {[%{name: color_name, hex: hex, code: ansi_color_code.code, text_contrast_color: text_contrast_color}] ++ data, index + 1}
   end)
   |> elem(0)
   |> Enum.reverse()

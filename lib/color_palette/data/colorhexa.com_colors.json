@@ -2,1281 +2,1537 @@
   {
     "code": 0,
     "name": "Black",
-    "hex": "000000"
+    "hex": "000000",
+    "text_contrast_color": "white"
   },
   {
     "code": 1,
     "name": "Maroon",
-    "hex": "800000"
+    "hex": "800000",
+    "text_contrast_color": "white"
   },
   {
     "code": 2,
     "name": "Office green",
-    "hex": "008000"
+    "hex": "008000",
+    "text_contrast_color": "white"
   },
   {
     "code": 3,
     "name": "Olive",
-    "hex": "808000"
+    "hex": "808000",
+    "text_contrast_color": "white"
   },
   {
     "code": 4,
     "name": "Navy blue",
-    "hex": "000080"
+    "hex": "000080",
+    "text_contrast_color": "white"
   },
   {
     "code": 5,
     "name": "Purple",
-    "hex": "800080"
+    "hex": "800080",
+    "text_contrast_color": "white"
   },
   {
     "code": 6,
     "name": "Teal",
-    "hex": "008080"
+    "hex": "008080",
+    "text_contrast_color": "white"
   },
   {
     "code": 7,
     "name": "Silver",
-    "hex": "c0c0c0"
+    "hex": "c0c0c0",
+    "text_contrast_color": "black"
   },
   {
     "code": 8,
     "name": "Gray",
-    "hex": "808080"
+    "hex": "808080",
+    "text_contrast_color": "white"
   },
   {
     "code": 9,
     "name": "Red",
-    "hex": "ff0000"
+    "hex": "ff0000",
+    "text_contrast_color": "white"
   },
   {
     "code": 10,
     "name": "Green",
-    "hex": "00ff00"
+    "hex": "00ff00",
+    "text_contrast_color": "black"
   },
   {
     "code": 11,
     "name": "Yellow",
-    "hex": "ffff00"
+    "hex": "ffff00",
+    "text_contrast_color": "black"
   },
   {
     "code": 12,
     "name": "Blue",
-    "hex": "0000ff"
+    "hex": "0000ff",
+    "text_contrast_color": "white"
   },
   {
     "code": 13,
     "name": "Magenta",
-    "hex": "ff00ff"
+    "hex": "ff00ff",
+    "text_contrast_color": "white"
   },
   {
     "code": 14,
     "name": "Cyan",
-    "hex": "00ffff"
+    "hex": "00ffff",
+    "text_contrast_color": "black"
   },
   {
     "code": 15,
     "name": "White",
-    "hex": "ffffff"
+    "hex": "ffffff",
+    "text_contrast_color": "black"
   },
   {
     "code": 16,
     "name": "Black",
-    "hex": "000000"
+    "hex": "000000",
+    "text_contrast_color": "white"
   },
   {
     "code": 17,
     "name": "Very dark blue",
-    "hex": "00005f"
+    "hex": "00005f",
+    "text_contrast_color": "white"
   },
   {
     "code": 18,
     "name": "Dark blue",
-    "hex": "000087"
+    "hex": "000087",
+    "text_contrast_color": "white"
   },
   {
     "code": 19,
     "name": "Dark blue",
-    "hex": "0000af"
+    "hex": "0000af",
+    "text_contrast_color": "white"
   },
   {
     "code": 20,
     "name": "Strong blue",
-    "hex": "0000d7"
+    "hex": "0000d7",
+    "text_contrast_color": "white"
   },
   {
     "code": 21,
     "name": "Blue",
-    "hex": "0000ff"
+    "hex": "0000ff",
+    "text_contrast_color": "white"
   },
   {
     "code": 22,
     "name": "Very dark lime green",
-    "hex": "005f00"
+    "hex": "005f00",
+    "text_contrast_color": "white"
   },
   {
     "code": 23,
     "name": "Very dark cyan",
-    "hex": "005f5f"
+    "hex": "005f5f",
+    "text_contrast_color": "white"
   },
   {
     "code": 24,
     "name": "Dark blue",
-    "hex": "005f87"
+    "hex": "005f87",
+    "text_contrast_color": "white"
   },
   {
     "code": 25,
     "name": "Dark blue",
-    "hex": "005faf"
+    "hex": "005faf",
+    "text_contrast_color": "white"
   },
   {
     "code": 26,
     "name": "Strong blue",
-    "hex": "005fd7"
+    "hex": "005fd7",
+    "text_contrast_color": "white"
   },
   {
     "code": 27,
     "name": "Pure (or mostly pure) blue",
-    "hex": "005fff"
+    "hex": "005fff",
+    "text_contrast_color": "white"
   },
   {
     "code": 28,
     "name": "Dark lime green",
-    "hex": "008700"
+    "hex": "008700",
+    "text_contrast_color": "white"
   },
   {
     "code": 29,
     "name": "Dark cyan - lime green",
-    "hex": "00875f"
+    "hex": "00875f",
+    "text_contrast_color": "white"
   },
   {
     "code": 30,
     "name": "Dark cyan",
-    "hex": "008787"
+    "hex": "008787",
+    "text_contrast_color": "white"
   },
   {
     "code": 31,
     "name": "Dark cyan",
-    "hex": "0087af"
+    "hex": "0087af",
+    "text_contrast_color": "white"
   },
   {
     "code": 32,
     "name": "Strong blue",
-    "hex": "0087d7"
+    "hex": "0087d7",
+    "text_contrast_color": "white"
   },
   {
     "code": 33,
     "name": "Pure (or mostly pure) blue",
-    "hex": "0087ff"
+    "hex": "0087ff",
+    "text_contrast_color": "white"
   },
   {
     "code": 34,
     "name": "Dark lime green",
-    "hex": "00af00"
+    "hex": "00af00",
+    "text_contrast_color": "white"
   },
   {
     "code": 35,
     "name": "Dark cyan - lime green",
-    "hex": "00af5f"
+    "hex": "00af5f",
+    "text_contrast_color": "white"
   },
   {
     "code": 36,
     "name": "Dark cyan",
-    "hex": "00af87"
+    "hex": "00af87",
+    "text_contrast_color": "white"
   },
   {
     "code": 37,
     "name": "Dark cyan",
-    "hex": "00afaf"
+    "hex": "00afaf",
+    "text_contrast_color": "white"
   },
   {
     "code": 38,
     "name": "Strong cyan",
-    "hex": "00afd7"
+    "hex": "00afd7",
+    "text_contrast_color": "white"
   },
   {
     "code": 39,
     "name": "Pure (or mostly pure) blue",
-    "hex": "00afff"
+    "hex": "00afff",
+    "text_contrast_color": "black"
   },
   {
     "code": 40,
     "name": "Strong lime green",
-    "hex": "00d700"
+    "hex": "00d700",
+    "text_contrast_color": "white"
   },
   {
     "code": 41,
     "name": "Strong cyan - lime green",
-    "hex": "00d75f"
+    "hex": "00d75f",
+    "text_contrast_color": "black"
   },
   {
     "code": 42,
     "name": "Strong cyan - lime green",
-    "hex": "00d787"
+    "hex": "00d787",
+    "text_contrast_color": "black"
   },
   {
     "code": 43,
     "name": "Strong cyan",
-    "hex": "00d7af"
+    "hex": "00d7af",
+    "text_contrast_color": "black"
   },
   {
     "code": 44,
     "name": "Strong cyan",
-    "hex": "00d7d7"
+    "hex": "00d7d7",
+    "text_contrast_color": "black"
   },
   {
     "code": 45,
     "name": "Pure (or mostly pure) cyan",
-    "hex": "00d7ff"
+    "hex": "00d7ff",
+    "text_contrast_color": "black"
   },
   {
     "code": 46,
     "name": "Green",
-    "hex": "00ff00"
+    "hex": "00ff00",
+    "text_contrast_color": "black"
   },
   {
     "code": 47,
     "name": "Pure (or mostly pure) cyan - lime green",
-    "hex": "00ff5f"
+    "hex": "00ff5f",
+    "text_contrast_color": "black"
   },
   {
     "code": 48,
     "name": "Pure (or mostly pure) cyan - lime green",
-    "hex": "00ff87"
+    "hex": "00ff87",
+    "text_contrast_color": "black"
   },
   {
     "code": 49,
     "name": "Pure (or mostly pure) cyan - lime green",
-    "hex": "00ffaf"
+    "hex": "00ffaf",
+    "text_contrast_color": "black"
   },
   {
     "code": 50,
     "name": "Pure (or mostly pure) cyan",
-    "hex": "00ffd7"
+    "hex": "00ffd7",
+    "text_contrast_color": "black"
   },
   {
     "code": 51,
     "name": "Cyan",
-    "hex": "00ffff"
+    "hex": "00ffff",
+    "text_contrast_color": "black"
   },
   {
     "code": 52,
     "name": "Very dark red",
-    "hex": "5f0000"
+    "hex": "5f0000",
+    "text_contrast_color": "white"
   },
   {
     "code": 53,
     "name": "Very dark magenta",
-    "hex": "5f005f"
+    "hex": "5f005f",
+    "text_contrast_color": "white"
   },
   {
     "code": 54,
     "name": "Dark violet",
-    "hex": "5f0087"
+    "hex": "5f0087",
+    "text_contrast_color": "white"
   },
   {
     "code": 55,
     "name": "Dark violet",
-    "hex": "5f00af"
+    "hex": "5f00af",
+    "text_contrast_color": "white"
   },
   {
     "code": 56,
     "name": "Strong violet",
-    "hex": "5f00d7"
+    "hex": "5f00d7",
+    "text_contrast_color": "white"
   },
   {
     "code": 57,
     "name": "Pure (or mostly pure) violet",
-    "hex": "5f00ff"
+    "hex": "5f00ff",
+    "text_contrast_color": "white"
   },
   {
     "code": 58,
     "name": "Very dark yellow [Olive tone]",
-    "hex": "5f5f00"
+    "hex": "5f5f00",
+    "text_contrast_color": "white"
   },
   {
     "code": 59,
     "name": "Very dark gray",
-    "hex": "5f5f5f"
+    "hex": "5f5f5f",
+    "text_contrast_color": "white"
   },
   {
     "code": 60,
     "name": "Mostly desaturated dark blue",
-    "hex": "5f5f87"
+    "hex": "5f5f87",
+    "text_contrast_color": "white"
   },
   {
     "code": 61,
     "name": "Dark moderate blue",
-    "hex": "5f5faf"
+    "hex": "5f5faf",
+    "text_contrast_color": "white"
   },
   {
     "code": 62,
     "name": "Moderate blue",
-    "hex": "5f5fd7"
+    "hex": "5f5fd7",
+    "text_contrast_color": "white"
   },
   {
     "code": 63,
     "name": "Light blue",
-    "hex": "5f5fff"
+    "hex": "5f5fff",
+    "text_contrast_color": "white"
   },
   {
     "code": 64,
     "name": "Dark green",
-    "hex": "5f8700"
+    "hex": "5f8700",
+    "text_contrast_color": "white"
   },
   {
     "code": 65,
     "name": "Mostly desaturated dark lime green",
-    "hex": "5f875f"
+    "hex": "5f875f",
+    "text_contrast_color": "white"
   },
   {
     "code": 66,
     "name": "Mostly desaturated dark cyan",
-    "hex": "5f8787"
+    "hex": "5f8787",
+    "text_contrast_color": "white"
   },
   {
     "code": 67,
     "name": "Dark moderate blue",
-    "hex": "5f87af"
+    "hex": "5f87af",
+    "text_contrast_color": "white"
   },
   {
     "code": 68,
     "name": "Moderate blue",
-    "hex": "5f87d7"
+    "hex": "5f87d7",
+    "text_contrast_color": "black"
   },
   {
     "code": 69,
     "name": "Light blue",
-    "hex": "5f87ff"
+    "hex": "5f87ff",
+    "text_contrast_color": "black"
   },
   {
     "code": 70,
     "name": "Dark green",
-    "hex": "5faf00"
+    "hex": "5faf00",
+    "text_contrast_color": "black"
   },
   {
     "code": 71,
     "name": "Dark moderate lime green",
-    "hex": "5faf5f"
+    "hex": "5faf5f",
+    "text_contrast_color": "black"
   },
   {
     "code": 72,
     "name": "Dark moderate cyan - lime green",
-    "hex": "5faf87"
+    "hex": "5faf87",
+    "text_contrast_color": "black"
   },
   {
     "code": 73,
     "name": "Dark moderate cyan",
-    "hex": "5fafaf"
+    "hex": "5fafaf",
+    "text_contrast_color": "black"
   },
   {
     "code": 74,
     "name": "Moderate blue",
-    "hex": "5fafd7"
+    "hex": "5fafd7",
+    "text_contrast_color": "black"
   },
   {
     "code": 75,
     "name": "Light blue",
-    "hex": "5fafff"
+    "hex": "5fafff",
+    "text_contrast_color": "black"
   },
   {
     "code": 76,
     "name": "Strong green",
-    "hex": "5fd700"
+    "hex": "5fd700",
+    "text_contrast_color": "black"
   },
   {
     "code": 77,
     "name": "Moderate lime green",
-    "hex": "5fd75f"
+    "hex": "5fd75f",
+    "text_contrast_color": "black"
   },
   {
     "code": 78,
     "name": "Moderate cyan - lime green",
-    "hex": "5fd787"
+    "hex": "5fd787",
+    "text_contrast_color": "black"
   },
   {
     "code": 79,
     "name": "Moderate cyan - lime green",
-    "hex": "5fd7af"
+    "hex": "5fd7af",
+    "text_contrast_color": "black"
   },
   {
     "code": 80,
     "name": "Moderate cyan",
-    "hex": "5fd7d7"
+    "hex": "5fd7d7",
+    "text_contrast_color": "black"
   },
   {
     "code": 81,
     "name": "Light blue",
-    "hex": "5fd7ff"
+    "hex": "5fd7ff",
+    "text_contrast_color": "black"
   },
   {
     "code": 82,
     "name": "Pure (or mostly pure) green",
-    "hex": "5fff00"
+    "hex": "5fff00",
+    "text_contrast_color": "black"
   },
   {
     "code": 83,
     "name": "Light lime green",
-    "hex": "5fff5f"
+    "hex": "5fff5f",
+    "text_contrast_color": "black"
   },
   {
     "code": 84,
     "name": "Light cyan - lime green",
-    "hex": "5fff87"
+    "hex": "5fff87",
+    "text_contrast_color": "black"
   },
   {
     "code": 85,
     "name": "Light cyan - lime green",
-    "hex": "5fffaf"
+    "hex": "5fffaf",
+    "text_contrast_color": "black"
   },
   {
     "code": 86,
     "name": "Light cyan - lime green",
-    "hex": "5fffd7"
+    "hex": "5fffd7",
+    "text_contrast_color": "black"
   },
   {
     "code": 87,
     "name": "Light cyan",
-    "hex": "5fffff"
+    "hex": "5fffff",
+    "text_contrast_color": "black"
   },
   {
     "code": 88,
     "name": "Dark red",
-    "hex": "870000"
+    "hex": "870000",
+    "text_contrast_color": "white"
   },
   {
     "code": 89,
     "name": "Dark pink",
-    "hex": "87005f"
+    "hex": "87005f",
+    "text_contrast_color": "white"
   },
   {
     "code": 90,
     "name": "Dark magenta",
-    "hex": "870087"
+    "hex": "870087",
+    "text_contrast_color": "white"
   },
   {
     "code": 91,
     "name": "Dark magenta",
-    "hex": "8700af"
+    "hex": "8700af",
+    "text_contrast_color": "white"
   },
   {
     "code": 92,
     "name": "Strong violet",
-    "hex": "8700d7"
+    "hex": "8700d7",
+    "text_contrast_color": "white"
   },
   {
     "code": 93,
     "name": "Pure (or mostly pure) violet",
-    "hex": "8700ff"
+    "hex": "8700ff",
+    "text_contrast_color": "white"
   },
   {
     "code": 94,
     "name": "Dark orange [Brown tone]",
-    "hex": "875f00"
+    "hex": "875f00",
+    "text_contrast_color": "white"
   },
   {
     "code": 95,
     "name": "Mostly desaturated dark red",
-    "hex": "875f5f"
+    "hex": "875f5f",
+    "text_contrast_color": "white"
   },
   {
     "code": 96,
     "name": "Mostly desaturated dark magenta",
-    "hex": "875f87"
+    "hex": "875f87",
+    "text_contrast_color": "white"
   },
   {
     "code": 97,
     "name": "Dark moderate violet",
-    "hex": "875faf"
+    "hex": "875faf",
+    "text_contrast_color": "white"
   },
   {
     "code": 98,
     "name": "Moderate violet",
-    "hex": "875fd7"
+    "hex": "875fd7",
+    "text_contrast_color": "white"
   },
   {
     "code": 99,
     "name": "Light violet",
-    "hex": "875fff"
+    "hex": "875fff",
+    "text_contrast_color": "white"
   },
   {
     "code": 100,
     "name": "Dark yellow [Olive tone]",
-    "hex": "878700"
+    "hex": "878700",
+    "text_contrast_color": "white"
   },
   {
     "code": 101,
     "name": "Mostly desaturated dark yellow",
-    "hex": "87875f"
+    "hex": "87875f",
+    "text_contrast_color": "black"
   },
   {
     "code": 102,
     "name": "Dark gray",
-    "hex": "878787"
+    "hex": "878787",
+    "text_contrast_color": "black"
   },
   {
     "code": 103,
     "name": "Dark grayish blue",
-    "hex": "8787af"
+    "hex": "8787af",
+    "text_contrast_color": "black"
   },
   {
     "code": 104,
     "name": "Slightly desaturated blue",
-    "hex": "8787d7"
+    "hex": "8787d7",
+    "text_contrast_color": "black"
   },
   {
     "code": 105,
     "name": "Very light blue",
-    "hex": "8787ff"
+    "hex": "8787ff",
+    "text_contrast_color": "black"
   },
   {
     "code": 106,
     "name": "Dark yellow [Olive tone]",
-    "hex": "87af00"
+    "hex": "87af00",
+    "text_contrast_color": "black"
   },
   {
     "code": 107,
     "name": "Dark moderate green",
-    "hex": "87af5f"
+    "hex": "87af5f",
+    "text_contrast_color": "black"
   },
   {
     "code": 108,
     "name": "Dark grayish lime green",
-    "hex": "87af87"
+    "hex": "87af87",
+    "text_contrast_color": "black"
   },
   {
     "code": 109,
     "name": "Dark grayish cyan",
-    "hex": "87afaf"
+    "hex": "87afaf",
+    "text_contrast_color": "black"
   },
   {
     "code": 110,
     "name": "Slightly desaturated blue",
-    "hex": "87afd7"
+    "hex": "87afd7",
+    "text_contrast_color": "black"
   },
   {
     "code": 111,
     "name": "Very light blue",
-    "hex": "87afff"
+    "hex": "87afff",
+    "text_contrast_color": "black"
   },
   {
     "code": 112,
     "name": "Strong green",
-    "hex": "87d700"
+    "hex": "87d700",
+    "text_contrast_color": "black"
   },
   {
     "code": 113,
     "name": "Moderate green",
-    "hex": "87d75f"
+    "hex": "87d75f",
+    "text_contrast_color": "black"
   },
   {
     "code": 114,
     "name": "Slightly desaturated lime green",
-    "hex": "87d787"
+    "hex": "87d787",
+    "text_contrast_color": "black"
   },
   {
     "code": 115,
     "name": "Slightly desaturated cyan - lime green",
-    "hex": "87d7af"
+    "hex": "87d7af",
+    "text_contrast_color": "black"
   },
   {
     "code": 116,
     "name": "Slightly desaturated cyan",
-    "hex": "87d7d7"
+    "hex": "87d7d7",
+    "text_contrast_color": "black"
   },
   {
     "code": 117,
     "name": "Very light blue",
-    "hex": "87d7ff"
+    "hex": "87d7ff",
+    "text_contrast_color": "black"
   },
   {
     "code": 118,
     "name": "Pure (or mostly pure) green",
-    "hex": "87ff00"
+    "hex": "87ff00",
+    "text_contrast_color": "black"
   },
   {
     "code": 119,
     "name": "Light green",
-    "hex": "87ff5f"
+    "hex": "87ff5f",
+    "text_contrast_color": "black"
   },
   {
     "code": 120,
     "name": "Very light lime green",
-    "hex": "87ff87"
+    "hex": "87ff87",
+    "text_contrast_color": "black"
   },
   {
     "code": 121,
     "name": "Very light cyan - lime green",
-    "hex": "87ffaf"
+    "hex": "87ffaf",
+    "text_contrast_color": "black"
   },
   {
     "code": 122,
     "name": "Very light cyan - lime green",
-    "hex": "87ffd7"
+    "hex": "87ffd7",
+    "text_contrast_color": "black"
   },
   {
     "code": 123,
     "name": "Very light cyan",
-    "hex": "87ffff"
+    "hex": "87ffff",
+    "text_contrast_color": "black"
   },
   {
     "code": 124,
     "name": "Dark red",
-    "hex": "af0000"
+    "hex": "af0000",
+    "text_contrast_color": "white"
   },
   {
     "code": 125,
     "name": "Dark pink",
-    "hex": "af005f"
+    "hex": "af005f",
+    "text_contrast_color": "white"
   },
   {
     "code": 126,
     "name": "Dark magenta",
-    "hex": "af0087"
+    "hex": "af0087",
+    "text_contrast_color": "white"
   },
   {
     "code": 127,
     "name": "Dark magenta",
-    "hex": "af00af"
+    "hex": "af00af",
+    "text_contrast_color": "white"
   },
   {
     "code": 128,
     "name": "Strong magenta",
-    "hex": "af00d7"
+    "hex": "af00d7",
+    "text_contrast_color": "white"
   },
   {
     "code": 129,
     "name": "Pure (or mostly pure) violet",
-    "hex": "af00ff"
+    "hex": "af00ff",
+    "text_contrast_color": "white"
   },
   {
     "code": 130,
     "name": "Dark orange [Brown tone]",
-    "hex": "af5f00"
+    "hex": "af5f00",
+    "text_contrast_color": "white"
   },
   {
     "code": 131,
     "name": "Dark moderate red",
-    "hex": "af5f5f"
+    "hex": "af5f5f",
+    "text_contrast_color": "white"
   },
   {
     "code": 132,
     "name": "Dark moderate pink",
-    "hex": "af5f87"
+    "hex": "af5f87",
+    "text_contrast_color": "white"
   },
   {
     "code": 133,
     "name": "Dark moderate magenta",
-    "hex": "af5faf"
+    "hex": "af5faf",
+    "text_contrast_color": "white"
   },
   {
     "code": 134,
     "name": "Moderate violet",
-    "hex": "af5fd7"
+    "hex": "af5fd7",
+    "text_contrast_color": "black"
   },
   {
     "code": 135,
     "name": "Light violet",
-    "hex": "af5fff"
+    "hex": "af5fff",
+    "text_contrast_color": "black"
   },
   {
     "code": 136,
     "name": "Dark yellow [Olive tone]",
-    "hex": "af8700"
+    "hex": "af8700",
+    "text_contrast_color": "black"
   },
   {
     "code": 137,
     "name": "Dark moderate orange",
-    "hex": "af875f"
+    "hex": "af875f",
+    "text_contrast_color": "black"
   },
   {
     "code": 138,
     "name": "Dark grayish red",
-    "hex": "af8787"
+    "hex": "af8787",
+    "text_contrast_color": "black"
   },
   {
     "code": 139,
     "name": "Dark grayish magenta",
-    "hex": "af87af"
+    "hex": "af87af",
+    "text_contrast_color": "black"
   },
   {
     "code": 140,
     "name": "Slightly desaturated violet",
-    "hex": "af87d7"
+    "hex": "af87d7",
+    "text_contrast_color": "black"
   },
   {
     "code": 141,
     "name": "Very light violet",
-    "hex": "af87ff"
+    "hex": "af87ff",
+    "text_contrast_color": "black"
   },
   {
     "code": 142,
     "name": "Dark yellow [Olive tone]",
-    "hex": "afaf00"
+    "hex": "afaf00",
+    "text_contrast_color": "black"
   },
   {
     "code": 143,
     "name": "Dark moderate yellow",
-    "hex": "afaf5f"
+    "hex": "afaf5f",
+    "text_contrast_color": "black"
   },
   {
     "code": 144,
     "name": "Dark grayish yellow",
-    "hex": "afaf87"
+    "hex": "afaf87",
+    "text_contrast_color": "black"
   },
   {
     "code": 145,
     "name": "Gray",
-    "hex": "afafaf"
+    "hex": "afafaf",
+    "text_contrast_color": "black"
   },
   {
     "code": 146,
     "name": "Grayish blue",
-    "hex": "afafd7"
+    "hex": "afafd7",
+    "text_contrast_color": "black"
   },
   {
     "code": 147,
     "name": "Pale blue",
-    "hex": "afafff"
+    "hex": "afafff",
+    "text_contrast_color": "black"
   },
   {
     "code": 148,
     "name": "Strong yellow",
-    "hex": "afd700"
+    "hex": "afd700",
+    "text_contrast_color": "black"
   },
   {
     "code": 149,
     "name": "Moderate green",
-    "hex": "afd75f"
+    "hex": "afd75f",
+    "text_contrast_color": "black"
   },
   {
     "code": 150,
     "name": "Slightly desaturated green",
-    "hex": "afd787"
+    "hex": "afd787",
+    "text_contrast_color": "black"
   },
   {
     "code": 151,
     "name": "Grayish lime green",
-    "hex": "afd7af"
+    "hex": "afd7af",
+    "text_contrast_color": "black"
   },
   {
     "code": 152,
     "name": "Grayish cyan",
-    "hex": "afd7d7"
+    "hex": "afd7d7",
+    "text_contrast_color": "black"
   },
   {
     "code": 153,
     "name": "Pale blue",
-    "hex": "afd7ff"
+    "hex": "afd7ff",
+    "text_contrast_color": "black"
   },
   {
     "code": 154,
     "name": "Pure (or mostly pure) green",
-    "hex": "afff00"
+    "hex": "afff00",
+    "text_contrast_color": "black"
   },
   {
     "code": 155,
     "name": "Light green",
-    "hex": "afff5f"
+    "hex": "afff5f",
+    "text_contrast_color": "black"
   },
   {
     "code": 156,
     "name": "Very light green",
-    "hex": "afff87"
+    "hex": "afff87",
+    "text_contrast_color": "black"
   },
   {
     "code": 157,
     "name": "Pale lime green",
-    "hex": "afffaf"
+    "hex": "afffaf",
+    "text_contrast_color": "black"
   },
   {
     "code": 158,
     "name": "Pale cyan - lime green",
-    "hex": "afffd7"
+    "hex": "afffd7",
+    "text_contrast_color": "black"
   },
   {
     "code": 159,
     "name": "Pale cyan",
-    "hex": "afffff"
+    "hex": "afffff",
+    "text_contrast_color": "black"
   },
   {
     "code": 160,
     "name": "Strong red",
-    "hex": "d70000"
+    "hex": "d70000",
+    "text_contrast_color": "white"
   },
   {
     "code": 161,
     "name": "Strong pink",
-    "hex": "d7005f"
+    "hex": "d7005f",
+    "text_contrast_color": "white"
   },
   {
     "code": 162,
     "name": "Strong pink",
-    "hex": "d70087"
+    "hex": "d70087",
+    "text_contrast_color": "white"
   },
   {
     "code": 163,
     "name": "Strong magenta",
-    "hex": "d700af"
+    "hex": "d700af",
+    "text_contrast_color": "white"
   },
   {
     "code": 164,
     "name": "Strong magenta",
-    "hex": "d700d7"
+    "hex": "d700d7",
+    "text_contrast_color": "white"
   },
   {
     "code": 165,
     "name": "Pure (or mostly pure) magenta",
-    "hex": "d700ff"
+    "hex": "d700ff",
+    "text_contrast_color": "white"
   },
   {
     "code": 166,
     "name": "Strong orange",
-    "hex": "d75f00"
+    "hex": "d75f00",
+    "text_contrast_color": "white"
   },
   {
     "code": 167,
     "name": "Moderate red",
-    "hex": "d75f5f"
+    "hex": "d75f5f",
+    "text_contrast_color": "black"
   },
   {
     "code": 168,
     "name": "Moderate pink",
-    "hex": "d75f87"
+    "hex": "d75f87",
+    "text_contrast_color": "black"
   },
   {
     "code": 169,
     "name": "Moderate pink",
-    "hex": "d75faf"
+    "hex": "d75faf",
+    "text_contrast_color": "black"
   },
   {
     "code": 170,
     "name": "Moderate magenta",
-    "hex": "d75fd7"
+    "hex": "d75fd7",
+    "text_contrast_color": "black"
   },
   {
     "code": 171,
     "name": "Light magenta",
-    "hex": "d75fff"
+    "hex": "d75fff",
+    "text_contrast_color": "black"
   },
   {
     "code": 172,
     "name": "Strong orange",
-    "hex": "d78700"
+    "hex": "d78700",
+    "text_contrast_color": "black"
   },
   {
     "code": 173,
     "name": "Moderate orange",
-    "hex": "d7875f"
+    "hex": "d7875f",
+    "text_contrast_color": "black"
   },
   {
     "code": 174,
     "name": "Slightly desaturated red",
-    "hex": "d78787"
+    "hex": "d78787",
+    "text_contrast_color": "black"
   },
   {
     "code": 175,
     "name": "Slightly desaturated pink",
-    "hex": "d787af"
+    "hex": "d787af",
+    "text_contrast_color": "black"
   },
   {
     "code": 176,
     "name": "Slightly desaturated magenta",
-    "hex": "d787d7"
+    "hex": "d787d7",
+    "text_contrast_color": "black"
   },
   {
     "code": 177,
     "name": "Very light violet",
-    "hex": "d787ff"
+    "hex": "d787ff",
+    "text_contrast_color": "black"
   },
   {
     "code": 178,
     "name": "Strong yellow",
-    "hex": "d7af00"
+    "hex": "d7af00",
+    "text_contrast_color": "black"
   },
   {
     "code": 179,
     "name": "Moderate orange",
-    "hex": "d7af5f"
+    "hex": "d7af5f",
+    "text_contrast_color": "black"
   },
   {
     "code": 180,
     "name": "Slightly desaturated orange",
-    "hex": "d7af87"
+    "hex": "d7af87",
+    "text_contrast_color": "black"
   },
   {
     "code": 181,
     "name": "Grayish red",
-    "hex": "d7afaf"
+    "hex": "d7afaf",
+    "text_contrast_color": "black"
   },
   {
     "code": 182,
     "name": "Grayish magenta",
-    "hex": "d7afd7"
+    "hex": "d7afd7",
+    "text_contrast_color": "black"
   },
   {
     "code": 183,
     "name": "Pale violet",
-    "hex": "d7afff"
+    "hex": "d7afff",
+    "text_contrast_color": "black"
   },
   {
     "code": 184,
     "name": "Strong yellow",
-    "hex": "d7d700"
+    "hex": "d7d700",
+    "text_contrast_color": "black"
   },
   {
     "code": 185,
     "name": "Moderate yellow",
-    "hex": "d7d75f"
+    "hex": "d7d75f",
+    "text_contrast_color": "black"
   },
   {
     "code": 186,
     "name": "Slightly desaturated yellow",
-    "hex": "d7d787"
+    "hex": "d7d787",
+    "text_contrast_color": "black"
   },
   {
     "code": 187,
     "name": "Grayish yellow",
-    "hex": "d7d7af"
+    "hex": "d7d7af",
+    "text_contrast_color": "black"
   },
   {
     "code": 188,
     "name": "Light gray",
-    "hex": "d7d7d7"
+    "hex": "d7d7d7",
+    "text_contrast_color": "black"
   },
   {
     "code": 189,
     "name": "Very pale blue",
-    "hex": "d7d7ff"
+    "hex": "d7d7ff",
+    "text_contrast_color": "black"
   },
   {
     "code": 190,
     "name": "Pure (or mostly pure) yellow",
-    "hex": "d7ff00"
+    "hex": "d7ff00",
+    "text_contrast_color": "black"
   },
   {
     "code": 191,
     "name": "Light yellow",
-    "hex": "d7ff5f"
+    "hex": "d7ff5f",
+    "text_contrast_color": "black"
   },
   {
     "code": 192,
     "name": "Very light green",
-    "hex": "d7ff87"
+    "hex": "d7ff87",
+    "text_contrast_color": "black"
   },
   {
     "code": 193,
     "name": "Pale green",
-    "hex": "d7ffaf"
+    "hex": "d7ffaf",
+    "text_contrast_color": "black"
   },
   {
     "code": 194,
     "name": "Very pale lime green",
-    "hex": "d7ffd7"
+    "hex": "d7ffd7",
+    "text_contrast_color": "black"
   },
   {
     "code": 195,
     "name": "Very pale cyan",
-    "hex": "d7ffff"
+    "hex": "d7ffff",
+    "text_contrast_color": "black"
   },
   {
     "code": 196,
     "name": "Red",
-    "hex": "ff0000"
+    "hex": "ff0000",
+    "text_contrast_color": "white"
   },
   {
     "code": 197,
     "name": "Pure (or mostly pure) pink",
-    "hex": "ff005f"
+    "hex": "ff005f",
+    "text_contrast_color": "white"
   },
   {
     "code": 198,
     "name": "Pure (or mostly pure) pink",
-    "hex": "ff0087"
+    "hex": "ff0087",
+    "text_contrast_color": "white"
   },
   {
     "code": 199,
     "name": "Pure (or mostly pure) pink",
-    "hex": "ff00af"
+    "hex": "ff00af",
+    "text_contrast_color": "white"
   },
   {
     "code": 200,
     "name": "Pure (or mostly pure) magenta",
-    "hex": "ff00d7"
+    "hex": "ff00d7",
+    "text_contrast_color": "white"
   },
   {
     "code": 201,
     "name": "Magenta",
-    "hex": "ff00ff"
+    "hex": "ff00ff",
+    "text_contrast_color": "white"
   },
   {
     "code": 202,
     "name": "Pure (or mostly pure) orange",
-    "hex": "ff5f00"
+    "hex": "ff5f00",
+    "text_contrast_color": "black"
   },
   {
     "code": 203,
     "name": "Light red",
-    "hex": "ff5f5f"
+    "hex": "ff5f5f",
+    "text_contrast_color": "black"
   },
   {
     "code": 204,
     "name": "Light red",
-    "hex": "ff5f87"
+    "hex": "ff5f87",
+    "text_contrast_color": "black"
   },
   {
     "code": 205,
     "name": "Light pink",
-    "hex": "ff5faf"
+    "hex": "ff5faf",
+    "text_contrast_color": "black"
   },
   {
     "code": 206,
     "name": "Light pink",
-    "hex": "ff5fd7"
+    "hex": "ff5fd7",
+    "text_contrast_color": "black"
   },
   {
     "code": 207,
     "name": "Light magenta",
-    "hex": "ff5fff"
+    "hex": "ff5fff",
+    "text_contrast_color": "black"
   },
   {
     "code": 208,
     "name": "Pure (or mostly pure) orange",
-    "hex": "ff8700"
+    "hex": "ff8700",
+    "text_contrast_color": "black"
   },
   {
     "code": 209,
     "name": "Light orange",
-    "hex": "ff875f"
+    "hex": "ff875f",
+    "text_contrast_color": "black"
   },
   {
     "code": 210,
     "name": "Very light red",
-    "hex": "ff8787"
+    "hex": "ff8787",
+    "text_contrast_color": "black"
   },
   {
     "code": 211,
     "name": "Very light pink",
-    "hex": "ff87af"
+    "hex": "ff87af",
+    "text_contrast_color": "black"
   },
   {
     "code": 212,
     "name": "Very light pink",
-    "hex": "ff87d7"
+    "hex": "ff87d7",
+    "text_contrast_color": "black"
   },
   {
     "code": 213,
     "name": "Very light magenta",
-    "hex": "ff87ff"
+    "hex": "ff87ff",
+    "text_contrast_color": "black"
   },
   {
     "code": 214,
     "name": "Pure (or mostly pure) orange",
-    "hex": "ffaf00"
+    "hex": "ffaf00",
+    "text_contrast_color": "black"
   },
   {
     "code": 215,
     "name": "Light orange",
-    "hex": "ffaf5f"
+    "hex": "ffaf5f",
+    "text_contrast_color": "black"
   },
   {
     "code": 216,
     "name": "Very light orange",
-    "hex": "ffaf87"
+    "hex": "ffaf87",
+    "text_contrast_color": "black"
   },
   {
     "code": 217,
     "name": "Pale red [Pink tone]",
-    "hex": "ffafaf"
+    "hex": "ffafaf",
+    "text_contrast_color": "black"
   },
   {
     "code": 218,
     "name": "Pale pink",
-    "hex": "ffafd7"
+    "hex": "ffafd7",
+    "text_contrast_color": "black"
   },
   {
     "code": 219,
     "name": "Pale magenta",
-    "hex": "ffafff"
+    "hex": "ffafff",
+    "text_contrast_color": "black"
   },
   {
     "code": 220,
     "name": "Gold",
-    "hex": "ffd700"
+    "hex": "ffd700",
+    "text_contrast_color": "black"
   },
   {
     "code": 221,
     "name": "Light yellow",
-    "hex": "ffd75f"
+    "hex": "ffd75f",
+    "text_contrast_color": "black"
   },
   {
     "code": 222,
     "name": "Very light orange",
-    "hex": "ffd787"
+    "hex": "ffd787",
+    "text_contrast_color": "black"
   },
   {
     "code": 223,
     "name": "Pale orange",
-    "hex": "ffd7af"
+    "hex": "ffd7af",
+    "text_contrast_color": "black"
   },
   {
     "code": 224,
     "name": "Very pale red [Pink tone]",
-    "hex": "ffd7d7"
+    "hex": "ffd7d7",
+    "text_contrast_color": "black"
   },
   {
     "code": 225,
     "name": "Very pale magenta",
-    "hex": "ffd7ff"
+    "hex": "ffd7ff",
+    "text_contrast_color": "black"
   },
   {
     "code": 226,
     "name": "Yellow",
-    "hex": "ffff00"
+    "hex": "ffff00",
+    "text_contrast_color": "black"
   },
   {
     "code": 227,
     "name": "Light yellow",
-    "hex": "ffff5f"
+    "hex": "ffff5f",
+    "text_contrast_color": "black"
   },
   {
     "code": 228,
     "name": "Very light yellow",
-    "hex": "ffff87"
+    "hex": "ffff87",
+    "text_contrast_color": "black"
   },
   {
     "code": 229,
     "name": "Pale yellow",
-    "hex": "ffffaf"
+    "hex": "ffffaf",
+    "text_contrast_color": "black"
   },
   {
     "code": 230,
     "name": "Very pale yellow",
-    "hex": "ffffd7"
+    "hex": "ffffd7",
+    "text_contrast_color": "black"
   },
   {
     "code": 231,
     "name": "White",
-    "hex": "ffffff"
+    "hex": "ffffff",
+    "text_contrast_color": "black"
   },
   {
     "code": 232,
     "name": "Very dark gray (mostly black)",
-    "hex": "080808"
+    "hex": "080808",
+    "text_contrast_color": "white"
   },
   {
     "code": 233,
     "name": "Very dark gray (mostly black)",
-    "hex": "121212"
+    "hex": "121212",
+    "text_contrast_color": "white"
   },
   {
     "code": 234,
     "name": "Very dark gray (mostly black)",
-    "hex": "1c1c1c"
+    "hex": "1c1c1c",
+    "text_contrast_color": "white"
   },
   {
     "code": 235,
     "name": "Very dark gray (mostly black)",
-    "hex": "262626"
+    "hex": "262626",
+    "text_contrast_color": "white"
   },
   {
     "code": 236,
     "name": "Very dark gray (mostly black)",
-    "hex": "303030"
+    "hex": "303030",
+    "text_contrast_color": "white"
   },
   {
     "code": 237,
     "name": "Very dark gray",
-    "hex": "3a3a3a"
+    "hex": "3a3a3a",
+    "text_contrast_color": "white"
   },
   {
     "code": 238,
     "name": "Very dark gray",
-    "hex": "444444"
+    "hex": "444444",
+    "text_contrast_color": "white"
   },
   {
     "code": 239,
     "name": "Very dark gray",
-    "hex": "4e4e4e"
+    "hex": "4e4e4e",
+    "text_contrast_color": "white"
   },
   {
     "code": 240,
     "name": "Very dark gray",
-    "hex": "585858"
+    "hex": "585858",
+    "text_contrast_color": "white"
   },
   {
     "code": 241,
     "name": "Very dark gray",
-    "hex": "626262"
+    "hex": "626262",
+    "text_contrast_color": "white"
   },
   {
     "code": 242,
     "name": "Very dark gray",
-    "hex": "6c6c6c"
+    "hex": "6c6c6c",
+    "text_contrast_color": "white"
   },
   {
     "code": 243,
     "name": "Dark gray",
-    "hex": "767676"
+    "hex": "767676",
+    "text_contrast_color": "white"
   },
   {
     "code": 244,
     "name": "Gray",
-    "hex": "808080"
+    "hex": "808080",
+    "text_contrast_color": "white"
   },
   {
     "code": 245,
     "name": "Dark gray",
-    "hex": "8a8a8a"
+    "hex": "8a8a8a",
+    "text_contrast_color": "black"
   },
   {
     "code": 246,
     "name": "Dark gray",
-    "hex": "949494"
+    "hex": "949494",
+    "text_contrast_color": "black"
   },
   {
     "code": 247,
     "name": "Dark gray",
-    "hex": "9e9e9e"
+    "hex": "9e9e9e",
+    "text_contrast_color": "black"
   },
   {
     "code": 248,
     "name": "Gray",
-    "hex": "a8a8a8"
+    "hex": "a8a8a8",
+    "text_contrast_color": "black"
   },
   {
     "code": 249,
     "name": "Gray",
-    "hex": "b2b2b2"
+    "hex": "b2b2b2",
+    "text_contrast_color": "black"
   },
   {
     "code": 250,
     "name": "Gray",
-    "hex": "bcbcbc"
+    "hex": "bcbcbc",
+    "text_contrast_color": "black"
   },
   {
     "code": 251,
     "name": "Light gray",
-    "hex": "c6c6c6"
+    "hex": "c6c6c6",
+    "text_contrast_color": "black"
   },
   {
     "code": 252,
     "name": "Light gray",
-    "hex": "d0d0d0"
+    "hex": "d0d0d0",
+    "text_contrast_color": "black"
   },
   {
     "code": 253,
     "name": "Very light gray",
-    "hex": "dadada"
+    "hex": "dadada",
+    "text_contrast_color": "black"
   },
   {
     "code": 254,
     "name": "Very light gray",
-    "hex": "e4e4e4"
+    "hex": "e4e4e4",
+    "text_contrast_color": "black"
   },
   {
     "code": 255,
     "name": "Very light gray",
-    "hex": "eeeeee"
+    "hex": "eeeeee",
+    "text_contrast_color": "black"
   }
 ]
