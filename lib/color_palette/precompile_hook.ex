@@ -69,7 +69,7 @@ defmodule ColorPalette.PrecompileHook do
                           |> Jason.decode!(keys: :atoms)
 
       @color_data_api_colors @color_data_api_raw_data
-                             |> DataConverter.convert_color_data_api_raw_data(@ansi_color_codes)
+                             |> DataConverter.convert_raw_color_data_api_to_colors(@ansi_color_codes)
 
       @color_name_dot_com_colors @color_name_dot_com_raw_data
                                  |> DataConverter.convert_raw_color_data_to_colors(@ansi_color_codes, :color_name_dot_com)

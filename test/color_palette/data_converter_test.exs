@@ -6,12 +6,12 @@ defmodule ColorPalette.DataConverterTest do
   alias ColorPalette.ANSIColorCode
   alias ColorPalette.Color
 
-  describe "convert_color_data_api_raw_data" do
+  describe "convert_raw_color_data_api_to_colors" do
     test "adds color names and text_contrast_color to ansi color codes" do
       color_codes = ColorPalette.ansi_color_codes()
       color_data = ColorPalette.color_data_api_raw_data()
 
-      colors = DataConverter.convert_color_data_api_raw_data(color_data, color_codes)
+      colors = DataConverter.convert_raw_color_data_api_to_colors(color_data, color_codes)
       assert length(colors) == 256
 
       # ------------------------

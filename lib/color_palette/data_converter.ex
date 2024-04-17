@@ -3,7 +3,7 @@ defmodule ColorPalette.DataConverter do
 
   alias ColorPalette.Color
 
-  def convert_color_data_api_raw_data(color_data, ansi_color_codes) do
+  def convert_raw_color_data_api_to_colors(color_data, ansi_color_codes) do
     Enum.zip(color_data, ansi_color_codes)
     |> Enum.map(fn {raw_color, ansi_color_code} ->
       name = raw_color.name.value |> color_name_to_atom()
