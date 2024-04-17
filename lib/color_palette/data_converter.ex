@@ -57,12 +57,10 @@ defmodule ColorPalette.DataConverter do
       colors =
         names
         |> Enum.map(fn color_name ->
-          text_contrast_color = if String.contains?(Atom.to_string(color_name), "very_dark"), do: :white, else: :black
-
           %Color{
             name: color_name,
             ansi_color_code: ansi_color_code,
-            text_contrast_color: text_contrast_color,
+            text_contrast_color: String.to_atom(raw_color.text_contrast_color),
             source: [:colorhexa],
             exact_name_match?: false,
             distance_to_closest_named_hex: nil,

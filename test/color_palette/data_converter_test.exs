@@ -88,7 +88,7 @@ defmodule ColorPalette.DataConverterTest do
 
       assert black.name == :black
       assert black.ansi_color_code == %ANSIColorCode{code: 0, hex: "000000", color_group: :gray_and_black, rgb: [0, 0, 0]}
-      assert black.text_contrast_color == :black
+      assert black.text_contrast_color == :white
       assert black.source == [:colorhexa]
       assert black.closest_named_hex == nil
       assert black.distance_to_closest_named_hex == nil
@@ -107,7 +107,7 @@ defmodule ColorPalette.DataConverterTest do
                rgb: [175, 0, 255]
              }
 
-      assert pure_violet.text_contrast_color == :black
+      assert pure_violet.text_contrast_color == :white
       assert pure_violet.source == [:colorhexa]
       assert pure_violet.closest_named_hex == nil
       assert pure_violet.distance_to_closest_named_hex == nil
