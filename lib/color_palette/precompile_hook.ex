@@ -8,6 +8,9 @@ defmodule ColorPalette.PrecompileHook do
 
   defmacro __before_compile__(_env) do
     quote do
+      # --------------------------------------------------------------------------------------------
+      # Raw Data:
+
       @io_ansi_color_names __DIR__
                            |> Path.join("color_palette/data/ansi_color_names.json")
                            |> File.read!()
@@ -53,6 +56,8 @@ defmodule ColorPalette.PrecompileHook do
       @color_groups_to_ansi_color_codes @ansi_color_codes
                                         |> DataConverter.color_groups_to_ansi_color_codes(@color_groups)
 
+      # ------------------------
+
       @color_data_api_raw_data __DIR__
                                |> Path.join("color_palette/data/color_data_api_colors.json")
                                |> File.read!()
@@ -68,6 +73,9 @@ defmodule ColorPalette.PrecompileHook do
                           |> File.read!()
                           |> Jason.decode!(keys: :atoms)
 
+      # --------------------------------------------------------------------------------------------
+      # Raw Data Converted to `ColorPalette.Color` structs:
+
       @color_data_api_colors @color_data_api_raw_data
                              |> DataConverter.convert_raw_color_data_api_to_colors(@ansi_color_codes)
 
@@ -79,6 +87,9 @@ defmodule ColorPalette.PrecompileHook do
 
       @io_ansi_colors @io_ansi_color_names
                       |> DataConverter.convert_ansi_colors_to_colors(@ansi_color_codes)
+
+      # --------------------------------------------------------------------------------------------
+      # Tranformation & Grouping of the Data:
 
       @all_colors_initial DataConverter.multi_zip([
                             @io_ansi_colors ++ List.duplicate(nil, 256 - 16),
@@ -104,7 +115,13 @@ defmodule ColorPalette.PrecompileHook do
                                             @all_colors_initial,
                                             @ansi_color_codes_without_names
                                           )
+
+      # -------------------------------
+      # The main colors data structure:
       @colors @unique_color_names_to_colors |> Map.merge(@generated_names_for_unnamed_colors)
+
+      # --------------------------------------------------------------------------------------------
+      # Generate `ColorPalette` functions for the colors:
 
       @colors
       |> Enum.each(fn {color_name, color} ->
@@ -120,6 +137,11 @@ defmodule ColorPalette.PrecompileHook do
         end
       end)
 
+      # --------------------------------------------------------------------------------------------
+      # Accessors
+      # ---------
+
+      # Raw Data:
       def color_groups_to_ansi_color_codes, do: @color_groups_to_ansi_color_codes
       def color_data_api_raw_data, do: @color_data_api_raw_data
       def color_name_dot_com_raw_data, do: @color_name_dot_com_raw_data
@@ -128,21 +150,28 @@ defmodule ColorPalette.PrecompileHook do
       def color_groups, do: @color_groups
       def io_ansi_color_names, do: @io_ansi_color_names
 
+      # ---------------------------------------------------
+      # Raw Data converetd to `ColorPalette.Color` structs:
+
       def io_ansi_colors, do: @io_ansi_colors
       def color_name_dot_com_colors, do: @color_name_dot_com_colors
       def color_data_api_colors, do: @color_data_api_colors
       def colorhexa_colors, do: @colorhexa_colors
       def all_colors_initial, do: @all_colors_initial
 
+      # ---------------------------
+      # Transformed & Grouped Data:
+
       def color_names_to_colors, do: @color_names_to_colors
       def all_colors, do: @all_colors
       def unique_color_names_to_colors, do: @unique_color_names_to_colors
       def ansi_color_codes_without_names, do: @ansi_color_codes_without_names
-
       def generated_names_for_unnamed_colors, do: @generated_names_for_unnamed_colors
+      def all_colors, do: @all_colors
 
+      # -------------------------------
       @doc """
-      A map between the color name and the `ColorPalette.Color` struct
+      The main colors data structure.  A map between the color name and the `ColorPalette.Color` struct
       """
       def colors, do: @colors
     end
