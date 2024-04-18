@@ -675,7 +675,7 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "purge_orphaned_same_as_entries" do
+  describe "purge_orphaned_same_as_entries/1" do
     test "removes same_as entries which are no longer in the map of colors" do
       colors = %{
         black1: %Color{ansi_color_code: %ANSIColorCode{hex: "000000"}, same_as: [:black2, :black3]},
@@ -687,6 +687,35 @@ defmodule ColorPalette.DataConverterTest do
       assert colors_purged == %{
                black1: %Color{ansi_color_code: %ANSIColorCode{hex: "000000"}, same_as: [:black2]},
                black2: %Color{ansi_color_code: %ANSIColorCode{hex: "000000"}, same_as: [:black1]}
+             }
+    end
+  end
+
+  describe "group_by_name_frequency/1" do
+    test "groups the colors so that the entries with the fewest colors go into the map first" do
+      colors = [
+        [
+          %Color{name: :black, ansi_color_code: %ANSIColorCode{hex: "000000", code: 0}, source: [:io_ansi]},
+          %Color{name: :black1, ansi_color_code: %ANSIColorCode{hex: "000000", code: 0}, source: [:colorhexa]}
+        ],
+        [
+          %Color{name: :black, ansi_color_code: %ANSIColorCode{hex: "000000", code: 16}, source: [:color_name_dot_com]}
+        ]
+      ]
+
+      color_map = DataConverter.group_by_name_frequency(colors)
+
+      assert color_map == %{
+               black: %Color{
+                 name: :black,
+                 ansi_color_code: %ANSIColorCode{hex: "000000", code: 16},
+                 source: [:color_name_dot_com]
+               },
+               black1: %Color{
+                 name: :black1,
+                 ansi_color_code: %ANSIColorCode{hex: "000000", code: 0},
+                 source: [:colorhexa]
+               }
              }
     end
   end

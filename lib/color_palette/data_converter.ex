@@ -234,4 +234,16 @@ defmodule ColorPalette.DataConverter do
     end)
     |> Enum.into(%{})
   end
+
+  def group_by_name_frequency(ansi_colors) do
+    ansi_colors
+    |> Enum.sort_by(&length(&1))
+    |> Enum.reduce(%{}, fn ansi_colors_for_code, acc1 ->
+      ansi_colors_for_code
+      |> Enum.reduce(acc1, fn color, acc2 ->
+        # The first map entry for the color name "wins" and sticks around:
+        Map.update(acc2, color.name, color, fn value -> value end)
+      end)
+    end)
+  end
 end
