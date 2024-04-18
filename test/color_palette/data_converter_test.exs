@@ -674,4 +674,20 @@ defmodule ColorPalette.DataConverterTest do
              }
     end
   end
+
+  describe "purge_orphaned_same_as_entries" do
+    test "removes same_as entries which are no longer in the map of colors" do
+      colors = %{
+        black1: %Color{ansi_color_code: %ANSIColorCode{hex: "000000"}, same_as: [:black2, :black3]},
+        black2: %Color{ansi_color_code: %ANSIColorCode{hex: "000000"}, same_as: [:black1, :black3]}
+      }
+
+      colors_purged = DataConverter.purge_orphaned_same_as_entries(colors)
+
+      assert colors_purged == %{
+               black1: %Color{ansi_color_code: %ANSIColorCode{hex: "000000"}, same_as: [:black2]},
+               black2: %Color{ansi_color_code: %ANSIColorCode{hex: "000000"}, same_as: [:black1]}
+             }
+    end
+  end
 end

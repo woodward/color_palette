@@ -225,4 +225,13 @@ defmodule ColorPalette.DataConverter do
       Map.put(acc, name_with_hex_suffix, renamed_color)
     end)
   end
+
+  def purge_orphaned_same_as_entries(color_map) do
+    color_map
+    |> Enum.map(fn {color_name, color} ->
+      purged_same_as = color.same_as |> Enum.reject(&(!Map.has_key?(color_map, &1)))
+      {color_name, %{color | same_as: purged_same_as}}
+    end)
+    |> Enum.into(%{})
+  end
 end
