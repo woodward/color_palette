@@ -113,7 +113,7 @@ defmodule ColorPaletteTest do
   describe "colors" do
     test "returns the map of color names to color data" do
       colors = ColorPalette.colors()
-      assert length(Map.keys(colors)) == 505
+      assert length(Map.keys(colors)) == 485
     end
   end
 
@@ -212,13 +212,13 @@ defmodule ColorPaletteTest do
 
       assert color == %Color{
                ansi_color_code: %ANSIColorCode{code: 63, color_group: :blue, hex: "5f5fff", rgb: [95, 95, 255]},
-               closest_named_hex: "4F86F7",
-               distance_to_closest_named_hex: 3579,
+               closest_named_hex: nil,
+               distance_to_closest_named_hex: nil,
                exact_name_match?: false,
-               name: :blueberry_5f5fff,
-               renamed?: true,
-               same_as: [],
-               source: [:color_data_api],
+               name: :very_light_blue,
+               renamed?: false,
+               same_as: [:blueberry, :light_blue],
+               source: [:color_name_dot_com],
                text_contrast_color: :white
              }
     end
@@ -230,13 +230,13 @@ defmodule ColorPaletteTest do
 
       assert color == %Color{
                ansi_color_code: %ANSIColorCode{code: 63, color_group: :blue, hex: "5f5fff", rgb: [95, 95, 255]},
-               closest_named_hex: "4F86F7",
-               distance_to_closest_named_hex: 3579,
+               closest_named_hex: nil,
+               distance_to_closest_named_hex: nil,
                exact_name_match?: false,
-               name: :blueberry_5f5fff,
-               renamed?: true,
-               same_as: [],
-               source: [:color_data_api],
+               name: :very_light_blue,
+               renamed?: false,
+               same_as: [:blueberry, :light_blue],
+               source: [:color_name_dot_com],
                text_contrast_color: :white
              }
     end
@@ -245,16 +245,16 @@ defmodule ColorPaletteTest do
   describe "find_by_source" do
     test "returns the colors as defined by their source" do
       io_ansi_colors = ColorPalette.find_by_source(:io_ansi)
-      assert length(io_ansi_colors) == 13
+      assert length(io_ansi_colors) == 10
 
       color_name_dot_com_colors = ColorPalette.find_by_source(:color_name_dot_com)
-      assert length(color_name_dot_com_colors) == 206
+      assert length(color_name_dot_com_colors) == 217
 
       color_data_api_colors = ColorPalette.find_by_source(:color_data_api)
-      assert length(color_data_api_colors) == 197
+      assert length(color_data_api_colors) == 190
 
       colorhexa_colors = ColorPalette.find_by_source(:colorhexa)
-      assert length(colorhexa_colors) == 129
+      assert length(colorhexa_colors) == 130
     end
   end
 
@@ -271,8 +271,7 @@ defmodule ColorPaletteTest do
       first = key_values |> List.first()
 
       assert first ==
-               {%ColorPalette.ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black},
-                [:black_000000]}
+               {%ColorPalette.ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black}, [:black]}
     end
   end
 end

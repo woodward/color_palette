@@ -91,34 +91,57 @@ defmodule ColorPalette.PrecompileHook do
       # --------------------------------------------------------------------------------------------
       # Tranformation & Grouping of the Data:
 
-      @all_colors_initial DataConverter.multi_zip([
-                            @io_ansi_colors ++ List.duplicate(nil, 256 - 16),
-                            @color_data_api_colors,
-                            @color_name_dot_com_colors,
-                            @colorhexa_colors
-                          ])
+      @colors_initial DataConverter.multi_zip([
+                        @io_ansi_colors ++ List.duplicate(nil, 256 - 16),
+                        @color_data_api_colors,
+                        @color_name_dot_com_colors,
+                        @colorhexa_colors
+                      ])
 
-      @all_colors @all_colors_initial |> DataConverter.annotate_same_as_field()
+      # ----------------------
+      # Perhaps get rid of the intermediate variable @colors_initial_ordered_by_code
+      @colors_initial_ordered_by_code @colors_initial
 
-      @color_names_to_colors @all_colors
-                             |> List.flatten()
-                             |> DataConverter.color_names_to_colors()
+      @colors_ordered_by_code @colors_initial_ordered_by_code |> DataConverter.annotate_same_as_field()
 
-      @unique_color_names_to_colors @color_names_to_colors
-                                    |> Enum.map(fn {color_name, colors} ->
-                                      {color_name, List.first(colors)}
-                                    end)
-                                    |> Enum.into(%{})
+      @colors_by_name @colors_ordered_by_code
+                      |> DataConverter.group_by_name_frequency()
+                      |> DataConverter.purge_orphaned_same_as_entries()
 
-      @ansi_color_codes_without_names @unique_color_names_to_colors |> DataConverter.unnamed_ansi_color_codes()
+      @ansi_color_codes_missing_names @colors_by_name |> DataConverter.unnamed_ansi_color_codes()
+
       @generated_names_for_unnamed_colors DataConverter.create_names_for_missing_colors(
-                                            @all_colors_initial,
-                                            @ansi_color_codes_without_names
+                                            @colors_initial_ordered_by_code,
+                                            @ansi_color_codes_missing_names
                                           )
 
       # -------------------------------
       # The main colors data structure:
-      @colors @unique_color_names_to_colors |> Map.merge(@generated_names_for_unnamed_colors)
+      @colors @colors_by_name |> Map.merge(@generated_names_for_unnamed_colors)
+
+      # --------------------------------------------------------------------------------------------
+      # Old version of generating the color data (kept for now for reference):
+      # @old_all_colors @colors_initial |> DataConverter.annotate_same_as_field()
+
+      # @old_color_names_to_colors @old_all_colors
+      #                            |> List.flatten()
+      #                            |> DataConverter.color_names_to_colors()
+
+      # @old_unique_color_names_to_colors @old_color_names_to_colors
+      #                                   |> Enum.map(fn {color_name, colors} ->
+      #                                     {color_name, List.first(colors)}
+      #                                   end)
+      #                                   |> Enum.into(%{})
+
+      # @old_ansi_color_codes_missing_names @old_unique_color_names_to_colors |> DataConverter.unnamed_ansi_color_codes()
+      # @old_generated_names_for_unnamed_colors DataConverter.create_names_for_missing_colors(
+      #                                           @colors_initial,
+      #                                           @old_ansi_color_codes_missing_names
+      #                                         )
+
+      # # -------------------------------
+      # # The main colors data structure:
+      # @old_colors @old_unique_color_names_to_colors |> Map.merge(@old_generated_names_for_unnamed_colors)
 
       # --------------------------------------------------------------------------------------------
       # Generate `ColorPalette` functions for the colors:
@@ -157,17 +180,25 @@ defmodule ColorPalette.PrecompileHook do
       def color_name_dot_com_colors, do: @color_name_dot_com_colors
       def color_data_api_colors, do: @color_data_api_colors
       def colorhexa_colors, do: @colorhexa_colors
-      def all_colors_initial, do: @all_colors_initial
+      def colors_initial, do: @colors_initial
 
       # ---------------------------
       # Transformed & Grouped Data:
 
-      def color_names_to_colors, do: @color_names_to_colors
-      def all_colors, do: @all_colors
-      def unique_color_names_to_colors, do: @unique_color_names_to_colors
-      def ansi_color_codes_without_names, do: @ansi_color_codes_without_names
+      # def old_all_colors, do: @old_all_colors
+      # def old_color_names_to_colors, do: @old_color_names_to_colors
+      # def old_unique_color_names_to_colors, do: @old_unique_color_names_to_colors
+      # def old_ansi_color_codes_missing_names, do: @old_ansi_color_codes_missing_names
+      # def old_generated_names_for_unnamed_colors, do: @old_generated_names_for_unnamed_colors
+      # def old_colors, do: @old_colors
+
+      # -----------------------------
+      # Transformed & Grouped Data:
+
+      def colors_ordered_by_code, do: @colors_ordered_by_code
+      def colors_by_name, do: @colors_by_name
+      def ansi_color_codes_missing_names, do: @ansi_color_codes_missing_names
       def generated_names_for_unnamed_colors, do: @generated_names_for_unnamed_colors
-      def all_colors, do: @all_colors
 
       # -------------------------------
       @doc """

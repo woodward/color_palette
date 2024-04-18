@@ -628,23 +628,19 @@ defmodule ColorPalette.DataConverterTest do
 
   describe "unnamed_ansi_color_codes" do
     test "returns a list of IO ansi color codes without a name" do
-      colors = ColorPalette.unique_color_names_to_colors()
+      colors = ColorPalette.colors_by_name()
 
       color_codes_with_no_names = DataConverter.unnamed_ansi_color_codes(colors)
 
-      assert length(color_codes_with_no_names) == 33
+      assert length(color_codes_with_no_names) == 13
 
-      first_five = color_codes_with_no_names |> Enum.take(5)
-      last_five = color_codes_with_no_names |> Enum.reverse() |> Enum.take(5) |> Enum.sort()
-
-      assert first_five == [0, 1, 3, 4, 6]
-      assert last_five == [163, 171, 234, 244, 246]
+      assert color_codes_with_no_names == [10, 13, 16, 42, 48, 84, 85, 92, 105, 122, 123, 241, 248]
     end
   end
 
   describe "create_names_for_missing_colors/2" do
     test "creates some fake color names for colors which are missing names" do
-      all_colors = ColorPalette.all_colors_initial()
+      all_colors = ColorPalette.colors_initial()
       missing_names = [22, 33]
       new_names = DataConverter.create_names_for_missing_colors(all_colors, missing_names)
 
