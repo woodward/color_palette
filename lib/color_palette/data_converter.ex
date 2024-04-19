@@ -3,8 +3,8 @@ defmodule ColorPalette.DataConverter do
 
   alias ColorPalette.Color
 
-  def convert_raw_color_data_api_to_colors(color_data) do
-    color_data
+  def convert_raw_color_data_api_to_colors(raw_color_data) do
+    raw_color_data
     |> Enum.map(fn raw_color ->
       raw_color.name.value
       |> color_name_to_atom()
@@ -35,15 +35,14 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  def convert_raw_color_data_to_colors(colorhexa_raw_data, ansi_color_codes, source) do
-    Enum.zip(colorhexa_raw_data, ansi_color_codes)
-    |> Enum.map(fn {raw_color, ansi_color_code} ->
+  def convert_raw_color_data_to_colors(raw_color_data, source) do
+    raw_color_data
+    |> Enum.map(fn raw_color ->
       raw_color.name
       |> color_name_to_atom()
       |> Enum.map(fn color_name ->
         %Color{
           name: color_name,
-          ansi_color_code: ansi_color_code,
           text_contrast_color: String.to_atom(raw_color.text_contrast_color),
           source: [source],
           exact_name_match?: false,

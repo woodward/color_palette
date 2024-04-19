@@ -89,10 +89,9 @@ defmodule ColorPalette.DataConverterTest do
 
   describe "convert colorhexa raw data" do
     test "adds color names and text_contrast_color to ansi color codes" do
-      color_codes = ColorPalette.ansi_color_codes()
       color_data = ColorPalette.colorhexa_raw_data()
 
-      colors = DataConverter.convert_raw_color_data_to_colors(color_data, color_codes, :colorhexa)
+      colors = DataConverter.convert_raw_color_data_to_colors(color_data, :colorhexa)
       assert length(colors) == 256
 
       # ------------------------
@@ -100,7 +99,7 @@ defmodule ColorPalette.DataConverterTest do
       [black] = colors |> List.first()
 
       assert black.name == :black
-      assert black.ansi_color_code == %ANSIColorCode{code: 0, hex: "000000", color_group: :gray_and_black, rgb: [0, 0, 0]}
+      assert black.ansi_color_code == nil
       assert black.text_contrast_color == :white
       assert black.source == [:colorhexa]
       assert black.closest_named_hex == nil
@@ -113,13 +112,7 @@ defmodule ColorPalette.DataConverterTest do
 
       assert pure_violet.name == :pure_violet
 
-      assert pure_violet.ansi_color_code == %ANSIColorCode{
-               code: 129,
-               color_group: :purple_violet_and_magenta,
-               hex: "af00ff",
-               rgb: [175, 0, 255]
-             }
-
+      assert pure_violet.ansi_color_code == nil
       assert pure_violet.text_contrast_color == :white
       assert pure_violet.source == [:colorhexa]
       assert pure_violet.closest_named_hex == nil
@@ -133,7 +126,7 @@ defmodule ColorPalette.DataConverterTest do
       assert pale_cyan_and_lime_green == [
                %Color{
                  name: :pale_cyan,
-                 ansi_color_code: %ANSIColorCode{code: 158, color_group: :cyan, hex: "afffd7", rgb: [175, 255, 215]},
+                 ansi_color_code: nil,
                  text_contrast_color: :black,
                  closest_named_hex: nil,
                  distance_to_closest_named_hex: nil,
@@ -143,7 +136,7 @@ defmodule ColorPalette.DataConverterTest do
                },
                %Color{
                  name: :lime_green,
-                 ansi_color_code: %ANSIColorCode{code: 158, color_group: :cyan, hex: "afffd7", rgb: [175, 255, 215]},
+                 ansi_color_code: nil,
                  text_contrast_color: :black,
                  closest_named_hex: nil,
                  distance_to_closest_named_hex: nil,
@@ -419,10 +412,9 @@ defmodule ColorPalette.DataConverterTest do
 
   describe "convert_raw_color_data_to_colors" do
     test "converts the color-name.com raw data into a list of Colors" do
-      ansi_codes = ColorPalette.ansi_color_codes()
       color_name_dot_com_raw_data = ColorPalette.color_name_dot_com_raw_data()
 
-      colors = DataConverter.convert_raw_color_data_to_colors(color_name_dot_com_raw_data, ansi_codes, :color_name_dot_com)
+      colors = DataConverter.convert_raw_color_data_to_colors(color_name_dot_com_raw_data, :color_name_dot_com)
 
       assert length(colors) == 256
 
@@ -431,7 +423,7 @@ defmodule ColorPalette.DataConverterTest do
       assert alien_armpit == %Color{
                name: :alien_armpit,
                text_contrast_color: :black,
-               ansi_color_code: %ANSIColorCode{code: 112, hex: "87d700", color_group: :green, rgb: [135, 215, 0]},
+               ansi_color_code: nil,
                source: [:color_name_dot_com],
                closest_named_hex: nil,
                distance_to_closest_named_hex: nil,
