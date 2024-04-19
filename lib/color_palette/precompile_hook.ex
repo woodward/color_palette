@@ -77,7 +77,8 @@ defmodule ColorPalette.PrecompileHook do
       # Raw Data Converted to `ColorPalette.Color` structs:
 
       @color_data_api_colors @color_data_api_raw_data
-                             |> DataConverter.convert_raw_color_data_api_to_colors(@ansi_color_codes)
+                             |> DataConverter.convert_raw_color_data_api_to_colors()
+                             |> DataConverter.add_ansi_color_codes_to_colors(@ansi_color_codes)
 
       @color_name_dot_com_colors @color_name_dot_com_raw_data
                                  |> DataConverter.convert_raw_color_data_to_colors(@ansi_color_codes, :color_name_dot_com)

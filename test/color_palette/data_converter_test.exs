@@ -29,10 +29,9 @@ defmodule ColorPalette.DataConverterTest do
 
   describe "convert_raw_color_data_api_to_colors" do
     test "adds color names and text_contrast_color to ansi color codes" do
-      color_codes = ColorPalette.ansi_color_codes()
       color_data = ColorPalette.color_data_api_raw_data()
 
-      colors = DataConverter.convert_raw_color_data_api_to_colors(color_data, color_codes)
+      colors = DataConverter.convert_raw_color_data_api_to_colors(color_data)
       assert length(colors) == 256
 
       # ------------------------
@@ -40,7 +39,7 @@ defmodule ColorPalette.DataConverterTest do
       [black] = colors |> List.first()
 
       assert black.name == :black
-      assert black.ansi_color_code == %ANSIColorCode{code: 0, hex: "000000", color_group: :gray_and_black, rgb: [0, 0, 0]}
+      assert black.ansi_color_code == nil
       assert black.text_contrast_color == :white
       assert black.source == [:color_data_api]
       assert black.closest_named_hex == "000000"
@@ -52,14 +51,7 @@ defmodule ColorPalette.DataConverterTest do
       [electric_violet] = colors |> Enum.at(129)
 
       assert electric_violet.name == :electric_violet
-
-      assert electric_violet.ansi_color_code == %ANSIColorCode{
-               code: 129,
-               color_group: :purple_violet_and_magenta,
-               hex: "af00ff",
-               rgb: [175, 0, 255]
-             }
-
+      assert electric_violet.ansi_color_code == nil
       assert electric_violet.text_contrast_color == :white
       assert electric_violet.source == [:color_data_api]
       assert electric_violet.closest_named_hex == "8B00FF"
@@ -73,7 +65,7 @@ defmodule ColorPalette.DataConverterTest do
       assert magenta_fuschia == [
                %ColorPalette.Color{
                  name: :magenta,
-                 ansi_color_code: %ColorPalette.ANSIColorCode{code: 201, hex: "ff00ff", rgb: [255, 0, 255], color_group: :pink},
+                 ansi_color_code: nil,
                  text_contrast_color: :black,
                  source: [:color_data_api],
                  closest_named_hex: "FF00FF",
@@ -83,7 +75,7 @@ defmodule ColorPalette.DataConverterTest do
                },
                %ColorPalette.Color{
                  name: :fuchsia,
-                 ansi_color_code: %ColorPalette.ANSIColorCode{code: 201, hex: "ff00ff", rgb: [255, 0, 255], color_group: :pink},
+                 ansi_color_code: nil,
                  text_contrast_color: :black,
                  source: [:color_data_api],
                  closest_named_hex: "FF00FF",
