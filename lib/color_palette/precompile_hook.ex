@@ -102,7 +102,9 @@ defmodule ColorPalette.PrecompileHook do
       # Perhaps get rid of the intermediate variable @colors_initial_ordered_by_code
       @colors_initial_ordered_by_code @colors_initial
 
-      @colors_ordered_by_code @colors_initial_ordered_by_code |> DataConverter.annotate_same_as_field()
+      @colors_ordered_by_code @colors_initial_ordered_by_code
+                              |> DataConverter.collate_colors_with_same_name_for_code()
+                              |> DataConverter.annotate_same_as_field()
 
       @colors_by_name @colors_ordered_by_code
                       |> DataConverter.group_by_name_frequency()

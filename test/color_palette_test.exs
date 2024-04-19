@@ -217,7 +217,7 @@ defmodule ColorPaletteTest do
                exact_name_match?: false,
                name: :very_light_blue,
                renamed?: false,
-               same_as: [:blueberry, :light_blue],
+               same_as: [:light_blue, :blueberry],
                source: [:color_name_dot_com],
                text_contrast_color: :white
              }
@@ -235,7 +235,7 @@ defmodule ColorPaletteTest do
                exact_name_match?: false,
                name: :very_light_blue,
                renamed?: false,
-               same_as: [:blueberry, :light_blue],
+               same_as: [:light_blue, :blueberry],
                source: [:color_name_dot_com],
                text_contrast_color: :white
              }

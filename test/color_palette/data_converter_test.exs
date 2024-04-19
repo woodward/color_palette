@@ -687,6 +687,136 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "collate_colors_with_same_name_for_code" do
+    test "groups colors with the same name, combining their sources" do
+      colors = [
+        [
+          %ColorPalette.Color{
+            name: :purple_pizzazz,
+            ansi_color_code: %ColorPalette.ANSIColorCode{code: 200, color_group: :pink, hex: "ff00d7", rgb: [255, 0, 215]},
+            text_contrast_color: :black,
+            closest_named_hex: "FF00CC",
+            distance_to_closest_named_hex: 123,
+            source: [:color_data_api],
+            exact_name_match?: false,
+            renamed?: false,
+            same_as: []
+          },
+          %ColorPalette.Color{
+            name: :shocking_pink,
+            ansi_color_code: %ColorPalette.ANSIColorCode{code: 200, color_group: :pink, hex: "ff00d7", rgb: [255, 0, 215]},
+            text_contrast_color: :white,
+            closest_named_hex: nil,
+            distance_to_closest_named_hex: nil,
+            source: [:color_name_dot_com],
+            exact_name_match?: false,
+            renamed?: false,
+            same_as: []
+          }
+        ],
+        [
+          %ColorPalette.Color{
+            name: :fuchsia,
+            ansi_color_code: %ColorPalette.ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+            text_contrast_color: :black,
+            closest_named_hex: "FF00FF",
+            distance_to_closest_named_hex: 0,
+            source: [:color_data_api],
+            exact_name_match?: true,
+            renamed?: false,
+            same_as: []
+          },
+          %ColorPalette.Color{
+            name: :fuchsia,
+            ansi_color_code: %ColorPalette.ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+            text_contrast_color: :white,
+            closest_named_hex: nil,
+            distance_to_closest_named_hex: nil,
+            source: [:color_name_dot_com],
+            exact_name_match?: false,
+            renamed?: false,
+            same_as: []
+          },
+          %ColorPalette.Color{
+            name: :magenta,
+            ansi_color_code: %ColorPalette.ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+            text_contrast_color: :white,
+            closest_named_hex: nil,
+            distance_to_closest_named_hex: nil,
+            source: [:colorhexa],
+            exact_name_match?: false,
+            renamed?: false,
+            same_as: []
+          },
+          %ColorPalette.Color{
+            name: :magenta,
+            ansi_color_code: %ColorPalette.ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+            text_contrast_color: :black,
+            closest_named_hex: "FF00FF",
+            distance_to_closest_named_hex: 0,
+            source: [:color_data_api],
+            exact_name_match?: true,
+            renamed?: false,
+            same_as: []
+          }
+        ]
+      ]
+
+      colors_collated = DataConverter.collate_colors_with_same_name_for_code(colors)
+
+      assert colors_collated == [
+               [
+                 %ColorPalette.Color{
+                   name: :purple_pizzazz,
+                   ansi_color_code: %ColorPalette.ANSIColorCode{code: 200, color_group: :pink, hex: "ff00d7", rgb: [255, 0, 215]},
+                   text_contrast_color: :black,
+                   closest_named_hex: "FF00CC",
+                   distance_to_closest_named_hex: 123,
+                   source: [:color_data_api],
+                   exact_name_match?: false,
+                   renamed?: false,
+                   same_as: []
+                 },
+                 %ColorPalette.Color{
+                   name: :shocking_pink,
+                   ansi_color_code: %ColorPalette.ANSIColorCode{code: 200, color_group: :pink, hex: "ff00d7", rgb: [255, 0, 215]},
+                   text_contrast_color: :white,
+                   closest_named_hex: nil,
+                   distance_to_closest_named_hex: nil,
+                   source: [:color_name_dot_com],
+                   exact_name_match?: false,
+                   renamed?: false,
+                   same_as: []
+                 }
+               ],
+               [
+                 %ColorPalette.Color{
+                   name: :magenta,
+                   ansi_color_code: %ColorPalette.ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+                   text_contrast_color: :black,
+                   closest_named_hex: "FF00FF",
+                   distance_to_closest_named_hex: 0,
+                   source: [:colorhexa, :color_data_api],
+                   exact_name_match?: true,
+                   renamed?: false,
+                   same_as: []
+                 },
+                 %ColorPalette.Color{
+                   name: :fuchsia,
+                   ansi_color_code: %ColorPalette.ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+                   text_contrast_color: :white,
+                   closest_named_hex: "FF00FF",
+                   distance_to_closest_named_hex: 0,
+                   source: [:color_data_api, :color_name_dot_com],
+                   exact_name_match?: true,
+                   renamed?: false,
+                   same_as: []
+                 }
+               ]
+             ]
+    end
+  end
+
   describe "group_by_name_frequency/1" do
     test "groups the colors so that the entries with the fewest colors go into the map first" do
       colors = [

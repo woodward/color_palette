@@ -226,6 +226,45 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  def collate_colors_with_same_name_for_code(colors) do
+    colors
+    |> Enum.map(fn colors_for_code ->
+      colors_for_code
+      |> Enum.group_by(& &1.name)
+      |> Enum.reduce([], fn {_color_name, colors_for_name}, acc ->
+        colors_result =
+          colors_for_name
+          |> Enum.reduce(nil, fn color_for_name, acc ->
+            if acc == nil do
+              color_for_name
+            else
+              closest_named_hex = if acc.closest_named_hex, do: acc.closest_named_hex, else: color_for_name.closest_named_hex
+
+              distance_to_closest_named_hex =
+                if acc.distance_to_closest_named_hex do
+                  acc.distance_to_closest_named_hex
+                else
+                  color_for_name.distance_to_closest_named_hex
+                end
+
+              exact_name_match? = if acc.exact_name_match?, do: acc.exact_name_match?, else: color_for_name.exact_name_match?
+
+              %{
+                color_for_name
+                | source: acc.source ++ color_for_name.source,
+                  closest_named_hex: closest_named_hex,
+                  distance_to_closest_named_hex: distance_to_closest_named_hex,
+                  exact_name_match?: exact_name_match?
+              }
+            end
+          end)
+
+        [colors_result] ++ acc
+      end)
+      |> Enum.reverse()
+    end)
+  end
+
   def purge_orphaned_same_as_entries(color_map) do
     color_map
     |> Enum.map(fn {color_name, color} ->
