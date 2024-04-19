@@ -6,8 +6,7 @@ defmodule ColorPalette.DataConverter do
   def convert_raw_color_data_api_to_colors(color_data, ansi_color_codes) do
     Enum.zip(color_data, ansi_color_codes)
     |> Enum.map(fn {raw_color, ansi_color_code} ->
-      name = raw_color.name.value |> color_name_to_atom()
-      names = if is_list(name), do: name, else: [name]
+      names = raw_color.name.value |> color_name_to_atom()
 
       colors =
         names
@@ -34,8 +33,7 @@ defmodule ColorPalette.DataConverter do
   def convert_raw_color_data_to_colors(colorhexa_raw_data, ansi_color_codes, source) do
     Enum.zip(colorhexa_raw_data, ansi_color_codes)
     |> Enum.map(fn {raw_color, ansi_color_code} ->
-      name = raw_color.name |> color_name_to_atom()
-      names = if is_list(name), do: name, else: [name]
+      names = raw_color.name |> color_name_to_atom()
 
       colors =
         names
@@ -85,24 +83,21 @@ defmodule ColorPalette.DataConverter do
   end
 
   def color_name_to_atom(name) do
-    names =
-      name
-      |> String.downcase()
-      |> String.replace(~r/\(.*\)/, "")
-      |> String.replace(~r/é/, "")
-      |> String.replace("[", "_")
-      |> String.replace("]", "")
-      |> String.split("/")
-      |> Enum.map(&String.trim(&1))
-      |> Enum.map(&String.split(&1, " - "))
-      |> List.flatten()
-      |> Enum.map(&String.replace(&1, " ", "_"))
-      |> Enum.map(&String.replace(&1, "'", ""))
-      |> Enum.map(&String.replace(&1, "-", "_"))
-      |> Enum.map(&String.replace(&1, "__", "_"))
-      |> Enum.map(&String.to_atom(&1))
-
-    if length(names) == 1, do: List.first(names), else: names
+    name
+    |> String.downcase()
+    |> String.replace(~r/\(.*\)/, "")
+    |> String.replace(~r/é/, "")
+    |> String.replace("[", "_")
+    |> String.replace("]", "")
+    |> String.split("/")
+    |> Enum.map(&String.trim(&1))
+    |> Enum.map(&String.split(&1, " - "))
+    |> List.flatten()
+    |> Enum.map(&String.replace(&1, " ", "_"))
+    |> Enum.map(&String.replace(&1, "'", ""))
+    |> Enum.map(&String.replace(&1, "-", "_"))
+    |> Enum.map(&String.replace(&1, "__", "_"))
+    |> Enum.map(&String.to_atom(&1))
   end
 
   def text_contrast_color(color) do
@@ -220,7 +215,7 @@ defmodule ColorPalette.DataConverter do
     color_codes_missing_names
     |> Enum.reduce(%{}, fn code, acc ->
       color = all_colors |> Enum.at(code) |> List.first()
-      name_with_hex_suffix = color_name_to_atom("#{color.name}_#{color.ansi_color_code.hex}")
+      name_with_hex_suffix = color_name_to_atom("#{color.name}_#{color.ansi_color_code.hex}") |> List.first()
       renamed_color = %{color | name: name_with_hex_suffix, renamed?: true}
       Map.put(acc, name_with_hex_suffix, renamed_color)
     end)

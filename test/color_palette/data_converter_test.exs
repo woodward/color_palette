@@ -274,19 +274,19 @@ defmodule ColorPalette.DataConverterTest do
 
   describe "color_name_to_atom" do
     test "converts a color name to an atom" do
-      assert DataConverter.color_name_to_atom("Black") == :black
+      assert DataConverter.color_name_to_atom("Black") == [:black]
     end
 
     test "snake cases multi-word colors" do
-      assert DataConverter.color_name_to_atom("Rose of Sharon") == :rose_of_sharon
+      assert DataConverter.color_name_to_atom("Rose of Sharon") == [:rose_of_sharon]
     end
 
     test "works for colors with apostrophes" do
-      assert DataConverter.color_name_to_atom("Screamin' Green") == :screamin_green
+      assert DataConverter.color_name_to_atom("Screamin' Green") == [:screamin_green]
     end
 
     test "works for colors with dashes" do
-      assert DataConverter.color_name_to_atom("Yellow-Green") == :yellow_green
+      assert DataConverter.color_name_to_atom("Yellow-Green") == [:yellow_green]
     end
 
     test "returns two colors if a slash" do
@@ -294,27 +294,27 @@ defmodule ColorPalette.DataConverterTest do
     end
 
     test "gets rid of content in parens" do
-      assert DataConverter.color_name_to_atom("Gold (Web)") == :gold
+      assert DataConverter.color_name_to_atom("Gold (Web)") == [:gold]
     end
 
     test "drops the é on :tenné" do
-      assert DataConverter.color_name_to_atom("Tenné") == :tenn
+      assert DataConverter.color_name_to_atom("Tenné") == [:tenn]
     end
 
     test "drops the '(mostly black)' phrase on colorhexa names" do
-      assert DataConverter.color_name_to_atom("Very dark gray (mostly black)") == :very_dark_gray
+      assert DataConverter.color_name_to_atom("Very dark gray (mostly black)") == [:very_dark_gray]
     end
 
     test "drops the '(or mostly pure)' phrase on colorhexa names" do
-      assert DataConverter.color_name_to_atom("Pure (or mostly pure) orange") == :pure_orange
+      assert DataConverter.color_name_to_atom("Pure (or mostly pure) orange") == [:pure_orange]
     end
 
     test "changes the '[Pink tone]' phrase on colorhexa names" do
-      assert DataConverter.color_name_to_atom("Very pale red [Pink tone]") == :very_pale_red_pink_tone
+      assert DataConverter.color_name_to_atom("Very pale red [Pink tone]") == [:very_pale_red_pink_tone]
     end
 
     test "changes the '[Olive tone]' phrase on colorhexa names" do
-      assert DataConverter.color_name_to_atom("Dark yellow [Olive tone]") == :dark_yellow_olive_tone
+      assert DataConverter.color_name_to_atom("Dark yellow [Olive tone]") == [:dark_yellow_olive_tone]
     end
 
     test "splits colorhexa names with a dash" do
