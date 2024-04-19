@@ -16,7 +16,7 @@ defmodule ColorPalette.DataConverterTest do
 
       # ------------------------
 
-      black = colors |> List.first()
+      [black] = colors |> List.first()
 
       assert black.name == :black
       assert black.ansi_color_code == %ANSIColorCode{code: 0, hex: "000000", color_group: :gray_and_black, rgb: [0, 0, 0]}
@@ -28,7 +28,7 @@ defmodule ColorPalette.DataConverterTest do
 
       # ------------------------
 
-      electric_violet = colors |> Enum.at(129)
+      [electric_violet] = colors |> Enum.at(129)
 
       assert electric_violet.name == :electric_violet
 
@@ -84,7 +84,7 @@ defmodule ColorPalette.DataConverterTest do
 
       # ------------------------
 
-      black = colors |> List.first()
+      [black] = colors |> List.first()
 
       assert black.name == :black
       assert black.ansi_color_code == %ANSIColorCode{code: 0, hex: "000000", color_group: :gray_and_black, rgb: [0, 0, 0]}
@@ -96,7 +96,7 @@ defmodule ColorPalette.DataConverterTest do
 
       # ------------------------
 
-      pure_violet = colors |> Enum.at(129)
+      [pure_violet] = colors |> Enum.at(129)
 
       assert pure_violet.name == :pure_violet
 
@@ -413,7 +413,7 @@ defmodule ColorPalette.DataConverterTest do
 
       assert length(colors) == 256
 
-      alien_armpit = colors |> Enum.at(112)
+      [alien_armpit] = colors |> Enum.at(112)
 
       assert alien_armpit == %Color{
                name: :alien_armpit,

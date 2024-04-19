@@ -6,50 +6,42 @@ defmodule ColorPalette.DataConverter do
   def convert_raw_color_data_api_to_colors(color_data, ansi_color_codes) do
     Enum.zip(color_data, ansi_color_codes)
     |> Enum.map(fn {raw_color, ansi_color_code} ->
-      names = raw_color.name.value |> color_name_to_atom()
+      raw_color.name.value
+      |> color_name_to_atom()
+      |> Enum.map(fn color_name ->
+        distance_to_closest_named_hex = raw_color.name.distance
+        exact_name_match? = raw_color.name.exact_match_name
+        closest_named_hex = raw_color.name.closest_named_hex |> String.replace("#", "")
 
-      colors =
-        names
-        |> Enum.map(fn color_name ->
-          distance_to_closest_named_hex = raw_color.name.distance
-          exact_name_match? = raw_color.name.exact_match_name
-          closest_named_hex = raw_color.name.closest_named_hex |> String.replace("#", "")
-
-          %Color{
-            name: color_name,
-            ansi_color_code: ansi_color_code,
-            text_contrast_color: text_contrast_color(raw_color),
-            source: [:color_data_api],
-            distance_to_closest_named_hex: distance_to_closest_named_hex,
-            exact_name_match?: exact_name_match?,
-            closest_named_hex: closest_named_hex
-          }
-        end)
-
-      if length(colors) == 1, do: List.first(colors), else: colors
+        %Color{
+          name: color_name,
+          ansi_color_code: ansi_color_code,
+          text_contrast_color: text_contrast_color(raw_color),
+          source: [:color_data_api],
+          distance_to_closest_named_hex: distance_to_closest_named_hex,
+          exact_name_match?: exact_name_match?,
+          closest_named_hex: closest_named_hex
+        }
+      end)
     end)
   end
 
   def convert_raw_color_data_to_colors(colorhexa_raw_data, ansi_color_codes, source) do
     Enum.zip(colorhexa_raw_data, ansi_color_codes)
     |> Enum.map(fn {raw_color, ansi_color_code} ->
-      names = raw_color.name |> color_name_to_atom()
-
-      colors =
-        names
-        |> Enum.map(fn color_name ->
-          %Color{
-            name: color_name,
-            ansi_color_code: ansi_color_code,
-            text_contrast_color: String.to_atom(raw_color.text_contrast_color),
-            source: [source],
-            exact_name_match?: false,
-            distance_to_closest_named_hex: nil,
-            closest_named_hex: nil
-          }
-        end)
-
-      if length(colors) == 1, do: List.first(colors), else: colors
+      raw_color.name
+      |> color_name_to_atom()
+      |> Enum.map(fn color_name ->
+        %Color{
+          name: color_name,
+          ansi_color_code: ansi_color_code,
+          text_contrast_color: String.to_atom(raw_color.text_contrast_color),
+          source: [source],
+          exact_name_match?: false,
+          distance_to_closest_named_hex: nil,
+          closest_named_hex: nil
+        }
+      end)
     end)
   end
 
