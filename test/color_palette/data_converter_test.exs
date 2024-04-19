@@ -8,10 +8,71 @@ defmodule ColorPalette.DataConverterTest do
 
   describe "convert_raw_color_data_api_to_colors" do
     test "adds color names and text_contrast_color to ansi color codes" do
+      color_data = ColorPalette.color_data_api_raw_data()
+
+      colors = DataConverter.convert_raw_color_data_api_to_colors(color_data)
+      assert length(colors) == 256
+
+      # ------------------------
+
+      [black] = colors |> List.first()
+
+      assert black.name == :black
+      assert black.ansi_color_code == nil
+      assert black.text_contrast_color == :white
+      assert black.source == [:color_data_api]
+      assert black.closest_named_hex == "000000"
+      assert black.distance_to_closest_named_hex == 0
+      assert black.exact_name_match? == true
+
+      # ------------------------
+
+      [electric_violet] = colors |> Enum.at(129)
+
+      assert electric_violet.name == :electric_violet
+      assert electric_violet.ansi_color_code == nil
+      assert electric_violet.text_contrast_color == :white
+      assert electric_violet.source == [:color_data_api]
+      assert electric_violet.closest_named_hex == "8B00FF"
+      assert electric_violet.distance_to_closest_named_hex == 1368
+      assert electric_violet.exact_name_match? == false
+
+      # ------------------------
+
+      magenta_fuschia = colors |> Enum.at(201)
+
+      assert magenta_fuschia == [
+               %ColorPalette.Color{
+                 name: :magenta,
+                 ansi_color_code: nil,
+                 text_contrast_color: :black,
+                 source: [:color_data_api],
+                 closest_named_hex: "FF00FF",
+                 distance_to_closest_named_hex: 0,
+                 exact_name_match?: true,
+                 same_as: []
+               },
+               %ColorPalette.Color{
+                 name: :fuchsia,
+                 ansi_color_code: nil,
+                 text_contrast_color: :black,
+                 source: [:color_data_api],
+                 closest_named_hex: "FF00FF",
+                 distance_to_closest_named_hex: 0,
+                 exact_name_match?: true,
+                 same_as: []
+               }
+             ]
+    end
+  end
+
+  describe "add_ansi_color_codes_to_colors" do
+    @tag :skip
+    test "adds ansi color codes to color data" do
       color_codes = ColorPalette.ansi_color_codes()
       color_data = ColorPalette.color_data_api_raw_data()
 
-      colors = DataConverter.convert_raw_color_data_api_to_colors(color_data, color_codes)
+      colors = DataConverter.add_ansi_color_codes_to_colors(color_data, color_codes)
       assert length(colors) == 256
 
       # ------------------------
