@@ -434,16 +434,15 @@ defmodule ColorPalette.DataConverterTest do
 
   describe "convert_ansi_colors_to_colors" do
     test "works" do
-      ansi_codes = ColorPalette.ansi_color_codes()
       ansi_colors = ColorPalette.io_ansi_color_names()
 
-      colors = DataConverter.convert_ansi_colors_to_colors(ansi_colors, ansi_codes)
+      colors = DataConverter.convert_ansi_colors_to_colors(ansi_colors)
 
       assert length(colors) == 16
-      black = colors |> List.first()
+      [black] = colors |> List.first()
 
       assert black == %Color{
-               ansi_color_code: %ANSIColorCode{code: 0, color_group: :gray_and_black, hex: "000000", rgb: [0, 0, 0]},
+               ansi_color_code: nil,
                text_contrast_color: :white,
                name: :black,
                source: [:io_ansi],

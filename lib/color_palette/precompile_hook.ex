@@ -89,7 +89,8 @@ defmodule ColorPalette.PrecompileHook do
                         |> DataConverter.add_ansi_color_codes_to_colors(@ansi_color_codes)
 
       @io_ansi_colors @io_ansi_color_names
-                      |> DataConverter.convert_ansi_colors_to_colors(@ansi_color_codes)
+                      |> DataConverter.convert_ansi_colors_to_colors()
+                      |> DataConverter.add_ansi_color_codes_to_colors(@ansi_color_codes)
 
       # --------------------------------------------------------------------------------------------
       # Tranformation & Grouping of the Data:

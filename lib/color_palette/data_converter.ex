@@ -25,16 +25,6 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  def add_ansi_color_codes_to_colors(color_data, ansi_color_codes) do
-    Enum.zip(color_data, ansi_color_codes)
-    |> Enum.map(fn {colors, ansi_color_code} ->
-      colors
-      |> Enum.map(fn color ->
-        %Color{color | ansi_color_code: ansi_color_code}
-      end)
-    end)
-  end
-
   def convert_raw_color_data_to_colors(raw_color_data, source) do
     raw_color_data
     |> Enum.map(fn raw_color ->
@@ -65,6 +55,32 @@ defmodule ColorPalette.DataConverter do
         exact_name_match?: true,
         distance_to_closest_named_hex: 0
       }
+    end)
+  end
+
+  def convert_ansi_colors_to_colors(ansi_colors_raw_data) do
+    ansi_colors_raw_data
+    |> Enum.map(fn ansi_color ->
+      [
+        %Color{
+          name: ansi_color.name,
+          text_contrast_color: ansi_color.text_contrast_color,
+          source: [:io_ansi],
+          closest_named_hex: nil,
+          exact_name_match?: true,
+          distance_to_closest_named_hex: 0
+        }
+      ]
+    end)
+  end
+
+  def add_ansi_color_codes_to_colors(color_data, ansi_color_codes) do
+    Enum.zip(color_data, ansi_color_codes)
+    |> Enum.map(fn {colors, ansi_color_code} ->
+      colors
+      |> Enum.map(fn color ->
+        %Color{color | ansi_color_code: ansi_color_code}
+      end)
     end)
   end
 
