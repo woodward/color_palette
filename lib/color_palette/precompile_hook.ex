@@ -42,6 +42,7 @@ defmodule ColorPalette.PrecompileHook do
                                |> Path.join("color_palette/data/color_data_api_colors.json")
                                |> File.read!()
                                |> Jason.decode!(keys: :atoms)
+                               |> Enum.map(&DataConverter.normalize_data(&1))
 
       @raw_color_name_dot_com_data __DIR__
                                    |> Path.join("color_palette/data/color-name.com_colors.json")
@@ -57,7 +58,7 @@ defmodule ColorPalette.PrecompileHook do
       # Raw Data Converted to `ColorPalette.Color` structs:
 
       @color_data_api_colors @raw_color_data_api_data
-                             |> DataConverter.convert_raw_color_data_api_to_colors()
+                             |> DataConverter.convert_raw_color_data_to_colors(source: :color_data_api)
                              |> DataConverter.add_ansi_color_codes_to_colors(@ansi_color_codes)
 
       @color_name_dot_com_colors @raw_color_name_dot_com_data

@@ -54,58 +54,21 @@ defmodule ColorPaletteTest do
       first_color_data = color_data |> List.first()
 
       assert first_color_data == %{
-               XYZ: %{value: "XYZ(0, 0, 0)", X: 0, fraction: %{X: 0, Y: 0, Z: 0}, Y: 0, Z: 0},
-               _embedded: %{},
-               _links: %{self: %{href: "/id?hex=000000"}},
-               cmyk: %{
-                 value: "cmyk(NaN, NaN, NaN, 100)",
-                 c: nil,
-                 k: 100,
-                 m: nil,
-                 y: nil,
-                 fraction: %{c: nil, k: 1, m: nil, y: nil}
-               },
-               contrast: %{value: "#ffffff"},
-               hex: %{value: "#000000", clean: "000000"},
-               hsl: %{value: "hsl(0, 0%, 0%)", s: 0, h: 0, l: 0, fraction: %{s: 0, h: 0, l: 0}},
-               hsv: %{value: "hsv(0, 0%, 0%)", s: 0, v: 0, h: 0, fraction: %{s: 0, v: 0, h: 0}},
-               image: %{
-                 named: "https://www.thecolorapi.com/id?format=svg&hex=000000",
-                 bare: "https://www.thecolorapi.com/id?format=svg&named=false&hex=000000"
-               },
-               name: %{value: "Black", closest_named_hex: "#000000", distance: 0, exact_match_name: true},
-               rgb: %{value: "rgb(0, 0, 0)", r: 0, fraction: %{r: 0, b: 0, g: 0}, b: 0, g: 0}
+               name: "Black",
+               closest_named_hex: "000000",
+               distance_to_closest_named_hex: 0,
+               exact_name_match?: true,
+               text_contrast_color: "white"
              }
 
       last_color_data = color_data |> List.last()
 
       assert last_color_data == %{
-               XYZ: %{
-                 value: "XYZ(89, 93, 102)",
-                 X: 89,
-                 fraction: %{X: 0.8871333333333333, Y: 0.9333333333333333, Z: 1.0164},
-                 Y: 93,
-                 Z: 102
-               },
-               _embedded: %{},
-               _links: %{self: %{href: "/id?hex=EEEEEE"}},
-               cmyk: %{value: "cmyk(0, 0, 0, 7)", c: 0, k: 7, m: 0, y: 0, fraction: %{c: 0, k: 0.06666666666666665, m: 0, y: 0}},
-               contrast: %{value: "#000000"},
-               hex: %{value: "#EEEEEE", clean: "EEEEEE"},
-               hsl: %{value: "hsl(0, 0%, 93%)", s: 0, h: 0, l: 93, fraction: %{s: 0, h: 0, l: 0.9333333333333333}},
-               hsv: %{value: "hsv(0, 0%, 93%)", s: 0, v: 93, h: 0, fraction: %{s: 0, v: 0.9333333333333333, h: 0}},
-               image: %{
-                 named: "https://www.thecolorapi.com/id?format=svg&hex=EEEEEE",
-                 bare: "https://www.thecolorapi.com/id?format=svg&named=false&hex=EEEEEE"
-               },
-               name: %{value: "Gallery", closest_named_hex: "#EFEFEF", distance: 5, exact_match_name: false},
-               rgb: %{
-                 value: "rgb(238, 238, 238)",
-                 r: 238,
-                 fraction: %{r: 0.9333333333333333, b: 0.9333333333333333, g: 0.9333333333333333},
-                 b: 238,
-                 g: 238
-               }
+               name: "Gallery",
+               closest_named_hex: "EFEFEF",
+               distance_to_closest_named_hex: 5,
+               exact_name_match?: false,
+               text_contrast_color: "black"
              }
     end
   end
@@ -218,7 +181,7 @@ defmodule ColorPaletteTest do
                  closest_named_hex: "FF878D",
                  distance_to_closest_named_hex: 44,
                  source: [:color_data_api, :color_name_dot_com],
-                 exact_name_match?: false,
+                 exact_name_match?: nil,
                  renamed?: false,
                  same_as: [:very_light_red]
                },
@@ -229,7 +192,7 @@ defmodule ColorPaletteTest do
                  closest_named_hex: nil,
                  distance_to_closest_named_hex: nil,
                  source: [:colorhexa],
-                 exact_name_match?: false,
+                 exact_name_match?: nil,
                  renamed?: false,
                  same_as: [:tulip]
                }
@@ -249,7 +212,7 @@ defmodule ColorPaletteTest do
                  closest_named_hex: "FC89AC",
                  distance_to_closest_named_hex: 320,
                  source: [:color_data_api, :color_name_dot_com],
-                 exact_name_match?: false,
+                 exact_name_match?: nil,
                  renamed?: false,
                  same_as: [:very_light_pink]
                },
@@ -260,7 +223,7 @@ defmodule ColorPaletteTest do
                  closest_named_hex: nil,
                  distance_to_closest_named_hex: nil,
                  source: [:colorhexa],
-                 exact_name_match?: false,
+                 exact_name_match?: nil,
                  renamed?: false,
                  same_as: [:tickle_me_pink]
                }

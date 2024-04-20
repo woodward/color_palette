@@ -19,7 +19,7 @@ defmodule ColorPalette.Color do
           closest_named_hex: String.t() | nil,
           distance_to_closest_named_hex: integer() | nil,
           source: [source()],
-          exact_name_match?: boolean(),
+          exact_name_match?: boolean() | nil,
           renamed?: boolean(),
           same_as: [color_name()]
         }

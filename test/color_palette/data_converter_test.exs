@@ -31,7 +31,7 @@ defmodule ColorPalette.DataConverterTest do
     test "adds color names and text_contrast_color to ansi color codes" do
       color_data = ColorPalette.raw_color_data_api_data()
 
-      colors = DataConverter.convert_raw_color_data_api_to_colors(color_data)
+      colors = DataConverter.convert_raw_color_data_to_colors(color_data, source: :color_data_api)
       assert length(colors) == 256
 
       # ------------------------
@@ -104,7 +104,7 @@ defmodule ColorPalette.DataConverterTest do
       assert black.source == [:colorhexa]
       assert black.closest_named_hex == nil
       assert black.distance_to_closest_named_hex == nil
-      assert black.exact_name_match? == false
+      assert black.exact_name_match? == nil
 
       # ------------------------
 
@@ -117,7 +117,7 @@ defmodule ColorPalette.DataConverterTest do
       assert pure_violet.source == [:colorhexa]
       assert pure_violet.closest_named_hex == nil
       assert pure_violet.distance_to_closest_named_hex == nil
-      assert pure_violet.exact_name_match? == false
+      assert pure_violet.exact_name_match? == nil
 
       # ------------------------
 
@@ -131,7 +131,7 @@ defmodule ColorPalette.DataConverterTest do
                  closest_named_hex: nil,
                  distance_to_closest_named_hex: nil,
                  source: [:colorhexa],
-                 exact_name_match?: false,
+                 exact_name_match?: nil,
                  same_as: []
                },
                %Color{
@@ -141,7 +141,7 @@ defmodule ColorPalette.DataConverterTest do
                  closest_named_hex: nil,
                  distance_to_closest_named_hex: nil,
                  source: [:colorhexa],
-                 exact_name_match?: false,
+                 exact_name_match?: nil,
                  same_as: []
                }
              ]
@@ -427,7 +427,7 @@ defmodule ColorPalette.DataConverterTest do
                source: [:color_name_dot_com],
                closest_named_hex: nil,
                distance_to_closest_named_hex: nil,
-               exact_name_match?: false
+               exact_name_match?: nil
              }
     end
   end

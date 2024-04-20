@@ -3,45 +3,43 @@ defmodule ColorPalette.DataConverter do
 
   alias ColorPalette.Color
 
-  def convert_raw_color_data_api_to_colors(raw_color_data) do
-    raw_color_data
-    |> Enum.map(fn raw_color ->
-      raw_color.name.value
-      |> color_name_to_atom()
-      |> Enum.map(fn color_name ->
-        distance_to_closest_named_hex = raw_color.name.distance
-        exact_name_match? = raw_color.name.exact_match_name
-        closest_named_hex = raw_color.name.closest_named_hex |> String.replace("#", "")
+  def normalize_data(color_data_api) do
+    text_contrast_color =
+      case color_data_api.contrast.value do
+        "#ffffff" -> "white"
+        "#000000" -> "black"
+        _ -> raise "Unexpected doc text color"
+      end
 
-        %Color{
-          name: color_name,
-          text_contrast_color: text_contrast_color_for_color_data_api(raw_color),
-          source: [:color_data_api],
-          distance_to_closest_named_hex: distance_to_closest_named_hex,
-          exact_name_match?: exact_name_match?,
-          closest_named_hex: closest_named_hex
-        }
-      end)
-    end)
+    %{
+      name: color_data_api.name.value,
+      distance_to_closest_named_hex: color_data_api.name.distance,
+      text_contrast_color: text_contrast_color,
+      exact_name_match?: color_data_api.name.exact_match_name,
+      closest_named_hex: color_data_api.name.closest_named_hex |> String.replace("#", "")
+    }
   end
 
   def convert_raw_color_data_to_colors(raw_color_data, opts) do
     source = Keyword.get(opts, :source)
-    exact_name_match? = Keyword.get(opts, :exact_name_match?, false)
-    distance_to_closest_named_hex = Keyword.get(opts, :distance_to_closest_named_hex)
+    all_exact_name_match? = Keyword.get(opts, :exact_name_match?, false)
+    all_distance = Keyword.get(opts, :distance_to_closest_named_hex)
 
     raw_color_data
     |> Enum.map(fn raw_color ->
       raw_color.name
       |> color_name_to_atom()
       |> Enum.map(fn color_name ->
+        exact_name_match? = if all_exact_name_match?, do: true, else: raw_color[:exact_name_match?]
+        distance = if all_distance == nil, do: raw_color[:distance_to_closest_named_hex], else: all_distance
+
         %Color{
           name: color_name,
           text_contrast_color: String.to_atom(raw_color.text_contrast_color),
           source: [source],
           exact_name_match?: exact_name_match?,
-          distance_to_closest_named_hex: distance_to_closest_named_hex,
-          closest_named_hex: nil
+          distance_to_closest_named_hex: distance,
+          closest_named_hex: raw_color[:closest_named_hex]
         }
       end)
     end)
