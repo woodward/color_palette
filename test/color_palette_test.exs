@@ -305,4 +305,130 @@ defmodule ColorPaletteTest do
                {%ColorPalette.ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black}, [:black]}
     end
   end
+
+  describe "figure out whether ColorPalette has all named Bunt colors" do
+    test "checks on the named Bunt colors" do
+      # Taken from:
+      # https://github.com/rrrene/bunt/blob/master/lib/bunt_ansi.ex#L40
+      # and the non-named colors were deleted:
+      bunt_named_colors = [
+        {"darkblue", :color18, 18, {0, 0, 135}},
+        {"mediumblue", :color20, 20, {0, 0, 215}},
+        {"darkgreen", :color22, 22, {0, 95, 0}},
+        {"darkslategray", :color23, 23, {0, 95, 95}},
+        {"darkcyan", :color30, 30, {0, 135, 135}},
+        {"deepskyblue", :color39, 39, {0, 175, 255}},
+        {"springgreen", :color48, 48, {0, 255, 135}},
+        {"aqua", :color51, 51, {0, 255, 255}},
+        {"dimgray", :color59, 59, {95, 95, 95}},
+        {"steelblue", :color67, 67, {95, 135, 175}},
+        {"darkred", :color88, 88, {135, 0, 0}},
+        {"darkmagenta", :color90, 90, {135, 0, 135}},
+        {"olive", :color100, 100, {135, 135, 0}},
+        {"chartreuse", :color118, 118, {135, 255, 0}},
+        {"aquamarine", :color122, 122, {135, 255, 215}},
+        {"greenyellow", :color154, 154, {175, 255, 0}},
+        {"chocolate", :color172, 172, {215, 135, 0}},
+        {"goldenrod", :color178, 178, {215, 175, 0}},
+        {"lightgray", :color188, 188, {215, 215, 215}},
+        {"beige", :color194, 194, {215, 255, 215}},
+        {"lightcyan", :color195, 195, {215, 255, 255}},
+        {"fuchsia", :color201, 201, {255, 0, 255}},
+        {"orangered", :color202, 202, {255, 95, 0}},
+        {"hotpink", :color205, 205, {255, 95, 175}},
+        {"darkorange", :color208, 208, {255, 135, 0}},
+        {"coral", :color209, 209, {255, 135, 95}},
+        {"orange", :color214, 214, {255, 175, 0}},
+        {"gold", :color220, 220, {255, 215, 0}},
+        {"khaki", :color222, 222, {255, 215, 135}},
+        {"moccasin", :color223, 223, {255, 215, 175}},
+        {"mistyrose", :color224, 224, {255, 215, 215}},
+        {"lightyellow", :color230, 230, {255, 255, 215}}
+      ]
+
+      assert length(bunt_named_colors) == 32
+
+      missing_by_code =
+        bunt_named_colors
+        |> Enum.reduce([], fn {bunt_name, _, code, _rgb_tuple}, acc ->
+          names_for_color =
+            ColorPalette.find_by_code(code)
+            |> Enum.map(& &1.name)
+            |> Enum.map(&(Atom.to_string(&1) |> String.replace("_", "")))
+
+          if bunt_name in names_for_color, do: acc, else: [{bunt_name, code}] ++ acc
+        end)
+        |> Enum.reverse()
+
+      assert length(missing_by_code) == 20
+
+      assert missing_by_code == [
+               {"darkslategray", 23},
+               {"deepskyblue", 39},
+               {"springgreen", 48},
+               {"dimgray", 59},
+               {"steelblue", 67},
+               {"darkmagenta", 90},
+               {"olive", 100},
+               {"aquamarine", 122},
+               {"greenyellow", 154},
+               {"chocolate", 172},
+               {"goldenrod", 178},
+               {"beige", 194},
+               {"lightcyan", 195},
+               {"orangered", 202},
+               {"darkorange", 208},
+               {"orange", 214},
+               {"khaki", 222},
+               {"moccasin", 223},
+               {"mistyrose", 224},
+               {"lightyellow", 230}
+             ]
+
+      all_names = ColorPalette.colors() |> Map.keys() |> Enum.map(&(Atom.to_string(&1) |> String.replace("_", "")))
+
+      missing_overall =
+        bunt_named_colors
+        |> Enum.reduce([], fn {bunt_name, _, code, _rgb_tuple}, acc ->
+          if bunt_name in all_names, do: acc, else: [{bunt_name, code}] ++ acc
+        end)
+        |> Enum.reverse()
+
+      assert length(missing_overall) == 11
+
+      assert missing_overall == [
+               {"darkslategray", 23},
+               {"deepskyblue", 39},
+               {"chocolate", 172},
+               {"goldenrod", 178},
+               {"beige", 194},
+               {"orangered", 202},
+               {"darkorange", 208},
+               {"orange", 214},
+               {"khaki", 222},
+               {"moccasin", 223},
+               {"mistyrose", 224}
+             ]
+
+      colors_in_color_palette_but_with_different_code =
+        MapSet.new(missing_by_code)
+        |> MapSet.difference(MapSet.new(missing_overall))
+        |> MapSet.to_list()
+        |> Enum.sort_by(fn {_, code} -> code end)
+
+      assert length(colors_in_color_palette_but_with_different_code) == 9
+
+      assert colors_in_color_palette_but_with_different_code == [
+               {"springgreen", 48},
+               {"dimgray", 59},
+               {"steelblue", 67},
+               {"darkmagenta", 90},
+               {"olive", 100},
+               {"aquamarine", 122},
+               {"greenyellow", 154},
+               {"lightcyan", 195},
+               {"lightyellow", 230}
+             ]
+    end
+  end
 end
