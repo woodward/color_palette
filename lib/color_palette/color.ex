@@ -4,12 +4,30 @@ defmodule ColorPalette.Color do
   """
 
   alias ColorPalette.ExDocUtils
+  alias ColorPalette.ANSIColorCode
+
+  @type text_contrast_color :: :white | :black
+
+  @type source :: :io_ansi | :colorhexa | :color_name_dot_com | :color_data_api
+
+  @type color_name :: atom()
+
+  @type t() :: %__MODULE__{
+          name: color_name(),
+          ansi_color_code: ANSIColorCode.t(),
+          text_contrast_color: text_contrast_color(),
+          closest_named_hex: String.t() | nil,
+          distance_to_closest_named_hex: integer() | nil,
+          source: [source()],
+          exact_name_match?: boolean(),
+          renamed?: boolean(),
+          same_as: [color_name()]
+        }
 
   defstruct [
     :name,
     :ansi_color_code,
     :text_contrast_color,
-    # :source can be one or more of :io_ansi, :color_name_dot_com, or :color_data_api:
     :closest_named_hex,
     :distance_to_closest_named_hex,
     source: [],
