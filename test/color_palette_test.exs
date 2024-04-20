@@ -207,38 +207,69 @@ defmodule ColorPaletteTest do
   end
 
   describe "find_by_hex" do
-    test "returns the color with the specified hex value" do
-      color = ColorPalette.find_by_hex("5f5fff")
+    test "returns the colors with the specified hex value (sorted by name)" do
+      color = ColorPalette.find_by_hex("ff8787")
 
-      assert color == %Color{
-               ansi_color_code: %ANSIColorCode{code: 63, color_group: :blue, hex: "5f5fff", rgb: [95, 95, 255]},
-               closest_named_hex: nil,
-               distance_to_closest_named_hex: nil,
-               exact_name_match?: false,
-               name: :very_light_blue,
-               renamed?: false,
-               same_as: [:light_blue, :blueberry],
-               source: [:color_name_dot_com],
-               text_contrast_color: :white
-             }
+      assert color == [
+               %Color{
+                 name: :tulip,
+                 ansi_color_code: %ANSIColorCode{code: 210, color_group: :red, hex: "ff8787", rgb: [255, 135, 135]},
+                 text_contrast_color: :black,
+                 closest_named_hex: "FF878D",
+                 distance_to_closest_named_hex: 44,
+                 source: [:color_data_api, :color_name_dot_com],
+                 exact_name_match?: false,
+                 renamed?: false,
+                 same_as: [:very_light_red]
+               },
+               %Color{
+                 name: :very_light_red,
+                 ansi_color_code: %ANSIColorCode{code: 210, color_group: :red, hex: "ff8787", rgb: [255, 135, 135]},
+                 text_contrast_color: :black,
+                 closest_named_hex: nil,
+                 distance_to_closest_named_hex: nil,
+                 source: [:colorhexa],
+                 exact_name_match?: false,
+                 renamed?: false,
+                 same_as: [:tulip]
+               }
+             ]
     end
   end
 
   describe "find_by_code" do
-    test "returns the color with the specified code" do
-      color = ColorPalette.find_by_code(63)
+    test "returns the colors with the specified code (sorted by name)" do
+      color = ColorPalette.find_by_code(211)
 
-      assert color == %Color{
-               ansi_color_code: %ANSIColorCode{code: 63, color_group: :blue, hex: "5f5fff", rgb: [95, 95, 255]},
-               closest_named_hex: nil,
-               distance_to_closest_named_hex: nil,
-               exact_name_match?: false,
-               name: :very_light_blue,
-               renamed?: false,
-               same_as: [:light_blue, :blueberry],
-               source: [:color_name_dot_com],
-               text_contrast_color: :white
-             }
+      assert color == [
+               %Color{
+                 name: :tickle_me_pink,
+                 ansi_color_code: %ANSIColorCode{code: 211, color_group: :pink, hex: "ff87af", rgb: [255, 135, 175]},
+                 text_contrast_color: :black,
+                 closest_named_hex: "FC89AC",
+                 distance_to_closest_named_hex: 320,
+                 source: [:color_data_api, :color_name_dot_com],
+                 exact_name_match?: false,
+                 renamed?: false,
+                 same_as: [:very_light_pink]
+               },
+               %Color{
+                 name: :very_light_pink,
+                 ansi_color_code: %ANSIColorCode{code: 211, color_group: :pink, hex: "ff87af", rgb: [255, 135, 175]},
+                 text_contrast_color: :black,
+                 closest_named_hex: nil,
+                 distance_to_closest_named_hex: nil,
+                 source: [:colorhexa],
+                 exact_name_match?: false,
+                 renamed?: false,
+                 same_as: [:tickle_me_pink]
+               }
+             ]
+    end
+
+    test "returns an error if the code is not within 0-255" do
+      assert ColorPalette.find_by_code(256) == {:error, "Code 256 is not valid"}
+      assert ColorPalette.find_by_code(-1) == {:error, "Code -1 is not valid"}
     end
   end
 

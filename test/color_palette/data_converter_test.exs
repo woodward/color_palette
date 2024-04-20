@@ -355,18 +355,18 @@ defmodule ColorPalette.DataConverterTest do
     end
 
     test "returns the color with the specified hex value", %{colors: colors} do
-      pompadour = DataConverter.find_by_hex(colors, "5f005f")
+      [pompadour] = DataConverter.find_by_hex(colors, "5f005f")
       assert pompadour.name == :pompadour
     end
 
     test "also works if there is a # in the hex value", %{colors: colors} do
-      pompadour = DataConverter.find_by_hex(colors, "#5f005f")
+      [pompadour] = DataConverter.find_by_hex(colors, "#5f005f")
       assert pompadour.name == :pompadour
     end
 
-    test "returns an error if the hex value is not found", %{colors: colors} do
+    test "returns an empty list if the hex value is not found", %{colors: colors} do
       result = DataConverter.find_by_hex(colors, "#aabbcc")
-      assert result == {:error, "Hex value #aabbcc not found"}
+      assert result == []
     end
   end
 
@@ -397,7 +397,7 @@ defmodule ColorPalette.DataConverterTest do
     end
 
     test "returns the color with the specified code", %{colors: colors} do
-      pompadour = DataConverter.find_by_code(colors, 53)
+      [pompadour] = DataConverter.find_by_code(colors, 53)
       assert pompadour.name == :pompadour
     end
 
@@ -405,8 +405,8 @@ defmodule ColorPalette.DataConverterTest do
       result = DataConverter.find_by_code(colors, -1)
       assert result == {:error, "Code -1 is not valid"}
 
-      result = DataConverter.find_by_code(colors, 257)
-      assert result == {:error, "Code 257 is not valid"}
+      result = DataConverter.find_by_code(colors, 256)
+      assert result == {:error, "Code 256 is not valid"}
     end
   end
 

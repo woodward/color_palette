@@ -172,10 +172,10 @@ defmodule ColorPalette.DataConverter do
   def find_by_hex(color_names, hex) do
     hex = hex |> String.replace("#", "")
 
-    case color_names |> Enum.find(fn {_color_name, color} -> color.ansi_color_code.hex == hex end) do
-      nil -> {:error, "Hex value ##{hex} not found"}
-      result -> result |> elem(1)
-    end
+    color_names
+    |> Enum.filter(fn {_color_name, color} -> color.ansi_color_code.hex == hex end)
+    |> Enum.map(fn {_color_name, color} -> color end)
+    |> Enum.sort_by(& &1.name)
   end
 
   def find_by_code(_color_names, code) when code < 0 or code > 255 do
@@ -184,8 +184,9 @@ defmodule ColorPalette.DataConverter do
 
   def find_by_code(color_names, code) do
     color_names
-    |> Enum.find(fn {_color_name, color} -> color.ansi_color_code.code == code end)
-    |> elem(1)
+    |> Enum.filter(fn {_color_name, color} -> color.ansi_color_code.code == code end)
+    |> Enum.map(fn {_color_name, color} -> color end)
+    |> Enum.sort_by(& &1.name)
   end
 
   def unnamed_ansi_color_codes(color_map) do
