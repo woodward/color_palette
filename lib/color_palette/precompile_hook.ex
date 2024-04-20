@@ -51,17 +51,17 @@ defmodule ColorPalette.PrecompileHook do
 
       # ------------------------
 
-      @color_data_api_raw_data __DIR__
+      @raw_color_data_api_data __DIR__
                                |> Path.join("color_palette/data/color_data_api_colors.json")
                                |> File.read!()
                                |> Jason.decode!(keys: :atoms)
 
-      @color_name_dot_com_raw_data __DIR__
+      @raw_color_name_dot_com_data __DIR__
                                    |> Path.join("color_palette/data/color-name.com_colors.json")
                                    |> File.read!()
                                    |> Jason.decode!(keys: :atoms)
 
-      @colorhexa_raw_data __DIR__
+      @raw_colorhexa_data __DIR__
                           |> Path.join("color_palette/data/colorhexa.com_colors.json")
                           |> File.read!()
                           |> Jason.decode!(keys: :atoms)
@@ -69,15 +69,15 @@ defmodule ColorPalette.PrecompileHook do
       # --------------------------------------------------------------------------------------------
       # Raw Data Converted to `ColorPalette.Color` structs:
 
-      @color_data_api_colors @color_data_api_raw_data
+      @color_data_api_colors @raw_color_data_api_data
                              |> DataConverter.convert_raw_color_data_api_to_colors()
                              |> DataConverter.add_ansi_color_codes_to_colors(@ansi_color_codes)
 
-      @color_name_dot_com_colors @color_name_dot_com_raw_data
+      @color_name_dot_com_colors @raw_color_name_dot_com_data
                                  |> DataConverter.convert_raw_color_data_to_colors(:color_name_dot_com)
                                  |> DataConverter.add_ansi_color_codes_to_colors(@ansi_color_codes)
 
-      @colorhexa_colors @colorhexa_raw_data
+      @colorhexa_colors @raw_colorhexa_data
                         |> DataConverter.convert_raw_color_data_to_colors(:colorhexa)
                         |> DataConverter.add_ansi_color_codes_to_colors(@ansi_color_codes)
 
@@ -168,9 +168,9 @@ defmodule ColorPalette.PrecompileHook do
 
       # Raw Data:
       def color_groups_to_ansi_color_codes, do: @color_groups_to_ansi_color_codes
-      def color_data_api_raw_data, do: @color_data_api_raw_data
-      def color_name_dot_com_raw_data, do: @color_name_dot_com_raw_data
-      def colorhexa_raw_data, do: @colorhexa_raw_data
+      def raw_color_data_api_data, do: @raw_color_data_api_data
+      def raw_color_name_dot_com_data, do: @raw_color_name_dot_com_data
+      def raw_colorhexa_data, do: @raw_colorhexa_data
       def ansi_color_codes, do: @ansi_color_codes
       def color_groups, do: @color_groups
       def io_ansi_color_names, do: @io_ansi_color_names
