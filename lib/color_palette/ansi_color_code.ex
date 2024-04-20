@@ -8,11 +8,12 @@ defmodule ColorPalette.ANSIColorCode do
 
   @type code :: 0..255
   @type rgb_value :: 0..255
+  @type hex :: String.t()
 
   @type t :: %__MODULE__{
           code: code(),
           color_group: ColorGroup.t(),
-          hex: String.t(),
+          hex: hex(),
           rgb: [rgb_value()]
         }
 
