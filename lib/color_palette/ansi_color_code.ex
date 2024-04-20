@@ -6,8 +6,12 @@ defmodule ColorPalette.ANSIColorCode do
   """
   alias ColorPalette.ColorGroup
 
-  @type code :: 0..255
-  @type rgb_value :: 0..255
+  # An integer in the range 0 - 255:
+  @type code :: integer()
+
+  # An integer in the range 0 - 255:
+  @type rgb_value :: integer()
+
   @type hex :: String.t()
 
   @type t :: %__MODULE__{
