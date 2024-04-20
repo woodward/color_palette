@@ -13,6 +13,7 @@ defmodule ColorPalette.MixProject do
       deps: deps(),
       description: "Additional IO.ANSI named colors for Elixir scripts",
       package: package(),
+      dialyzer: [plt_add_apps: [:mix]],
 
       # Docs
       name: "ColorPalette",
@@ -33,6 +34,7 @@ defmodule ColorPalette.MixProject do
 
   defp deps do
     [
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
       {:jason, "~> 1.4"},
       {:ex_doc, "~> 0.32", only: :dev, runtime: false}
     ]

@@ -5,6 +5,7 @@ defmodule Mix.Tasks.GenerateGuides do
 
   alias ColorPalette.GuideGenerator
 
+  @impl Mix.Task
   def run(_args) do
     start_app!()
     GuideGenerator.generate_color_groups_guide()
