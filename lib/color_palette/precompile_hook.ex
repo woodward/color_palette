@@ -159,16 +159,6 @@ defmodule ColorPalette.PrecompileHook do
       def colorhexa_colors, do: @colorhexa_colors
       def combined_colors, do: @combined_colors
 
-      # ---------------------------
-      # Transformed & Grouped Data:
-
-      # def old_all_colors, do: @old_all_colors
-      # def old_color_names_to_colors, do: @old_color_names_to_colors
-      # def old_unique_color_names_to_colors, do: @old_unique_color_names_to_colors
-      # def old_ansi_color_codes_missing_names, do: @old_ansi_color_codes_missing_names
-      # def old_generated_names_for_unnamed_colors, do: @old_generated_names_for_unnamed_colors
-      # def old_colors, do: @old_colors
-
       # -----------------------------
       # Transformed & Grouped Data:
 
