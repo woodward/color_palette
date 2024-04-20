@@ -91,59 +91,33 @@ defmodule ColorPalette.PrecompileHook do
       # --------------------------------------------------------------------------------------------
       # Tranformation & Grouping of the Data:
 
-      @colors_initial DataConverter.multi_zip([
-                        @io_ansi_colors ++ List.duplicate(nil, 256 - 16),
-                        @color_data_api_colors,
-                        @color_name_dot_com_colors,
-                        @colorhexa_colors
-                      ])
+      @combined_colors DataConverter.multi_zip([
+                         @io_ansi_colors ++ List.duplicate(nil, 256 - 16),
+                         @color_data_api_colors,
+                         @color_name_dot_com_colors,
+                         @colorhexa_colors
+                       ])
 
       # ----------------------
-      # Perhaps get rid of the intermediate variable @colors_initial_ordered_by_code
-      @colors_initial_ordered_by_code @colors_initial
 
-      @colors_ordered_by_code @colors_initial_ordered_by_code
-                              |> DataConverter.collate_colors_with_same_name_for_code()
-                              |> DataConverter.annotate_same_as_field()
+      @combined_colors_collated @combined_colors
+                                |> DataConverter.collate_colors_with_same_name_for_code()
+                                |> DataConverter.annotate_same_as_field()
 
-      @colors_by_name @colors_ordered_by_code
+      @colors_by_name @combined_colors_collated
                       |> DataConverter.group_by_name_frequency()
                       |> DataConverter.purge_orphaned_same_as_entries()
 
       @ansi_color_codes_missing_names @colors_by_name |> DataConverter.unnamed_ansi_color_codes()
 
       @generated_names_for_unnamed_colors DataConverter.create_names_for_missing_colors(
-                                            @colors_initial_ordered_by_code,
+                                            @combined_colors,
                                             @ansi_color_codes_missing_names
                                           )
 
       # -------------------------------
       # The main colors data structure:
       @colors @colors_by_name |> Map.merge(@generated_names_for_unnamed_colors)
-
-      # --------------------------------------------------------------------------------------------
-      # Old version of generating the color data (kept for now for reference):
-      # @old_all_colors @colors_initial |> DataConverter.annotate_same_as_field()
-
-      # @old_color_names_to_colors @old_all_colors
-      #                            |> List.flatten()
-      #                            |> DataConverter.color_names_to_colors()
-
-      # @old_unique_color_names_to_colors @old_color_names_to_colors
-      #                                   |> Enum.map(fn {color_name, colors} ->
-      #                                     {color_name, List.first(colors)}
-      #                                   end)
-      #                                   |> Enum.into(%{})
-
-      # @old_ansi_color_codes_missing_names @old_unique_color_names_to_colors |> DataConverter.unnamed_ansi_color_codes()
-      # @old_generated_names_for_unnamed_colors DataConverter.create_names_for_missing_colors(
-      #                                           @colors_initial,
-      #                                           @old_ansi_color_codes_missing_names
-      #                                         )
-
-      # # -------------------------------
-      # # The main colors data structure:
-      # @old_colors @old_unique_color_names_to_colors |> Map.merge(@old_generated_names_for_unnamed_colors)
 
       # --------------------------------------------------------------------------------------------
       # Generate `ColorPalette` functions for the colors:
@@ -182,7 +156,7 @@ defmodule ColorPalette.PrecompileHook do
       def color_name_dot_com_colors, do: @color_name_dot_com_colors
       def color_data_api_colors, do: @color_data_api_colors
       def colorhexa_colors, do: @colorhexa_colors
-      def colors_initial, do: @colors_initial
+      def combined_colors, do: @combined_colors
 
       # ---------------------------
       # Transformed & Grouped Data:
@@ -197,7 +171,7 @@ defmodule ColorPalette.PrecompileHook do
       # -----------------------------
       # Transformed & Grouped Data:
 
-      def colors_ordered_by_code, do: @colors_ordered_by_code
+      def combined_colors_collated, do: @combined_colors_collated
       def colors_by_name, do: @colors_by_name
       def ansi_color_codes_missing_names, do: @ansi_color_codes_missing_names
       def generated_names_for_unnamed_colors, do: @generated_names_for_unnamed_colors
