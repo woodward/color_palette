@@ -15,7 +15,7 @@ defmodule ColorPalette.DataConverter do
 
         %Color{
           name: color_name,
-          text_contrast_color: text_contrast_color(raw_color),
+          text_contrast_color: text_contrast_color_for_color_data_api(raw_color),
           source: [:color_data_api],
           distance_to_closest_named_hex: distance_to_closest_named_hex,
           exact_name_match?: exact_name_match?,
@@ -89,7 +89,7 @@ defmodule ColorPalette.DataConverter do
     |> Enum.map(&String.to_atom(&1))
   end
 
-  def text_contrast_color(color) do
+  def text_contrast_color_for_color_data_api(color) do
     case color.contrast.value do
       "#ffffff" -> :white
       "#000000" -> :black
