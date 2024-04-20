@@ -4,13 +4,14 @@ defmodule ColorPalette.ANSIColorCode do
 
   A struct which represents one of the 256 ANSI colors.
   """
+  alias ColorPalette.ColorGroup
 
   @type code :: 0..255
   @type rgb_value :: 0..255
 
   @type t :: %__MODULE__{
           code: code(),
-          color_group: atom(),
+          color_group: ColorGroup.t(),
           hex: String.t(),
           rgb: [rgb_value()]
         }

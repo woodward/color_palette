@@ -5,6 +5,7 @@ defmodule ColorPalette.PrecompileHook do
 
   alias ColorPalette.ANSIColorCode
   alias ColorPalette.DataConverter
+  alias ColorPalette.ColorGroup
 
   defmacro __before_compile__(_env) do
     quote do
@@ -15,20 +16,6 @@ defmodule ColorPalette.PrecompileHook do
                            |> Path.join("color_palette/data/ansi_color_names.json")
                            |> File.read!()
                            |> Jason.decode!(keys: :atoms)
-
-      @color_groups [
-        :blue,
-        :brown,
-        :cyan,
-        :gray_and_black,
-        :green,
-        :orange,
-        :pink,
-        :purple_violet_and_magenta,
-        :red,
-        :white,
-        :yellow
-      ]
 
       @ansi_color_codes_by_group __DIR__
                                  |> Path.join("color_palette/data/ansi_color_codes_by_group.json")
@@ -47,7 +34,7 @@ defmodule ColorPalette.PrecompileHook do
                         |> Enum.map(&Map.merge(%ANSIColorCode{}, &1))
 
       @color_groups_to_ansi_color_codes @ansi_color_codes
-                                        |> DataConverter.color_groups_to_ansi_color_codes(@color_groups)
+                                        |> DataConverter.color_groups_to_ansi_color_codes(ColorGroup.color_groups())
 
       # ------------------------
 
@@ -147,7 +134,6 @@ defmodule ColorPalette.PrecompileHook do
       def raw_color_name_dot_com_data, do: @raw_color_name_dot_com_data
       def raw_colorhexa_data, do: @raw_colorhexa_data
       def ansi_color_codes, do: @ansi_color_codes
-      def color_groups, do: @color_groups
       def io_ansi_color_names, do: @io_ansi_color_names
 
       # ---------------------------------------------------
