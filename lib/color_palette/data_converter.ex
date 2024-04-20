@@ -25,7 +25,8 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  def convert_raw_color_data_to_colors(raw_color_data, source, opts \\ []) do
+  def convert_raw_color_data_to_colors(raw_color_data, opts) do
+    source = Keyword.get(opts, :source)
     exact_name_match? = Keyword.get(opts, :exact_name_match?, false)
     distance_to_closest_named_hex = Keyword.get(opts, :distance_to_closest_named_hex)
 
