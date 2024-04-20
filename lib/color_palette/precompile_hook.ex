@@ -15,13 +15,6 @@ defmodule ColorPalette.PrecompileHook do
                            |> Path.join("color_palette/data/ansi_color_names.json")
                            |> File.read!()
                            |> Jason.decode!(keys: :atoms)
-                           |> Enum.map(
-                             &%{
-                               &1
-                               | name: String.to_atom(&1.name),
-                                 text_contrast_color: String.to_atom(&1.text_contrast_color)
-                             }
-                           )
 
       @color_groups [
         :blue,
@@ -89,7 +82,10 @@ defmodule ColorPalette.PrecompileHook do
                         |> DataConverter.add_ansi_color_codes_to_colors(@ansi_color_codes)
 
       @io_ansi_colors @io_ansi_color_names
-                      |> DataConverter.convert_ansi_colors_to_colors()
+                      |> DataConverter.convert_raw_color_data_to_colors(:io_ansi,
+                        exact_name_match?: true,
+                        distance_to_closest_named_hex: 0
+                      )
                       |> DataConverter.add_ansi_color_codes_to_colors(@ansi_color_codes)
 
       # --------------------------------------------------------------------------------------------

@@ -25,7 +25,10 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  def convert_raw_color_data_to_colors(raw_color_data, source) do
+  def convert_raw_color_data_to_colors(raw_color_data, source, opts \\ []) do
+    exact_name_match? = Keyword.get(opts, :exact_name_match?, false)
+    distance_to_closest_named_hex = Keyword.get(opts, :distance_to_closest_named_hex)
+
     raw_color_data
     |> Enum.map(fn raw_color ->
       raw_color.name
@@ -35,27 +38,11 @@ defmodule ColorPalette.DataConverter do
           name: color_name,
           text_contrast_color: String.to_atom(raw_color.text_contrast_color),
           source: [source],
-          exact_name_match?: false,
-          distance_to_closest_named_hex: nil,
+          exact_name_match?: exact_name_match?,
+          distance_to_closest_named_hex: distance_to_closest_named_hex,
           closest_named_hex: nil
         }
       end)
-    end)
-  end
-
-  def convert_ansi_colors_to_colors(ansi_colors_raw_data) do
-    ansi_colors_raw_data
-    |> Enum.map(fn ansi_color ->
-      [
-        %Color{
-          name: ansi_color.name,
-          text_contrast_color: ansi_color.text_contrast_color,
-          source: [:io_ansi],
-          closest_named_hex: nil,
-          exact_name_match?: true,
-          distance_to_closest_named_hex: 0
-        }
-      ]
     end)
   end
 

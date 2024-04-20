@@ -436,7 +436,11 @@ defmodule ColorPalette.DataConverterTest do
     test "works" do
       ansi_colors = ColorPalette.io_ansi_color_names()
 
-      colors = DataConverter.convert_ansi_colors_to_colors(ansi_colors)
+      colors =
+        DataConverter.convert_raw_color_data_to_colors(ansi_colors, :io_ansi,
+          exact_name_match?: true,
+          distance_to_closest_named_hex: 0
+        )
 
       assert length(colors) == 16
       [black] = colors |> List.first()
