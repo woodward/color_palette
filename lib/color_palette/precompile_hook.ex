@@ -124,9 +124,10 @@ defmodule ColorPalette.PrecompileHook do
 
       # --------------------------------------------------------------------------------------------
       # Accessors
-      # ---------
+      # Most are here just for debugging purposes, other than `colors/0` and `ansi_color_codes/0`
+      # --------------------------------------------------------------------------------------------
 
-      # Raw Data:
+      # Raw Data
       def color_groups_to_ansi_color_codes, do: @color_groups_to_ansi_color_codes
       def raw_color_data_api_data, do: @raw_color_data_api_data
       def raw_color_name_dot_com_data, do: @raw_color_name_dot_com_data
@@ -143,7 +144,7 @@ defmodule ColorPalette.PrecompileHook do
       def colorhexa_colors, do: @colorhexa_colors
       def combined_colors, do: @combined_colors
 
-      # -----------------------------
+      # ---------------------------
       # Transformed & Grouped Data:
 
       def combined_colors_collated, do: @combined_colors_collated
@@ -155,7 +156,7 @@ defmodule ColorPalette.PrecompileHook do
       @doc """
       The main colors data structure.  A map between the color name and the `ColorPalette.Color` struct
       """
-      @spec colors() :: %{atom() => ColorPalette.Color.t()}
+      @spec colors() :: %{ColorPalette.Color.color_name() => ColorPalette.Color.t()}
       def colors, do: @colors
     end
   end

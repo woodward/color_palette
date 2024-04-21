@@ -11,7 +11,7 @@ defmodule ColorPalette do
   - `find_by_code/1` - Finds a color by its ANSI code number (e.g., 0..255).
   - `color_names/0` - Returns the list of all color names (e.g., `[:aero_blue, :alien_armpit, :alto, ...]`)
   - `random_color_name/0` - Returns a random color name
-  - `print_in_random_color/2` - Prints a message in a random color
+  - `print_using_random_color/2` - Prints a message in a random color
 
   ## Colors
 
@@ -66,23 +66,19 @@ defmodule ColorPalette do
   Returns the list of all color names
   """
   @spec color_names() :: [Color.color_name()]
-  def color_names do
-    colors() |> Map.keys() |> Enum.sort()
-  end
+  def color_names, do: colors() |> Map.keys() |> Enum.sort()
 
   @doc """
   Returns a random color name
   """
   @spec random_color_name() :: Color.color_name()
-  def random_color_name do
-    color_names() |> Enum.random()
-  end
+  def random_color_name, do: color_names() |> Enum.random()
 
   @doc """
   Prints a message in a random color
   """
-  @spec print_in_random_color(String.t(), Keyword.t()) :: Color.color_name()
-  def print_in_random_color(message, opts \\ []) do
+  @spec print_using_random_color(String.t(), Keyword.t()) :: Color.color_name()
+  def print_using_random_color(message, opts \\ []) do
     show_color_name? = Keyword.get(opts, :show_color_name?, false)
     random_color = random_color_name()
     message = if show_color_name?, do: "#{random_color}:  #{message}", else: message
