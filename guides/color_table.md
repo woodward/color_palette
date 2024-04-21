@@ -1,6 +1,8 @@
 # ANSI Color Table
 
-From [ANSI Escape Codes](https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit)
+From [ANSI Escape Codes](https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit). Note that the numbers
+in the table below are linked to the corresponding `ColorPalette` function names; e.g., `70` links
+to [ANSI color code 70, which is :kelly_green](ansi_color_codes.html#color-70)
 
 <table style="text-align:center;font-size:80%;width:100%;background:#f6f6f6;cursor:default;" cellpadding="0" cellspacing="1" >
   <tbody>
@@ -312,3 +314,10 @@ From [ANSI Escape Codes](https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit)
     </tr>
   </tbody>
 </table>
+
+## The ANSI Color Codes and Hex Values
+
+Source: [this Wikimedia Commons file](https://en.wikipedia.org/wiki/Xterm#/media/File:Xterm_256color_chart.svg)
+referenced from this [Wikipedia article on Xterm protocols](https://en.wikipedia.org/wiki/Xterm#Protocols).
+
+![Colors](https://raw.github.com/woodward/color_palette/master/assets/xterm-256color-chart.svg)
