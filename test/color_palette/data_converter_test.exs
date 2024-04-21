@@ -63,7 +63,7 @@ defmodule ColorPalette.DataConverterTest do
       magenta_fuschia = colors |> Enum.at(201)
 
       assert magenta_fuschia == [
-               %ColorPalette.Color{
+               %Color{
                  name: :magenta,
                  ansi_color_code: nil,
                  text_contrast_color: :black,
@@ -73,7 +73,7 @@ defmodule ColorPalette.DataConverterTest do
                  exact_name_match?: true,
                  same_as: []
                },
-               %ColorPalette.Color{
+               %Color{
                  name: :fuchsia,
                  ansi_color_code: nil,
                  text_contrast_color: :black,
@@ -152,9 +152,9 @@ defmodule ColorPalette.DataConverterTest do
     test "groups by name" do
       colors = [
         [
-          %ColorPalette.Color{
+          %Color{
             name: :black,
-            ansi_color_code: %ColorPalette.ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black},
+            ansi_color_code: %ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black},
             text_contrast_color: :white,
             closest_named_hex: nil,
             distance_to_closest_named_hex: 0,
@@ -162,9 +162,9 @@ defmodule ColorPalette.DataConverterTest do
             exact_name_match?: true,
             same_as: []
           },
-          %ColorPalette.Color{
+          %Color{
             name: :black,
-            ansi_color_code: %ColorPalette.ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black},
+            ansi_color_code: %ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black},
             text_contrast_color: :white,
             closest_named_hex: "000000",
             distance_to_closest_named_hex: 0,
@@ -172,9 +172,9 @@ defmodule ColorPalette.DataConverterTest do
             exact_name_match?: true,
             same_as: []
           },
-          %ColorPalette.Color{
+          %Color{
             name: :black,
-            ansi_color_code: %ColorPalette.ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black},
+            ansi_color_code: %ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black},
             text_contrast_color: :white,
             closest_named_hex: nil,
             distance_to_closest_named_hex: nil,
@@ -184,9 +184,9 @@ defmodule ColorPalette.DataConverterTest do
           }
         ],
         [
-          %ColorPalette.Color{
+          %Color{
             name: :purple_pizzazz,
-            ansi_color_code: %ColorPalette.ANSIColorCode{code: 200, hex: "ff00d7", rgb: [255, 0, 215], color_group: :pink},
+            ansi_color_code: %ANSIColorCode{code: 200, hex: "ff00d7", rgb: [255, 0, 215], color_group: :pink},
             text_contrast_color: :black,
             closest_named_hex: "FF00CC",
             distance_to_closest_named_hex: 123,
@@ -194,9 +194,9 @@ defmodule ColorPalette.DataConverterTest do
             exact_name_match?: false,
             same_as: []
           },
-          %ColorPalette.Color{
+          %Color{
             name: :shocking_pink,
-            ansi_color_code: %ColorPalette.ANSIColorCode{code: 200, hex: "ff00d7", rgb: [255, 0, 215], color_group: :pink},
+            ansi_color_code: %ANSIColorCode{code: 200, hex: "ff00d7", rgb: [255, 0, 215], color_group: :pink},
             text_contrast_color: :white,
             closest_named_hex: nil,
             distance_to_closest_named_hex: nil,
@@ -211,9 +211,9 @@ defmodule ColorPalette.DataConverterTest do
 
       assert grouped == [
                [
-                 %ColorPalette.Color{
+                 %Color{
                    name: :black,
-                   ansi_color_code: %ColorPalette.ANSIColorCode{
+                   ansi_color_code: %ANSIColorCode{
                      code: 0,
                      hex: "000000",
                      rgb: [0, 0, 0],
@@ -228,9 +228,9 @@ defmodule ColorPalette.DataConverterTest do
                  }
                ],
                [
-                 %ColorPalette.Color{
+                 %Color{
                    name: :purple_pizzazz,
-                   ansi_color_code: %ColorPalette.ANSIColorCode{code: 200, hex: "ff00d7", rgb: [255, 0, 215], color_group: :pink},
+                   ansi_color_code: %ANSIColorCode{code: 200, hex: "ff00d7", rgb: [255, 0, 215], color_group: :pink},
                    text_contrast_color: :black,
                    closest_named_hex: "FF00CC",
                    distance_to_closest_named_hex: 123,
@@ -238,9 +238,9 @@ defmodule ColorPalette.DataConverterTest do
                    exact_name_match?: false,
                    same_as: [:shocking_pink]
                  },
-                 %ColorPalette.Color{
+                 %Color{
                    name: :shocking_pink,
-                   ansi_color_code: %ColorPalette.ANSIColorCode{code: 200, hex: "ff00d7", rgb: [255, 0, 215], color_group: :pink},
+                   ansi_color_code: %ANSIColorCode{code: 200, hex: "ff00d7", rgb: [255, 0, 215], color_group: :pink},
                    text_contrast_color: :white,
                    closest_named_hex: nil,
                    distance_to_closest_named_hex: nil,
@@ -331,21 +331,21 @@ defmodule ColorPalette.DataConverterTest do
   describe "find_by_hex" do
     setup do
       colors = %{
-        mystic_pearl: %ColorPalette.Color{
+        mystic_pearl: %Color{
           name: :mystic_pearl,
-          ansi_color_code: %ColorPalette.ANSIColorCode{
+          ansi_color_code: %ANSIColorCode{
             hex: "d75f87"
           }
         },
-        spring_green_00ff5f: %ColorPalette.Color{
+        spring_green_00ff5f: %Color{
           name: :spring_green_00ff5f,
-          ansi_color_code: %ColorPalette.ANSIColorCode{
+          ansi_color_code: %ANSIColorCode{
             hex: "00ff5f"
           }
         },
-        pompadour: %ColorPalette.Color{
+        pompadour: %Color{
           name: :pompadour,
-          ansi_color_code: %ColorPalette.ANSIColorCode{
+          ansi_color_code: %ANSIColorCode{
             hex: "5f005f"
           }
         }
@@ -373,21 +373,21 @@ defmodule ColorPalette.DataConverterTest do
   describe "find_by_code" do
     setup do
       colors = %{
-        mystic_pearl: %ColorPalette.Color{
+        mystic_pearl: %Color{
           name: :mystic_pearl,
-          ansi_color_code: %ColorPalette.ANSIColorCode{
+          ansi_color_code: %ANSIColorCode{
             code: 168
           }
         },
-        spring_green_00ff5f: %ColorPalette.Color{
+        spring_green_00ff5f: %Color{
           name: :spring_green_00ff5f,
-          ansi_color_code: %ColorPalette.ANSIColorCode{
+          ansi_color_code: %ANSIColorCode{
             code: 48
           }
         },
-        pompadour: %ColorPalette.Color{
+        pompadour: %Color{
           name: :pompadour,
-          ansi_color_code: %ColorPalette.ANSIColorCode{
+          ansi_color_code: %ANSIColorCode{
             code: 53
           }
         }
@@ -510,9 +510,9 @@ defmodule ColorPalette.DataConverterTest do
   describe "color_names_to_colors" do
     test "groups colors by color names" do
       colors = [
-        %ColorPalette.Color{
+        %Color{
           name: :alien_armpit,
-          ansi_color_code: %ColorPalette.ANSIColorCode{code: 112, hex: "87d700", rgb: [135, 215, 0], color_group: :green},
+          ansi_color_code: %ANSIColorCode{code: 112, hex: "87d700", rgb: [135, 215, 0], color_group: :green},
           text_contrast_color: :black,
           source: :color_name_dot_com,
           closest_named_hex: nil,
@@ -520,9 +520,9 @@ defmodule ColorPalette.DataConverterTest do
           exact_name_match?: false,
           same_as: []
         },
-        %ColorPalette.Color{
+        %Color{
           name: :black,
-          ansi_color_code: %ColorPalette.ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black},
+          ansi_color_code: %ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black},
           text_contrast_color: :white,
           source: :io_ansi,
           closest_named_hex: nil,
@@ -530,9 +530,9 @@ defmodule ColorPalette.DataConverterTest do
           exact_name_match?: false,
           same_as: []
         },
-        %ColorPalette.Color{
+        %Color{
           name: :cyan,
-          ansi_color_code: %ColorPalette.ANSIColorCode{code: 6, hex: "008080", rgb: [0, 128, 128], color_group: :cyan},
+          ansi_color_code: %ANSIColorCode{code: 6, hex: "008080", rgb: [0, 128, 128], color_group: :cyan},
           text_contrast_color: :white,
           source: :io_ansi,
           closest_named_hex: nil,
@@ -540,9 +540,9 @@ defmodule ColorPalette.DataConverterTest do
           exact_name_match?: false,
           same_as: [:teal]
         },
-        %ColorPalette.Color{
+        %Color{
           name: :cyan,
-          ansi_color_code: %ColorPalette.ANSIColorCode{code: 45, hex: "00d7ff", rgb: [0, 215, 255], color_group: :blue},
+          ansi_color_code: %ANSIColorCode{code: 45, hex: "00d7ff", rgb: [0, 215, 255], color_group: :blue},
           text_contrast_color: :black,
           source: :color_name_dot_com,
           closest_named_hex: nil,
@@ -556,9 +556,9 @@ defmodule ColorPalette.DataConverterTest do
 
       assert grouped == %{
                cyan: [
-                 %ColorPalette.Color{
+                 %Color{
                    name: :cyan,
-                   ansi_color_code: %ColorPalette.ANSIColorCode{code: 45, hex: "00d7ff", rgb: [0, 215, 255], color_group: :blue},
+                   ansi_color_code: %ANSIColorCode{code: 45, hex: "00d7ff", rgb: [0, 215, 255], color_group: :blue},
                    text_contrast_color: :black,
                    source: :color_name_dot_com,
                    closest_named_hex: nil,
@@ -566,8 +566,8 @@ defmodule ColorPalette.DataConverterTest do
                    exact_name_match?: false,
                    same_as: []
                  },
-                 %ColorPalette.Color{
-                   ansi_color_code: %ColorPalette.ANSIColorCode{code: 6, color_group: :cyan, hex: "008080", rgb: [0, 128, 128]},
+                 %Color{
+                   ansi_color_code: %ANSIColorCode{code: 6, color_group: :cyan, hex: "008080", rgb: [0, 128, 128]},
                    closest_named_hex: nil,
                    distance_to_closest_named_hex: nil,
                    exact_name_match?: false,
@@ -578,9 +578,9 @@ defmodule ColorPalette.DataConverterTest do
                  }
                ],
                black: [
-                 %ColorPalette.Color{
+                 %Color{
                    name: :black,
-                   ansi_color_code: %ColorPalette.ANSIColorCode{
+                   ansi_color_code: %ANSIColorCode{
                      code: 0,
                      hex: "000000",
                      rgb: [0, 0, 0],
@@ -595,9 +595,9 @@ defmodule ColorPalette.DataConverterTest do
                  }
                ],
                alien_armpit: [
-                 %ColorPalette.Color{
+                 %Color{
                    name: :alien_armpit,
-                   ansi_color_code: %ColorPalette.ANSIColorCode{code: 112, hex: "87d700", rgb: [135, 215, 0], color_group: :green},
+                   ansi_color_code: %ANSIColorCode{code: 112, hex: "87d700", rgb: [135, 215, 0], color_group: :green},
                    text_contrast_color: :black,
                    source: :color_name_dot_com,
                    closest_named_hex: nil,
@@ -623,9 +623,9 @@ defmodule ColorPalette.DataConverterTest do
       ansi_color_codes_to_color_names = DataConverter.ansi_color_codes_to_color_names(ansi_color_codes, color_names)
 
       assert ansi_color_codes_to_color_names == %{
-               %ColorPalette.ANSIColorCode{code: 1} => [:black2, :black1],
-               %ColorPalette.ANSIColorCode{code: 2} => [:some_other_color],
-               %ColorPalette.ANSIColorCode{code: 3} => []
+               %ANSIColorCode{code: 1} => [:black2, :black1],
+               %ANSIColorCode{code: 2} => [:some_other_color],
+               %ANSIColorCode{code: 3} => []
              }
     end
   end
@@ -695,9 +695,9 @@ defmodule ColorPalette.DataConverterTest do
     test "groups colors with the same name, combining their sources" do
       colors = [
         [
-          %ColorPalette.Color{
+          %Color{
             name: :purple_pizzazz,
-            ansi_color_code: %ColorPalette.ANSIColorCode{code: 200, color_group: :pink, hex: "ff00d7", rgb: [255, 0, 215]},
+            ansi_color_code: %ANSIColorCode{code: 200, color_group: :pink, hex: "ff00d7", rgb: [255, 0, 215]},
             text_contrast_color: :black,
             closest_named_hex: "FF00CC",
             distance_to_closest_named_hex: 123,
@@ -706,9 +706,9 @@ defmodule ColorPalette.DataConverterTest do
             renamed?: false,
             same_as: []
           },
-          %ColorPalette.Color{
+          %Color{
             name: :shocking_pink,
-            ansi_color_code: %ColorPalette.ANSIColorCode{code: 200, color_group: :pink, hex: "ff00d7", rgb: [255, 0, 215]},
+            ansi_color_code: %ANSIColorCode{code: 200, color_group: :pink, hex: "ff00d7", rgb: [255, 0, 215]},
             text_contrast_color: :white,
             closest_named_hex: nil,
             distance_to_closest_named_hex: nil,
@@ -719,9 +719,9 @@ defmodule ColorPalette.DataConverterTest do
           }
         ],
         [
-          %ColorPalette.Color{
+          %Color{
             name: :fuchsia,
-            ansi_color_code: %ColorPalette.ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+            ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
             text_contrast_color: :black,
             closest_named_hex: "FF00FF",
             distance_to_closest_named_hex: 0,
@@ -730,9 +730,9 @@ defmodule ColorPalette.DataConverterTest do
             renamed?: false,
             same_as: []
           },
-          %ColorPalette.Color{
+          %Color{
             name: :fuchsia,
-            ansi_color_code: %ColorPalette.ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+            ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
             text_contrast_color: :white,
             closest_named_hex: nil,
             distance_to_closest_named_hex: nil,
@@ -741,9 +741,9 @@ defmodule ColorPalette.DataConverterTest do
             renamed?: false,
             same_as: []
           },
-          %ColorPalette.Color{
+          %Color{
             name: :magenta,
-            ansi_color_code: %ColorPalette.ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+            ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
             text_contrast_color: :white,
             closest_named_hex: nil,
             distance_to_closest_named_hex: nil,
@@ -752,9 +752,9 @@ defmodule ColorPalette.DataConverterTest do
             renamed?: false,
             same_as: []
           },
-          %ColorPalette.Color{
+          %Color{
             name: :magenta,
-            ansi_color_code: %ColorPalette.ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+            ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
             text_contrast_color: :black,
             closest_named_hex: "FF00FF",
             distance_to_closest_named_hex: 0,
@@ -770,9 +770,9 @@ defmodule ColorPalette.DataConverterTest do
 
       assert colors_collated == [
                [
-                 %ColorPalette.Color{
+                 %Color{
                    name: :purple_pizzazz,
-                   ansi_color_code: %ColorPalette.ANSIColorCode{code: 200, color_group: :pink, hex: "ff00d7", rgb: [255, 0, 215]},
+                   ansi_color_code: %ANSIColorCode{code: 200, color_group: :pink, hex: "ff00d7", rgb: [255, 0, 215]},
                    text_contrast_color: :black,
                    closest_named_hex: "FF00CC",
                    distance_to_closest_named_hex: 123,
@@ -781,9 +781,9 @@ defmodule ColorPalette.DataConverterTest do
                    renamed?: false,
                    same_as: []
                  },
-                 %ColorPalette.Color{
+                 %Color{
                    name: :shocking_pink,
-                   ansi_color_code: %ColorPalette.ANSIColorCode{code: 200, color_group: :pink, hex: "ff00d7", rgb: [255, 0, 215]},
+                   ansi_color_code: %ANSIColorCode{code: 200, color_group: :pink, hex: "ff00d7", rgb: [255, 0, 215]},
                    text_contrast_color: :white,
                    closest_named_hex: nil,
                    distance_to_closest_named_hex: nil,
@@ -794,9 +794,9 @@ defmodule ColorPalette.DataConverterTest do
                  }
                ],
                [
-                 %ColorPalette.Color{
+                 %Color{
                    name: :magenta,
-                   ansi_color_code: %ColorPalette.ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+                   ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
                    text_contrast_color: :black,
                    closest_named_hex: "FF00FF",
                    distance_to_closest_named_hex: 0,
@@ -805,9 +805,9 @@ defmodule ColorPalette.DataConverterTest do
                    renamed?: false,
                    same_as: []
                  },
-                 %ColorPalette.Color{
+                 %Color{
                    name: :fuchsia,
-                   ansi_color_code: %ColorPalette.ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+                   ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
                    text_contrast_color: :white,
                    closest_named_hex: "FF00FF",
                    distance_to_closest_named_hex: 0,
