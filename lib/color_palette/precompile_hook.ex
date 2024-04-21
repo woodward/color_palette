@@ -155,6 +155,7 @@ defmodule ColorPalette.PrecompileHook do
       @doc """
       The main colors data structure.  A map between the color name and the `ColorPalette.Color` struct
       """
+      @spec colors() :: %{atom() => ColorPalette.Color.t()}
       def colors, do: @colors
     end
   end

@@ -1,8 +1,11 @@
 defmodule ColorPalette.DataConverter do
   @moduledoc false
 
+  alias ColorPalette.ANSIColorCode
   alias ColorPalette.Color
+  alias ColorPalette.ColorGroup
 
+  @spec normalize_data(map()) :: map()
   def normalize_data(color_data_api) do
     text_contrast_color =
       case color_data_api.contrast.value do
@@ -20,6 +23,7 @@ defmodule ColorPalette.DataConverter do
     }
   end
 
+  @spec convert_raw_color_data_to_colors([map()], Color.source()) :: [Color.t()]
   def convert_raw_color_data_to_colors(raw_color_data, source) do
     raw_color_data
     |> Enum.map(fn raw_color ->
@@ -38,6 +42,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  @spec add_ansi_color_codes_to_colors([Color.t()], [ANSIColorCode.t()]) :: [Color.t()]
   def add_ansi_color_codes_to_colors(color_data, ansi_color_codes) do
     Enum.zip(color_data, ansi_color_codes)
     |> Enum.map(fn {colors, ansi_color_code} ->
@@ -48,6 +53,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  @spec color_groups_to_ansi_color_codes([ANSIColorCode.t()], [ColorGroup.t()]) :: %{ColorGroup.t() => [ANSIColorCode.t()]}
   def color_groups_to_ansi_color_codes(ansi_color_codes, color_groups) do
     color_groups_to_ansi_color_codes =
       color_groups
@@ -62,6 +68,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  @spec color_name_to_atom(String.t()) :: [Color.color_name()]
   def color_name_to_atom(name) do
     name
     |> String.downcase()
@@ -80,14 +87,7 @@ defmodule ColorPalette.DataConverter do
     |> Enum.map(&String.to_atom(&1))
   end
 
-  def text_contrast_color_for_color_data_api(color) do
-    case color.contrast.value do
-      "#ffffff" -> :white
-      "#000000" -> :black
-      _ -> raise "Unexpected doc text color"
-    end
-  end
-
+  @spec annotate_same_as_field([Color.t()]) :: [Color.t()]
   def annotate_same_as_field(colors) do
     colors
     |> Enum.map(fn colors_for_code ->
@@ -110,6 +110,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  @spec color_names_to_colors([Color.t()]) :: %{Color.color_name() => [Color.t()]}
   def color_names_to_colors(colors) do
     colors
     |> Enum.reduce(%{}, fn color, acc ->
@@ -124,6 +125,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  @spec multi_zip(list()) :: list()
   def multi_zip(lists) do
     [first_list | remaining] = lists
     length_of_first_list = length(first_list)
@@ -146,6 +148,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  @spec ansi_color_codes_to_color_names([ANSIColorCode.t()], %{atom() => Color.t()}) :: %{ANSIColorCode.t() => [atom()]}
   def ansi_color_codes_to_color_names(ansi_color_codes, colors) do
     ansi_color_codes_to_color_names =
       ansi_color_codes
@@ -160,6 +163,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  @spec find_by_hex(%{Color.color_name() => Color.t()}, ANSIColorCode.hex()) :: [Color.t()]
   def find_by_hex(color_names, hex) do
     hex = hex |> String.replace("#", "")
 
@@ -169,6 +173,7 @@ defmodule ColorPalette.DataConverter do
     |> Enum.sort_by(& &1.name)
   end
 
+  @spec find_by_code(%{Color.color_name() => Color.t()}, ANSIColorCode.code()) :: [Color.t()]
   def find_by_code(_color_names, code) when code < 0 or code > 255 do
     {:error, "Code #{code} is not valid"}
   end

@@ -21,18 +21,24 @@ defmodule ColorPalette do
 
   defdelegate reset(), to: IO.ANSI
 
+  alias ColorPalette.ANSIColorCode
+  alias ColorPalette.Color
   alias ColorPalette.DataConverter
 
   @before_compile ColorPalette.PrecompileHook
 
+  @spec ansi_color_codes_to_color_names() :: %{ANSIColorCode.t() => [Color.t()]}
   def ansi_color_codes_to_color_names do
     DataConverter.ansi_color_codes_to_color_names(ansi_color_codes(), colors())
   end
 
+  @spec find_by_hex(ANSIColorCode.hex()) :: [Color.t()]
   def find_by_hex(hex), do: colors() |> DataConverter.find_by_hex(hex)
 
+  @spec find_by_code(ANSIColorCode.code()) :: [Color.t()]
   def find_by_code(code), do: colors() |> DataConverter.find_by_code(code)
 
+  @spec find_by_source(Color.source()) :: [Color.t()]
   def find_by_source(source) do
     colors()
     |> Enum.filter(fn {_name, color} ->
