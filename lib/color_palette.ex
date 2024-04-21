@@ -55,4 +55,13 @@ defmodule ColorPalette do
   def random_color_name do
     color_names() |> Enum.random()
   end
+
+  @spec print_in_random_color(String.t(), Keyword.t()) :: Color.color_name()
+  def print_in_random_color(message, opts \\ []) do
+    show_color_name? = Keyword.get(opts, :show_color_name?, false)
+    random_color = random_color_name()
+    message = if show_color_name?, do: "#{random_color}:  #{message}", else: message
+    IO.puts(apply(ColorPalette, random_color, []) <> message <> reset())
+    random_color
+  end
 end
