@@ -20,25 +20,18 @@ defmodule ColorPalette.DataConverter do
     }
   end
 
-  def convert_raw_color_data_to_colors(raw_color_data, opts) do
-    source = Keyword.get(opts, :source)
-    all_exact_name_match? = Keyword.get(opts, :exact_name_match?, false)
-    all_distance = Keyword.get(opts, :distance_to_closest_named_hex)
-
+  def convert_raw_color_data_to_colors(raw_color_data, source) do
     raw_color_data
     |> Enum.map(fn raw_color ->
       raw_color.name
       |> color_name_to_atom()
       |> Enum.map(fn color_name ->
-        exact_name_match? = if all_exact_name_match?, do: true, else: raw_color[:exact_name_match?]
-        distance = if all_distance == nil, do: raw_color[:distance_to_closest_named_hex], else: all_distance
-
         %Color{
           name: color_name,
           text_contrast_color: String.to_atom(raw_color.text_contrast_color),
           source: [source],
-          exact_name_match?: exact_name_match?,
-          distance_to_closest_named_hex: distance,
+          exact_name_match?: raw_color[:exact_name_match?],
+          distance_to_closest_named_hex: raw_color[:distance_to_closest_named_hex],
           closest_named_hex: raw_color[:closest_named_hex]
         }
       end)

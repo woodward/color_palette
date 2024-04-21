@@ -16,6 +16,7 @@ defmodule ColorPalette.PrecompileHook do
                            |> Path.join("color_palette/data/ansi_color_names.json")
                            |> File.read!()
                            |> Jason.decode!(keys: :atoms)
+                           |> Enum.map(&(&1 |> Map.merge(%{exact_name_match?: true, distance_to_closest_named_hex: 0})))
 
       @ansi_color_codes_by_group __DIR__
                                  |> Path.join("color_palette/data/ansi_color_codes_by_group.json")
@@ -58,23 +59,19 @@ defmodule ColorPalette.PrecompileHook do
       # Raw Data Converted to `ColorPalette.Color` structs:
 
       @color_data_api_colors @raw_color_data_api_data
-                             |> DataConverter.convert_raw_color_data_to_colors(source: :color_data_api)
+                             |> DataConverter.convert_raw_color_data_to_colors(:color_data_api)
                              |> DataConverter.add_ansi_color_codes_to_colors(@ansi_color_codes)
 
       @color_name_dot_com_colors @raw_color_name_dot_com_data
-                                 |> DataConverter.convert_raw_color_data_to_colors(source: :color_name_dot_com)
+                                 |> DataConverter.convert_raw_color_data_to_colors(:color_name_dot_com)
                                  |> DataConverter.add_ansi_color_codes_to_colors(@ansi_color_codes)
 
       @colorhexa_colors @raw_colorhexa_data
-                        |> DataConverter.convert_raw_color_data_to_colors(source: :colorhexa)
+                        |> DataConverter.convert_raw_color_data_to_colors(:colorhexa)
                         |> DataConverter.add_ansi_color_codes_to_colors(@ansi_color_codes)
 
       @io_ansi_colors @io_ansi_color_names
-                      |> DataConverter.convert_raw_color_data_to_colors(
-                        source: :io_ansi,
-                        exact_name_match?: true,
-                        distance_to_closest_named_hex: 0
-                      )
+                      |> DataConverter.convert_raw_color_data_to_colors(:io_ansi)
                       |> DataConverter.add_ansi_color_codes_to_colors(@ansi_color_codes)
 
       # --------------------------------------------------------------------------------------------

@@ -31,7 +31,7 @@ defmodule ColorPalette.DataConverterTest do
     test "adds color names and text_contrast_color to ansi color codes" do
       color_data = ColorPalette.raw_color_data_api_data()
 
-      colors = DataConverter.convert_raw_color_data_to_colors(color_data, source: :color_data_api)
+      colors = DataConverter.convert_raw_color_data_to_colors(color_data, :color_data_api)
       assert length(colors) == 256
 
       # ------------------------
@@ -91,7 +91,7 @@ defmodule ColorPalette.DataConverterTest do
     test "adds color names and text_contrast_color to ansi color codes" do
       color_data = ColorPalette.raw_colorhexa_data()
 
-      colors = DataConverter.convert_raw_color_data_to_colors(color_data, source: :colorhexa)
+      colors = DataConverter.convert_raw_color_data_to_colors(color_data, :colorhexa)
       assert length(colors) == 256
 
       # ------------------------
@@ -414,7 +414,7 @@ defmodule ColorPalette.DataConverterTest do
     test "converts the color-name.com raw data into a list of Colors" do
       raw_color_name_dot_com_data = ColorPalette.raw_color_name_dot_com_data()
 
-      colors = DataConverter.convert_raw_color_data_to_colors(raw_color_name_dot_com_data, source: :color_name_dot_com)
+      colors = DataConverter.convert_raw_color_data_to_colors(raw_color_name_dot_com_data, :color_name_dot_com)
 
       assert length(colors) == 256
 
@@ -436,12 +436,7 @@ defmodule ColorPalette.DataConverterTest do
     test "works" do
       ansi_colors = ColorPalette.io_ansi_color_names()
 
-      colors =
-        DataConverter.convert_raw_color_data_to_colors(ansi_colors,
-          source: :io_ansi,
-          exact_name_match?: true,
-          distance_to_closest_named_hex: 0
-        )
+      colors = DataConverter.convert_raw_color_data_to_colors(ansi_colors, :io_ansi)
 
       assert length(colors) == 16
       [black] = colors |> List.first()
