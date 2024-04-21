@@ -73,10 +73,38 @@ defmodule ColorPaletteTest do
     end
   end
 
-  describe "colors" do
+  describe "colors/1" do
     test "returns the map of color names to color data" do
       colors = ColorPalette.colors()
       assert length(Map.keys(colors)) == 485
+
+      assert colors.olive == %Color{
+               ansi_color_code: %ANSIColorCode{code: 3, color_group: :green, hex: "808000", rgb: [128, 128, 0]},
+               closest_named_hex: "808000",
+               distance_to_closest_named_hex: 0,
+               exact_name_match?: true,
+               name: :olive,
+               renamed?: false,
+               same_as: [:yellow],
+               source: [:color_data_api, :color_name_dot_com, :colorhexa],
+               text_contrast_color: :white
+             }
+    end
+  end
+
+  describe "color_names/0" do
+    test "returns the list of color names" do
+      colors = ColorPalette.color_names()
+      assert length(colors) == 485
+      first_five_names = colors |> Enum.take(5)
+      assert first_five_names == [:aero_blue, :alien_armpit, :alto, :american_orange, :american_silver]
+    end
+  end
+
+  describe "random_color_name/0" do
+    test "returns a random color name" do
+      random_color = ColorPalette.random_color_name()
+      assert random_color in ColorPalette.color_names()
     end
   end
 

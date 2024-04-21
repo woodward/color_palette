@@ -45,4 +45,14 @@ defmodule ColorPalette do
       source in color.source
     end)
   end
+
+  @spec color_names() :: [Color.color_name()]
+  def color_names do
+    colors() |> Map.keys() |> Enum.sort()
+  end
+
+  @spec random_color_name() :: Color.color_name()
+  def random_color_name do
+    color_names() |> Enum.random()
+  end
 end
