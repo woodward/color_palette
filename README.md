@@ -22,6 +22,11 @@ Documentation can be found [here](https://hexdocs.pm/color_palette/readme.html) 
 ***IMPORTANT***: note that there are background functions defined for each of the colors (and these are 
 not shown in the docs); e.g., for `ColorPalette.aqua/0` there is also `ColorPalette.aqua_background/0`.
 
+
+### Some of the colors shown in the terminal 
+
+![Colors](https://raw.github.com/woodward/color_palette/master/assets/colors-in-terminal.png)
+
 ## Usage
 
 This hex package adds 485 additional named colors to use in Elixir terminal scripts, based on 
