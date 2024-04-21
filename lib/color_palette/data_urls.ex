@@ -1,6 +1,9 @@
 defmodule ColorPalette.DataURLs do
   @moduledoc false
 
+  alias ColorPalette.Color
+
+  @spec url(Color.source(), Keyword.t()) :: String.t()
   def url(type, opts) do
     name = Keyword.get(opts, :name)
     hex = Keyword.get(opts, :hex)
