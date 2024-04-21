@@ -178,13 +178,15 @@ defmodule ColorPalette.DataConverter do
     {:error, "Code #{code} is not valid"}
   end
 
-  def find_by_code(color_names, code) do
-    color_names
+  @spec find_by_code(%{Color.color_name() => Color.t()}, ANSIColorCode.code()) :: [Color.t()]
+  def find_by_code(colors, code) do
+    colors
     |> Enum.filter(fn {_color_name, color} -> color.ansi_color_code.code == code end)
     |> Enum.map(fn {_color_name, color} -> color end)
     |> Enum.sort_by(& &1.name)
   end
 
+  @spec unnamed_ansi_color_codes(%{Color.color_name() => Color.t()}) :: [ANSIColorCode.code()]
   def unnamed_ansi_color_codes(color_map) do
     ansi_color_code_set = 0..255 |> Range.to_list() |> MapSet.new()
 

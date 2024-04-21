@@ -3,6 +3,11 @@ defmodule ColorPalette.GuideGenerator do
   Generates the guides for the ExDocs
   """
 
+  @doc """
+  Generates the [color groups guide](color_groups.html) by writing a markdown file
+  `color_groups.md` into the `guides` directory
+  """
+  @spec generate_color_groups_guide() :: :ok
   def generate_color_groups_guide do
     content = """
     # Color Groups
@@ -40,6 +45,11 @@ defmodule ColorPalette.GuideGenerator do
     :ok
   end
 
+  @doc """
+  Generates the [ANSI Color Codes list](ansi_color_codes.html) by writing a markdown file
+  `ansi_color_codes.md` into the `guides` directory
+  """
+  @spec generate_ansi_color_codes_guide() :: :ok
   def generate_ansi_color_codes_guide do
     content = """
     # 256 ANSI Color Codes

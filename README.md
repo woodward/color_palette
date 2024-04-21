@@ -19,6 +19,8 @@ end
 
 Documentation can be found [here](https://hexdocs.pm/color_palette/readme.html) and a 
 [full list of colors here](https://hexdocs.pm/color_palette/ColorPalette.html#summary).
+***IMPORTANT***: note that there are background functions defined for each of the colors (and these are 
+not shown in the docs); e.g., for `ColorPalette.aqua/0` there is also `ColorPalette.aqua_background/0`.
 
 ## Usage
 
@@ -66,13 +68,14 @@ See the main module page for [ColorPalette](https://hexdocs.pm/color_palette/Col
 ## Data Sources
 
 The 256 IO ANSI color codes are readily available, and a copy of them are stored in JSON format 
-[in this data directory.](https://github.com/woodward/color_palette/blob/main/lib/color_palette/data/ansi_color_codes.json).
+[in this file.](https://github.com/woodward/color_palette/blob/main/lib/color_palette/data/ansi_color_codes.json).
 These colors were manually grouped by the `ColorPalette` author into 11 color groups 
 [in this file](https://github.com/woodward/color_palette/blob/main/lib/color_palette/data/ansi_color_codes_by_group.json) 
 (loosely based on the grouping of the [web extended colors from here](https://en.wikipedia.org/wiki/Web_colors#Extended_colors));
 note that this was a subjective process.
 The 16 `IO.ANSI` color names are stored as a [a JSON file here.](https://github.com/woodward/color_palette/blob/main/lib/color_palette/data/ansi_color_names.json)
 Color names for the 256 ANSI color codes were obtained from [color-name.com](https://www.color-name.com/),  
-[thecolorapi.com](https://www.thecolorapi.com/), and [ColorHexa.com](https://www.colorhexa.com/) .
+[thecolorapi.com](https://www.thecolorapi.com/), and [ColorHexa.com](https://www.colorhexa.com/) , and are
+stored in JSON in this [data directory](https://github.com/woodward/color_palette/blob/main/lib/color_palette/data/).
 `Mix.install/2` Elixir scripts to download the data for these sources are found [here](https://github.com/woodward/color_palette/blob/main/bin/download_color-name_data.exs), [here](https://github.com/woodward/color_palette/blob/main/bin/download_thecolorapi_data.exs), and 
 [here](https://github.com/woodward/color_palette/blob/main/bin/download_colorhexa_data.exs), respectively.
