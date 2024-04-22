@@ -3,11 +3,15 @@ defmodule ColorPalette.GuideGenerator do
   Generates the guides for the ExDocs
   """
 
+  alias ColorPalette.ANSIColorCode
+  alias ColorPalette.Color
+  alias ColorPalette.ColorGroup
+
   @doc """
   Generates the [color groups guide](color_groups.html) by writing a markdown file
   `color_groups.md` into the `guides` directory
   """
-  @spec generate_color_groups_guide() :: :ok
+  @spec generate_color_groups_guide :: :ok
   def generate_color_groups_guide do
     content = """
     # Color Groups
@@ -49,7 +53,7 @@ defmodule ColorPalette.GuideGenerator do
   Generates the [ANSI Color Codes list](ansi_color_codes.html) by writing a markdown file
   `ansi_color_codes.md` into the `guides` directory
   """
-  @spec generate_ansi_color_codes_guide() :: :ok
+  @spec generate_ansi_color_codes_guide :: :ok
   def generate_ansi_color_codes_guide do
     content = """
     # 256 ANSI Color Codes
@@ -81,6 +85,15 @@ defmodule ColorPalette.GuideGenerator do
     :ok
   end
 
+  @spec color_block(
+          ANSIColorCode.code(),
+          ANSIColorCode.hex(),
+          Color.text_contrast_color(),
+          [Color.color_name()],
+          ColorGroup.t() | nil,
+          String.t()
+        ) ::
+          String.t()
   defp color_block(code, hex, text_contrast_color, color_names, color_group, div_styling) do
     color_names_label = if length(color_names) == 1, do: "Color Name", else: "Color Names"
 
@@ -102,6 +115,7 @@ defmodule ColorPalette.GuideGenerator do
     """
   end
 
+  @spec color_links([Color.color_name()], ANSIColorCode.hex(), Color.text_contrast_color()) :: String.t()
   defp color_links(color_names, hex, text_contrast_color) do
     color_names
     |> Enum.map(fn color_name ->
@@ -114,6 +128,7 @@ defmodule ColorPalette.GuideGenerator do
     |> Enum.join(", ")
   end
 
+  @spec color_group_name(ColorGroup.t() | nil, integer()) :: String.t()
   defp color_group_name(nil, count), do: "## Uncategorized (#{count} colors)\n\n"
 
   defp color_group_name(name, count) do

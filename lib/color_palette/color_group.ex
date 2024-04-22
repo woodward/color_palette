@@ -38,6 +38,6 @@ defmodule ColorPalette.ColorGroup do
   @doc """
   Returns the 11 color groups based on the [web extended colors](https://en.wikipedia.org/wiki/Web_colors#Extended_colors)
   """
-  @spec color_groups() :: [__MODULE__.t()]
+  @spec color_groups :: [__MODULE__.t()]
   def color_groups, do: @color_groups
 end

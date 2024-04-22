@@ -4,8 +4,9 @@ defmodule ColorPalette.PrecompileHook do
   import ColorPalette.Color
 
   alias ColorPalette.ANSIColorCode
-  alias ColorPalette.DataConverter
+  alias ColorPalette.Color
   alias ColorPalette.ColorGroup
+  alias ColorPalette.DataConverter
 
   defmacro __before_compile__(_env) do
     quote do
@@ -128,35 +129,62 @@ defmodule ColorPalette.PrecompileHook do
       # --------------------------------------------------------------------------------------------
 
       # Raw Data
+      @spec color_groups_to_ansi_color_codes :: %{ColorGroup.t() => [ANSIColorCode.t()]}
       def color_groups_to_ansi_color_codes, do: @color_groups_to_ansi_color_codes
+
+      @spec raw_color_data_api_data :: [map()]
       def raw_color_data_api_data, do: @raw_color_data_api_data
+
+      @spec raw_color_name_dot_com_data :: [map()]
       def raw_color_name_dot_com_data, do: @raw_color_name_dot_com_data
+
+      @spec raw_colorhexa_data :: [map()]
       def raw_colorhexa_data, do: @raw_colorhexa_data
+
+      @spec ansi_color_codes :: [ANSIColorCode.t()]
       def ansi_color_codes, do: @ansi_color_codes
+
+      @spec io_ansi_color_names :: [map()]
       def io_ansi_color_names, do: @io_ansi_color_names
 
       # ---------------------------------------------------
       # Raw Data converetd to `ColorPalette.Color` structs:
 
+      @spec io_ansi_colors :: [[Color.t()]]
       def io_ansi_colors, do: @io_ansi_colors
+
+      @spec color_name_dot_com_colors :: [[Color.t()]]
       def color_name_dot_com_colors, do: @color_name_dot_com_colors
+
+      @spec color_data_api_colors :: [[Color.t()]]
       def color_data_api_colors, do: @color_data_api_colors
+
+      @spec colorhexa_colors :: [[Color.t()]]
       def colorhexa_colors, do: @colorhexa_colors
+
+      @spec combined_colors :: [[Color.t()]]
       def combined_colors, do: @combined_colors
 
       # ---------------------------
       # Transformed & Grouped Data:
 
+      @spec combined_colors_collated :: [[Color.t()]]
       def combined_colors_collated, do: @combined_colors_collated
+
+      @spec colors_by_name :: %{Color.color_name() => Color.t()}
       def colors_by_name, do: @colors_by_name
+
+      @spec ansi_color_codes_missing_names :: [ANSIColorCode.code()]
       def ansi_color_codes_missing_names, do: @ansi_color_codes_missing_names
+
+      @spec generated_names_for_unnamed_colors :: %{Color.color_name() => Color.t()}
       def generated_names_for_unnamed_colors, do: @generated_names_for_unnamed_colors
 
       # -------------------------------
       @doc """
       The main colors data structure.  A map between the color name and the `ColorPalette.Color` struct
       """
-      @spec colors() :: %{ColorPalette.Color.color_name() => ColorPalette.Color.t()}
+      @spec colors() :: %{Color.color_name() => Color.t()}
       def colors, do: @colors
     end
   end
