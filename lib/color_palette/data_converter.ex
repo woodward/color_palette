@@ -125,7 +125,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  @spec multi_zip(list()) :: list()
+  @spec multi_zip([[Color.t()]]) :: [[Color.t()]]
   def multi_zip(lists) do
     [first_list | remaining] = lists
     length_of_first_list = length(first_list)
@@ -148,7 +148,8 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  @spec ansi_color_codes_to_color_names([ANSIColorCode.t()], %{atom() => Color.t()}) :: %{ANSIColorCode.t() => [atom()]}
+  @spec ansi_color_codes_to_color_names([ANSIColorCode.t()], %{Color.name() => Color.t()}) ::
+          %{ANSIColorCode.t() => [Color.name()]}
   def ansi_color_codes_to_color_names(ansi_color_codes, colors) do
     ansi_color_codes_to_color_names =
       ansi_color_codes
