@@ -10,10 +10,10 @@ defmodule ColorPalette.Color do
 
   @type source :: :io_ansi | :colorhexa | :color_name_dot_com | :color_data_api
 
-  @type color_name :: atom()
+  @type name :: atom()
 
   @type t() :: %__MODULE__{
-          name: color_name(),
+          name: name(),
           ansi_color_code: ANSIColorCode.t(),
           text_contrast_color: text_contrast_color(),
           closest_named_hex: String.t() | nil,
@@ -21,7 +21,7 @@ defmodule ColorPalette.Color do
           source: [source()],
           exact_name_match?: boolean() | nil,
           renamed?: boolean(),
-          same_as: [color_name()]
+          same_as: [name()]
         }
 
   defstruct [

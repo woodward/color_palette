@@ -8,7 +8,7 @@ defmodule ColorPalette.ExDocUtils do
   alias ColorPalette.ColorGroup
   alias ColorPalette.DataURLs
 
-  @spec same_as([Color.color_name()], ANSIColorCode.hex(), Color.text_contrast_color()) :: String.t()
+  @spec same_as([Color.name()], ANSIColorCode.hex(), Color.text_contrast_color()) :: String.t()
   def same_as([], _hex, _text_contrast_color), do: ""
 
   def same_as(same_as, hex, text_contrast_color) do
@@ -21,14 +21,14 @@ defmodule ColorPalette.ExDocUtils do
     """
   end
 
-  @spec color_link(Color.color_name(), ANSIColorCode.hex(), Color.text_contrast_color()) :: String.t()
+  @spec color_link(Color.name(), ANSIColorCode.hex(), Color.text_contrast_color()) :: String.t()
   def color_link(name, hex, text_contrast_color) do
     """
     <a style="color: #{text_contrast_color}; background-color: ##{hex};" href="ColorPalette.html##{name}/0">#{name}</a>
     """
   end
 
-  @spec source_links([Color.source()], Color.text_contrast_color(), ANSIColorCode.hex(), Color.color_name()) :: String.t()
+  @spec source_links([Color.source()], Color.text_contrast_color(), ANSIColorCode.hex(), Color.name()) :: String.t()
   def source_links(sources, text_contrast_color, hex, name) do
     source_span = """
     <span style="margin-right: 2rem;"> Source: </span>
@@ -40,7 +40,7 @@ defmodule ColorPalette.ExDocUtils do
     end)
   end
 
-  @spec source_link(Color.source(), Color.text_contrast_color(), ANSIColorCode.hex(), Color.color_name()) :: String.t()
+  @spec source_link(Color.source(), Color.text_contrast_color(), ANSIColorCode.hex(), Color.name()) :: String.t()
   def source_link(source, text_contrast_color, hex, name) do
     url = DataURLs.url(source, hex: hex, name: name)
 

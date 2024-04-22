@@ -32,7 +32,7 @@ defmodule ColorPalette do
 
   @doc """
   A mapping between the ANSI color codes (e.g, `ColorPalette.ANSIColorCode`) and color
-  names (e.g., `ColorPalette.Color.color_name()`)
+  names (e.g., `ColorPalette.Color.name()`)
   """
   @spec ansi_color_codes_to_color_names() :: %{ANSIColorCode.t() => [Color.t()]}
   def ansi_color_codes_to_color_names do
@@ -65,19 +65,19 @@ defmodule ColorPalette do
   @doc """
   Returns the list of all color names
   """
-  @spec color_names() :: [Color.color_name()]
+  @spec color_names() :: [Color.name()]
   def color_names, do: colors() |> Map.keys() |> Enum.sort()
 
   @doc """
   Returns a random color name
   """
-  @spec random_color_name() :: Color.color_name()
+  @spec random_color_name() :: Color.name()
   def random_color_name, do: color_names() |> Enum.random()
 
   @doc """
   Prints a message in a random color
   """
-  @spec print_using_random_color(String.t(), Keyword.t()) :: Color.color_name()
+  @spec print_using_random_color(String.t(), Keyword.t()) :: Color.name()
   def print_using_random_color(message, opts \\ []) do
     show_color_name? = Keyword.get(opts, :show_color_name?, false)
     random_color = random_color_name()

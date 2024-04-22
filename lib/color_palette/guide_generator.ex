@@ -89,7 +89,7 @@ defmodule ColorPalette.GuideGenerator do
           ANSIColorCode.code(),
           ANSIColorCode.hex(),
           Color.text_contrast_color(),
-          [Color.color_name()],
+          [Color.name()],
           ColorGroup.t() | nil,
           String.t()
         ) ::
@@ -115,7 +115,7 @@ defmodule ColorPalette.GuideGenerator do
     """
   end
 
-  @spec color_links([Color.color_name()], ANSIColorCode.hex(), Color.text_contrast_color()) :: String.t()
+  @spec color_links([Color.name()], ANSIColorCode.hex(), Color.text_contrast_color()) :: String.t()
   defp color_links(color_names, hex, text_contrast_color) do
     color_names
     |> Enum.map(fn color_name ->

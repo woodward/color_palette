@@ -171,20 +171,20 @@ defmodule ColorPalette.PrecompileHook do
       @spec combined_colors_collated :: [[Color.t()]]
       def combined_colors_collated, do: @combined_colors_collated
 
-      @spec colors_by_name :: %{Color.color_name() => Color.t()}
+      @spec colors_by_name :: %{Color.name() => Color.t()}
       def colors_by_name, do: @colors_by_name
 
       @spec ansi_color_codes_missing_names :: [ANSIColorCode.code()]
       def ansi_color_codes_missing_names, do: @ansi_color_codes_missing_names
 
-      @spec generated_names_for_unnamed_colors :: %{Color.color_name() => Color.t()}
+      @spec generated_names_for_unnamed_colors :: %{Color.name() => Color.t()}
       def generated_names_for_unnamed_colors, do: @generated_names_for_unnamed_colors
 
       # -------------------------------
       @doc """
       The main colors data structure.  A map between the color name and the `ColorPalette.Color` struct
       """
-      @spec colors() :: %{Color.color_name() => Color.t()}
+      @spec colors() :: %{Color.name() => Color.t()}
       def colors, do: @colors
     end
   end

@@ -68,7 +68,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  @spec color_name_to_atom(String.t()) :: [Color.color_name()]
+  @spec color_name_to_atom(String.t()) :: [Color.name()]
   def color_name_to_atom(name) do
     name
     |> String.downcase()
@@ -110,7 +110,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  @spec color_names_to_colors([Color.t()]) :: %{Color.color_name() => [Color.t()]}
+  @spec color_names_to_colors([Color.t()]) :: %{Color.name() => [Color.t()]}
   def color_names_to_colors(colors) do
     colors
     |> Enum.reduce(%{}, fn color, acc ->
@@ -163,7 +163,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  @spec find_by_hex(%{Color.color_name() => Color.t()}, ANSIColorCode.hex()) :: [Color.t()]
+  @spec find_by_hex(%{Color.name() => Color.t()}, ANSIColorCode.hex()) :: [Color.t()]
   def find_by_hex(color_names, hex) do
     hex = hex |> String.replace("#", "")
 
@@ -173,12 +173,12 @@ defmodule ColorPalette.DataConverter do
     |> Enum.sort_by(& &1.name)
   end
 
-  @spec find_by_code(%{Color.color_name() => Color.t()}, ANSIColorCode.code()) :: [Color.t()]
+  @spec find_by_code(%{Color.name() => Color.t()}, ANSIColorCode.code()) :: [Color.t()]
   def find_by_code(_color_names, code) when code < 0 or code > 255 do
     {:error, "Code #{code} is not valid"}
   end
 
-  @spec find_by_code(%{Color.color_name() => Color.t()}, ANSIColorCode.code()) :: [Color.t()]
+  @spec find_by_code(%{Color.name() => Color.t()}, ANSIColorCode.code()) :: [Color.t()]
   def find_by_code(colors, code) do
     colors
     |> Enum.filter(fn {_color_name, color} -> color.ansi_color_code.code == code end)
@@ -186,7 +186,7 @@ defmodule ColorPalette.DataConverter do
     |> Enum.sort_by(& &1.name)
   end
 
-  @spec unnamed_ansi_color_codes(%{Color.color_name() => Color.t()}) :: [ANSIColorCode.code()]
+  @spec unnamed_ansi_color_codes(%{Color.name() => Color.t()}) :: [ANSIColorCode.code()]
   def unnamed_ansi_color_codes(color_map) do
     ansi_color_code_set = 0..255 |> Range.to_list() |> MapSet.new()
 
@@ -199,8 +199,8 @@ defmodule ColorPalette.DataConverter do
     MapSet.difference(ansi_color_code_set, color_set) |> MapSet.to_list() |> Enum.sort()
   end
 
-  @spec create_names_for_missing_colors(%{Color.color_name() => Color.t()}, [ANSIColorCode.code()]) ::
-          %{Color.color_name() => Color.t()}
+  @spec create_names_for_missing_colors(%{Color.name() => Color.t()}, [ANSIColorCode.code()]) ::
+          %{Color.name() => Color.t()}
   def create_names_for_missing_colors(all_colors, color_codes_missing_names) do
     color_codes_missing_names
     |> Enum.reduce(%{}, fn code, acc ->
@@ -251,7 +251,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  @spec purge_orphaned_same_as_entries(%{Color.color_name() => Color.t()}) :: %{Color.color_name() => Color.t()}
+  @spec purge_orphaned_same_as_entries(%{Color.name() => Color.t()}) :: %{Color.name() => Color.t()}
   def purge_orphaned_same_as_entries(color_map) do
     color_map
     |> Enum.map(fn {color_name, color} ->
@@ -261,7 +261,7 @@ defmodule ColorPalette.DataConverter do
     |> Enum.into(%{})
   end
 
-  @spec group_by_name_frequency([[Color.t()]]) :: %{Color.color_name() => Color.t()}
+  @spec group_by_name_frequency([[Color.t()]]) :: %{Color.name() => Color.t()}
   def group_by_name_frequency(ansi_colors) do
     ansi_colors
     |> Enum.sort_by(&length(&1))
