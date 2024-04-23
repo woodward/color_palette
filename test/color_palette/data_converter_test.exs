@@ -765,8 +765,8 @@ defmodule ColorPalette.DataConverterTest do
       new_names = DataConverter.create_names_for_missing_colors(all_colors, missing_names)
 
       assert new_names == %{
-               azure_radiance_0087ff: %Color{
-                 name: :azure_radiance_0087ff,
+               azure_radiance_033_0087ff: %Color{
+                 name: :azure_radiance_033_0087ff,
                  ansi_color_code: %ANSIColorCode{code: 33, hex: "0087ff", rgb: [0, 135, 255], color_group: :blue},
                  text_contrast_color: :black,
                  closest_named_hex: "007FFF",
@@ -776,8 +776,8 @@ defmodule ColorPalette.DataConverterTest do
                  same_as: [],
                  renamed?: true
                },
-               camarone_005f00: %Color{
-                 name: :camarone_005f00,
+               camarone_022_005f00: %Color{
+                 name: :camarone_022_005f00,
                  ansi_color_code: %ANSIColorCode{code: 22, hex: "005f00", rgb: [0, 95, 0], color_group: :green},
                  text_contrast_color: :white,
                  closest_named_hex: "00581A",

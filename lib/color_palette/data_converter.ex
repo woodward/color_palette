@@ -298,7 +298,8 @@ defmodule ColorPalette.DataConverter do
     color_codes_missing_names
     |> Enum.reduce(%{}, fn code, acc ->
       color = all_colors |> Enum.at(code) |> List.first()
-      name_with_hex_suffix = color_name_to_atom("#{color.name}_#{color.ansi_color_code.hex}") |> List.first()
+      code = color.ansi_color_code.code |> Integer.to_string() |> String.pad_leading(3, "0")
+      name_with_hex_suffix = color_name_to_atom("#{color.name}_#{code}_#{color.ansi_color_code.hex}") |> List.first()
       renamed_color = %{color | name: name_with_hex_suffix, renamed?: true}
       Map.put(acc, name_with_hex_suffix, renamed_color)
     end)
