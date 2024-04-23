@@ -113,7 +113,8 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  @spec annotate_same_as_field_for_codes_with_same_hex([Color.t()], list()) :: [Color.t()]
+  @spec annotate_same_as_field_for_codes_with_same_hex([Color.t()], %{ANSIColorCode.hex() => [ANSIColorCode.code()]}) ::
+          [Color.t()]
   def annotate_same_as_field_for_codes_with_same_hex(colors, ansi_codes_with_same_hex) do
     ansi_codes_with_same_hex
     |> Enum.reduce(colors, fn {_hex, codes_for_same_hex}, acc1 ->
@@ -143,6 +144,38 @@ defmodule ColorPalette.DataConverter do
           end)
 
         acc2 |> List.update_at(code, fn _value -> updated_colors_at_code_index end)
+      end)
+    end)
+  end
+
+  @spec annotate_same_as_field_for_duplicate_code_hexes(
+          %{Color.name() => Color.t()},
+          %{ANSIColorCode.hex() => [ANSIColorCode.code()]}
+        ) ::
+          %{Color.name() => Color.t()}
+  def annotate_same_as_field_for_duplicate_code_hexes(colors, ansi_codes_with_same_hex_value) do
+    names_for_codes_with_same_hex_value =
+      ansi_codes_with_same_hex_value
+      |> Enum.reduce(%{}, fn {hex, duplicate_codes}, acc ->
+        names =
+          duplicate_codes
+          |> Enum.map(&find_by_code(colors, &1))
+          |> List.flatten()
+          |> Enum.map(& &1.name)
+          # Not sure if this is needed, but does not hurt:
+          |> Enum.uniq()
+
+        Map.put(acc, hex, names)
+      end)
+
+    names_for_codes_with_same_hex_value
+    |> Enum.reduce(colors, fn {hex, color_names}, acc1 ->
+      colors
+      |> find_by_hex(hex)
+      |> Enum.reduce(acc1, fn color, acc2 ->
+        same_as_augmented = (color.same_as ++ color_names) |> Enum.uniq() |> Enum.reject(&(&1 == color.name))
+        color = %{color | same_as: same_as_augmented}
+        Map.put(acc2, color.name, color)
       end)
     end)
   end

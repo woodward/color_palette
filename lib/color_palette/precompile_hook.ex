@@ -38,6 +38,18 @@ defmodule ColorPalette.PrecompileHook do
       @color_groups_to_ansi_color_codes @ansi_color_codes
                                         |> DataConverter.color_groups_to_ansi_color_codes(ColorGroup.color_groups())
 
+      @ansi_codes_with_same_hex_value %{
+        "000000" => [0, 16],
+        "0000ff" => [12, 21],
+        "00ff00" => [10, 46],
+        "00ffff" => [14, 51],
+        "808080" => [8, 244],
+        "ff0000" => [9, 196],
+        "ff00ff" => [13, 201],
+        "ffff00" => [11, 226],
+        "ffffff" => [15, 231]
+      }
+
       # ------------------------
 
       @raw_color_data_api_data __DIR__
@@ -104,7 +116,9 @@ defmodule ColorPalette.PrecompileHook do
 
       # -------------------------------
       # The main colors data structure:
-      @colors @colors_by_name |> Map.merge(@generated_names_for_unnamed_colors)
+      @colors @colors_by_name
+              |> Map.merge(@generated_names_for_unnamed_colors)
+              |> DataConverter.annotate_same_as_field_for_duplicate_code_hexes(@ansi_codes_with_same_hex_value)
 
       # --------------------------------------------------------------------------------------------
       # Generate `ColorPalette` functions for the colors:
@@ -143,6 +157,9 @@ defmodule ColorPalette.PrecompileHook do
 
       @spec ansi_color_codes :: [ANSIColorCode.t()]
       def ansi_color_codes, do: @ansi_color_codes
+
+      @spec ansi_codes_with_same_hex_value :: %{ANSIColorCode.hex() => [ANSIColorCode.code()]}
+      def ansi_codes_with_same_hex_value, do: @ansi_codes_with_same_hex_value
 
       @spec io_ansi_color_names :: [map()]
       def io_ansi_color_names, do: @io_ansi_color_names

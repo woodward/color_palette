@@ -287,6 +287,74 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "annotate_same_as_field_for_duplicate_code_hexes" do
+    test "adds some additional values to the same_as field" do
+      ansi_codes_with_same_hex_value = %{
+        "000000" => [0, 16],
+        "0000ff" => [12, 21],
+        "00ff00" => [10, 46],
+        "00ffff" => [14, 51],
+        "808080" => [8, 244],
+        "ff0000" => [9, 196],
+        "ff00ff" => [13, 201],
+        "ffff00" => [11, 226],
+        "ffffff" => [15, 231]
+      }
+
+      colors = %{
+        black: %Color{
+          name: :black,
+          ansi_color_code: %ANSIColorCode{code: 0, color_group: :gray_and_black, hex: "000000", rgb: [0, 0, 0]},
+          text_contrast_color: :white,
+          closest_named_hex: "000000",
+          distance_to_closest_named_hex: 0,
+          source: [:io_ansi, :color_data_api, :color_name_dot_com, :colorhexa],
+          exact_name_match?: true,
+          renamed?: false,
+          same_as: [:foo, :bar]
+        },
+        black_000000: %Color{
+          name: :black_000000,
+          ansi_color_code: %ANSIColorCode{code: 16, color_group: :gray_and_black, hex: "000000", rgb: [0, 0, 0]},
+          text_contrast_color: :white,
+          closest_named_hex: "000000",
+          distance_to_closest_named_hex: 0,
+          source: [:color_data_api],
+          exact_name_match?: true,
+          renamed?: true,
+          same_as: [:foo, :bar]
+        }
+      }
+
+      annotated_colors = DataConverter.annotate_same_as_field_for_duplicate_code_hexes(colors, ansi_codes_with_same_hex_value)
+
+      assert annotated_colors == %{
+               black: %Color{
+                 name: :black,
+                 ansi_color_code: %ANSIColorCode{code: 0, color_group: :gray_and_black, hex: "000000", rgb: [0, 0, 0]},
+                 text_contrast_color: :white,
+                 closest_named_hex: "000000",
+                 distance_to_closest_named_hex: 0,
+                 source: [:io_ansi, :color_data_api, :color_name_dot_com, :colorhexa],
+                 exact_name_match?: true,
+                 renamed?: false,
+                 same_as: [:foo, :bar, :black_000000]
+               },
+               black_000000: %Color{
+                 name: :black_000000,
+                 ansi_color_code: %ANSIColorCode{code: 16, color_group: :gray_and_black, hex: "000000", rgb: [0, 0, 0]},
+                 text_contrast_color: :white,
+                 closest_named_hex: "000000",
+                 distance_to_closest_named_hex: 0,
+                 source: [:color_data_api],
+                 exact_name_match?: true,
+                 renamed?: true,
+                 same_as: [:foo, :bar, :black]
+               }
+             }
+    end
+  end
+
   describe "color_groups_to_ansi_color_codes" do
     test "collates the ansi color codes by color group" do
       ansi_color_codes = [
