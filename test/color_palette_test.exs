@@ -383,7 +383,8 @@ defmodule ColorPaletteTest do
       first = key_values |> List.first()
 
       assert first ==
-               {%ColorPalette.ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black}, [:black]}
+               {%ColorPalette.ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black},
+                [:black, :black_000000]}
     end
   end
 

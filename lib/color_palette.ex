@@ -36,7 +36,7 @@ defmodule ColorPalette do
   """
   @spec ansi_color_codes_to_color_names() :: %{ANSIColorCode.t() => [Color.t()]}
   def ansi_color_codes_to_color_names do
-    DataConverter.ansi_color_codes_to_color_names(ansi_color_codes(), colors())
+    DataConverter.ansi_color_codes_to_color_names(ansi_color_codes(), colors(), ansi_codes_with_same_hex_value())
   end
 
   @doc """

@@ -712,22 +712,36 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "ansi_color_codes_to_color_names/2" do
+  describe "ansi_color_codes_to_color_names/3" do
     test "groups by ansi color codes" do
-      ansi_color_codes = [%ANSIColorCode{code: 1}, %ANSIColorCode{code: 2}, %ANSIColorCode{code: 3}]
+      ansi_color_codes = [
+        %ANSIColorCode{code: 1, hex: "000000"},
+        %ANSIColorCode{code: 2, hex: "aaaaaa"},
+        %ANSIColorCode{code: 3, hex: "000000"}
+      ]
 
       color_names = %{
-        black1: %Color{ansi_color_code: %ANSIColorCode{code: 1}},
-        black2: %Color{ansi_color_code: %ANSIColorCode{code: 1}},
-        some_other_color: %Color{ansi_color_code: %ANSIColorCode{code: 2}}
+        black1: %Color{name: :black1, ansi_color_code: %ANSIColorCode{code: 1, hex: "000000"}},
+        black2: %Color{name: :black2, ansi_color_code: %ANSIColorCode{code: 1, hex: "000000"}},
+        some_other_color: %Color{name: :some_other_color, ansi_color_code: %ANSIColorCode{code: 2, hex: "aaaaaa"}},
+        black3: %Color{name: :black3, ansi_color_code: %ANSIColorCode{code: 3, hex: "000000"}}
       }
 
-      ansi_color_codes_to_color_names = DataConverter.ansi_color_codes_to_color_names(ansi_color_codes, color_names)
+      ansi_codes_with_same_hex_value = %{
+        "000000" => [1, 3]
+      }
+
+      ansi_color_codes_to_color_names =
+        DataConverter.ansi_color_codes_to_color_names(
+          ansi_color_codes,
+          color_names,
+          ansi_codes_with_same_hex_value
+        )
 
       assert ansi_color_codes_to_color_names == %{
-               %ANSIColorCode{code: 1} => [:black2, :black1],
-               %ANSIColorCode{code: 2} => [:some_other_color],
-               %ANSIColorCode{code: 3} => []
+               %ANSIColorCode{code: 1, hex: "000000"} => [:black1, :black2, :black3],
+               %ANSIColorCode{code: 2, hex: "aaaaaa"} => [:some_other_color],
+               %ANSIColorCode{code: 3, hex: "000000"} => [:black1, :black2, :black3]
              }
     end
   end
