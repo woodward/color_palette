@@ -31,7 +31,7 @@ not shown in the docs); e.g., for `ColorPalette.aqua/0` there is also `ColorPale
 
 This hex package adds **485** additional named colors to use in Elixir terminal scripts, based on 
 the 256 ANSI color code sequences (so some of the color names are duplicates and reference the same color).  
-Note that some of the colors are approximations, as the color space for the ANSI color codes is rather 
+Note that some of the color names are approximations, as the color space for the ANSI color codes is rather 
 limited (it's 6 bit (6 x 6 x 6 = 216 colors, plus 40 additional named colors)).  The values were obtained 
 by accessing [TheColorAPI](https://www.thecolorapi.com/), [ColorHexa](https://www.colorhexa.com/), 
 and also [color-name.com](https://www.color-name.com/).
