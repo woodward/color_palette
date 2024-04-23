@@ -253,6 +253,40 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "annotate_same_as_field_for_codes_with_same_hex/2" do
+    test "add entries to Color.same_as for the case when different codes have the same hex value" do
+      colors = List.duplicate([], 256)
+
+      elem0 = [
+        %Color{name: :black1, same_as: [:black2], ansi_color_code: %ANSIColorCode{hex: "000000", code: 0}},
+        %Color{name: :black2, same_as: [:black1], ansi_color_code: %ANSIColorCode{hex: "000000", code: 0}}
+      ]
+
+      elem16 = [
+        %Color{name: :black3, same_as: [], ansi_color_code: %ANSIColorCode{hex: "000000", code: 16}}
+      ]
+
+      colors = colors |> List.update_at(0, fn _ -> elem0 end)
+      colors = colors |> List.update_at(16, fn _ -> elem16 end)
+
+      codes_with_same_hex = %{"000000" => [0, 16]}
+      annotated = DataConverter.annotate_same_as_field_for_codes_with_same_hex(colors, codes_with_same_hex)
+
+      annotated_elem0 = annotated |> Enum.at(0)
+
+      assert annotated_elem0 == [
+               %Color{name: :black1, same_as: [:black2, :black3], ansi_color_code: %ANSIColorCode{hex: "000000", code: 0}},
+               %Color{name: :black2, same_as: [:black1, :black3], ansi_color_code: %ANSIColorCode{hex: "000000", code: 0}}
+             ]
+
+      annotated_elem16 = annotated |> Enum.at(16)
+
+      assert annotated_elem16 == [
+               %Color{name: :black3, same_as: [:black1, :black2], ansi_color_code: %ANSIColorCode{hex: "000000", code: 16}}
+             ]
+    end
+  end
+
   describe "color_groups_to_ansi_color_codes" do
     test "collates the ansi color codes by color group" do
       ansi_color_codes = [

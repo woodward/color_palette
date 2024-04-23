@@ -1,5 +1,8 @@
 defmodule ColorPalette.DataConverter do
-  @moduledoc false
+  @moduledoc """
+  The functions in `ColorPalette.DataConverter` are all pure functions for testability (as opposed
+  to those in `ColorPalette` which reference statically compiled data).
+  """
 
   alias ColorPalette.ANSIColorCode
   alias ColorPalette.Color
@@ -106,6 +109,40 @@ defmodule ColorPalette.DataConverter do
       end)
       |> Enum.map(fn color ->
         %{color | same_as: names_for_this_code |> Enum.reject(&(&1 == color.name))}
+      end)
+    end)
+  end
+
+  @spec annotate_same_as_field_for_codes_with_same_hex([Color.t()], list()) :: [Color.t()]
+  def annotate_same_as_field_for_codes_with_same_hex(colors, ansi_codes_with_same_hex) do
+    ansi_codes_with_same_hex
+    |> Enum.reduce(colors, fn {_hex, codes_for_same_hex}, acc1 ->
+      codes_for_same_hex
+      |> Enum.reduce(acc1, fn code, acc2 ->
+        colors_at_code_index = acc2 |> Enum.at(code)
+        other_indices = codes_for_same_hex |> Enum.reject(&(&1 == code))
+
+        names_for_other_indices =
+          other_indices
+          |> Enum.reduce([], fn other_index, acc3 ->
+            colors_at_other_index = colors |> Enum.at(other_index)
+
+            names_at_other_index =
+              colors_at_other_index
+              |> Enum.reduce([], fn other_color, acc4 ->
+                acc4 ++ [other_color.name]
+              end)
+
+            acc3 ++ names_at_other_index
+          end)
+
+        updated_colors_at_code_index =
+          colors_at_code_index
+          |> Enum.map(fn color ->
+            %{color | same_as: color.same_as ++ names_for_other_indices}
+          end)
+
+        acc2 |> List.update_at(code, fn _value -> updated_colors_at_code_index end)
       end)
     end)
   end
