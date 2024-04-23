@@ -38,6 +38,8 @@ defmodule ColorPalette.PrecompileHook do
       @color_groups_to_ansi_color_codes @ansi_color_codes
                                         |> DataConverter.color_groups_to_ansi_color_codes(ColorGroup.color_groups())
 
+      # Some of the ANSI color codes have the same hex value;
+      # these are the duplicates:
       @ansi_codes_with_same_hex_value %{
         "000000" => [0, 16],
         "0000ff" => [12, 21],
@@ -158,6 +160,10 @@ defmodule ColorPalette.PrecompileHook do
       @spec ansi_color_codes :: [ANSIColorCode.t()]
       def ansi_color_codes, do: @ansi_color_codes
 
+      @doc """
+      Some of the ANSI color codes have the same hex value; this is a mapping between
+      the hex value and the duplicate color codes.
+      """
       @spec ansi_codes_with_same_hex_value :: %{ANSIColorCode.hex() => [ANSIColorCode.code()]}
       def ansi_codes_with_same_hex_value, do: @ansi_codes_with_same_hex_value
 
@@ -165,7 +171,7 @@ defmodule ColorPalette.PrecompileHook do
       def io_ansi_color_names, do: @io_ansi_color_names
 
       # ---------------------------------------------------
-      # Raw Data converetd to `ColorPalette.Color` structs:
+      # Raw Data converted to `ColorPalette.Color` structs:
 
       @spec io_ansi_colors :: [[Color.t()]]
       def io_ansi_colors, do: @io_ansi_colors
