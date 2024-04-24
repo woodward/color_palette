@@ -738,28 +738,17 @@ defmodule ColorPalette.DataConverterTest do
         %ANSIColorCode{code: 3, hex: "000000"}
       ]
 
-      color_names = %{
-        black1: %Color{name: :black1, ansi_color_code: %ANSIColorCode{code: 1, hex: "000000"}},
-        black2: %Color{name: :black2, ansi_color_code: %ANSIColorCode{code: 1, hex: "000000"}},
-        some_other_color: %Color{name: :some_other_color, ansi_color_code: %ANSIColorCode{code: 2, hex: "aaaaaa"}},
-        black3: %Color{name: :black3, ansi_color_code: %ANSIColorCode{code: 3, hex: "000000"}}
+      hex_to_color_names = %{
+        "000000" => [:black1, :black2],
+        "aaaaaa" => [:some_color]
       }
 
-      ansi_codes_with_same_hex_value = %{
-        "000000" => [1, 3]
-      }
-
-      ansi_color_codes_to_color_names =
-        DataConverter.ansi_color_codes_to_color_names(
-          ansi_color_codes,
-          color_names,
-          ansi_codes_with_same_hex_value
-        )
+      ansi_color_codes_to_color_names = DataConverter.ansi_color_codes_to_color_names(ansi_color_codes, hex_to_color_names)
 
       assert ansi_color_codes_to_color_names == %{
-               %ANSIColorCode{code: 1, hex: "000000"} => [:black1, :black2, :black3],
-               %ANSIColorCode{code: 2, hex: "aaaaaa"} => [:some_other_color],
-               %ANSIColorCode{code: 3, hex: "000000"} => [:black1, :black2, :black3]
+               %ANSIColorCode{code: 1, hex: "000000"} => [:black1, :black2],
+               %ANSIColorCode{code: 2, hex: "aaaaaa"} => [:some_color],
+               %ANSIColorCode{code: 3, hex: "000000"} => [:black1, :black2]
              }
     end
   end

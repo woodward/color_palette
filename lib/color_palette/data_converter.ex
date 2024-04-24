@@ -218,40 +218,12 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  @spec ansi_color_codes_to_color_names(
-          [ANSIColorCode.t()],
-          %{Color.name() => Color.t()},
-          %{ANSIColorCode.hex() => [ANSIColorCode.code()]}
-        ) ::
+  @spec ansi_color_codes_to_color_names([ANSIColorCode.t()], %{ANSIColorCode.hex() => [Color.name()]}) ::
           %{ANSIColorCode.t() => [Color.name()]}
-  def ansi_color_codes_to_color_names(ansi_color_codes, colors, ansi_codes_with_same_hex_value) do
-    empty_ansi_color_codes_to_color_names =
-      ansi_color_codes
-      |> Enum.reduce(%{}, fn ansi_color_code, acc ->
-        Map.put(acc, ansi_color_code, [])
-      end)
-
-    colors
-    |> Enum.reduce(empty_ansi_color_codes_to_color_names, fn {color_name, color}, acc ->
-      Map.update(acc, color.ansi_color_code, [color_name], &([color_name] ++ &1))
-    end)
-    |> Enum.map(fn {ansi_color_code, color_names} ->
-      other_codes =
-        ansi_codes_with_same_hex_value
-        |> Map.get(ansi_color_code.hex)
-        |> case do
-          nil ->
-            []
-
-          other_codes ->
-            other_codes
-            |> Enum.reject(&(&1 == ansi_color_code.code))
-            |> Enum.flat_map(fn other_code ->
-              find_by_code(colors, other_code) |> Enum.map(& &1.name)
-            end)
-        end
-
-      {ansi_color_code, (color_names ++ other_codes) |> Enum.sort()}
+  def ansi_color_codes_to_color_names(ansi_color_codes, hex_to_color_names) do
+    ansi_color_codes
+    |> Enum.reduce([], fn ansi_color_code, acc ->
+      [{ansi_color_code, Map.get(hex_to_color_names, ansi_color_code.hex)}] ++ acc
     end)
     |> Enum.into(%{})
   end

@@ -103,11 +103,11 @@ defmodule ColorPalette.PrecompileHook do
 
       @combined_colors_collated @combined_colors
                                 |> DataConverter.collate_colors_with_same_name_for_code()
-                                |> DataConverter.annotate_same_as_field()
+      # |> DataConverter.annotate_same_as_field()
 
       @colors_by_name @combined_colors_collated
                       |> DataConverter.group_by_name_frequency()
-                      |> DataConverter.purge_orphaned_same_as_entries()
+      # |> DataConverter.purge_orphaned_same_as_entries()
 
       @ansi_color_codes_missing_names @colors_by_name |> DataConverter.unnamed_ansi_color_codes()
 
@@ -120,11 +120,11 @@ defmodule ColorPalette.PrecompileHook do
       # The main colors data structure:
       @colors_temp @colors_by_name
                    |> Map.merge(@generated_names_for_unnamed_colors)
-                   |> DataConverter.annotate_same_as_field_for_duplicate_code_hexes(@ansi_codes_with_same_hex_value)
+      #  |> DataConverter.annotate_same_as_field_for_duplicate_code_hexes(@ansi_codes_with_same_hex_value)
 
       @hex_to_color_names @colors_temp |> DataConverter.hex_to_color_names()
 
-      @colors @colors_temp
+      @colors @colors_temp |> DataConverter.fill_in_same_as_field(@hex_to_color_names)
 
       # --------------------------------------------------------------------------------------------
       # Generate `ColorPalette` functions for the colors:
