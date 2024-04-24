@@ -513,4 +513,72 @@ defmodule ColorPaletteTest do
              ]
     end
   end
+
+  describe "bug fix: patriach has wrong :same_as colors" do
+    test "patriarch should have correct :same_as colors" do
+      colors = ColorPalette.colors()
+
+      patriarch = colors.patriarch
+      assert patriarch.ansi_color_code.code == 5
+      assert patriarch.ansi_color_code.hex == "800080"
+      assert patriarch.same_as == [:magenta, :fresh_eggplant, :purple]
+
+      # The sibling colors for this one are correct:
+      magenta = colors.magenta
+      assert magenta.ansi_color_code.code == 201
+      assert magenta.ansi_color_code.hex == "ff00ff"
+      assert magenta.same_as == [:fuchsia, :light_magenta_013]
+
+      # The sibling colors for this one are correct:
+      fresh_eggplant = colors.fresh_eggplant
+      assert fresh_eggplant.ansi_color_code.code == 89
+      assert fresh_eggplant.ansi_color_code.hex == "87005f"
+      assert fresh_eggplant.same_as == [:french_plum, :dark_pink]
+
+      # The sibling colors for this one are NOT correct:
+      purple = colors.purple
+      assert purple.ansi_color_code.code == 55
+      assert purple.ansi_color_code.hex == "5f00af"
+      assert purple.same_as == [:chinese_purple, :dark_violet]
+
+      # --------------------------------------------------------------------------------------------
+      # These are correct:
+      fuchsia = colors.fuchsia
+      assert fuchsia.ansi_color_code.code == 201
+      assert fuchsia.ansi_color_code.hex == "ff00ff"
+      assert fuchsia.same_as == [:magenta, :light_magenta_013]
+
+      light_magenta_013 = colors.light_magenta_013
+      assert light_magenta_013.ansi_color_code.code == 13
+      assert light_magenta_013.ansi_color_code.hex == "ff00ff"
+      assert light_magenta_013.same_as == [:fuchsia, :magenta]
+
+      # -----------------------------
+      # These are correct:
+
+      french_plum = colors.french_plum
+      assert french_plum.ansi_color_code.code == 89
+      assert french_plum.ansi_color_code.hex == "87005f"
+      assert french_plum.same_as == [:fresh_eggplant, :dark_pink]
+
+      dark_pink = colors.dark_pink
+      assert dark_pink.ansi_color_code.code == 89
+      assert dark_pink.ansi_color_code.hex == "87005f"
+      assert dark_pink.same_as == [:fresh_eggplant, :french_plum]
+
+      # -----------------------------
+      # These are NOT correct:
+
+      chinese_purple = colors.chinese_purple
+      assert chinese_purple.ansi_color_code.code == 55
+      assert chinese_purple.ansi_color_code.hex == "5f00af"
+      assert chinese_purple.same_as == [:purple, :dark_violet]
+
+      # NOT correct:
+      dark_violet = colors.dark_violet
+      assert dark_violet.ansi_color_code.code == 54
+      assert dark_violet.ansi_color_code.hex == "5f0087"
+      assert dark_violet.same_as == [:pigment_indigo, :metallic_violet]
+    end
+  end
 end
