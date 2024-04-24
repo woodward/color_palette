@@ -7,8 +7,9 @@ defmodule ColorPalette do
   - `io_ansi_color_names/0` - The `IO.ANSI` colors and their corresponding text contrast colors.
   - `reset/0` - Delegates to the `IO.ANSI.reset/0` function.
   - `ansi_color_codes_to_color_names/0` - A mapping between `ColorPalette.ANSIColorCode` and color names
-  - `find_by_hex/1` - Finds a color by its hex value.
-  - `find_by_code/1` - Finds a color by its ANSI code number (e.g., 0..255).
+  - `find_by_hex/1` - Finds the colors with a certain hex value, e.g., "aabb00"
+  - `find_by_code/1` - Finds the colors with a certain ANSI color code (e.g., 0..255).
+  - `find_by_source/1` - Finds the colors that were obtained from `source`, where `source` is one of `ColorPalette.source()`
   - `color_names/0` - Returns the list of all color names (e.g., `[:aero_blue, :alien_armpit, :alto, ...]`)
   - `random_color_name/0` - Returns a random color name
   - `print_using_random_color/2` - Prints a message in a random color

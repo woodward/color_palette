@@ -1,6 +1,6 @@
 # ColorPalette
 
-A library which brings additional named colors [via 8 bit ANSI color escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit)
+A library which brings additional named colors [via the 256 ANSI color escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit)
 into Elixir (in addition to the 16 standard named `IO.ANSI` colors, such as `:red`, `:blue`, `:cyan`, 
 `:light_red`, `:light_blue`, `:light_cyan`, etc.) `ColorPalette` purposely only has minimal dependencies (in
 this case, just the `Jason` library).
@@ -25,6 +25,9 @@ not shown in the docs); e.g., for `ColorPalette.aqua/0` there is also `ColorPale
 
 ### Some of the colors shown in the terminal 
 
+These colors can be seen in a terminal by running 
+[this script](https://github.com/woodward/color_palette/blob/main/bin/display_color_palette.exs).
+
 ![Colors](https://raw.github.com/woodward/color_palette/master/assets/colors-in-terminal.png)
 
 ## Usage
@@ -32,7 +35,8 @@ not shown in the docs); e.g., for `ColorPalette.aqua/0` there is also `ColorPale
 This hex package adds **485** additional named colors to use in Elixir terminal scripts, based on 
 the 256 ANSI color code sequences (so some of the color names are duplicates and reference the same color).  
 Note that some of the color names are approximations, as the color space for the ANSI color codes is rather 
-limited (it's 6 bit (6 x 6 x 6 = 216 colors, plus 40 additional named colors)).  The values were obtained 
+limited (it's 6 bit (6 x 6 x 6 = 216 colors, plus 40 additional named colors), although there are 9
+duplicate hex values so really only 247 unique colors).  The color names were obtained 
 by accessing [TheColorAPI](https://www.thecolorapi.com/), [ColorHexa](https://www.colorhexa.com/), 
 and also [color-name.com](https://www.color-name.com/).
 
@@ -78,10 +82,12 @@ The 256 IO ANSI color codes are readily available, and a copy of them are stored
 These colors were manually grouped by the `ColorPalette` author into 11 color groups 
 [in this file](https://github.com/woodward/color_palette/blob/main/lib/color_palette/data/ansi_color_codes_by_group.json) 
 (loosely based on the grouping of the [web extended colors from here](https://en.wikipedia.org/wiki/Web_colors#Extended_colors));
-note that this was a subjective process.
-The 16 `IO.ANSI` color names are stored as a [a JSON file here.](https://github.com/woodward/color_palette/blob/main/lib/color_palette/data/ansi_color_names.json)
+note that this was a subjective process. The 16 `IO.ANSI` color names are stored as a 
+[a JSON file here.](https://github.com/woodward/color_palette/blob/main/lib/color_palette/data/ansi_color_names.json)
 Color names for the 256 ANSI color codes were obtained from [color-name.com](https://www.color-name.com/),  
-[thecolorapi.com](https://www.thecolorapi.com/), and [ColorHexa.com](https://www.colorhexa.com/) , and are
+[thecolorapi.com](https://www.thecolorapi.com/), and [ColorHexa.com](https://www.colorhexa.com/) , and the data are
 stored in JSON in this [data directory](https://github.com/woodward/color_palette/blob/main/lib/color_palette/data/).
-`Mix.install/2` Elixir scripts to download the data for these sources are found [here](https://github.com/woodward/color_palette/blob/main/bin/download_color-name_data.exs), [here](https://github.com/woodward/color_palette/blob/main/bin/download_thecolorapi_data.exs), and 
+`Mix.install/2` Elixir scripts to download the data for these sources are found 
+[here](https://github.com/woodward/color_palette/blob/main/bin/download_color-name_data.exs), 
+[here](https://github.com/woodward/color_palette/blob/main/bin/download_thecolorapi_data.exs), and 
 [here](https://github.com/woodward/color_palette/blob/main/bin/download_colorhexa_data.exs), respectively.
