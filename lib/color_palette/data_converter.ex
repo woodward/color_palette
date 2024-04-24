@@ -367,4 +367,17 @@ defmodule ColorPalette.DataConverter do
       end)
     end)
   end
+
+  @spec hex_to_color_names(%{Color.name() => Color.t()}) :: %{ANSIColorCode.hex() => [Color.name()]}
+  def hex_to_color_names(colors) do
+    colors
+    |> Enum.reduce(%{}, fn {_color_name, color}, acc ->
+      hex = color.ansi_color_code.hex
+      Map.update(acc, hex, [color.name], fn value -> value ++ [color.name] end)
+    end)
+    |> Enum.map(fn {hex, names} ->
+      {hex, names |> Enum.sort()}
+    end)
+    |> Enum.into(%{})
+  end
 end

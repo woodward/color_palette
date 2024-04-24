@@ -118,9 +118,13 @@ defmodule ColorPalette.PrecompileHook do
 
       # -------------------------------
       # The main colors data structure:
-      @colors @colors_by_name
-              |> Map.merge(@generated_names_for_unnamed_colors)
-              |> DataConverter.annotate_same_as_field_for_duplicate_code_hexes(@ansi_codes_with_same_hex_value)
+      @colors_temp @colors_by_name
+                   |> Map.merge(@generated_names_for_unnamed_colors)
+                   |> DataConverter.annotate_same_as_field_for_duplicate_code_hexes(@ansi_codes_with_same_hex_value)
+
+      @hex_to_color_names @colors_temp |> DataConverter.hex_to_color_names()
+
+      @colors @colors_temp
 
       # --------------------------------------------------------------------------------------------
       # Generate `ColorPalette` functions for the colors:
@@ -209,6 +213,9 @@ defmodule ColorPalette.PrecompileHook do
       """
       @spec colors() :: %{Color.name() => Color.t()}
       def colors, do: @colors
+
+      @spec hex_to_color_names :: %{ANSIColorCode.hex() => [Color.name()]}
+      def hex_to_color_names, do: @hex_to_color_names
     end
   end
 end

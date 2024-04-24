@@ -714,6 +714,24 @@ defmodule ColorPalette.DataConverterTest do
 
   describe "ansi_color_codes_to_color_names/3" do
     test "groups by ansi color codes" do
+      colors = %{
+        black1: %Color{name: :black1, ansi_color_code: %ANSIColorCode{code: 1, hex: "000000"}},
+        black2: %Color{name: :black2, ansi_color_code: %ANSIColorCode{code: 1, hex: "000000"}},
+        some_other_color: %Color{name: :some_other_color, ansi_color_code: %ANSIColorCode{code: 2, hex: "aaaaaa"}},
+        black3: %Color{name: :black3, ansi_color_code: %ANSIColorCode{code: 3, hex: "000000"}}
+      }
+
+      hex_to_color_names = DataConverter.hex_to_color_names(colors)
+
+      assert hex_to_color_names == %{
+               "000000" => [:black1, :black2, :black3],
+               "aaaaaa" => [:some_other_color]
+             }
+    end
+  end
+
+  describe "hex_to_color_names/3" do
+    test "groups color names by hex values" do
       ansi_color_codes = [
         %ANSIColorCode{code: 1, hex: "000000"},
         %ANSIColorCode{code: 2, hex: "aaaaaa"},
