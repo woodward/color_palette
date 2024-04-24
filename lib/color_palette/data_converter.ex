@@ -380,4 +380,20 @@ defmodule ColorPalette.DataConverter do
     end)
     |> Enum.into(%{})
   end
+
+  @spec fill_in_same_as_field(%{Color.name() => Color.t()}, %{ANSIColorCode.hex() => [Color.name()]}) ::
+          %{Color.name() => Color.t()}
+  def fill_in_same_as_field(colors, hex_to_color_names) do
+    colors
+    |> Enum.map(fn {color_name, color} ->
+      same_as =
+        hex_to_color_names
+        |> Map.get(color.ansi_color_code.hex)
+        |> Enum.reject(&(&1 == color.name))
+        |> Enum.sort()
+
+      {color_name, %{color | same_as: same_as}}
+    end)
+    |> Enum.into(%{})
+  end
 end

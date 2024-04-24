@@ -712,7 +712,7 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "ansi_color_codes_to_color_names/3" do
+  describe "hex_to_color_names/1" do
     test "groups by ansi color codes" do
       colors = %{
         black1: %Color{name: :black1, ansi_color_code: %ANSIColorCode{code: 1, hex: "000000"}},
@@ -730,7 +730,7 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "hex_to_color_names/3" do
+  describe "ansi_color_codes_to_color_names/3" do
     test "groups color names by hex values" do
       ansi_color_codes = [
         %ANSIColorCode{code: 1, hex: "000000"},
@@ -760,6 +760,47 @@ defmodule ColorPalette.DataConverterTest do
                %ANSIColorCode{code: 1, hex: "000000"} => [:black1, :black2, :black3],
                %ANSIColorCode{code: 2, hex: "aaaaaa"} => [:some_other_color],
                %ANSIColorCode{code: 3, hex: "000000"} => [:black1, :black2, :black3]
+             }
+    end
+  end
+
+  describe "fill_in_same_as_field/2" do
+    test "fills in the :same_as field" do
+      hex_to_color_names = %{
+        "000000" => [:black1, :black2, :black3],
+        "aaaaaa" => [:some_other_color]
+      }
+
+      colors = %{
+        black1: %Color{name: :black1, ansi_color_code: %ANSIColorCode{code: 1, hex: "000000"}},
+        black2: %Color{name: :black2, ansi_color_code: %ANSIColorCode{code: 1, hex: "000000"}},
+        some_other_color: %Color{name: :some_other_color, ansi_color_code: %ANSIColorCode{code: 2, hex: "aaaaaa"}},
+        black3: %Color{name: :black3, ansi_color_code: %ANSIColorCode{code: 3, hex: "000000"}}
+      }
+
+      annotated_colors = DataConverter.fill_in_same_as_field(colors, hex_to_color_names)
+
+      assert annotated_colors == %{
+               black1: %Color{
+                 name: :black1,
+                 same_as: [:black2, :black3],
+                 ansi_color_code: %ANSIColorCode{code: 1, hex: "000000"}
+               },
+               black2: %Color{
+                 name: :black2,
+                 same_as: [:black1, :black3],
+                 ansi_color_code: %ANSIColorCode{code: 1, hex: "000000"}
+               },
+               some_other_color: %Color{
+                 name: :some_other_color,
+                 same_as: [],
+                 ansi_color_code: %ANSIColorCode{code: 2, hex: "aaaaaa"}
+               },
+               black3: %Color{
+                 name: :black3,
+                 same_as: [:black1, :black2],
+                 ansi_color_code: %ANSIColorCode{code: 3, hex: "000000"}
+               }
              }
     end
   end
