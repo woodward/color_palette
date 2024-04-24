@@ -384,7 +384,7 @@ defmodule ColorPaletteTest do
 
       assert first ==
                {%ColorPalette.ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black},
-                [:black, :black_016_000000]}
+                [:black, :black_016]}
     end
   end
 
