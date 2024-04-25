@@ -190,6 +190,65 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  @spec combine_colors_with_same_name_and_code([Color.t()]) :: Color.t()
+  def combine_colors_with_same_name_and_code(colors) do
+    color_names = colors |> Enum.map(& &1.name) |> Enum.uniq()
+
+    if color_names |> length() > 1 do
+      color_names_string = color_names |> Enum.map(&(":" <> Atom.to_string(&1))) |> Enum.join(", ")
+      raise "Colors must all have the same name; instead got #{color_names_string}"
+    end
+
+    codes = colors |> Enum.map(& &1.ansi_color_code.code) |> Enum.uniq()
+
+    if codes |> length() > 1 do
+      codes_string = codes |> Enum.map(&Integer.to_string(&1)) |> Enum.join(", ")
+      raise "Colors must all have the same ANSI color code; instead got #{codes_string}"
+    end
+
+    # ---------------------------------
+
+    first_color = colors |> List.first()
+
+    source = colors |> Enum.reduce([], fn color, acc -> color.source ++ acc end) |> Enum.sort()
+
+    text_contrast_color =
+      colors
+      |> Enum.reduce([], fn color, acc -> [color.text_contrast_color] ++ acc end)
+      |> Enum.uniq()
+      |> Enum.sort()
+      |> List.first()
+
+    {closest_named_hex, distance_to_closest_named_hex, exact_name_match?} =
+      colors
+      |> Enum.reduce({nil, nil, false}, fn color, acc ->
+        cond do
+          color.exact_name_match? ->
+            {color.closest_named_hex, 0, true}
+
+          color.distance_to_closest_named_hex != nil ->
+            if color.distance_to_closest_named_hex < elem(acc, 1) do
+              {color.closest_named_hex, color.distance_to_closest_named_hex, false}
+            else
+              acc
+            end
+
+          true ->
+            acc
+        end
+      end)
+
+    %Color{
+      name: first_color.name,
+      ansi_color_code: first_color.ansi_color_code,
+      text_contrast_color: text_contrast_color,
+      source: source,
+      distance_to_closest_named_hex: distance_to_closest_named_hex,
+      closest_named_hex: closest_named_hex,
+      exact_name_match?: exact_name_match?
+    }
+  end
+
   @spec combine_colors_with_same_name_for_code([[Color.t()]]) :: [[Color.t()]]
   def combine_colors_with_same_name_for_code(colors) do
     colors

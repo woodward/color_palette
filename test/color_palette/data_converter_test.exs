@@ -652,6 +652,177 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "combine_colors_with_same_name_and_code" do
+    test "combines colors with the same name and code and combines their sources" do
+      colors =
+        [
+          %Color{
+            name: :fuchsia,
+            ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+            text_contrast_color: :black,
+            closest_named_hex: "FF00FF",
+            distance_to_closest_named_hex: 0,
+            source: [:color_data_api],
+            exact_name_match?: true,
+            renamed?: false,
+            same_as: []
+          },
+          %Color{
+            name: :fuchsia,
+            ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+            text_contrast_color: :white,
+            closest_named_hex: nil,
+            distance_to_closest_named_hex: nil,
+            source: [:color_name_dot_com],
+            exact_name_match?: false,
+            renamed?: false,
+            same_as: []
+          }
+        ]
+
+      colors_collated = DataConverter.combine_colors_with_same_name_and_code(colors)
+
+      assert colors_collated ==
+               %Color{
+                 name: :fuchsia,
+                 ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+                 text_contrast_color: :black,
+                 closest_named_hex: "FF00FF",
+                 distance_to_closest_named_hex: 0,
+                 source: [:color_data_api, :color_name_dot_com],
+                 exact_name_match?: true,
+                 renamed?: false,
+                 same_as: []
+               }
+    end
+
+    test "combines colors using the closest named hex with the shortest distance - comparison against nil" do
+      colors =
+        [
+          %Color{
+            name: :fuchsia,
+            ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+            text_contrast_color: :black,
+            closest_named_hex: "FF00FF",
+            distance_to_closest_named_hex: 60,
+            source: [:color_data_api],
+            exact_name_match?: false,
+            renamed?: false,
+            same_as: []
+          },
+          %Color{
+            name: :fuchsia,
+            ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+            text_contrast_color: :white,
+            closest_named_hex: nil,
+            distance_to_closest_named_hex: nil,
+            source: [:color_name_dot_com],
+            exact_name_match?: false,
+            renamed?: false,
+            same_as: []
+          }
+        ]
+
+      colors_collated = DataConverter.combine_colors_with_same_name_and_code(colors)
+
+      assert colors_collated ==
+               %Color{
+                 name: :fuchsia,
+                 ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+                 text_contrast_color: :black,
+                 closest_named_hex: "FF00FF",
+                 distance_to_closest_named_hex: 60,
+                 source: [:color_data_api, :color_name_dot_com],
+                 exact_name_match?: false,
+                 renamed?: false,
+                 same_as: []
+               }
+    end
+
+    test "combines colors using the closest named hex with the shortest distance" do
+      colors =
+        [
+          %Color{
+            name: :fuchsia,
+            ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+            text_contrast_color: :black,
+            closest_named_hex: "FF00FF",
+            distance_to_closest_named_hex: 60,
+            source: [:color_data_api],
+            exact_name_match?: false,
+            renamed?: false,
+            same_as: []
+          },
+          %Color{
+            name: :fuchsia,
+            ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+            text_contrast_color: :white,
+            closest_named_hex: "FF00FD",
+            distance_to_closest_named_hex: 120,
+            source: [:color_name_dot_com],
+            exact_name_match?: false,
+            renamed?: false,
+            same_as: []
+          }
+        ]
+
+      colors_collated = DataConverter.combine_colors_with_same_name_and_code(colors)
+
+      assert colors_collated ==
+               %Color{
+                 name: :fuchsia,
+                 ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+                 text_contrast_color: :black,
+                 closest_named_hex: "FF00FF",
+                 distance_to_closest_named_hex: 60,
+                 source: [:color_data_api, :color_name_dot_com],
+                 exact_name_match?: false,
+                 renamed?: false,
+                 same_as: []
+               }
+    end
+
+    test "raises an exception if the names do not match" do
+      colors = [%Color{name: :fuchsia}, %Color{name: :not_fuchsia}]
+
+      assert_raise(RuntimeError, "Colors must all have the same name; instead got :fuchsia, :not_fuchsia", fn ->
+        DataConverter.combine_colors_with_same_name_and_code(colors)
+      end)
+    end
+
+    test "raises an exception if the colors do not have the same ANSI code" do
+      colors =
+        [
+          %Color{
+            name: :fuchsia,
+            ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+            text_contrast_color: :black,
+            closest_named_hex: "FF00FF",
+            distance_to_closest_named_hex: 0,
+            source: [:color_data_api],
+            exact_name_match?: true,
+            renamed?: false,
+            same_as: []
+          },
+          %Color{
+            name: :fuchsia,
+            ansi_color_code: %ANSIColorCode{code: 202, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
+            text_contrast_color: :white,
+            closest_named_hex: nil,
+            distance_to_closest_named_hex: nil,
+            source: [:color_name_dot_com],
+            exact_name_match?: false,
+            renamed?: false,
+            same_as: []
+          }
+        ]
+
+      assert_raise(RuntimeError, "Colors must all have the same ANSI color code; instead got 201, 202", fn ->
+        DataConverter.combine_colors_with_same_name_and_code(colors)
+      end)
+    end
+  end
+
   describe "combine_colors_with_same_name_for_code" do
     test "groups colors with the same name, combining their sources" do
       colors = [
