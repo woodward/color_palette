@@ -249,6 +249,22 @@ defmodule ColorPalette.DataConverter do
     }
   end
 
+  @spec combine_colors_with_same_name(%{Color.name() => [Color.t()]}) :: %{Color.name() => [Color.t()]}
+  def combine_colors_with_same_name(colors) do
+    colors
+    |> Enum.map(fn {color_name, colors} ->
+      combined_colors_for_same_name_and_code =
+        colors
+        |> Enum.group_by(& &1.ansi_color_code.code)
+        |> Enum.reduce([], fn {_code, colors_for_code}, acc ->
+          [combine_colors_with_same_name_and_code(colors_for_code)] ++ acc
+        end)
+
+      {color_name, combined_colors_for_same_name_and_code}
+    end)
+    |> Enum.into(%{})
+  end
+
   @spec combine_colors_with_same_name_for_code([[Color.t()]]) :: [[Color.t()]]
   def combine_colors_with_same_name_for_code(colors) do
     colors
