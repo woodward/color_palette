@@ -2,15 +2,13 @@ defmodule ColorPalette.ANSIColorCode do
   @moduledoc """
   ## ANSI Color Code Struct
 
-  A struct which represents one of the 256 ANSI colors.
+  A struct which represents one of the 256 ANSI color codes
   """
   alias ColorPalette.ColorGroup
 
-  # An integer in the range 0 - 255:
-  @type code :: integer()
+  @type code :: 0..255
 
-  # An integer in the range 0 - 255:
-  @type rgb_value :: integer()
+  @type rgb_value :: 0..255
 
   @type hex :: String.t()
 
