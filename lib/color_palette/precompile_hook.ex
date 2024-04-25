@@ -13,12 +13,6 @@ defmodule ColorPalette.PrecompileHook do
       # --------------------------------------------------------------------------------------------
       # Raw Data:
 
-      @io_ansi_color_names __DIR__
-                           |> Path.join("color_palette/data/ansi_color_names.json")
-                           |> File.read!()
-                           |> Jason.decode!(keys: :atoms)
-                           |> Enum.map(&(&1 |> Map.merge(%{exact_name_match?: true, distance_to_closest_named_hex: 0})))
-
       @ansi_color_codes_by_group __DIR__
                                  |> Path.join("color_palette/data/ansi_color_codes_by_group.json")
                                  |> File.read!()
@@ -38,13 +32,20 @@ defmodule ColorPalette.PrecompileHook do
       @color_groups_to_ansi_color_codes @ansi_color_codes
                                         |> DataConverter.color_groups_to_ansi_color_codes(ColorGroup.color_groups())
 
-      # ------------------------
+      # --------------------
+      # Color name raw data:
+
+      @io_ansi_color_names __DIR__
+                           |> Path.join("color_palette/data/ansi_color_names.json")
+                           |> File.read!()
+                           |> Jason.decode!(keys: :atoms)
+                           |> Enum.map(&(&1 |> Map.merge(%{exact_name_match?: true, distance_to_closest_named_hex: 0})))
 
       @raw_color_data_api_data __DIR__
                                |> Path.join("color_palette/data/color_data_api_colors.json")
                                |> File.read!()
                                |> Jason.decode!(keys: :atoms)
-                               |> Enum.map(&DataConverter.normalize_data(&1))
+                               |> Enum.with_index(fn data, code -> DataConverter.normalize_data(data, code) end)
 
       @raw_color_name_dot_com_data __DIR__
                                    |> Path.join("color_palette/data/color-name.com_colors.json")

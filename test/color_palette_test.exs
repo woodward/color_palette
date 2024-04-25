@@ -54,6 +54,7 @@ defmodule ColorPaletteTest do
       first_color_data = color_data |> List.first()
 
       assert first_color_data == %{
+               code: 0,
                name: "Black",
                closest_named_hex: "000000",
                distance_to_closest_named_hex: 0,
@@ -64,6 +65,7 @@ defmodule ColorPaletteTest do
       last_color_data = color_data |> List.last()
 
       assert last_color_data == %{
+               code: 255,
                name: "Gallery",
                closest_named_hex: "EFEFEF",
                distance_to_closest_named_hex: 5,

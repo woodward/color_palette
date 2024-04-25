@@ -8,8 +8,8 @@ defmodule ColorPalette.DataConverter do
   alias ColorPalette.Color
   alias ColorPalette.ColorGroup
 
-  @spec normalize_data(map()) :: map()
-  def normalize_data(color_data_api_value) do
+  @spec normalize_data(map(), ANSIColorCode.code()) :: map()
+  def normalize_data(color_data_api_value, code) do
     text_contrast_color =
       case color_data_api_value.contrast.value do
         "#ffffff" -> "white"
@@ -18,6 +18,7 @@ defmodule ColorPalette.DataConverter do
       end
 
     %{
+      code: code,
       name: color_data_api_value.name.value,
       distance_to_closest_named_hex: color_data_api_value.name.distance,
       text_contrast_color: text_contrast_color,
