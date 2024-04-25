@@ -632,6 +632,26 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "collate_colors_by_name/1" do
+    test "groups the colors under color names" do
+      colors = [
+        %Color{name: :black, ansi_color_code: %ANSIColorCode{code: 0}},
+        %Color{name: :black, ansi_color_code: %ANSIColorCode{code: 16}},
+        %Color{name: :red, ansi_color_code: %ANSIColorCode{code: 196}}
+      ]
+
+      color_map = DataConverter.collate_colors_by_name(colors)
+
+      assert color_map == %{
+               black: [
+                 %Color{name: :black, ansi_color_code: %ANSIColorCode{code: 0}},
+                 %Color{name: :black, ansi_color_code: %ANSIColorCode{code: 16}}
+               ],
+               red: [%Color{name: :red, ansi_color_code: %ANSIColorCode{code: 196}}]
+             }
+    end
+  end
+
   describe "collate_colors_with_same_name_for_code" do
     test "groups colors with the same name, combining their sources" do
       colors = [

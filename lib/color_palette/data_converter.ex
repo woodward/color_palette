@@ -230,6 +230,14 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  @spec collate_colors_by_name([Color.t()]) :: %{Color.name() => [Color.t()]}
+  def collate_colors_by_name(colors) do
+    colors
+    |> Enum.reduce(%{}, fn color, acc ->
+      Map.update(acc, color.name, [color], &(&1 ++ [color]))
+    end)
+  end
+
   @spec group_by_name_frequency([[Color.t()]]) :: %{Color.name() => Color.t()}
   def group_by_name_frequency(ansi_colors) do
     ansi_colors
