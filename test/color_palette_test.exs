@@ -349,8 +349,8 @@ defmodule ColorPaletteTest do
     end
 
     test "returns an error if the code is not within 0-255" do
-      assert ColorPalette.find_by_code(256) == {:error, "Code 256 is not valid"}
-      assert ColorPalette.find_by_code(-1) == {:error, "Code -1 is not valid"}
+      assert ColorPalette.find_by_code(256) == {:error, "Code 256 is not valid; it must be between 0 - 255"}
+      assert ColorPalette.find_by_code(-1) == {:error, "Code -1 is not valid; it must be between 0 - 255"}
     end
   end
 

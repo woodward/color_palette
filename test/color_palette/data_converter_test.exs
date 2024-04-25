@@ -298,10 +298,10 @@ defmodule ColorPalette.DataConverterTest do
 
     test "returns an error if the code is not in the specified range", %{colors: colors} do
       result = DataConverter.find_by_code(colors, -1)
-      assert result == {:error, "Code -1 is not valid"}
+      assert result == {:error, "Code -1 is not valid; it must be between 0 - 255"}
 
       result = DataConverter.find_by_code(colors, 256)
-      assert result == {:error, "Code 256 is not valid"}
+      assert result == {:error, "Code 256 is not valid; it must be between 0 - 255"}
     end
   end
 

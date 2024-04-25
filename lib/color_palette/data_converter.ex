@@ -9,20 +9,20 @@ defmodule ColorPalette.DataConverter do
   alias ColorPalette.ColorGroup
 
   @spec normalize_data(map()) :: map()
-  def normalize_data(color_data_api) do
+  def normalize_data(color_data_api_value) do
     text_contrast_color =
-      case color_data_api.contrast.value do
+      case color_data_api_value.contrast.value do
         "#ffffff" -> "white"
         "#000000" -> "black"
         _ -> raise "Unexpected doc text color"
       end
 
     %{
-      name: color_data_api.name.value,
-      distance_to_closest_named_hex: color_data_api.name.distance,
+      name: color_data_api_value.name.value,
+      distance_to_closest_named_hex: color_data_api_value.name.distance,
       text_contrast_color: text_contrast_color,
-      exact_name_match?: color_data_api.name.exact_match_name,
-      closest_named_hex: color_data_api.name.closest_named_hex |> String.replace("#", "")
+      exact_name_match?: color_data_api_value.name.exact_match_name,
+      closest_named_hex: color_data_api_value.name.closest_named_hex |> String.replace("#", "")
     }
   end
 
@@ -58,6 +58,9 @@ defmodule ColorPalette.DataConverter do
 
   @spec color_groups_to_ansi_color_codes([ANSIColorCode.t()], [ColorGroup.t()]) :: %{ColorGroup.t() => [ANSIColorCode.t()]}
   def color_groups_to_ansi_color_codes(ansi_color_codes, color_groups) do
+    # The block below is in case there are some color groups without any associated color codes,
+    # which is no longer the case (there is at least one ANSI color code in each color group), but
+    # I'm leaving this here regardless:
     color_groups_to_ansi_color_codes =
       color_groups
       |> Enum.reduce(%{}, fn color_group, acc ->
@@ -150,7 +153,7 @@ defmodule ColorPalette.DataConverter do
 
   @spec find_by_code(%{Color.name() => Color.t()}, ANSIColorCode.code()) :: [Color.t()]
   def find_by_code(_color_names, code) when code < 0 or code > 255 do
-    {:error, "Code #{code} is not valid"}
+    {:error, "Code #{code} is not valid; it must be between 0 - 255"}
   end
 
   @spec find_by_code(%{Color.name() => Color.t()}, ANSIColorCode.code()) :: [Color.t()]
