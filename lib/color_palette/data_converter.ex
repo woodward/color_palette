@@ -230,6 +230,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  # Not in use yet:
   @spec collate_colors_by_name([Color.t()]) :: %{Color.name() => [Color.t()]}
   def collate_colors_by_name(colors) do
     colors

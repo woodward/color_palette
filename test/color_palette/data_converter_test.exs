@@ -632,7 +632,7 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "collate_colors_by_name/1" do
+  describe "collate_colors_by_name/1 - not in use yet" do
     test "groups the colors under color names" do
       colors = [
         %Color{name: :black, ansi_color_code: %ANSIColorCode{code: 0}},
