@@ -190,8 +190,8 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  @spec collate_colors_with_same_name_for_code([[Color.t()]]) :: [[Color.t()]]
-  def collate_colors_with_same_name_for_code(colors) do
+  @spec combine_colors_with_same_name_for_code([[Color.t()]]) :: [[Color.t()]]
+  def combine_colors_with_same_name_for_code(colors) do
     colors
     |> Enum.map(fn colors_for_code ->
       colors_for_code

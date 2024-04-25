@@ -652,7 +652,7 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "collate_colors_with_same_name_for_code" do
+  describe "combine_colors_with_same_name_for_code" do
     test "groups colors with the same name, combining their sources" do
       colors = [
         [
@@ -727,7 +727,7 @@ defmodule ColorPalette.DataConverterTest do
         ]
       ]
 
-      colors_collated = DataConverter.collate_colors_with_same_name_for_code(colors)
+      colors_collated = DataConverter.combine_colors_with_same_name_for_code(colors)
 
       assert colors_collated == [
                [

@@ -87,7 +87,7 @@ defmodule ColorPalette.PrecompileHook do
 
       # ----------------------
 
-      @combined_colors_collated @combined_colors |> DataConverter.collate_colors_with_same_name_for_code()
+      @combined_colors_collated @combined_colors |> DataConverter.combine_colors_with_same_name_for_code()
 
       @colors_by_name @combined_colors_collated |> DataConverter.group_by_name_frequency()
 
