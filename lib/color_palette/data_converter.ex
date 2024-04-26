@@ -27,8 +27,8 @@ defmodule ColorPalette.DataConverter do
     }
   end
 
-  @spec convert_raw_color_data_to_colors([map()], Color.source()) :: [Color.t()]
-  def convert_raw_color_data_to_colors(raw_color_data, source) do
+  @spec convert_raw_color_data_to_colors([map()], Color.source(), [ANSIColorCode.t()]) :: [Color.t()]
+  def convert_raw_color_data_to_colors(raw_color_data, source, ansi_color_codes) do
     raw_color_data
     |> Enum.map(fn raw_color ->
       raw_color.name
@@ -40,7 +40,8 @@ defmodule ColorPalette.DataConverter do
           source: [source],
           exact_name_match?: raw_color[:exact_name_match?],
           distance_to_closest_named_hex: raw_color[:distance_to_closest_named_hex],
-          closest_named_hex: raw_color[:closest_named_hex]
+          closest_named_hex: raw_color[:closest_named_hex],
+          ansi_color_code: ansi_color_codes |> Enum.at(raw_color.code)
         }
       end)
     end)

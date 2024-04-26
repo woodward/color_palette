@@ -61,20 +61,16 @@ defmodule ColorPalette.PrecompileHook do
       # Raw Data Converted to `ColorPalette.Color` structs:
 
       @color_data_api_colors @raw_color_data_api_data
-                             |> DataConverter.convert_raw_color_data_to_colors(:color_data_api)
-                             |> DataConverter.add_ansi_color_codes_to_colors(@ansi_color_codes)
+                             |> DataConverter.convert_raw_color_data_to_colors(:color_data_api, @ansi_color_codes)
 
       @color_name_dot_com_colors @raw_color_name_dot_com_data
-                                 |> DataConverter.convert_raw_color_data_to_colors(:color_name_dot_com)
-                                 |> DataConverter.add_ansi_color_codes_to_colors(@ansi_color_codes)
+                                 |> DataConverter.convert_raw_color_data_to_colors(:color_name_dot_com, @ansi_color_codes)
 
       @colorhexa_colors @raw_colorhexa_data
-                        |> DataConverter.convert_raw_color_data_to_colors(:colorhexa)
-                        |> DataConverter.add_ansi_color_codes_to_colors(@ansi_color_codes)
+                        |> DataConverter.convert_raw_color_data_to_colors(:colorhexa, @ansi_color_codes)
 
       @io_ansi_colors @io_ansi_color_names
-                      |> DataConverter.convert_raw_color_data_to_colors(:io_ansi)
-                      |> DataConverter.add_ansi_color_codes_to_colors(@ansi_color_codes)
+                      |> DataConverter.convert_raw_color_data_to_colors(:io_ansi, @ansi_color_codes)
 
       # --------------------------------------------------------------------------------------------
       # Tranformation & Grouping of the Data:
