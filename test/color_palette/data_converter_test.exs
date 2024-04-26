@@ -1121,4 +1121,54 @@ defmodule ColorPalette.DataConverterTest do
              }
     end
   end
+
+  describe "group_by_name_frequency_new/1" do
+    test "groups the colors so that the entries with the fewest colors go into the map first" do
+      colors = %{
+        black: [
+          %Color{name: :black, ansi_color_code: %ANSIColorCode{hex: "000000", code: 0}, source: [:io_ansi]},
+          %Color{name: :black, ansi_color_code: %ANSIColorCode{hex: "000000", code: 16}, source: [:color_name_dot_com]}
+        ],
+        black1: [
+          %Color{name: :black1, ansi_color_code: %ANSIColorCode{hex: "000000", code: 0}, source: [:colorhexa]}
+        ]
+      }
+
+      color_map = DataConverter.group_by_name_frequency_new(colors)
+
+      assert color_map == %{
+               black: %Color{
+                 name: :black,
+                 ansi_color_code: %ANSIColorCode{hex: "000000", code: 0},
+                 source: [:io_ansi]
+               },
+               black1: %Color{
+                 name: :black1,
+                 ansi_color_code: %ANSIColorCode{hex: "000000", code: 0},
+                 source: [:colorhexa]
+               }
+             }
+    end
+  end
+
+  describe "do I even need group_by_name_frequency_new" do
+    test "see how many for each color name" do
+      combined_colors_collated_new = ColorPalette.combined_colors_collated_new()
+      assert Map.keys(combined_colors_collated_new) |> length() == 472
+
+      with_more_than_one_color =
+        combined_colors_collated_new
+        |> Enum.filter(fn {_color_name, colors} -> length(colors) > 1 end)
+        |> Enum.into(%{})
+
+      assert Map.keys(with_more_than_one_color) |> length() == 121
+
+      with_more_than_two_colors =
+        combined_colors_collated_new
+        |> Enum.filter(fn {_color_name, colors} -> length(colors) > 2 end)
+        |> Enum.into(%{})
+
+      assert Map.keys(with_more_than_two_colors) |> length() == 61
+    end
+  end
 end

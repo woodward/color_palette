@@ -86,7 +86,25 @@ defmodule ColorPalette.PrecompileHook do
 
       @combined_colors_collated @combined_colors |> DataConverter.combine_colors_with_same_name_for_code()
 
+      @combined_colors_new (@io_ansi_colors ++
+                              @color_data_api_colors ++
+                              @color_name_dot_com_colors ++
+                              @colorhexa_colors)
+                           |> List.flatten()
+
+      def combined_colors_new, do: @combined_colors_new
+
+      # # ----------------------
+
+      @combined_colors_collated_new @combined_colors_new
+                                    |> DataConverter.collate_colors_by_name()
+                                    |> DataConverter.combine_colors_with_same_name()
+
+      def combined_colors_collated_new, do: @combined_colors_collated_new
+
       @colors_by_name @combined_colors_collated |> DataConverter.group_by_name_frequency()
+
+      @colors_by_name_new @combined_colors_collated_new |> DataConverter.group_by_name_frequency_new()
 
       @ansi_color_codes_missing_names @colors_by_name |> DataConverter.unnamed_ansi_color_codes()
 

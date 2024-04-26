@@ -110,6 +110,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  # DELETE!!!!!
   @spec multi_zip([[Color.t()]]) :: [[Color.t()]]
   def multi_zip(lists) do
     [first_list | remaining] = lists
@@ -267,6 +268,7 @@ defmodule ColorPalette.DataConverter do
     |> Enum.into(%{})
   end
 
+  # DELETE!!!!!
   @spec combine_colors_with_same_name_for_code([[Color.t()]]) :: [[Color.t()]]
   def combine_colors_with_same_name_for_code(colors) do
     colors
@@ -316,6 +318,7 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  # DELETE!
   @spec group_by_name_frequency([[Color.t()]]) :: %{Color.name() => Color.t()}
   def group_by_name_frequency(ansi_colors) do
     ansi_colors
@@ -327,6 +330,27 @@ defmodule ColorPalette.DataConverter do
         Map.update(acc2, color.name, color, fn value -> value end)
       end)
     end)
+  end
+
+  @spec group_by_name_frequency_new(%{Color.name() => [Color.t()]}) :: %{Color.name() => Color.t()}
+  def group_by_name_frequency_new(colors) do
+    # Simplified version for now; make it better later:
+    colors
+    |> Enum.map(fn {color_name, colors} ->
+      {color_name, colors |> List.first()}
+    end)
+    |> Enum.into(%{})
+
+    # Old sort algorithm - use something from here, rather than above?
+    # ansi_colors
+    # |> Enum.sort_by(&length(&1))
+    # |> Enum.reduce(%{}, fn ansi_colors_for_code, acc1 ->
+    #   ansi_colors_for_code
+    #   |> Enum.reduce(acc1, fn color, acc2 ->
+    #     # The first map entry for the color name "wins" and sticks around:
+    #     Map.update(acc2, color.name, color, fn value -> value end)
+    #   end)
+    # end)
   end
 
   @spec hex_to_color_names(%{Color.name() => Color.t()}) :: %{ANSIColorCode.hex() => [Color.name()]}
