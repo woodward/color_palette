@@ -97,14 +97,14 @@ stored in JSON in this [data directory](https://github.com/woodward/color_palett
 Of the 256 ANSI color codes, surprisingly only 247 are unique hex values (i.e., unique colors); 
 there are nine hex codes with duplicate hex values:
 
-|   Hex   |                  Code 1                  |                     Code 2             | 
-|---------|------------------------------------------|----------------------------------------|
-| #000000 |       [0](ansi_color_codes.html#color-0) |   [16](ansi_color_codes.html#color-16) |
-| #0000ff |     [12](ansi_color_codes.html#color-12) |   [21](ansi_color_codes.html#color-21) |
-| #00ff00 |     [10](ansi_color_codes.html#color-10) |   [46](ansi_color_codes.html#color-46) |
-| #00ffff |     [14](ansi_color_codes.html#color-14) |   [51](ansi_color_codes.html#color-51) |
-| #808080 |       [8](ansi_color_codes.html#color-8) | [244](ansi_color_codes.html#color-244) |
-| #ff0000 |       [9](ansi_color_codes.html#color-9) | [196](ansi_color_codes.html#color-196) |
-| #ff00ff |     [13](ansi_color_codes.html#color-13) | [201](ansi_color_codes.html#color-201) |
-| #ffff00 |     [11](ansi_color_codes.html#color-11) | [226](ansi_color_codes.html#color-226) |
-| #ffffff |     [15](ansi_color_codes.html#color-15) | [231](ansi_color_codes.html#color-231) | 
+|   Hex   |                               Code 1                                  |                                 Code 2                                  | 
+|---------|-----------------------------------------------------------------------|-------------------------------------------------------------------------|
+| #000000 |   [0](https://hexdocs.pm/color_palette/ansi_color_codes.html#color-0) |   [16](https://hexdocs.pm/color_palette/ansi_color_codes.html#color-16) |
+| #0000ff | [12](https://hexdocs.pm/color_palette/ansi_color_codes.html#color-12) |   [21](https://hexdocs.pm/color_palette/ansi_color_codes.html#color-21) |
+| #00ff00 | [10](https://hexdocs.pm/color_palette/ansi_color_codes.html#color-10) |   [46](https://hexdocs.pm/color_palette/ansi_color_codes.html#color-46) |
+| #00ffff | [14](https://hexdocs.pm/color_palette/ansi_color_codes.html#color-14) |   [51](https://hexdocs.pm/color_palette/ansi_color_codes.html#color-51) |
+| #808080 |   [8](https://hexdocs.pm/color_palette/ansi_color_codes.html#color-8) | [244](https://hexdocs.pm/color_palette/ansi_color_codes.html#color-244) |
+| #ff0000 |   [9](https://hexdocs.pm/color_palette/ansi_color_codes.html#color-9) | [196](https://hexdocs.pm/color_palette/ansi_color_codes.html#color-196) |
+| #ff00ff | [13](https://hexdocs.pm/color_palette/ansi_color_codes.html#color-13) | [201](https://hexdocs.pm/color_palette/ansi_color_codes.html#color-201) |
+| #ffff00 | [11](https://hexdocs.pm/color_palette/ansi_color_codes.html#color-11) | [226](https://hexdocs.pm/color_palette/ansi_color_codes.html#color-226) |
+| #ffffff | [15](https://hexdocs.pm/color_palette/ansi_color_codes.html#color-15) | [231](https://hexdocs.pm/color_palette/ansi_color_codes.html#color-231) | 
