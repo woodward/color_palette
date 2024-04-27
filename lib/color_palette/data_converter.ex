@@ -247,23 +247,27 @@ defmodule ColorPalette.DataConverter do
 
   @spec group_by_name_frequency(%{Color.name() => [Color.t()]}) :: %{Color.name() => Color.t()}
   def group_by_name_frequency(colors) do
-    # Simplified version for now; make it better later:
+    code_frequency =
+      colors
+      |> Enum.reduce(%{}, fn {_color_name, colors_for_name}, acc1 ->
+        colors_for_name
+        |> Enum.reduce(acc1, fn color, acc2 ->
+          code = color.ansi_color_code.code
+          Map.update(acc2, code, 1, fn value -> value + 1 end)
+        end)
+      end)
+
     colors
     |> Enum.map(fn {color_name, colors} ->
-      {color_name, colors |> List.first()}
+      {color_name,
+       colors
+       |> Enum.sort_by(fn color ->
+         code = color.ansi_color_code.code
+         Map.get(code_frequency, code)
+       end)
+       |> List.first()}
     end)
     |> Enum.into(%{})
-
-    # Old sort algorithm - use something from here, rather than above?
-    # ansi_colors
-    # |> Enum.sort_by(&length(&1))
-    # |> Enum.reduce(%{}, fn ansi_colors_for_code, acc1 ->
-    #   ansi_colors_for_code
-    #   |> Enum.reduce(acc1, fn color, acc2 ->
-    #     # The first map entry for the color name "wins" and sticks around:
-    #     Map.update(acc2, color.name, color, fn value -> value end)
-    #   end)
-    # end)
   end
 
   @spec hex_to_color_names(%{Color.name() => Color.t()}) :: %{ANSIColorCode.hex() => [Color.name()]}

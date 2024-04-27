@@ -32,7 +32,7 @@ These colors can be seen in a terminal by running
 
 ## Usage
 
-This hex package adds **505** additional named colors to use in Elixir terminal scripts, based on 
+This hex package adds **493** additional named colors to use in Elixir terminal scripts, based on 
 the 256 ANSI color code sequences (so some of the color names are duplicates and reference the same color).  
 Note that some of the color names are approximations, as the color space for the ANSI color codes is rather 
 limited (it's 6 bit (6 x 6 x 6 = 216 colors, plus 40 additional named colors), although there are 9

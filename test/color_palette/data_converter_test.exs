@@ -535,43 +535,10 @@ defmodule ColorPalette.DataConverterTest do
 
       color_codes_with_no_names = DataConverter.unnamed_ansi_color_codes(colors)
 
-      assert length(color_codes_with_no_names) == 33
+      assert length(color_codes_with_no_names) == 21
 
-      assert color_codes_with_no_names == [
-               0,
-               1,
-               3,
-               4,
-               6,
-               9,
-               10,
-               11,
-               12,
-               13,
-               14,
-               21,
-               42,
-               47,
-               56,
-               59,
-               63,
-               69,
-               86,
-               87,
-               93,
-               98,
-               99,
-               118,
-               119,
-               121,
-               126,
-               156,
-               163,
-               171,
-               234,
-               244,
-               246
-             ]
+      expected = [0, 3, 4, 6, 9, 10, 11, 12, 13, 14, 42, 47, 56, 59, 63, 86, 87, 99, 121, 163, 246]
+      assert color_codes_with_no_names == expected
     end
   end
 
@@ -939,8 +906,8 @@ defmodule ColorPalette.DataConverterTest do
       assert color_map == %{
                black: %Color{
                  name: :black,
-                 ansi_color_code: %ANSIColorCode{hex: "000000", code: 0},
-                 source: [:io_ansi]
+                 ansi_color_code: %ANSIColorCode{hex: "000000", code: 16},
+                 source: [:color_name_dot_com]
                },
                black1: %Color{
                  name: :black1,

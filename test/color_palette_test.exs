@@ -78,7 +78,7 @@ defmodule ColorPaletteTest do
   describe "colors/1" do
     test "returns the map of color names to color data" do
       colors = ColorPalette.colors()
-      assert length(Map.keys(colors)) == 505
+      assert length(Map.keys(colors)) == 493
 
       assert colors.olive == %Color{
                ansi_color_code: %ANSIColorCode{code: 100, color_group: :green, hex: "878700", rgb: [135, 135, 0]},
@@ -87,7 +87,7 @@ defmodule ColorPaletteTest do
                exact_name_match?: false,
                name: :olive,
                renamed?: false,
-               same_as: [],
+               same_as: [:dark_yellow_olive_tone],
                source: [:color_data_api, :color_name_dot_com],
                text_contrast_color: :black
              }
@@ -97,7 +97,7 @@ defmodule ColorPaletteTest do
   describe "color_names/0" do
     test "returns the list of color names" do
       colors = ColorPalette.color_names()
-      assert length(colors) == 505
+      assert length(colors) == 493
       first_five_names = colors |> Enum.take(5)
       assert first_five_names == [:aero_blue, :alien_armpit, :alto, :american_orange, :american_silver]
     end
@@ -348,16 +348,16 @@ defmodule ColorPaletteTest do
   describe "find_by_source" do
     test "returns the colors as defined by their source" do
       io_ansi_colors = ColorPalette.find_by_source(:io_ansi)
-      assert length(io_ansi_colors) == 13
+      assert length(io_ansi_colors) == 12
 
       color_name_dot_com_colors = ColorPalette.find_by_source(:color_name_dot_com)
-      assert length(color_name_dot_com_colors) == 206
+      assert length(color_name_dot_com_colors) == 216
 
       color_data_api_colors = ColorPalette.find_by_source(:color_data_api)
-      assert length(color_data_api_colors) == 197
+      assert length(color_data_api_colors) == 189
 
       colorhexa_colors = ColorPalette.find_by_source(:colorhexa)
-      assert length(colorhexa_colors) == 129
+      assert length(colorhexa_colors) == 132
     end
   end
 
@@ -433,10 +433,9 @@ defmodule ColorPaletteTest do
         end)
         |> Enum.reverse()
 
-      assert length(missing_by_code) == 23
+      assert length(missing_by_code) == 21
 
       assert missing_by_code == [
-               {"darkblue", 18},
                {"darkgreen", 22},
                {"darkslategray", 23},
                {"darkcyan", 30},
@@ -446,7 +445,6 @@ defmodule ColorPaletteTest do
                {"steelblue", 67},
                {"darkred", 88},
                {"darkmagenta", 90},
-               {"chartreuse", 118},
                {"greenyellow", 154},
                {"chocolate", 172},
                {"goldenrod", 178},
@@ -492,10 +490,9 @@ defmodule ColorPaletteTest do
         |> MapSet.to_list()
         |> Enum.sort_by(fn {_, code} -> code end)
 
-      assert length(colors_in_color_palette_but_with_different_code) == 12
+      assert length(colors_in_color_palette_but_with_different_code) == 10
 
       assert colors_in_color_palette_but_with_different_code == [
-               {"darkblue", 18},
                {"darkgreen", 22},
                {"darkcyan", 30},
                {"springgreen", 48},
@@ -503,7 +500,6 @@ defmodule ColorPaletteTest do
                {"steelblue", 67},
                {"darkred", 88},
                {"darkmagenta", 90},
-               {"chartreuse", 118},
                {"greenyellow", 154},
                {"lightgray", 188},
                {"lightyellow", 230}
