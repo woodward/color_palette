@@ -2,7 +2,7 @@ defmodule ColorPalette.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/woodward/color_palette"
-  @version "0.1.5"
+  @version "0.1.6"
 
   def project do
     [
