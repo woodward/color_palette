@@ -16,7 +16,7 @@ defmodule ColorPalette.ExDocUtils do
 
     """
     <span style="padding-right: 2rem;">
-      Same as: #{links}
+      <span style="font-weight: bold; margin-right: 0.5rem;">Same as:</span>#{links}
     </span>
     """
   end
@@ -32,7 +32,7 @@ defmodule ColorPalette.ExDocUtils do
   def source_links(sources, text_contrast_color, hex, name) do
     source_span = """
     <div>
-    <span style="margin-right: 1rem;"> Source: </span>
+    <span style="margin-right: 0.5rem; font-weight: bold;"> Source: </span>
     """
 
     sources_html =

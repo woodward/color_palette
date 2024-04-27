@@ -53,10 +53,10 @@ defmodule ColorPalette.Color do
       Sets foreground color to <strong>#{name}</strong>.
       </div>
       <div>
-      Hex value ##{hex}
+      <span style="font-weight: bold;">Hex value</span> ##{hex}
       </div>
       <div>
-      ANSI code <a style="color: #{text_contrast_color};" href="ansi_color_codes.html#color-#{code}">#{code}</a>
+      <span style="font-weight: bold;">ANSI code</span> <a style="color: #{text_contrast_color};" href="ansi_color_codes.html#color-#{code}">#{code}</a>
       </div>
       </div>
       <div style="display: flex; flex-direction: row; justify-content: space-between;">
