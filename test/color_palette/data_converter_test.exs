@@ -918,6 +918,27 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "codes_by_frequency_count/1" do
+    test "sums the number of references to each ansi color code" do
+      colors = %{
+        black: [
+          %Color{name: :black, ansi_color_code: %ANSIColorCode{hex: "000000", code: 0}, source: [:io_ansi]},
+          %Color{name: :black, ansi_color_code: %ANSIColorCode{hex: "000000", code: 16}, source: [:color_name_dot_com]}
+        ],
+        black1: [
+          %Color{name: :black1, ansi_color_code: %ANSIColorCode{hex: "000000", code: 0}, source: [:colorhexa]}
+        ]
+      }
+
+      codes_by_frequency = DataConverter.codes_by_frequency_count(colors)
+
+      assert codes_by_frequency == %{
+               %ANSIColorCode{hex: "000000", code: 0} => 2,
+               %ANSIColorCode{hex: "000000", code: 16} => 1
+             }
+    end
+  end
+
   describe "do I even need group_by_name_frequency" do
     test "see how many for each color name" do
       combined_colors_collated = ColorPalette.combined_colors_collated()

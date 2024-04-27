@@ -245,26 +245,27 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  @spec codes_by_frequency_count(%{Color.name() => [Color.t()]}) :: %{ANSIColorCode => integer()}
+  def codes_by_frequency_count(colors) do
+    colors
+    |> Enum.reduce(%{}, fn {_color_name, colors_for_name}, acc1 ->
+      colors_for_name
+      |> Enum.reduce(acc1, fn color, acc2 ->
+        Map.update(acc2, color.ansi_color_code, 1, &(&1 + 1))
+      end)
+    end)
+  end
+
   @spec group_by_name_frequency(%{Color.name() => [Color.t()]}) :: %{Color.name() => Color.t()}
   def group_by_name_frequency(colors) do
-    code_frequency =
-      colors
-      |> Enum.reduce(%{}, fn {_color_name, colors_for_name}, acc1 ->
-        colors_for_name
-        |> Enum.reduce(acc1, fn color, acc2 ->
-          code = color.ansi_color_code.code
-          Map.update(acc2, code, 1, fn value -> value + 1 end)
-        end)
-      end)
+    code_frequencies = codes_by_frequency_count(colors)
 
     colors
     |> Enum.map(fn {color_name, colors} ->
       {color_name,
        colors
-       |> Enum.sort_by(fn color ->
-         code = color.ansi_color_code.code
-         Map.get(code_frequency, code)
-       end)
+       |> Enum.sort_by(&Map.get(code_frequencies, &1.ansi_color_code))
+       # The color with the lowest count "wins" (to try and get names for more of the ANSI color codes):
        |> List.first()}
     end)
     |> Enum.into(%{})
