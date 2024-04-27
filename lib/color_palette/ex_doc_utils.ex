@@ -31,13 +31,17 @@ defmodule ColorPalette.ExDocUtils do
   @spec source_links([Color.source()], Color.text_contrast_color(), ANSIColorCode.hex(), Color.name()) :: String.t()
   def source_links(sources, text_contrast_color, hex, name) do
     source_span = """
-    <span style="margin-right: 2rem;"> Source: </span>
+    <div>
+    <span style="margin-right: 1rem;"> Source: </span>
     """
 
-    sources
-    |> Enum.reduce(source_span, fn source, acc ->
-      acc <> source_link(source, text_contrast_color, hex, name)
-    end)
+    sources_html =
+      sources
+      |> Enum.reduce(source_span, fn source, acc ->
+        acc <> source_link(source, text_contrast_color, hex, name)
+      end)
+
+    sources_html <> "</div>"
   end
 
   @spec source_link(Color.source(), Color.text_contrast_color(), ANSIColorCode.hex(), Color.name()) :: String.t()

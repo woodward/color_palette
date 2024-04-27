@@ -48,11 +48,22 @@ defmodule ColorPalette.Color do
           ] do
       @doc """
       <div style="color: #{text_contrast_color}; background-color: ##{hex}; padding: 1rem;">
-      Sets foreground color to <strong>#{name}</strong>.  Hex value ##{hex}.  ANSI code #{code}.
-      <br />
+      <div style="display: flex; flex-direction: row; justify-content: space-between;">
+      <div>
+      Sets foreground color to <strong>#{name}</strong>.
+      </div>
+      <div>
+      Hex value ##{hex}
+      </div>
+      <div>
+      ANSI code <a style="color: #{text_contrast_color};" href="ansi_color_codes.html#color-#{code}">#{code}</a>
+      </div>
+      </div>
+      <div style="display: flex; flex-direction: row; justify-content: space-between;">
       #{ExDocUtils.source_links(source, text_contrast_color, hex, name)}
       #{ExDocUtils.same_as(same_as, hex, text_contrast_color)}
       #{ExDocUtils.color_group_link(hex, text_contrast_color, color_group)}
+      </div>
       </div>
       """
       def unquote(name)() do
