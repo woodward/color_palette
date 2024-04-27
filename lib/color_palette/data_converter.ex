@@ -27,7 +27,7 @@ defmodule ColorPalette.DataConverter do
     }
   end
 
-  @spec convert_raw_color_data_to_colors([map()], Color.source(), [ANSIColorCode.t()]) :: [Color.t()]
+  @spec convert_raw_color_data_to_colors([map()], Color.source(), [ANSIColorCode.t()]) :: [[Color.t()]]
   def convert_raw_color_data_to_colors(raw_color_data, source, ansi_color_codes) do
     raw_color_data
     |> Enum.map(fn raw_color ->
