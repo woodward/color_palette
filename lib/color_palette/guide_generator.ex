@@ -118,7 +118,7 @@ defmodule ColorPalette.GuideGenerator do
 
     """
     <div style="display: flex; flex-direction: row; justify-content: space-between; color: #{text_contrast_color}; background-color: ##{hex}; #{div_styling}" id="color-#{code}">
-      <div style="display: flex; flex-direction: row; width: 16rem;"><div style="margin-right: 2rem; font-weight: bold;">#{code}</div> <div style="margin-right: 2rem; white-space: nowrap;">#{hex_label} ##{hex} </div></div>
+      <div style="display: flex; flex-direction: row; width: 16rem;"><div style="margin-right: 2rem; font-weight: bold;"><a style="color: #{text_contrast_color};" href="ansi_color_codes.html#color-#{code}">#{code}</a></div> <div style="margin-right: 2rem; white-space: nowrap;">#{hex_label} ##{hex} </div></div>
       <div style="display: flex; flex-direction: row; margin-right: 1rem;"><span style="font-weight: bold; margin-right: 1rem;">#{color_names_label}</span> <span> #{color_links(color_names, hex, text_contrast_color)} </span> </div>
       #{color_group_link}
     </div>\n\n
