@@ -365,60 +365,6 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "multi_zip" do
-    test "combines the lists" do
-      list1 = ["a", "b", "c"]
-      list2 = ["dog", "cat", "squirrel"]
-      list3 = ["apple", "orange", "banana"]
-
-      combined = DataConverter.multi_zip([list1, list2, list3])
-
-      assert combined == [
-               ["a", "dog", "apple"],
-               ["b", "cat", "orange"],
-               ["c", "squirrel", "banana"]
-             ]
-    end
-
-    test "filters out nil values" do
-      list1 = ["a", "b", nil]
-      list2 = ["dog", nil, "squirrel"]
-      list3 = [nil, "orange", "banana"]
-
-      combined = DataConverter.multi_zip([list1, list2, list3])
-
-      assert combined == [
-               ["a", "dog"],
-               ["b", "orange"],
-               ["squirrel", "banana"]
-             ]
-    end
-
-    test "combines the lists, even if the elements are themselves list" do
-      list1 = ["a", ["b", "c"], ["d", "e"]]
-      list2 = ["dog", "cat", "squirrel"]
-      list3 = ["apple", ["orange", "tangerine"], "banana"]
-
-      combined = DataConverter.multi_zip([list1, list2, list3])
-
-      assert combined == [
-               ["a", "dog", "apple"],
-               ["b", "c", "cat", "orange", "tangerine"],
-               ["d", "e", "squirrel", "banana"]
-             ]
-    end
-
-    test "raises an exception if the lists are not of the same length" do
-      list1 = ["a", "b", "c"]
-      list2 = ["dog", "cat"]
-      list3 = ["apple", "orange", "banana"]
-
-      assert_raise RuntimeError, fn ->
-        DataConverter.multi_zip([list1, list2, list3])
-      end
-    end
-  end
-
   describe "color_names_to_colors" do
     test "groups colors by color names" do
       colors = [
@@ -606,46 +552,47 @@ defmodule ColorPalette.DataConverterTest do
 
   describe "unnamed_ansi_color_codes" do
     test "returns a list of IO ansi color codes without a name" do
-      colors = ColorPalette.colors_by_name()
+      colors = ColorPalette.colors_by_name_new()
 
       color_codes_with_no_names = DataConverter.unnamed_ansi_color_codes(colors)
 
-      assert length(color_codes_with_no_names) == 13
+      assert length(color_codes_with_no_names) == 33
 
-      assert color_codes_with_no_names == [10, 13, 16, 42, 48, 84, 85, 92, 105, 122, 123, 241, 248]
-    end
-  end
-
-  describe "create_names_for_missing_colors/2" do
-    test "creates some fake color names for colors which are missing names" do
-      all_colors = ColorPalette.combined_colors()
-      missing_names = [22, 33]
-      new_names = DataConverter.create_names_for_missing_colors(all_colors, missing_names)
-
-      assert new_names == %{
-               azure_radiance_033: %Color{
-                 name: :azure_radiance_033,
-                 ansi_color_code: %ANSIColorCode{code: 33, hex: "0087ff", rgb: [0, 135, 255], color_group: :blue},
-                 text_contrast_color: :black,
-                 closest_named_hex: "007FFF",
-                 distance_to_closest_named_hex: 66,
-                 source: [:color_data_api],
-                 exact_name_match?: false,
-                 same_as: [],
-                 renamed?: true
-               },
-               camarone_022: %Color{
-                 name: :camarone_022,
-                 ansi_color_code: %ANSIColorCode{code: 22, hex: "005f00", rgb: [0, 95, 0], color_group: :green},
-                 text_contrast_color: :white,
-                 closest_named_hex: "00581A",
-                 distance_to_closest_named_hex: 1031,
-                 source: [:color_data_api],
-                 exact_name_match?: false,
-                 same_as: [],
-                 renamed?: true
-               }
-             }
+      assert color_codes_with_no_names == [
+               0,
+               1,
+               3,
+               4,
+               6,
+               9,
+               10,
+               11,
+               12,
+               13,
+               14,
+               21,
+               42,
+               47,
+               56,
+               59,
+               63,
+               69,
+               86,
+               87,
+               93,
+               98,
+               99,
+               118,
+               119,
+               121,
+               126,
+               156,
+               163,
+               171,
+               234,
+               244,
+               246
+             ]
     end
   end
 
@@ -873,136 +820,6 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "combine_colors_with_same_name_for_code" do
-    test "groups colors with the same name, combining their sources" do
-      colors = [
-        [
-          %Color{
-            name: :purple_pizzazz,
-            ansi_color_code: %ANSIColorCode{code: 200, color_group: :pink, hex: "ff00d7", rgb: [255, 0, 215]},
-            text_contrast_color: :black,
-            closest_named_hex: "FF00CC",
-            distance_to_closest_named_hex: 123,
-            source: [:color_data_api],
-            exact_name_match?: false,
-            renamed?: false,
-            same_as: []
-          },
-          %Color{
-            name: :shocking_pink,
-            ansi_color_code: %ANSIColorCode{code: 200, color_group: :pink, hex: "ff00d7", rgb: [255, 0, 215]},
-            text_contrast_color: :white,
-            closest_named_hex: nil,
-            distance_to_closest_named_hex: nil,
-            source: [:color_name_dot_com],
-            exact_name_match?: false,
-            renamed?: false,
-            same_as: []
-          }
-        ],
-        [
-          %Color{
-            name: :fuchsia,
-            ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
-            text_contrast_color: :black,
-            closest_named_hex: "FF00FF",
-            distance_to_closest_named_hex: 0,
-            source: [:color_data_api],
-            exact_name_match?: true,
-            renamed?: false,
-            same_as: []
-          },
-          %Color{
-            name: :fuchsia,
-            ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
-            text_contrast_color: :white,
-            closest_named_hex: nil,
-            distance_to_closest_named_hex: nil,
-            source: [:color_name_dot_com],
-            exact_name_match?: false,
-            renamed?: false,
-            same_as: []
-          },
-          %Color{
-            name: :magenta,
-            ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
-            text_contrast_color: :white,
-            closest_named_hex: nil,
-            distance_to_closest_named_hex: nil,
-            source: [:colorhexa],
-            exact_name_match?: false,
-            renamed?: false,
-            same_as: []
-          },
-          %Color{
-            name: :magenta,
-            ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
-            text_contrast_color: :black,
-            closest_named_hex: "FF00FF",
-            distance_to_closest_named_hex: 0,
-            source: [:color_data_api],
-            exact_name_match?: true,
-            renamed?: false,
-            same_as: []
-          }
-        ]
-      ]
-
-      colors_collated = DataConverter.combine_colors_with_same_name_for_code(colors)
-
-      assert colors_collated == [
-               [
-                 %Color{
-                   name: :purple_pizzazz,
-                   ansi_color_code: %ANSIColorCode{code: 200, color_group: :pink, hex: "ff00d7", rgb: [255, 0, 215]},
-                   text_contrast_color: :black,
-                   closest_named_hex: "FF00CC",
-                   distance_to_closest_named_hex: 123,
-                   source: [:color_data_api],
-                   exact_name_match?: false,
-                   renamed?: false,
-                   same_as: []
-                 },
-                 %Color{
-                   name: :shocking_pink,
-                   ansi_color_code: %ANSIColorCode{code: 200, color_group: :pink, hex: "ff00d7", rgb: [255, 0, 215]},
-                   text_contrast_color: :white,
-                   closest_named_hex: nil,
-                   distance_to_closest_named_hex: nil,
-                   source: [:color_name_dot_com],
-                   exact_name_match?: false,
-                   renamed?: false,
-                   same_as: []
-                 }
-               ],
-               [
-                 %Color{
-                   name: :magenta,
-                   ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
-                   text_contrast_color: :black,
-                   closest_named_hex: "FF00FF",
-                   distance_to_closest_named_hex: 0,
-                   source: [:colorhexa, :color_data_api],
-                   exact_name_match?: true,
-                   renamed?: false,
-                   same_as: []
-                 },
-                 %Color{
-                   name: :fuchsia,
-                   ansi_color_code: %ANSIColorCode{code: 201, color_group: :pink, hex: "ff00ff", rgb: [255, 0, 255]},
-                   text_contrast_color: :white,
-                   closest_named_hex: "FF00FF",
-                   distance_to_closest_named_hex: 0,
-                   source: [:color_data_api, :color_name_dot_com],
-                   exact_name_match?: true,
-                   renamed?: false,
-                   same_as: []
-                 }
-               ]
-             ]
-    end
-  end
-
   describe "combine_colors_with_same_name" do
     test "groups colors with the same name, combining their sources" do
       colors = %{
@@ -1122,35 +939,6 @@ defmodule ColorPalette.DataConverterTest do
                    same_as: []
                  }
                ]
-             }
-    end
-  end
-
-  describe "group_by_name_frequency/1" do
-    test "groups the colors so that the entries with the fewest colors go into the map first" do
-      colors = [
-        [
-          %Color{name: :black, ansi_color_code: %ANSIColorCode{hex: "000000", code: 0}, source: [:io_ansi]},
-          %Color{name: :black1, ansi_color_code: %ANSIColorCode{hex: "000000", code: 0}, source: [:colorhexa]}
-        ],
-        [
-          %Color{name: :black, ansi_color_code: %ANSIColorCode{hex: "000000", code: 16}, source: [:color_name_dot_com]}
-        ]
-      ]
-
-      color_map = DataConverter.group_by_name_frequency(colors)
-
-      assert color_map == %{
-               black: %Color{
-                 name: :black,
-                 ansi_color_code: %ANSIColorCode{hex: "000000", code: 16},
-                 source: [:color_name_dot_com]
-               },
-               black1: %Color{
-                 name: :black1,
-                 ansi_color_code: %ANSIColorCode{hex: "000000", code: 0},
-                 source: [:colorhexa]
-               }
              }
     end
   end

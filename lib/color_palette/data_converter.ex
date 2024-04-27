@@ -110,30 +110,6 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  # DELETE!!!!!
-  @spec multi_zip([[Color.t()]]) :: [[Color.t()]]
-  def multi_zip(lists) do
-    [first_list | remaining] = lists
-    length_of_first_list = length(first_list)
-
-    remaining
-    |> Enum.each(fn list ->
-      if length(list) != length_of_first_list do
-        raise "The lists must all be of the same length"
-      end
-    end)
-
-    initial_combined = List.duplicate([], length_of_first_list)
-
-    lists
-    |> Enum.reduce(initial_combined, fn list, acc ->
-      Enum.zip(acc, list)
-      |> Enum.map(fn {acc_list, elem_list} ->
-        (acc_list ++ [elem_list]) |> List.flatten() |> Enum.reject(&(&1 == nil))
-      end)
-    end)
-  end
-
   @spec ansi_color_codes_to_color_names([ANSIColorCode.t()], %{ANSIColorCode.hex() => [Color.name()]}) ::
           %{ANSIColorCode.t() => [Color.name()]}
   def ansi_color_codes_to_color_names(ansi_color_codes, hex_to_color_names) do
@@ -178,19 +154,6 @@ defmodule ColorPalette.DataConverter do
       end)
 
     MapSet.difference(ansi_color_code_set, color_set) |> MapSet.to_list() |> Enum.sort()
-  end
-
-  @spec create_names_for_missing_colors(%{Color.name() => Color.t()}, [ANSIColorCode.code()]) ::
-          %{Color.name() => Color.t()}
-  def create_names_for_missing_colors(all_colors, color_codes_missing_names) do
-    color_codes_missing_names
-    |> Enum.reduce(%{}, fn code, acc ->
-      color = all_colors |> Enum.at(code) |> List.first()
-      code = color.ansi_color_code.code |> Integer.to_string() |> String.pad_leading(3, "0")
-      name_with_code_suffix = color_name_to_atom("#{color.name}_#{code}") |> List.first()
-      renamed_color = %{color | name: name_with_code_suffix, renamed?: true}
-      Map.put(acc, name_with_code_suffix, renamed_color)
-    end)
   end
 
   @spec create_names_for_missing_colors_new(%{Color.name() => Color.t()}, [ANSIColorCode.code()]) ::
@@ -281,67 +244,12 @@ defmodule ColorPalette.DataConverter do
     |> Enum.into(%{})
   end
 
-  # DELETE!!!!!
-  @spec combine_colors_with_same_name_for_code([[Color.t()]]) :: [[Color.t()]]
-  def combine_colors_with_same_name_for_code(colors) do
-    colors
-    |> Enum.map(fn colors_for_code ->
-      colors_for_code
-      |> Enum.group_by(& &1.name)
-      |> Enum.reduce([], fn {_color_name, colors_for_name}, acc ->
-        colors_result =
-          colors_for_name
-          |> Enum.reduce(nil, fn color_for_name, acc ->
-            if acc == nil do
-              color_for_name
-            else
-              closest_named_hex = if acc.closest_named_hex, do: acc.closest_named_hex, else: color_for_name.closest_named_hex
-
-              distance_to_closest_named_hex =
-                if acc.distance_to_closest_named_hex do
-                  acc.distance_to_closest_named_hex
-                else
-                  color_for_name.distance_to_closest_named_hex
-                end
-
-              exact_name_match? = if acc.exact_name_match?, do: acc.exact_name_match?, else: color_for_name.exact_name_match?
-
-              %{
-                color_for_name
-                | source: acc.source ++ color_for_name.source,
-                  closest_named_hex: closest_named_hex,
-                  distance_to_closest_named_hex: distance_to_closest_named_hex,
-                  exact_name_match?: exact_name_match?
-              }
-            end
-          end)
-
-        [colors_result] ++ acc
-      end)
-      |> Enum.reverse()
-    end)
-  end
-
   # Not in use yet:
   @spec collate_colors_by_name([Color.t()]) :: %{Color.name() => [Color.t()]}
   def collate_colors_by_name(colors) do
     colors
     |> Enum.reduce(%{}, fn color, acc ->
       Map.update(acc, color.name, [color], &(&1 ++ [color]))
-    end)
-  end
-
-  # DELETE!
-  @spec group_by_name_frequency([[Color.t()]]) :: %{Color.name() => Color.t()}
-  def group_by_name_frequency(ansi_colors) do
-    ansi_colors
-    |> Enum.sort_by(&length(&1))
-    |> Enum.reduce(%{}, fn ansi_colors_for_code, acc1 ->
-      ansi_colors_for_code
-      |> Enum.reduce(acc1, fn color, acc2 ->
-        # The first map entry for the color name "wins" and sticks around:
-        Map.update(acc2, color.name, color, fn value -> value end)
-      end)
     end)
   end
 
