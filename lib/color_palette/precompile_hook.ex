@@ -107,15 +107,21 @@ defmodule ColorPalette.PrecompileHook do
       @colors_by_name_new @combined_colors_collated_new |> DataConverter.group_by_name_frequency_new()
 
       @ansi_color_codes_missing_names @colors_by_name |> DataConverter.unnamed_ansi_color_codes()
+      @ansi_color_codes_missing_names_new @colors_by_name_new |> DataConverter.unnamed_ansi_color_codes()
 
       @generated_names_for_unnamed_colors DataConverter.create_names_for_missing_colors(
                                             @combined_colors,
                                             @ansi_color_codes_missing_names
                                           )
 
+      @generated_names_for_unnamed_colors_new DataConverter.create_names_for_missing_colors_new(
+                                                @combined_colors_new,
+                                                @ansi_color_codes_missing_names_new
+                                              )
+
       # -------------------------------
       # The main colors data structure:
-      colors_temp = @colors_by_name |> Map.merge(@generated_names_for_unnamed_colors)
+      colors_temp = @colors_by_name_new |> Map.merge(@generated_names_for_unnamed_colors_new)
 
       @hex_to_color_names colors_temp |> DataConverter.hex_to_color_names()
 
@@ -188,12 +194,15 @@ defmodule ColorPalette.PrecompileHook do
 
       @spec colors_by_name :: %{Color.name() => Color.t()}
       def colors_by_name, do: @colors_by_name
+      def colors_by_name_new, do: @colors_by_name_new
 
       @spec ansi_color_codes_missing_names :: [ANSIColorCode.code()]
       def ansi_color_codes_missing_names, do: @ansi_color_codes_missing_names
+      def ansi_color_codes_missing_names_new, do: @ansi_color_codes_missing_names_new
 
       @spec generated_names_for_unnamed_colors :: %{Color.name() => Color.t()}
       def generated_names_for_unnamed_colors, do: @generated_names_for_unnamed_colors
+      def generated_names_for_unnamed_colors_new, do: @generated_names_for_unnamed_colors_new
 
       # -------------------------------
       @doc """

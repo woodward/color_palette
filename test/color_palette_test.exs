@@ -78,18 +78,18 @@ defmodule ColorPaletteTest do
   describe "colors/1" do
     test "returns the map of color names to color data" do
       colors = ColorPalette.colors()
-      assert length(Map.keys(colors)) == 485
+      assert length(Map.keys(colors)) == 505
 
       assert colors.olive == %Color{
-               ansi_color_code: %ANSIColorCode{code: 3, color_group: :green, hex: "808000", rgb: [128, 128, 0]},
+               ansi_color_code: %ANSIColorCode{code: 100, color_group: :green, hex: "878700", rgb: [135, 135, 0]},
                closest_named_hex: "808000",
-               distance_to_closest_named_hex: 0,
-               exact_name_match?: true,
+               distance_to_closest_named_hex: 116,
+               exact_name_match?: false,
                name: :olive,
                renamed?: false,
                same_as: [],
-               source: [:color_data_api, :color_name_dot_com, :colorhexa],
-               text_contrast_color: :white
+               source: [:color_data_api, :color_name_dot_com],
+               text_contrast_color: :black
              }
     end
   end
@@ -97,7 +97,7 @@ defmodule ColorPaletteTest do
   describe "color_names/0" do
     test "returns the list of color names" do
       colors = ColorPalette.color_names()
-      assert length(colors) == 485
+      assert length(colors) == 505
       first_five_names = colors |> Enum.take(5)
       assert first_five_names == [:aero_blue, :alien_armpit, :alto, :american_orange, :american_silver]
     end
@@ -301,7 +301,7 @@ defmodule ColorPaletteTest do
                  closest_named_hex: "FF878D",
                  distance_to_closest_named_hex: 44,
                  source: [:color_data_api, :color_name_dot_com],
-                 exact_name_match?: nil,
+                 exact_name_match?: false,
                  renamed?: false,
                  same_as: [:very_light_red]
                },
@@ -312,7 +312,7 @@ defmodule ColorPaletteTest do
                  closest_named_hex: nil,
                  distance_to_closest_named_hex: nil,
                  source: [:colorhexa],
-                 exact_name_match?: nil,
+                 exact_name_match?: false,
                  renamed?: false,
                  same_as: [:tulip]
                }
@@ -325,27 +325,16 @@ defmodule ColorPaletteTest do
       color = ColorPalette.find_by_code(211)
 
       assert color == [
-               %Color{
-                 name: :tickle_me_pink,
-                 ansi_color_code: %ANSIColorCode{code: 211, color_group: :pink, hex: "ff87af", rgb: [255, 135, 175]},
-                 text_contrast_color: :black,
+               %ColorPalette.Color{
+                 ansi_color_code: %ColorPalette.ANSIColorCode{code: 211, color_group: :pink, hex: "ff87af", rgb: [255, 135, 175]},
                  closest_named_hex: "FC89AC",
                  distance_to_closest_named_hex: 320,
+                 exact_name_match?: false,
+                 name: :tickle_me_pink,
+                 renamed?: false,
+                 same_as: [],
                  source: [:color_data_api, :color_name_dot_com],
-                 exact_name_match?: nil,
-                 renamed?: false,
-                 same_as: [:very_light_pink]
-               },
-               %Color{
-                 name: :very_light_pink,
-                 ansi_color_code: %ANSIColorCode{code: 211, color_group: :pink, hex: "ff87af", rgb: [255, 135, 175]},
-                 text_contrast_color: :black,
-                 closest_named_hex: nil,
-                 distance_to_closest_named_hex: nil,
-                 source: [:colorhexa],
-                 exact_name_match?: nil,
-                 renamed?: false,
-                 same_as: [:tickle_me_pink]
+                 text_contrast_color: :black
                }
              ]
     end
@@ -359,16 +348,16 @@ defmodule ColorPaletteTest do
   describe "find_by_source" do
     test "returns the colors as defined by their source" do
       io_ansi_colors = ColorPalette.find_by_source(:io_ansi)
-      assert length(io_ansi_colors) == 10
+      assert length(io_ansi_colors) == 13
 
       color_name_dot_com_colors = ColorPalette.find_by_source(:color_name_dot_com)
-      assert length(color_name_dot_com_colors) == 217
+      assert length(color_name_dot_com_colors) == 206
 
       color_data_api_colors = ColorPalette.find_by_source(:color_data_api)
-      assert length(color_data_api_colors) == 190
+      assert length(color_data_api_colors) == 197
 
       colorhexa_colors = ColorPalette.find_by_source(:colorhexa)
-      assert length(colorhexa_colors) == 130
+      assert length(colorhexa_colors) == 129
     end
   end
 
@@ -386,7 +375,7 @@ defmodule ColorPaletteTest do
 
       assert first ==
                {%ColorPalette.ANSIColorCode{code: 0, hex: "000000", rgb: [0, 0, 0], color_group: :gray_and_black},
-                [:black, :black_016]}
+                [:black, :black_000]}
     end
   end
 
@@ -444,22 +433,25 @@ defmodule ColorPaletteTest do
         end)
         |> Enum.reverse()
 
-      assert length(missing_by_code) == 20
+      assert length(missing_by_code) == 23
 
       assert missing_by_code == [
+               {"darkblue", 18},
+               {"darkgreen", 22},
                {"darkslategray", 23},
+               {"darkcyan", 30},
                {"deepskyblue", 39},
                {"springgreen", 48},
                {"dimgray", 59},
                {"steelblue", 67},
+               {"darkred", 88},
                {"darkmagenta", 90},
-               {"olive", 100},
-               {"aquamarine", 122},
+               {"chartreuse", 118},
                {"greenyellow", 154},
                {"chocolate", 172},
                {"goldenrod", 178},
+               {"lightgray", 188},
                {"beige", 194},
-               {"lightcyan", 195},
                {"orangered", 202},
                {"darkorange", 208},
                {"orange", 214},
@@ -500,17 +492,20 @@ defmodule ColorPaletteTest do
         |> MapSet.to_list()
         |> Enum.sort_by(fn {_, code} -> code end)
 
-      assert length(colors_in_color_palette_but_with_different_code) == 9
+      assert length(colors_in_color_palette_but_with_different_code) == 12
 
       assert colors_in_color_palette_but_with_different_code == [
+               {"darkblue", 18},
+               {"darkgreen", 22},
+               {"darkcyan", 30},
                {"springgreen", 48},
                {"dimgray", 59},
                {"steelblue", 67},
+               {"darkred", 88},
                {"darkmagenta", 90},
-               {"olive", 100},
-               {"aquamarine", 122},
+               {"chartreuse", 118},
                {"greenyellow", 154},
-               {"lightcyan", 195},
+               {"lightgray", 188},
                {"lightyellow", 230}
              ]
     end

@@ -649,6 +649,39 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "create_names_for_missing_colors_new/2" do
+    test "creates some fake color names for colors which are missing names" do
+      all_colors = ColorPalette.combined_colors_new()
+      missing_names = [22, 33]
+      new_names = DataConverter.create_names_for_missing_colors_new(all_colors, missing_names)
+
+      assert new_names == %{
+               azure_radiance_033: %Color{
+                 name: :azure_radiance_033,
+                 ansi_color_code: %ANSIColorCode{code: 33, hex: "0087ff", rgb: [0, 135, 255], color_group: :blue},
+                 text_contrast_color: :black,
+                 closest_named_hex: "007FFF",
+                 distance_to_closest_named_hex: 66,
+                 source: [:color_data_api],
+                 exact_name_match?: false,
+                 same_as: [],
+                 renamed?: true
+               },
+               camarone_022: %Color{
+                 name: :camarone_022,
+                 ansi_color_code: %ANSIColorCode{code: 22, hex: "005f00", rgb: [0, 95, 0], color_group: :green},
+                 text_contrast_color: :white,
+                 closest_named_hex: "00581A",
+                 distance_to_closest_named_hex: 1031,
+                 source: [:color_data_api],
+                 exact_name_match?: false,
+                 same_as: [],
+                 renamed?: true
+               }
+             }
+    end
+  end
+
   describe "collate_colors_by_name/1 - not in use yet" do
     test "groups the colors under color names" do
       colors = [
