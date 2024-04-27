@@ -160,22 +160,7 @@ defmodule ColorPalette.DataConverter do
 
   @spec combine_colors_with_same_name_and_code([Color.t()]) :: Color.t()
   def combine_colors_with_same_name_and_code(colors) do
-    color_names = colors |> Enum.map(& &1.name) |> Enum.uniq()
-
-    if color_names |> length() > 1 do
-      color_names_string = color_names |> Enum.map(&(":" <> Atom.to_string(&1))) |> Enum.join(", ")
-      raise "Colors must all have the same name; instead got #{color_names_string}"
-    end
-
-    codes = colors |> Enum.map(& &1.ansi_color_code.code) |> Enum.uniq()
-
-    if codes |> length() > 1 do
-      codes_string = codes |> Enum.map(&Integer.to_string(&1)) |> Enum.join(", ")
-      raise "Colors must all have the same ANSI color code; instead got #{codes_string}"
-    end
-
-    # ---------------------------------
-
+    validate_input_for_combine_colors_fn!(colors)
     first_color = colors |> List.first()
 
     source = colors |> Enum.reduce([], fn color, acc -> color.source ++ acc end) |> Enum.sort()
@@ -217,6 +202,25 @@ defmodule ColorPalette.DataConverter do
     }
   end
 
+  @spec validate_input_for_combine_colors_fn!([Color.t()]) :: :ok
+  defp validate_input_for_combine_colors_fn!(colors) do
+    color_names = colors |> Enum.map(& &1.name) |> Enum.uniq()
+
+    if color_names |> length() > 1 do
+      color_names_string = color_names |> Enum.map(&(":" <> Atom.to_string(&1))) |> Enum.join(", ")
+      raise "Colors must all have the same name; instead got #{color_names_string}"
+    end
+
+    codes = colors |> Enum.map(& &1.ansi_color_code.code) |> Enum.uniq()
+
+    if codes |> length() > 1 do
+      codes_string = codes |> Enum.map(&Integer.to_string(&1)) |> Enum.join(", ")
+      raise "Colors must all have the same ANSI color code; instead got #{codes_string}"
+    end
+
+    :ok
+  end
+
   @spec combine_colors_with_same_name(%{Color.name() => [Color.t()]}) :: %{Color.name() => [Color.t()]}
   def combine_colors_with_same_name(colors) do
     colors
@@ -233,7 +237,6 @@ defmodule ColorPalette.DataConverter do
     |> Enum.into(%{})
   end
 
-  # Not in use yet:
   @spec collate_colors_by_name([Color.t()]) :: %{Color.name() => [Color.t()]}
   def collate_colors_by_name(colors) do
     colors
