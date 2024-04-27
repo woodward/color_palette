@@ -57,9 +57,9 @@ defmodule ColorPalette.ExDocUtils do
   def color_group_link(hex, text_contrast_color, color_group) do
     url = "color_groups.html##{color_group}"
 
-    """
-    <a style="color: #{text_contrast_color}; background-color: ##{hex}; padding-right: 2rem;" href="#{url}">Color Group: #{color_group}</a>
-    """
+    # Note: this cannot be done with the """ <a> ...""" as the ExDocs seem to really want this to all
+    # be on GuideGenerator.color_block/6:
+    " <a style=\"color: #{text_contrast_color}; background-color: ##{hex}; \" href=\"#{url}\"><span style=\"font-weight: bold;\">Color Group</span>: #{color_group}</a> "
   end
 
   @spec source_name(Color.source()) :: String.t()

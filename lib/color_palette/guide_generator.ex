@@ -41,7 +41,7 @@ defmodule ColorPalette.GuideGenerator do
           hex = ansi_color_code.hex
           code = ansi_color_code.code
 
-          acc <> color_block(code, hex, text_contrast_color, color_names, nil, "padding: 0.5rem;")
+          acc <> color_block(code, hex, text_contrast_color, color_names, nil, "padding: 1rem;")
         end)
       end)
 
@@ -95,22 +95,32 @@ defmodule ColorPalette.GuideGenerator do
         ) ::
           String.t()
   defp color_block(code, hex, text_contrast_color, color_names, color_group, div_styling) do
-    color_names_label = if length(color_names) == 1, do: "Color Name", else: "Color Names"
+    color_names_label =
+      if color_group == nil do
+        nil
+      else
+        if length(color_names) == 1, do: "Color Name:", else: "Color Names:"
+      end
 
     color_group_link =
-      if color_group, do: ColorPalette.ExDocUtils.color_group_link(hex, text_contrast_color, color_group), else: nil
+      if color_group == nil do
+        nil
+      else
+        "<div>" <> ColorPalette.ExDocUtils.color_group_link(hex, text_contrast_color, color_group) <> "</div>"
+      end
+
+    hex_label =
+      if color_group == nil do
+        nil
+      else
+        "<span style=\"font-weight: bold;\">Hex: </span>"
+      end
 
     """
     <div style="display: flex; flex-direction: row; justify-content: space-between; color: #{text_contrast_color}; background-color: ##{hex}; #{div_styling}" id="color-#{code}">
-      <div style="margin-right: 2rem; font-weight: bold;">#{code}:</div>
-      <div style="margin-right: 2rem;">Hex: ##{hex} </div>
-      <span>
-        <span style="margin-right: 1rem;">#{color_names_label}: </span>
-        <span style="margin-right: 1rem;">
-          #{color_links(color_names, hex, text_contrast_color)}
-        </span>
-        #{color_group_link}
-      </span>
+      <div style="display: flex; flex-direction: row; width: 16rem;"><div style="margin-right: 2rem; font-weight: bold;">#{code}</div> <div style="margin-right: 2rem; white-space: nowrap;">#{hex_label} ##{hex} </div></div>
+      <div style="display: flex; flex-direction: row; margin-right: 1rem;"><span style="font-weight: bold; margin-right: 1rem;">#{color_names_label}</span> <span> #{color_links(color_names, hex, text_contrast_color)} </span> </div>
+      #{color_group_link}
     </div>\n\n
     """
   end
@@ -119,11 +129,7 @@ defmodule ColorPalette.GuideGenerator do
   defp color_links(color_names, hex, text_contrast_color) do
     color_names
     |> Enum.map(fn color_name ->
-      """
-      <a style="color: #{text_contrast_color}; background_color: ##{hex}" href="ColorPalette.html##{color_name}/0">
-        :#{color_name}
-      </a>
-      """
+      " <a style=\"color: #{text_contrast_color}; background_color: ##{hex}\" href=\"ColorPalette.html##{color_name}/0\"> :#{color_name} </a> "
     end)
     |> Enum.join(", ")
   end
