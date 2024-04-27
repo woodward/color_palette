@@ -6,27 +6,6 @@ defmodule ColorPalette.DataConverterTest do
   alias ColorPalette.ANSIColorCode
   alias ColorPalette.Color
 
-  describe "add_ansi_color_codes_to_colors/2" do
-    test "annotates the ansi_color_code field of a Color with the actual code" do
-      color_data = [
-        [%Color{name: :black1}, %Color{name: :black2}],
-        [%Color{name: :yellow}]
-      ]
-
-      ansi_color_codes = [%ANSIColorCode{code: 0}, %ANSIColorCode{code: 1}]
-
-      colors = DataConverter.add_ansi_color_codes_to_colors(color_data, ansi_color_codes)
-
-      assert colors == [
-               [
-                 %Color{name: :black1, ansi_color_code: %ANSIColorCode{code: 0}},
-                 %Color{name: :black2, ansi_color_code: %ANSIColorCode{code: 0}}
-               ],
-               [%Color{name: :yellow, ansi_color_code: %ANSIColorCode{code: 1}}]
-             ]
-    end
-  end
-
   describe "convert_raw_color_data_api_to_colors" do
     test "adds color names and text_contrast_color to ansi color codes" do
       color_data = ColorPalette.raw_color_data_api_data()

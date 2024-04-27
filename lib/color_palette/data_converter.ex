@@ -47,17 +47,6 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  @spec add_ansi_color_codes_to_colors([Color.t()], [ANSIColorCode.t()]) :: [Color.t()]
-  def add_ansi_color_codes_to_colors(color_data, ansi_color_codes) do
-    Enum.zip(color_data, ansi_color_codes)
-    |> Enum.map(fn {colors, ansi_color_code} ->
-      colors
-      |> Enum.map(fn color ->
-        %Color{color | ansi_color_code: ansi_color_code}
-      end)
-    end)
-  end
-
   @spec color_groups_to_ansi_color_codes([ANSIColorCode.t()], [ColorGroup.t()]) :: %{ColorGroup.t() => [ANSIColorCode.t()]}
   def color_groups_to_ansi_color_codes(ansi_color_codes, color_groups) do
     # The block below is in case there are some color groups without any associated color codes,
