@@ -156,9 +156,9 @@ defmodule ColorPalette.DataConverter do
     MapSet.difference(ansi_color_code_set, color_set) |> MapSet.to_list() |> Enum.sort()
   end
 
-  @spec create_names_for_missing_colors_new(%{Color.name() => Color.t()}, [ANSIColorCode.code()]) ::
+  @spec create_names_for_missing_colors(%{Color.name() => Color.t()}, [ANSIColorCode.code()]) ::
           %{Color.name() => Color.t()}
-  def create_names_for_missing_colors_new(all_colors, color_codes_missing_names) do
+  def create_names_for_missing_colors(all_colors, color_codes_missing_names) do
     color_codes_missing_names
     |> Enum.reduce(%{}, fn code, acc ->
       color = all_colors |> Enum.filter(&(&1.ansi_color_code.code == code)) |> List.first()
@@ -253,8 +253,8 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
-  @spec group_by_name_frequency_new(%{Color.name() => [Color.t()]}) :: %{Color.name() => Color.t()}
-  def group_by_name_frequency_new(colors) do
+  @spec group_by_name_frequency(%{Color.name() => [Color.t()]}) :: %{Color.name() => Color.t()}
+  def group_by_name_frequency(colors) do
     # Simplified version for now; make it better later:
     colors
     |> Enum.map(fn {color_name, colors} ->

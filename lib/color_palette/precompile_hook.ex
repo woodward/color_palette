@@ -75,34 +75,30 @@ defmodule ColorPalette.PrecompileHook do
       # --------------------------------------------------------------------------------------------
       # Tranformation & Grouping of the Data:
 
-      @combined_colors_new (@io_ansi_colors ++
-                              @color_data_api_colors ++
-                              @color_name_dot_com_colors ++
-                              @colorhexa_colors)
-                           |> List.flatten()
-
-      def combined_colors_new, do: @combined_colors_new
+      @combined_colors (@io_ansi_colors ++
+                          @color_data_api_colors ++
+                          @color_name_dot_com_colors ++
+                          @colorhexa_colors)
+                       |> List.flatten()
 
       # # ----------------------
 
-      @combined_colors_collated_new @combined_colors_new
-                                    |> DataConverter.collate_colors_by_name()
-                                    |> DataConverter.combine_colors_with_same_name()
+      @combined_colors_collated @combined_colors
+                                |> DataConverter.collate_colors_by_name()
+                                |> DataConverter.combine_colors_with_same_name()
 
-      def combined_colors_collated_new, do: @combined_colors_collated_new
+      @colors_by_name @combined_colors_collated |> DataConverter.group_by_name_frequency()
 
-      @colors_by_name_new @combined_colors_collated_new |> DataConverter.group_by_name_frequency_new()
+      @ansi_color_codes_missing_names @colors_by_name |> DataConverter.unnamed_ansi_color_codes()
 
-      @ansi_color_codes_missing_names_new @colors_by_name_new |> DataConverter.unnamed_ansi_color_codes()
-
-      @generated_names_for_unnamed_colors_new DataConverter.create_names_for_missing_colors_new(
-                                                @combined_colors_new,
-                                                @ansi_color_codes_missing_names_new
-                                              )
+      @generated_names_for_unnamed_colors DataConverter.create_names_for_missing_colors(
+                                            @combined_colors,
+                                            @ansi_color_codes_missing_names
+                                          )
 
       # -------------------------------
       # The main colors data structure:
-      colors_temp = @colors_by_name_new |> Map.merge(@generated_names_for_unnamed_colors_new)
+      colors_temp = @colors_by_name |> Map.merge(@generated_names_for_unnamed_colors)
 
       @hex_to_color_names colors_temp |> DataConverter.hex_to_color_names()
 
@@ -164,23 +160,23 @@ defmodule ColorPalette.PrecompileHook do
       @spec colorhexa_colors :: [[Color.t()]]
       def colorhexa_colors, do: @colorhexa_colors
 
-      @spec combined_colors_new :: [[Color.t()]]
-      def combined_colors_new, do: @combined_colors_new
+      @spec combined_colors :: [Color.t()]
+      def combined_colors, do: @combined_colors
 
       # ---------------------------
       # Transformed & Grouped Data:
 
-      @spec combined_colors_collated_new :: [[Color.t()]]
-      def combined_colors_collated_new, do: @combined_colors_collated_new
+      @spec combined_colors_collated :: %{Color.name() => [Color.t()]}
+      def combined_colors_collated, do: @combined_colors_collated
 
-      @spec colors_by_name_new :: %{Color.name() => Color.t()}
-      def colors_by_name_new, do: @colors_by_name_new
+      @spec colors_by_name :: %{Color.name() => Color.t()}
+      def colors_by_name, do: @colors_by_name
 
-      @spec ansi_color_codes_missing_names_new :: [ANSIColorCode.code()]
-      def ansi_color_codes_missing_names_new, do: @ansi_color_codes_missing_names_new
+      @spec ansi_color_codes_missing_names :: [ANSIColorCode.code()]
+      def ansi_color_codes_missing_names, do: @ansi_color_codes_missing_names
 
-      @spec generated_names_for_unnamed_colors_new :: %{Color.name() => Color.t()}
-      def generated_names_for_unnamed_colors_new, do: @generated_names_for_unnamed_colors_new
+      @spec generated_names_for_unnamed_colors :: %{Color.name() => Color.t()}
+      def generated_names_for_unnamed_colors, do: @generated_names_for_unnamed_colors
 
       # -------------------------------
       @doc """

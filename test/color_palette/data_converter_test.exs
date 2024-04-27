@@ -552,7 +552,7 @@ defmodule ColorPalette.DataConverterTest do
 
   describe "unnamed_ansi_color_codes" do
     test "returns a list of IO ansi color codes without a name" do
-      colors = ColorPalette.colors_by_name_new()
+      colors = ColorPalette.colors_by_name()
 
       color_codes_with_no_names = DataConverter.unnamed_ansi_color_codes(colors)
 
@@ -596,11 +596,11 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "create_names_for_missing_colors_new/2" do
+  describe "create_names_for_missing_colors/2" do
     test "creates some fake color names for colors which are missing names" do
-      all_colors = ColorPalette.combined_colors_new()
+      all_colors = ColorPalette.combined_colors()
       missing_names = [22, 33]
-      new_names = DataConverter.create_names_for_missing_colors_new(all_colors, missing_names)
+      new_names = DataConverter.create_names_for_missing_colors(all_colors, missing_names)
 
       assert new_names == %{
                azure_radiance_033: %Color{
@@ -943,7 +943,7 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "group_by_name_frequency_new/1" do
+  describe "group_by_name_frequency/1" do
     test "groups the colors so that the entries with the fewest colors go into the map first" do
       colors = %{
         black: [
@@ -955,7 +955,7 @@ defmodule ColorPalette.DataConverterTest do
         ]
       }
 
-      color_map = DataConverter.group_by_name_frequency_new(colors)
+      color_map = DataConverter.group_by_name_frequency(colors)
 
       assert color_map == %{
                black: %Color{
@@ -972,20 +972,20 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
-  describe "do I even need group_by_name_frequency_new" do
+  describe "do I even need group_by_name_frequency" do
     test "see how many for each color name" do
-      combined_colors_collated_new = ColorPalette.combined_colors_collated_new()
-      assert Map.keys(combined_colors_collated_new) |> length() == 472
+      combined_colors_collated = ColorPalette.combined_colors_collated()
+      assert Map.keys(combined_colors_collated) |> length() == 472
 
       with_more_than_one_color =
-        combined_colors_collated_new
+        combined_colors_collated
         |> Enum.filter(fn {_color_name, colors} -> length(colors) > 1 end)
         |> Enum.into(%{})
 
       assert Map.keys(with_more_than_one_color) |> length() == 121
 
       with_more_than_two_colors =
-        combined_colors_collated_new
+        combined_colors_collated
         |> Enum.filter(fn {_color_name, colors} -> length(colors) > 2 end)
         |> Enum.into(%{})
 
