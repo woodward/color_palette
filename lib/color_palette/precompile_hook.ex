@@ -111,82 +111,103 @@ defmodule ColorPalette.PrecompileHook do
 
       @colors
       |> Enum.each(fn {color_name, color} ->
-        hex = color.ansi_color_code.hex
-        color_group = color.ansi_color_code.color_group
-        code = color.ansi_color_code.code
-        text_contrast_color = color.text_contrast_color
-        def_color(color_name, hex, text_contrast_color, color.same_as, color.source, color_group, code)
+        def_color(
+          color_name,
+          color.ansi_color_code.hex,
+          color.text_contrast_color,
+          color.same_as,
+          color.source,
+          color.ansi_color_code.color_group,
+          color.ansi_color_code.code
+        )
       end)
 
       # --------------------------------------------------------------------------------------------
       # Accessors
-      # Most are here just for debugging purposes, other than `colors/0`, `hex_to_color_names/0`,
-      # and `ansi_color_codes/0`
+      # Most are here mostly just for debugging purposes (other than `colors/0`, `hex_to_color_names/0`,
+      # and `ansi_color_codes/0`)
       # --------------------------------------------------------------------------------------------
 
       # Raw Data
+      @doc false
       @spec color_groups_to_ansi_color_codes :: %{ColorGroup.t() => [ANSIColorCode.t()]}
       def color_groups_to_ansi_color_codes, do: @color_groups_to_ansi_color_codes
 
+      @doc false
       @spec raw_color_data_api_data :: [map()]
       def raw_color_data_api_data, do: @raw_color_data_api_data
 
+      @doc false
       @spec raw_color_name_dot_com_data :: [map()]
       def raw_color_name_dot_com_data, do: @raw_color_name_dot_com_data
 
+      @doc false
       @spec raw_colorhexa_data :: [map()]
       def raw_colorhexa_data, do: @raw_colorhexa_data
 
-      @spec ansi_color_codes :: [ANSIColorCode.t()]
-      def ansi_color_codes, do: @ansi_color_codes
-
+      @doc false
       @spec io_ansi_color_names :: [map()]
       def io_ansi_color_names, do: @io_ansi_color_names
 
       # ---------------------------------------------------
       # Raw Data converted to `ColorPalette.Color` structs:
 
+      @doc false
       @spec io_ansi_colors :: [[Color.t()]]
       def io_ansi_colors, do: @io_ansi_colors
 
+      @doc false
       @spec color_name_dot_com_colors :: [[Color.t()]]
       def color_name_dot_com_colors, do: @color_name_dot_com_colors
 
+      @doc false
       @spec color_data_api_colors :: [[Color.t()]]
       def color_data_api_colors, do: @color_data_api_colors
 
+      @doc false
       @spec colorhexa_colors :: [[Color.t()]]
       def colorhexa_colors, do: @colorhexa_colors
 
+      @doc false
       @spec combined_colors :: [Color.t()]
       def combined_colors, do: @combined_colors
 
       # ---------------------------
-      # Transformed & Grouped Data:
+      # Transformed & grouped Data:
 
+      @doc false
       @spec combined_colors_collated :: %{Color.name() => [Color.t()]}
       def combined_colors_collated, do: @combined_colors_collated
 
+      @doc false
       @spec colors_by_name :: %{Color.name() => Color.t()}
       def colors_by_name, do: @colors_by_name
 
+      @doc false
       @spec ansi_color_codes_missing_names :: [ANSIColorCode.code()]
       def ansi_color_codes_missing_names, do: @ansi_color_codes_missing_names
 
+      @doc false
       @spec generated_names_for_unnamed_colors :: %{Color.name() => Color.t()}
       def generated_names_for_unnamed_colors, do: @generated_names_for_unnamed_colors
 
       # -------------------------------
       @doc """
+      A list of the 256 ANSI color codes
+      """
+      @spec ansi_color_codes :: [ColorPalette.ANSIColorCode.t()]
+      def ansi_color_codes, do: @ansi_color_codes
+
+      @doc """
       The main colors data structure.  A map between the color name and the `ColorPalette.Color` struct
       """
-      @spec colors() :: %{Color.name() => Color.t()}
+      @spec colors() :: %{ColorPalette.Color.name() => ColorPalette.Color.t()}
       def colors, do: @colors
 
       @doc """
       A mapping between the ANSI color hex value and the color names associated with that hex value.
       """
-      @spec hex_to_color_names :: %{ANSIColorCode.hex() => [Color.name()]}
+      @spec hex_to_color_names :: %{ColorPalette.ANSIColorCode.hex() => [ColorPalette.Color.name()]}
       def hex_to_color_names, do: @hex_to_color_names
     end
   end
