@@ -56,7 +56,7 @@ defmodule ColorPalette.Color do
       <span style="font-weight: bold;">Hex value</span> ##{hex}
       </div>
       <div>
-      <span style="font-weight: bold;">ANSI code</span> <a style="color: #{text_contrast_color};" href="ansi_color_codes.html#color-#{code}">#{code}</a>
+      <a style="color: #{text_contrast_color};" href="ansi_color_codes.html#color-#{code}"><span style="font-weight: bold;">ANSI code</span> #{code}</a>
       </div>
       </div>
       <div style="display: flex; flex-direction: row; justify-content: space-between;">
