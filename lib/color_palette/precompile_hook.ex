@@ -13,6 +13,9 @@ defmodule ColorPalette.PrecompileHook do
       # --------------------------------------------------------------------------------------------
       # Raw Data:
 
+      # -------------------------
+      # ANSI color code raw data:
+
       @ansi_color_codes_by_group __DIR__
                                  |> Path.join("color_palette/data/ansi_color_codes_by_group.json")
                                  |> File.read!()
@@ -58,7 +61,7 @@ defmodule ColorPalette.PrecompileHook do
                           |> Jason.decode!(keys: :atoms)
 
       # --------------------------------------------------------------------------------------------
-      # Raw Data Converted to `ColorPalette.Color` structs:
+      # Raw Data converted to `ColorPalette.Color` structs:
 
       @color_data_api_colors @raw_color_data_api_data
                              |> DataConverter.convert_raw_color_data_to_colors(:color_data_api, @ansi_color_codes)
@@ -81,8 +84,6 @@ defmodule ColorPalette.PrecompileHook do
                           @colorhexa_colors)
                        |> List.flatten()
 
-      # # ----------------------
-
       @combined_colors_collated @combined_colors
                                 |> DataConverter.collate_colors_by_name()
                                 |> DataConverter.combine_colors_with_same_name()
@@ -96,9 +97,10 @@ defmodule ColorPalette.PrecompileHook do
                                             @ansi_color_codes_missing_names
                                           )
 
-      # -------------------------------
-      # The main colors data structure:
       colors_temp = @colors_by_name |> Map.merge(@generated_names_for_unnamed_colors)
+
+      # ------------------------------------
+      # The main two colors data structures:
 
       @hex_to_color_names colors_temp |> DataConverter.hex_to_color_names()
 
@@ -113,17 +115,13 @@ defmodule ColorPalette.PrecompileHook do
         color_group = color.ansi_color_code.color_group
         code = color.ansi_color_code.code
         text_contrast_color = color.text_contrast_color
-
-        if color.source == :io_ansi do
-          delegate_to_io_ansi(color_name, hex, text_contrast_color, color_group, code)
-        else
-          def_color(color_name, hex, text_contrast_color, color.same_as, color.source, color_group, code)
-        end
+        def_color(color_name, hex, text_contrast_color, color.same_as, color.source, color_group, code)
       end)
 
       # --------------------------------------------------------------------------------------------
       # Accessors
-      # Most are here just for debugging purposes, other than `colors/0` and `ansi_color_codes/0`
+      # Most are here just for debugging purposes, other than `colors/0`, `hex_to_color_names/0`,
+      # and `ansi_color_codes/0`
       # --------------------------------------------------------------------------------------------
 
       # Raw Data
@@ -185,6 +183,9 @@ defmodule ColorPalette.PrecompileHook do
       @spec colors() :: %{Color.name() => Color.t()}
       def colors, do: @colors
 
+      @doc """
+      A mapping between the ANSI color hex value and the color names associated with that hex value.
+      """
       @spec hex_to_color_names :: %{ANSIColorCode.hex() => [Color.name()]}
       def hex_to_color_names, do: @hex_to_color_names
     end

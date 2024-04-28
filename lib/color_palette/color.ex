@@ -76,21 +76,4 @@ defmodule ColorPalette.Color do
       end
     end
   end
-
-  defmacro delegate_to_io_ansi(name, hex, text_contrast_color, color_group, code) do
-    quote bind_quoted: [name: name, text_contrast_color: text_contrast_color, hex: hex, color_group: color_group, code: code] do
-      @doc """
-      <div style="color: #{text_contrast_color}; background-color: ##{hex}; padding: 1rem;">
-      See
-      <a style="color: #{text_contrast_color}; background-color: ##{hex}; padding-right: 3rem;" href="https://hexdocs.pm/elixir/IO.ANSI.html##{name}/0">IO.ANSI.#{name}/0</a>
-      Hex value ##{hex}.  ANSI code #{code}.
-      #{ExDocUtils.color_group_link(hex, text_contrast_color, color_group)}
-      </div>
-      """
-      defdelegate unquote(name)(), to: IO.ANSI
-
-      @doc false
-      defdelegate unquote(String.to_atom("#{name}_background"))(), to: IO.ANSI
-    end
-  end
 end
