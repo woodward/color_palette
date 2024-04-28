@@ -92,6 +92,14 @@ stored in JSON in this [data directory](https://github.com/woodward/color_palett
 [here](https://github.com/woodward/color_palette/blob/main/bin/download_thecolorapi_data.exs), and 
 [here](https://github.com/woodward/color_palette/blob/main/bin/download_colorhexa_data.exs), respectively.
 
+## Renamed Colors
+
+Some of the names were in use by more than one hex value (according to the data sources); to accommodate 
+that scenario, one of the colors was renamed with the ANSI color code appended to the end of the name
+so that the names would point to a unique ANSI code/hex value. For example, there's `ColorPalette.blue/0` 
+which refers to hex value #0000ff and [ANSI code 21](ansi_color_codes.html#color-21). There's also 
+`ColorPalette.blue_004/0` which has a hex value of #000080 and [ANSI color code 4](ansi_color_codes.html#color-4). 
+
 ## Duplicate ANSI Color Codes
 
 Of the 256 ANSI color codes, surprisingly only 247 are unique hex values (i.e., unique colors); 
