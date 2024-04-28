@@ -1,5 +1,7 @@
 defmodule ColorPalette.PrecompileHook do
-  @moduledoc false
+  @moduledoc """
+  This hook is used to bring data and functions at compile-time into `ColorPalette`
+  """
 
   import ColorPalette.Color
 
