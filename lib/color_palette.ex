@@ -3,8 +3,6 @@ defmodule ColorPalette do
   ## Color Palette Functions
   - `colors/0`: A map between the color name (e.g., `:black`) and the `ColorPalette.Color` struct.
   - `ansi_color_codes/0` - A list of all 256 ANSI color codes
-  - `color_groups_to_ansi_color_codes/0` - A map between the color group and the ANSI color codes
-  - `io_ansi_color_names/0` - The `IO.ANSI` colors and their corresponding text contrast colors.
   - `reset/0` - Delegates to the `IO.ANSI.reset/0` function.
   - `ansi_color_codes_to_color_names/0` - A mapping between `ColorPalette.ANSIColorCode` and color names
   - `find_by_hex/1` - Finds the colors with a certain hex value, e.g., "aabb00"
