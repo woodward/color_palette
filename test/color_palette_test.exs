@@ -506,4 +506,46 @@ defmodule ColorPaletteTest do
              ]
     end
   end
+
+  describe "name that color data" do
+    test "figure out how many new color names would come from name that color data" do
+      name_that_color_data = File.read!("lib/color_palette/data/name_that_color_colors.json") |> Jason.decode!()
+      assert length(name_that_color_data) == 256
+
+      name_that_color_data_converted =
+        name_that_color_data
+        |> Enum.flat_map(&String.split(&1, " / "))
+        |> Enum.map(&String.replace(&1, " ", "_"))
+        |> Enum.map(&String.replace(&1, "'", ""))
+        |> Enum.map(&String.downcase(&1))
+        |> Enum.map(&String.to_atom(&1))
+
+      name_that_color_set = MapSet.new(name_that_color_data_converted)
+      existing_color_names_set = MapSet.new(ColorPalette.color_names())
+      difference = MapSet.difference(name_that_color_set, existing_color_names_set) |> MapSet.to_list() |> Enum.sort()
+      assert length(difference) == 19
+
+      assert difference == [
+               :boulder,
+               :copperfield,
+               :cornflower_blue,
+               :cranberry,
+               :deep_cerulean,
+               :deluge,
+               :downy,
+               :dusty_gray,
+               :french_pass,
+               :juniper,
+               :lavender_rose,
+               :pink_salmon,
+               :pistachio,
+               :rio_grande,
+               :scorpion,
+               :shakespeare,
+               :stratos,
+               :vivid_tangerine,
+               :wild_watermelon
+             ]
+    end
+  end
 end

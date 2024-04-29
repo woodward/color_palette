@@ -1,0 +1,39 @@
+2024-04-29
+
+# Notes on the data from "name that color"
+
+Only a subset of the colors from [name that color](https://chir.ag/projects/name-that-color/#DB5079) 
+were used in ColorPalette. Note that in spite of the hex value showing up in the URL, the hex values 
+are inserted via Javascript after the page loads so a scrape of their site with Req does not work 
+(the value always shows up as "Your Color" in the #colorname ID element on the page as he swaps it 
+out after page load for the actual name of the color). So the color names from "name that color" 
+were obtained by getting a list of the hex codes in the iex console; 
+i.e., 
+
+`ColorPalette.ansi_color_codes |> Enum.map(& &1.hex) `
+
+These were then pasted into the JS console on https://chir.ag/projects/name-that-color/; e.g., 
+
+hexes = ["000000", "800000", "008000", "808000", "000080", ...]
+
+Then I pasted the following into the JS console:
+
+```javascript
+  hexes.forEach(hex => {
+    console.log(ntc.name(hex)); 
+  });
+```
+
+This output was copy/pasted into a JSON file, and some editor fu resulted in the list of names shown 
+in `name_that_color_colors.json`.
+
+You can see the JS source here for "name that color" (this is loaded on the page 
+https://chir.ag/projects/name-that-color/).
+
+https://chir.ag/projects/ntc/ntc.js
+
+Note that there are a lot of duplicate names in their list of colors.  Also, there are also only 19 
+new color names (see ColorPaletteTest "name that color data"). 
+
+So it was decided to include only the unique "name that color data" in ColorPalette (see 
+`name_that_color_unique_colors.json`).
