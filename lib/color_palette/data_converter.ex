@@ -27,6 +27,29 @@ defmodule ColorPalette.DataConverter do
     }
   end
 
+  @spec normalize_name_that_color_data([map()], [map()]) :: [map()]
+  def normalize_name_that_color_data(name_that_color_raw_data, data_with_text_contrast_color) do
+    name_that_color_data =
+      name_that_color_raw_data
+      |> Enum.with_index(fn name, code ->
+        datum = data_with_text_contrast_color |> Enum.at(code)
+        %{name: name, code: code, text_contrast_color: datum.text_contrast_color}
+      end)
+
+    name_that_color_data
+    |> Enum.flat_map(fn color ->
+      color.name
+      |> String.split(" / ")
+      |> Enum.map(&String.replace(&1, " ", "_"))
+      |> Enum.map(&String.replace(&1, "'", ""))
+      |> Enum.map(&String.downcase(&1))
+      |> Enum.map(&String.to_atom(&1))
+      |> Enum.reduce([], fn color_name, acc ->
+        [%{color | name: color_name}] ++ acc
+      end)
+    end)
+  end
+
   @spec convert_raw_color_data_to_colors([map()], Color.source(), [ANSIColorCode.t()]) :: [[Color.t()]]
   def convert_raw_color_data_to_colors(raw_color_data, source, ansi_color_codes) do
     raw_color_data

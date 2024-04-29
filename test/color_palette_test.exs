@@ -78,7 +78,7 @@ defmodule ColorPaletteTest do
   describe "colors/1" do
     test "returns the map of color names to color data" do
       colors = ColorPalette.colors()
-      assert length(Map.keys(colors)) == 493
+      assert length(Map.keys(colors)) == 508
 
       assert colors.olive == %Color{
                ansi_color_code: %ANSIColorCode{code: 100, color_group: :green, hex: "878700", rgb: [135, 135, 0]},
@@ -97,7 +97,7 @@ defmodule ColorPaletteTest do
   describe "color_names/0" do
     test "returns the list of color names" do
       colors = ColorPalette.color_names()
-      assert length(colors) == 493
+      assert length(colors) == 508
       first_five_names = colors |> Enum.take(5)
       assert first_five_names == [:aero_blue, :alien_armpit, :alto, :american_orange, :american_silver]
     end
@@ -295,26 +295,37 @@ defmodule ColorPaletteTest do
 
       assert color == [
                %Color{
-                 name: :tulip,
                  ansi_color_code: %ANSIColorCode{code: 210, color_group: :red, hex: "ff8787", rgb: [255, 135, 135]},
-                 text_contrast_color: :black,
                  closest_named_hex: "FF878D",
                  distance_to_closest_named_hex: 44,
-                 source: [:color_data_api, :color_name_dot_com],
                  exact_name_match?: false,
+                 name: :tulip,
                  renamed?: false,
-                 same_as: [:very_light_red]
+                 same_as: [:very_light_red, :vivid_tangerine],
+                 source: [:color_data_api, :color_name_dot_com],
+                 text_contrast_color: :black
                },
                %Color{
+                 ansi_color_code: %ANSIColorCode{code: 210, color_group: :red, hex: "ff8787", rgb: [255, 135, 135]},
+                 closest_named_hex: nil,
+                 distance_to_closest_named_hex: nil,
+                 exact_name_match?: false,
                  name: :very_light_red,
+                 renamed?: false,
+                 same_as: [:tulip, :vivid_tangerine],
+                 source: [:colorhexa],
+                 text_contrast_color: :black
+               },
+               %Color{
+                 name: :vivid_tangerine,
                  ansi_color_code: %ANSIColorCode{code: 210, color_group: :red, hex: "ff8787", rgb: [255, 135, 135]},
                  text_contrast_color: :black,
                  closest_named_hex: nil,
                  distance_to_closest_named_hex: nil,
-                 source: [:colorhexa],
+                 source: [:name_that_color],
                  exact_name_match?: false,
                  renamed?: false,
-                 same_as: [:tulip]
+                 same_as: [:tulip, :very_light_red]
                }
              ]
     end
@@ -325,16 +336,27 @@ defmodule ColorPaletteTest do
       color = ColorPalette.find_by_code(211)
 
       assert color == [
-               %ColorPalette.Color{
-                 ansi_color_code: %ColorPalette.ANSIColorCode{code: 211, color_group: :pink, hex: "ff87af", rgb: [255, 135, 175]},
+               %Color{
+                 ansi_color_code: %ANSIColorCode{code: 211, color_group: :pink, hex: "ff87af", rgb: [255, 135, 175]},
+                 closest_named_hex: nil,
+                 distance_to_closest_named_hex: nil,
+                 exact_name_match?: false,
+                 name: :pink_salmon,
+                 renamed?: false,
+                 same_as: [:tickle_me_pink],
+                 source: [:name_that_color],
+                 text_contrast_color: :black
+               },
+               %Color{
+                 name: :tickle_me_pink,
+                 ansi_color_code: %ANSIColorCode{code: 211, color_group: :pink, hex: "ff87af", rgb: [255, 135, 175]},
+                 text_contrast_color: :black,
                  closest_named_hex: "FC89AC",
                  distance_to_closest_named_hex: 320,
-                 exact_name_match?: false,
-                 name: :tickle_me_pink,
-                 renamed?: false,
-                 same_as: [],
                  source: [:color_data_api, :color_name_dot_com],
-                 text_contrast_color: :black
+                 exact_name_match?: false,
+                 renamed?: false,
+                 same_as: [:pink_salmon]
                }
              ]
     end
@@ -351,13 +373,16 @@ defmodule ColorPaletteTest do
       assert length(io_ansi_colors) == 12
 
       color_name_dot_com_colors = ColorPalette.find_by_source(:color_name_dot_com)
-      assert length(color_name_dot_com_colors) == 216
+      assert length(color_name_dot_com_colors) == 217
 
       color_data_api_colors = ColorPalette.find_by_source(:color_data_api)
-      assert length(color_data_api_colors) == 189
+      assert length(color_data_api_colors) == 187
 
       colorhexa_colors = ColorPalette.find_by_source(:colorhexa)
-      assert length(colorhexa_colors) == 132
+      assert length(colorhexa_colors) == 129
+
+      name_that_color_colors = ColorPalette.find_by_source(:name_that_color)
+      assert length(name_that_color_colors) == 19
     end
   end
 
@@ -508,44 +533,56 @@ defmodule ColorPaletteTest do
   end
 
   describe "name that color data" do
-    test "figure out how many new color names would come from name that color data" do
+    test "figure out how many new color names would come from 'name that color' data" do
       name_that_color_data = File.read!("lib/color_palette/data/name_that_color_colors.json") |> Jason.decode!()
       assert length(name_that_color_data) == 256
 
-      name_that_color_data_converted =
-        name_that_color_data
-        |> Enum.flat_map(&String.split(&1, " / "))
-        |> Enum.map(&String.replace(&1, " ", "_"))
-        |> Enum.map(&String.replace(&1, "'", ""))
-        |> Enum.map(&String.downcase(&1))
-        |> Enum.map(&String.to_atom(&1))
+      # Somewhat arbitrarily I'm using the color-name.com data for the :text_constrast_color values
+      # (I could also have used the color data api or the colorhex data; note that there are slight
+      # differences in this value between the data sets):
+      data_with_text_contrast_color = ColorPalette.raw_color_name_dot_com_data()
 
-      name_that_color_set = MapSet.new(name_that_color_data_converted)
-      existing_color_names_set = MapSet.new(ColorPalette.color_names())
-      difference = MapSet.difference(name_that_color_set, existing_color_names_set) |> MapSet.to_list() |> Enum.sort()
-      assert length(difference) == 19
+      with_converted_names =
+        ColorPalette.DataConverter.normalize_name_that_color_data(
+          name_that_color_data,
+          data_with_text_contrast_color
+        )
 
-      assert difference == [
-               :boulder,
-               :copperfield,
-               :cornflower_blue,
-               :cranberry,
-               :deep_cerulean,
-               :deluge,
-               :downy,
-               :dusty_gray,
-               :french_pass,
-               :juniper,
-               :lavender_rose,
-               :pink_salmon,
-               :pistachio,
-               :rio_grande,
-               :scorpion,
-               :shakespeare,
-               :stratos,
-               :vivid_tangerine,
-               :wild_watermelon
-             ]
+      _name_that_color_set = MapSet.new(with_converted_names |> Enum.map(& &1.name))
+      _existing_color_names_set = MapSet.new(ColorPalette.color_names())
+
+      # --------------------------
+      # This part of the test no longer works now that the "name that color" data has been brought into ColorPalette:
+      # Left here for reference
+
+      # unique_names = MapSet.difference(name_that_color_set, existing_color_names_set) |> MapSet.to_list() |> Enum.sort()
+      # assert length(unique_names) == 19
+
+      # assert unique_names == [
+      #          :boulder,
+      #          :copperfield,
+      #          :cornflower_blue,
+      #          :cranberry,
+      #          :deep_cerulean,
+      #          :deluge,
+      #          :downy,
+      #          :dusty_gray,
+      #          :french_pass,
+      #          :juniper,
+      #          :lavender_rose,
+      #          :pink_salmon,
+      #          :pistachio,
+      #          :rio_grande,
+      #          :scorpion,
+      #          :shakespeare,
+      #          :stratos,
+      #          :vivid_tangerine,
+      #          :wild_watermelon
+      #        ]
+
+      # This was used to generate the data file:
+      # unique = with_converted_names |> Enum.filter(&(&1.name in unique_names)) |> Enum.uniq_by(& &1.name)
+      # File.write!("lib/color_palette/data/name_that_color_unique_colors.json", Jason.encode!(unique))
     end
   end
 end

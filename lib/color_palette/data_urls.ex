@@ -13,6 +13,7 @@ defmodule ColorPalette.DataURLs do
       :io_ansi -> "https://hexdocs.pm/elixir/IO.ANSI.html##{name}/0"
       :colorhexa -> "https://www.colorhexa.com/#{hex}"
       :color_name_dot_com -> "https://www.color-name.com/hex/#{hex}"
+      :name_that_color -> "https://chir.ag/projects/name-that-color/##{hex}"
       :color_data_api -> "https://www.thecolorapi.com/id?hex=#{hex}&format=#{format}"
       type -> raise "Unsupported data URL type: #{type}"
     end

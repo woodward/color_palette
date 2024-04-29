@@ -142,6 +142,22 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "normalize_name_that_color_data/2" do
+    test "adds in the :code and :text_contrast_color" do
+      data_with_text_contrast_color = ColorPalette.raw_color_name_dot_com_data()
+      name_that_color_data = File.read!("lib/color_palette/data/name_that_color_colors.json") |> Jason.decode!(keys: :atoms)
+      normalized = DataConverter.normalize_name_that_color_data(name_that_color_data, data_with_text_contrast_color)
+
+      assert length(normalized) == 261
+
+      first = normalized |> List.first()
+      assert first == %{code: 0, name: :black, text_contrast_color: "white"}
+
+      last = normalized |> List.last()
+      assert last == %{code: 255, name: :gallery, text_contrast_color: "black"}
+    end
+  end
+
   describe "color_groups_to_ansi_color_codes" do
     test "collates the ansi color codes by color group" do
       ansi_color_codes = [
@@ -535,9 +551,9 @@ defmodule ColorPalette.DataConverterTest do
 
       color_codes_with_no_names = DataConverter.unnamed_ansi_color_codes(colors)
 
-      assert length(color_codes_with_no_names) == 21
+      assert length(color_codes_with_no_names) == 17
 
-      expected = [0, 3, 4, 6, 9, 10, 11, 12, 13, 14, 42, 47, 56, 59, 63, 86, 87, 99, 121, 163, 246]
+      expected = [0, 3, 4, 6, 10, 11, 12, 13, 14, 42, 47, 56, 86, 87, 99, 121, 163]
       assert color_codes_with_no_names == expected
     end
   end
@@ -942,7 +958,7 @@ defmodule ColorPalette.DataConverterTest do
   describe "do I even need group_by_name_frequency" do
     test "see how many for each color name" do
       combined_colors_collated = ColorPalette.combined_colors_collated()
-      assert Map.keys(combined_colors_collated) |> length() == 472
+      assert Map.keys(combined_colors_collated) |> length() == 491
 
       with_more_than_one_color =
         combined_colors_collated

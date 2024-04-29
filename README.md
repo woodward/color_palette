@@ -91,6 +91,9 @@ stored in JSON in this [data directory](https://github.com/woodward/color_palett
 [here](https://github.com/woodward/color_palette/blob/main/bin/download_color-name_data.exs), 
 [here](https://github.com/woodward/color_palette/blob/main/bin/download_thecolorapi_data.exs), and 
 [here](https://github.com/woodward/color_palette/blob/main/bin/download_colorhexa_data.exs), respectively.
+Only a subset of the names (19) from [name that color](https://chir.ag/projects/name-that-color/) were
+used; see the notes on how this data was obtained in this 
+[README file](https://github.com/woodward/color_palette/blob/main/lib/color_palette/data/name_that_color_colors.README.txt).
 
 ## Renamed Colors
 

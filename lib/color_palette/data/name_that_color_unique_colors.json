@@ -1,0 +1,21 @@
+[
+  { "code": 17, "name": "stratos", "text_contrast_color": "white" },
+  { "code": 31, "name": "deep_cerulean", "text_contrast_color": "white" },
+  { "code": 59, "name": "scorpion", "text_contrast_color": "white" },
+  { "code": 63, "name": "cornflower_blue", "text_contrast_color": "white" },
+  { "code": 66, "name": "juniper", "text_contrast_color": "white" },
+  { "code": 74, "name": "shakespeare", "text_contrast_color": "black" },
+  { "code": 79, "name": "downy", "text_contrast_color": "black" },
+  { "code": 97, "name": "deluge", "text_contrast_color": "white" },
+  { "code": 112, "name": "pistachio", "text_contrast_color": "black" },
+  { "code": 148, "name": "rio_grande", "text_contrast_color": "black" },
+  { "code": 159, "name": "french_pass", "text_contrast_color": "black" },
+  { "code": 168, "name": "cranberry", "text_contrast_color": "white" },
+  { "code": 173, "name": "copperfield", "text_contrast_color": "white" },
+  { "code": 204, "name": "wild_watermelon", "text_contrast_color": "white" },
+  { "code": 210, "name": "vivid_tangerine", "text_contrast_color": "black" },
+  { "code": 211, "name": "pink_salmon", "text_contrast_color": "black" },
+  { "code": 212, "name": "lavender_rose", "text_contrast_color": "black" },
+  { "code": 243, "name": "boulder", "text_contrast_color": "white" },
+  { "code": 246, "name": "dusty_gray", "text_contrast_color": "white" }
+]

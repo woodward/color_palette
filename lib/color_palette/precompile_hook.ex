@@ -62,6 +62,11 @@ defmodule ColorPalette.PrecompileHook do
                           |> File.read!()
                           |> Jason.decode!(keys: :atoms)
 
+      @raw_name_that_color_data __DIR__
+                                |> Path.join("color_palette/data/name_that_color_unique_colors.json")
+                                |> File.read!()
+                                |> Jason.decode!(keys: :atoms)
+
       # --------------------------------------------------------------------------------------------
       # Raw Data converted to `ColorPalette.Color` structs:
 
@@ -74,6 +79,9 @@ defmodule ColorPalette.PrecompileHook do
       @colorhexa_colors @raw_colorhexa_data
                         |> DataConverter.convert_raw_color_data_to_colors(:colorhexa, @ansi_color_codes)
 
+      @name_that_color_colors @raw_name_that_color_data
+                              |> DataConverter.convert_raw_color_data_to_colors(:name_that_color, @ansi_color_codes)
+
       @io_ansi_colors @io_ansi_color_names
                       |> DataConverter.convert_raw_color_data_to_colors(:io_ansi, @ansi_color_codes)
 
@@ -83,7 +91,8 @@ defmodule ColorPalette.PrecompileHook do
       @combined_colors (@io_ansi_colors ++
                           @color_data_api_colors ++
                           @color_name_dot_com_colors ++
-                          @colorhexa_colors)
+                          @colorhexa_colors ++
+                          @name_that_color_colors)
                        |> List.flatten()
 
       @combined_colors_collated @combined_colors
@@ -148,6 +157,10 @@ defmodule ColorPalette.PrecompileHook do
       def raw_colorhexa_data, do: @raw_colorhexa_data
 
       @doc false
+      @spec raw_name_that_color_data :: [map()]
+      def raw_name_that_color_data, do: @raw_name_that_color_data
+
+      @doc false
       @spec io_ansi_color_names :: [map()]
       def io_ansi_color_names, do: @io_ansi_color_names
 
@@ -169,6 +182,10 @@ defmodule ColorPalette.PrecompileHook do
       @doc false
       @spec colorhexa_colors :: [[Color.t()]]
       def colorhexa_colors, do: @colorhexa_colors
+
+      @doc false
+      @spec name_that_color_colors :: [[Color.t()]]
+      def name_that_color_colors, do: @name_that_color_colors
 
       @doc false
       @spec combined_colors :: [Color.t()]

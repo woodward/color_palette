@@ -8,7 +8,7 @@ defmodule ColorPalette.Color do
 
   @type text_contrast_color :: :white | :black
 
-  @type source :: :io_ansi | :colorhexa | :color_name_dot_com | :color_data_api
+  @type source :: :io_ansi | :colorhexa | :color_name_dot_com | :color_data_api | :name_that_color
 
   @type name :: atom()
 
