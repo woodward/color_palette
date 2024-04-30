@@ -332,7 +332,7 @@ defmodule ColorPalette.DataConverter do
       color_stats =
         colors
         |> Enum.reduce(%{}, fn color, acc ->
-          Map.put(acc, color.ansi_color_code.code, color.source)
+          Map.put(acc, color.ansi_color_code.code, %{sources: color.source})
         end)
 
       {color_name, color_stats}

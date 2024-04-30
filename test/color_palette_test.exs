@@ -598,9 +598,9 @@ defmodule ColorPaletteTest do
       yellow = stats.yellow
 
       assert yellow == %{
-               226 => [:color_data_api, :color_name_dot_com, :colorhexa],
-               11 => [:color_data_api, :color_name_dot_com, :colorhexa],
-               3 => [:io_ansi]
+               226 => %{sources: [:color_data_api, :color_name_dot_com, :colorhexa]},
+               11 => %{sources: [:color_data_api, :color_name_dot_com, :colorhexa]},
+               3 => %{sources: [:io_ansi]}
              }
     end
   end
