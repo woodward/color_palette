@@ -10,6 +10,10 @@
 # Where third-party dependencies like ExDoc output generated docs.
 /doc/
 
+# These are here while I figure out the best strategy for generating the names for the codes:
+/doc.by_highest_frequency/
+/doc.by_lowest_frequency/
+
 # Ignore .fetch files in case you like to edit your project deps locally.
 /.fetch
 
