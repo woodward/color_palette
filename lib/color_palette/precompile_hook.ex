@@ -62,6 +62,11 @@ defmodule ColorPalette.PrecompileHook do
                           |> File.read!()
                           |> Jason.decode!(keys: :atoms)
 
+      @raw_bunt_data __DIR__
+                     |> Path.join("color_palette/data/bunt_colors.json")
+                     |> File.read!()
+                     |> Jason.decode!(keys: :atoms)
+
       @raw_name_that_color_data __DIR__
                                 |> Path.join("color_palette/data/name_that_color_unique_colors.json")
                                 |> File.read!()
@@ -82,6 +87,9 @@ defmodule ColorPalette.PrecompileHook do
       @name_that_color_colors @raw_name_that_color_data
                               |> DataConverter.convert_raw_color_data_to_colors(:name_that_color, @ansi_color_codes)
 
+      @bunt_colors @raw_bunt_data
+                   |> DataConverter.convert_raw_color_data_to_colors(:bunt, @ansi_color_codes)
+
       @io_ansi_colors @io_ansi_color_names
                       |> DataConverter.convert_raw_color_data_to_colors(:io_ansi, @ansi_color_codes)
 
@@ -92,6 +100,7 @@ defmodule ColorPalette.PrecompileHook do
                           @color_data_api_colors ++
                           @color_name_dot_com_colors ++
                           @colorhexa_colors ++
+                          @bunt_colors ++
                           @name_that_color_colors)
                        |> List.flatten()
 
@@ -157,6 +166,10 @@ defmodule ColorPalette.PrecompileHook do
       def raw_colorhexa_data, do: @raw_colorhexa_data
 
       @doc false
+      @spec raw_bunt_data :: [map()]
+      def raw_bunt_data, do: @raw_bunt_data
+
+      @doc false
       @spec raw_name_that_color_data :: [map()]
       def raw_name_that_color_data, do: @raw_name_that_color_data
 
@@ -182,6 +195,10 @@ defmodule ColorPalette.PrecompileHook do
       @doc false
       @spec colorhexa_colors :: [[Color.t()]]
       def colorhexa_colors, do: @colorhexa_colors
+
+      @doc false
+      @spec bunt_colors :: [[Color.t()]]
+      def bunt_colors, do: @bunt_colors
 
       @doc false
       @spec name_that_color_colors :: [[Color.t()]]

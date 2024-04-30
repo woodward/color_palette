@@ -49,7 +49,7 @@ defmodule ColorPalette.ExDocUtils do
     url = DataURLs.url(source, hex: hex, name: name)
 
     """
-    <a style="color: #{text_contrast_color}; background-color: ##{hex}; padding-right: 2rem;" href="#{url}">#{source_name(source)}</a>
+    <a style="color: #{text_contrast_color}; background-color: ##{hex}; padding-right: 0.5rem;" href="#{url}">#{source_name(source)}</a>
     """
   end
 
@@ -68,4 +68,5 @@ defmodule ColorPalette.ExDocUtils do
   def source_name(:color_data_api), do: "The Color API"
   def source_name(:colorhexa), do: "ColorHexa"
   def source_name(:name_that_color), do: "Name That Color"
+  def source_name(:bunt), do: "Bunt"
 end

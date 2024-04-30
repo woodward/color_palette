@@ -958,14 +958,14 @@ defmodule ColorPalette.DataConverterTest do
   describe "do I even need group_by_name_frequency" do
     test "see how many for each color name" do
       combined_colors_collated = ColorPalette.combined_colors_collated()
-      assert Map.keys(combined_colors_collated) |> length() == 491
+      assert Map.keys(combined_colors_collated) |> length() == 502
 
       with_more_than_one_color =
         combined_colors_collated
         |> Enum.filter(fn {_color_name, colors} -> length(colors) > 1 end)
         |> Enum.into(%{})
 
-      assert Map.keys(with_more_than_one_color) |> length() == 121
+      assert Map.keys(with_more_than_one_color) |> length() == 124
 
       with_more_than_two_colors =
         combined_colors_collated

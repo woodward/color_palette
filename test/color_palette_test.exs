@@ -78,7 +78,7 @@ defmodule ColorPaletteTest do
   describe "colors/1" do
     test "returns the map of color names to color data" do
       colors = ColorPalette.colors()
-      assert length(Map.keys(colors)) == 508
+      assert length(Map.keys(colors)) == 519
 
       assert colors.olive == %Color{
                ansi_color_code: %ANSIColorCode{code: 100, color_group: :green, hex: "878700", rgb: [135, 135, 0]},
@@ -88,7 +88,7 @@ defmodule ColorPaletteTest do
                name: :olive,
                renamed?: false,
                same_as: [:dark_yellow_olive_tone],
-               source: [:color_data_api, :color_name_dot_com],
+               source: [:bunt, :color_data_api, :color_name_dot_com],
                text_contrast_color: :black
              }
     end
@@ -97,7 +97,7 @@ defmodule ColorPaletteTest do
   describe "color_names/0" do
     test "returns the list of color names" do
       colors = ColorPalette.color_names()
-      assert length(colors) == 508
+      assert length(colors) == 519
       first_five_names = colors |> Enum.take(5)
       assert first_five_names == [:aero_blue, :alien_armpit, :alto, :american_orange, :american_silver]
     end
@@ -373,16 +373,19 @@ defmodule ColorPaletteTest do
       assert length(io_ansi_colors) == 12
 
       color_name_dot_com_colors = ColorPalette.find_by_source(:color_name_dot_com)
-      assert length(color_name_dot_com_colors) == 217
+      assert length(color_name_dot_com_colors) == 215
 
       color_data_api_colors = ColorPalette.find_by_source(:color_data_api)
-      assert length(color_data_api_colors) == 187
+      assert length(color_data_api_colors) == 186
 
       colorhexa_colors = ColorPalette.find_by_source(:colorhexa)
-      assert length(colorhexa_colors) == 129
+      assert length(colorhexa_colors) == 131
 
       name_that_color_colors = ColorPalette.find_by_source(:name_that_color)
       assert length(name_that_color_colors) == 19
+
+      bunt_colors = ColorPalette.find_by_source(:bunt)
+      assert length(bunt_colors) == 23
     end
   end
 
@@ -405,6 +408,9 @@ defmodule ColorPaletteTest do
   end
 
   describe "figure out whether ColorPalette has all named Bunt colors" do
+    # The Bunt colors are now incorporated into ColorPalette, so this test is no longer relevant
+    # Leaving here for reference purposes
+    @tag :skip
     test "checks on the named Bunt colors" do
       # Taken from:
       # https://github.com/rrrene/bunt/blob/master/lib/bunt_ansi.ex#L40
