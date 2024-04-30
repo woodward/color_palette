@@ -975,4 +975,19 @@ defmodule ColorPalette.DataConverterTest do
       assert Map.keys(with_more_than_two_colors) |> length() == 61
     end
   end
+
+  describe "name_stats" do
+    test "maps from names to codes, sources, and frequencies" do
+      collated = ColorPalette.combined_colors_collated()
+      stats = DataConverter.compute_stats(collated)
+
+      yellow = stats.yellow
+
+      assert yellow == %{
+               226 => [:color_data_api, :color_name_dot_com, :colorhexa],
+               11 => [:color_data_api, :color_name_dot_com, :colorhexa],
+               3 => [:io_ansi]
+             }
+    end
+  end
 end

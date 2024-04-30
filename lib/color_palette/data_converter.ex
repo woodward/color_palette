@@ -290,7 +290,7 @@ defmodule ColorPalette.DataConverter do
        # By highest frequency:
        # |> Enum.sort_by(&(-1 * Map.get(code_frequencies, &1.ansi_color_code)))
        # By lowest frequency:
-       |> Enum.sort_by(&(Map.get(code_frequencies, &1.ansi_color_code)))
+       |> Enum.sort_by(&Map.get(code_frequencies, &1.ansi_color_code))
        # The color with the lowest count "wins" (to try and get names for more of the ANSI color codes):
        |> List.first()}
     end)
@@ -322,6 +322,20 @@ defmodule ColorPalette.DataConverter do
         |> Enum.sort()
 
       {color_name, %{color | same_as: same_as}}
+    end)
+    |> Enum.into(%{})
+  end
+
+  def compute_stats(colors_collated) do
+    colors_collated
+    |> Enum.map(fn {color_name, colors} ->
+      color_stats =
+        colors
+        |> Enum.reduce(%{}, fn color, acc ->
+          Map.put(acc, color.ansi_color_code.code, color.source)
+        end)
+
+      {color_name, color_stats}
     end)
     |> Enum.into(%{})
   end

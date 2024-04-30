@@ -84,4 +84,13 @@ defmodule ColorPalette do
     IO.puts(apply(ColorPalette, random_color, []) <> message <> reset())
     random_color
   end
+
+  @doc """
+  Returns a struct which provides some useful data for determining the strategy for which name "wins"
+  (i.e., which name goes with which ANSI code)
+  """
+  @spec name_stats() :: %{Color.name() => %{ANSIColorCode.code() => [Color.source()]}}
+  def name_stats() do
+    ColorPalette.combined_colors_collated() |> DataConverter.compute_stats()
+  end
 end

@@ -591,4 +591,17 @@ defmodule ColorPaletteTest do
       # File.write!("lib/color_palette/data/name_that_color_unique_colors.json", Jason.encode!(unique))
     end
   end
+
+  describe "name_stats" do
+    test "returns the stats" do
+      stats = ColorPalette.name_stats()
+      yellow = stats.yellow
+
+      assert yellow == %{
+               226 => [:color_data_api, :color_name_dot_com, :colorhexa],
+               11 => [:color_data_api, :color_name_dot_com, :colorhexa],
+               3 => [:io_ansi]
+             }
+    end
+  end
 end
