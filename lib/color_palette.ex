@@ -89,7 +89,7 @@ defmodule ColorPalette do
   Returns a struct which provides some useful data for determining the strategy for which name "wins"
   (i.e., which name goes with which ANSI code)
   """
-  @spec name_stats() :: %{Color.name() => %{ANSIColorCode.code() => [Color.source()]}}
+  @spec name_stats() :: %{ANSIColorCode.code() => %{sources: [Color.source()], other_names: [Color.name()]}}
   def name_stats() do
     ColorPalette.combined_colors_collated() |> DataConverter.compute_stats()
   end
