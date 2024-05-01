@@ -976,6 +976,24 @@ defmodule ColorPalette.DataConverterTest do
     end
   end
 
+  describe "codes_to_names/1" do
+    test "returns a map from the code to the names for that code" do
+      collated = ColorPalette.combined_colors_collated()
+      counts = DataConverter.codes_to_names(collated)
+      code = %ColorPalette.ANSIColorCode{code: 156, color_group: :green, hex: "afff87", rgb: [175, 255, 135]}
+      assert Map.get(counts, code) == [:very_light_green, :mint_green]
+    end
+  end
+
+  describe "codes_to_name_counts/1" do
+    test "returns a map from the code to the count of the names" do
+      collated = ColorPalette.combined_colors_collated()
+      counts = DataConverter.codes_to_name_counts(collated)
+      code = %ColorPalette.ANSIColorCode{code: 156, color_group: :green, hex: "afff87", rgb: [175, 255, 135]}
+      assert Map.get(counts, code) == 2
+    end
+  end
+
   describe "name_stats" do
     test "maps from names to codes, sources, and frequencies" do
       collated = ColorPalette.combined_colors_collated()
@@ -984,9 +1002,18 @@ defmodule ColorPalette.DataConverterTest do
       yellow = stats.yellow
 
       assert yellow == %{
-               226 => %{sources: [:color_data_api, :color_name_dot_com, :colorhexa]},
-               11 => %{sources: [:color_data_api, :color_name_dot_com, :colorhexa]},
-               3 => %{sources: [:io_ansi]}
+               226 => %{
+                 sources: [:color_data_api, :color_name_dot_com, :colorhexa],
+                 other_names: []
+               },
+               11 => %{
+                 sources: [:color_data_api, :color_name_dot_com, :colorhexa],
+                 other_names: [:light_yellow]
+               },
+               3 => %{
+                 sources: [:io_ansi],
+                 other_names: [:olive]
+               }
              }
     end
   end

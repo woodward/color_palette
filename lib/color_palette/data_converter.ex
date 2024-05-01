@@ -279,6 +279,27 @@ defmodule ColorPalette.DataConverter do
     end)
   end
 
+  @spec codes_to_names(%{Color.name() => [Color.t()]}) :: %{ANSIColorCode => [Color.name()]}
+  def codes_to_names(colors) do
+    colors
+    |> Enum.reduce(%{}, fn {_color_name, colors_for_name}, acc1 ->
+      colors_for_name
+      |> Enum.reduce(acc1, fn color, acc2 ->
+        Map.update(acc2, color.ansi_color_code, [color.name], &([color.name] ++ &1))
+      end)
+    end)
+  end
+
+  @spec codes_to_name_counts(%{Color.name() => [Color.t()]}) :: %{ANSIColorCode => integer()}
+  def codes_to_name_counts(colors) do
+    colors
+    |> codes_to_names()
+    |> Enum.map(fn {code, color_names} ->
+      {code, length(color_names)}
+    end)
+    |> Enum.into(%{})
+  end
+
   @spec group_by_name_frequency(%{Color.name() => [Color.t()]}) :: %{Color.name() => Color.t()}
   def group_by_name_frequency(colors) do
     code_frequencies = codes_by_frequency_count(colors)
@@ -326,13 +347,19 @@ defmodule ColorPalette.DataConverter do
     |> Enum.into(%{})
   end
 
+  @spec compute_stats(%{Color.name() => [Color.t()]}) :: %{
+          ANSIColorCode.code() => %{sources: [Color.source()], other_names: [Color.name()]}
+        }
   def compute_stats(colors_collated) do
+    codes_to_names = codes_to_names(colors_collated)
+
     colors_collated
     |> Enum.map(fn {color_name, colors} ->
       color_stats =
         colors
         |> Enum.reduce(%{}, fn color, acc ->
-          Map.put(acc, color.ansi_color_code.code, %{sources: color.source})
+          other_names = Map.get(codes_to_names, color.ansi_color_code) |> Enum.reject(&(&1 == color.name))
+          Map.put(acc, color.ansi_color_code.code, %{sources: color.source, other_names: other_names})
         end)
 
       {color_name, color_stats}
