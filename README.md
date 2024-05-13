@@ -2,8 +2,9 @@
 
 A library which brings additional named colors [via the 256 ANSI color escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit)
 into Elixir (in addition to the 16 standard named `IO.ANSI` colors, such as `:red`, `:blue`, `:cyan`, 
-`:light_red`, `:light_blue`, `:light_cyan`, etc.) `ColorPalette` purposely only has minimal dependencies (in
-this case, just the `Jason` library).
+`:light_red`, `:light_blue`, `:light_cyan`, etc.) `ColorPalette` purposely has no dependencies, so 
+by using it you are not bringing a bunch of extra depenencies into your project.
+
 
 ## Installation
 
@@ -29,6 +30,7 @@ These colors can be seen in a terminal by running
 [this script](https://github.com/woodward/color_palette/blob/main/bin/display_color_palette.exs).
 
 ![Colors](https://raw.github.com/woodward/color_palette/master/assets/colors-in-terminal.png)
+
 
 ## Usage
 
@@ -75,6 +77,7 @@ or some
 
 See the main module page for [ColorPalette](https://hexdocs.pm/color_palette/ColorPalette.html) to see a list of all of the colors!
 
+
 ## Data Sources
 
 The 256 IO ANSI color codes are readily available, and a copy of them are stored in JSON format 
@@ -95,6 +98,7 @@ Only a subset of the names (19) from [name that color](https://chir.ag/projects/
 used; see the notes on how this data was obtained in this 
 [README file](https://github.com/woodward/color_palette/blob/main/lib/color_palette/data/name_that_color_colors.README.txt).  The named colors from [Bunt](https://github.com/rrrene/bunt) were downloaded [here](https://github.com/woodward/color_palette/blob/main/lib/color_palette/data/bunt_colors.json) and included into `ColorPalette`.
 
+
 ## Renamed Colors
 
 Some of the names were in use by more than one hex value (according to the data sources); to accommodate 
@@ -102,6 +106,7 @@ that scenario, one of the colors was renamed with the ANSI color code appended t
 so that the names would point to a unique ANSI code/hex value. For example, there's `ColorPalette.blue/0` 
 which refers to hex value #0000ff and [ANSI code 21](ansi_color_codes.html#color-21). There's also 
 `ColorPalette.blue_004/0` which has a hex value of #000080 and [ANSI color code 4](ansi_color_codes.html#color-4). 
+
 
 ## Duplicate ANSI Color Codes
 
