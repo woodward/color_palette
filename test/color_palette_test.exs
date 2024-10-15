@@ -3,6 +3,7 @@ defmodule ColorPaletteTest do
 
   alias ColorPalette.ANSIColorCode
   alias ColorPalette.Color
+  alias ColorPalette.PrecompileHook
 
   describe "functions which delegate to IO.ANSI" do
     test "reset() delegates to IO.ANSI" do
@@ -540,7 +541,7 @@ defmodule ColorPaletteTest do
 
   describe "name that color data" do
     test "figure out how many new color names would come from 'name that color' data" do
-      name_that_color_data = File.read!("lib/color_palette/data/name_that_color_colors.json") |> Jason.decode!()
+      name_that_color_data = File.read!("lib/color_palette/data/name_that_color_colors.json") |> PrecompileHook.jason_decode()
       assert length(name_that_color_data) == 256
 
       # Somewhat arbitrarily I'm using the color-name.com data for the :text_constrast_color values

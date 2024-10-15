@@ -10,6 +10,21 @@ defmodule ColorPalette.PrecompileHook do
   alias ColorPalette.ColorGroup
   alias ColorPalette.DataConverter
 
+  def atomize_keys(map) when is_map(map) do
+    map
+    |> Enum.reduce(%{}, fn {key, value}, acc ->
+      new_key = if is_binary(key), do: String.to_atom(key), else: key
+      new_value = if is_map(value), do: atomize_keys(value), else: value
+      Map.put(acc, new_key, new_value)
+    end)
+  end
+
+  def atomize_keys(value), do: value
+
+  def jason_decode(json) do
+    json |> :json.decode() |> Enum.map(&atomize_keys(&1))
+  end
+
   defmacro __before_compile__(_env) do
     quote do
       # --------------------------------------------------------------------------------------------
@@ -18,16 +33,18 @@ defmodule ColorPalette.PrecompileHook do
       # -------------------------
       # ANSI color code raw data:
 
+      alias ColorPalette.PrecompileHook
+
       @ansi_color_codes_by_group __DIR__
                                  |> Path.join("color_palette/data/ansi_color_codes_by_group.json")
                                  |> File.read!()
-                                 |> Jason.decode!(keys: :atoms)
+                                 |> PrecompileHook.jason_decode()
                                  |> Enum.map(&if &1.color_group, do: String.to_atom(&1.color_group), else: nil)
 
       @ansi_color_codes __DIR__
                         |> Path.join("color_palette/data/ansi_color_codes.json")
                         |> File.read!()
-                        |> Jason.decode!(keys: :atoms)
+                        |> PrecompileHook.jason_decode()
                         |> Enum.zip(@ansi_color_codes_by_group)
                         |> Enum.map(fn {ansi_color_code, color_group} ->
                           Map.put(ansi_color_code, :color_group, color_group)
@@ -43,34 +60,34 @@ defmodule ColorPalette.PrecompileHook do
       @io_ansi_color_names __DIR__
                            |> Path.join("color_palette/data/ansi_color_names.json")
                            |> File.read!()
-                           |> Jason.decode!(keys: :atoms)
+                           |> PrecompileHook.jason_decode()
                            |> Enum.map(&(&1 |> Map.merge(%{exact_name_match?: true, distance_to_closest_named_hex: 0})))
 
       @raw_color_data_api_data __DIR__
                                |> Path.join("color_palette/data/color_data_api_colors.json")
                                |> File.read!()
-                               |> Jason.decode!(keys: :atoms)
+                               |> PrecompileHook.jason_decode()
                                |> Enum.with_index(fn data, code -> DataConverter.normalize_data(data, code) end)
 
       @raw_color_name_dot_com_data __DIR__
                                    |> Path.join("color_palette/data/color-name.com_colors.json")
                                    |> File.read!()
-                                   |> Jason.decode!(keys: :atoms)
+                                   |> PrecompileHook.jason_decode()
 
       @raw_colorhexa_data __DIR__
                           |> Path.join("color_palette/data/colorhexa.com_colors.json")
                           |> File.read!()
-                          |> Jason.decode!(keys: :atoms)
+                          |> PrecompileHook.jason_decode()
 
       @raw_bunt_data __DIR__
                      |> Path.join("color_palette/data/bunt_colors.json")
                      |> File.read!()
-                     |> Jason.decode!(keys: :atoms)
+                     |> PrecompileHook.jason_decode()
 
       @raw_name_that_color_data __DIR__
                                 |> Path.join("color_palette/data/name_that_color_unique_colors.json")
                                 |> File.read!()
-                                |> Jason.decode!(keys: :atoms)
+                                |> PrecompileHook.jason_decode()
 
       # --------------------------------------------------------------------------------------------
       # Raw Data converted to `ColorPalette.Color` structs:

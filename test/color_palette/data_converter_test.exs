@@ -5,6 +5,7 @@ defmodule ColorPalette.DataConverterTest do
   alias ColorPalette.DataConverter
   alias ColorPalette.ANSIColorCode
   alias ColorPalette.Color
+  alias ColorPalette.PrecompileHook
 
   describe "convert_raw_color_data_api_to_colors" do
     test "adds color names and text_contrast_color to ansi color codes" do
@@ -145,7 +146,7 @@ defmodule ColorPalette.DataConverterTest do
   describe "normalize_name_that_color_data/2" do
     test "adds in the :code and :text_contrast_color" do
       data_with_text_contrast_color = ColorPalette.raw_color_name_dot_com_data()
-      name_that_color_data = File.read!("lib/color_palette/data/name_that_color_colors.json") |> Jason.decode!(keys: :atoms)
+      name_that_color_data = File.read!("lib/color_palette/data/name_that_color_colors.json") |> PrecompileHook.jason_decode()
       normalized = DataConverter.normalize_name_that_color_data(name_that_color_data, data_with_text_contrast_color)
 
       assert length(normalized) == 261
@@ -981,7 +982,7 @@ defmodule ColorPalette.DataConverterTest do
       collated = ColorPalette.combined_colors_collated()
       counts = DataConverter.codes_to_names(collated)
       code = %ColorPalette.ANSIColorCode{code: 156, color_group: :green, hex: "afff87", rgb: [175, 255, 135]}
-      assert Map.get(counts, code) == [:very_light_green, :mint_green]
+      assert Map.get(counts, code) |> Enum.sort() == [:mint_green, :very_light_green]
     end
   end
 

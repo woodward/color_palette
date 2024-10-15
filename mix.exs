@@ -8,7 +8,7 @@ defmodule ColorPalette.MixProject do
     [
       app: :color_palette,
       version: @version,
-      elixir: "~> 1.16",
+      elixir: "~> 1.17",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       description: "Additional IO.ANSI named colors for Elixir scripts",
@@ -35,21 +35,12 @@ defmodule ColorPalette.MixProject do
   defp deps do
     [
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:jason, "~> 1.4", only: [:test, :prod, :dev], runtime: runtime?()},
       {:ex_doc, "~> 0.32", only: :dev, runtime: false}
     ]
   end
 
   defp aliases do
     [docs: ["generate_guides", "docs"]]
-  end
-
-  defp runtime?() do
-    # This makes this runtime flag be determined at runtime rather than at compile time.
-    # I.e., I wanted to specify the following in deps() but it is not possible:
-    #
-    # {:jason, "~> 1.4", only: [:test, :dev], runtime: true, only: :prod, runtime: false},
-    Mix.env() == :test || Mix.env() == :dev
   end
 
   defp package do

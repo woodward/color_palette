@@ -2,8 +2,7 @@
 
 A library which brings additional named colors [via the 256 ANSI color escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit)
 into Elixir (in addition to the 16 standard named `IO.ANSI` colors, such as `:red`, `:blue`, `:cyan`, 
-`:light_red`, `:light_blue`, `:light_cyan`, etc.) `ColorPalette` purposely only has minimal dependencies (in
-this case, just the `Jason` library).
+`:light_red`, `:light_blue`, `:light_cyan`, etc.) `ColorPalette` purposely has zero dependencies.
 
 
 ## Installation
